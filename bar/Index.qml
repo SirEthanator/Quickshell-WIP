@@ -1,4 +1,4 @@
-import "..";  // For Globals
+import "..";  // For Opts
 import Quickshell;
 import QtQuick;
 import QtQuick.Layouts;
@@ -17,25 +17,28 @@ Variants {
       right: true
     }
 
-    height: Globals.vars.barHeight
-    margins.top: Globals.vars.gap
+    height: Opts.bar.floatingModules ? Opts.vars.barHeight - Opts.vars.paddingBar*2 : Opts.vars.barHeight
+    margins.top: Opts.bar.floating ? Opts.vars.gap : 0
 
     // Visible background of bar
     Rectangle {
       anchors {
         fill: parent
-        leftMargin: Globals.vars.gap
-        rightMargin: Globals.vars.gap
+        leftMargin: Opts.bar.floating ? Opts.vars.gap : 0
+        rightMargin: Opts.bar.floating ? Opts.vars.gap : 0
       }
-      color: Globals.colours.bg
-      radius: Globals.vars.br
+      color: Opts.bar.floatingModules ? "transparent" : Opts.colours.bg
+      radius: Opts.bar.floating ? Opts.vars.br : 0
 
       // =========================
       // ===== CONTENT START =====
       // =========================
       RowLayout {
         anchors {
-          margins: Globals.vars.paddingBar
+          leftMargin: Opts.vars.paddingBar
+          rightMargin: Opts.vars.paddingBar
+          topMargin: Opts.bar.floatingModules ? 0 : Opts.vars.paddingBar
+          bottomMargin: Opts.bar.floatingModules ? 0 : Opts.vars.paddingBar
           fill: parent
         }
         uniformCellSizes: true
@@ -44,7 +47,7 @@ Variants {
           Layout.fillHeight: true
           Layout.alignment: Qt.AlignLeft
 
-          Text {text: "Placeholder"; color: Globals.colours.fg}
+          Text {text: "Placeholder"; color: Opts.colours.fg}
         }
 
         // ==========
@@ -63,7 +66,7 @@ Variants {
           Layout.alignment: Qt.AlignRight
           layoutDirection: Qt.RightToLeft
 
-          Text {text: "Placeholder"; color: Globals.colours.fg}
+          Text {text: "Placeholder"; color: Opts.colours.fg}
         }
       }
       // =======================
