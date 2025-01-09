@@ -3,7 +3,7 @@ import Quickshell;
 import QtQuick;
 
 BarModule {
-  implicitWidth: clockText.implicitWidth + Globals.vars.paddingModule;
+  implicitWidth: clockText.implicitWidth + Opts.vars.paddingModule;
 
   SystemClock {
     id: clock;
@@ -13,8 +13,8 @@ BarModule {
   Text {
     id: clockText
     anchors.centerIn: parent;
-    color: Globals.colours.fg;
-    font.pixelSize: Globals.vars.fontMain;
+    color: Opts.colours.fg;
+    font.pixelSize: Opts.vars.fontMain;
 
     text: {
       const hoursTmp = (clock.hours < 13) ? clock.hours : clock.hours - 12;

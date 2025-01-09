@@ -4,8 +4,8 @@ import QtQuick;
 import QtQuick.Layouts;
 
 Rectangle {
-  color: Globals.colours.bgLight;
-  radius: Globals.vars.br;
+  color: Opts.colours.bgLight;
+  radius: Opts.vars.br;
   Layout.fillHeight: true
 }
 
