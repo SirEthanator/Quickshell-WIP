@@ -5,7 +5,10 @@ import QtQuick.Layouts;
 
 Rectangle {
   color: Opts.colours.bgLight;
-  radius: Opts.vars.br;
+  topRightRadius: ! Opts.bar.floating && Opts.bar.floatingModules ? 0 : Opts.vars.br;
+  topLeftRadius: ! Opts.bar.floating && Opts.bar.floatingModules ? 0 : Opts.vars.br;
+  bottomLeftRadius: Opts.vars.br;
+  bottomRightRadius: Opts.vars.br;
   Layout.fillHeight: true
 }
 
