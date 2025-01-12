@@ -13,7 +13,7 @@ BarModule {
 
   Text {
     color: Opts.colours.fg;
-    font.pixelSize: Opts.vars.fontMain;
+    font: Opts.vars.mainFont
 
     text: {
       const tmp = root.title.length > Opts.bar.truncationLength;

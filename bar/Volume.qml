@@ -22,7 +22,7 @@ BarModule {
 
   Text {
     color: Opts.colours.fg;
-    font.pixelSize: Opts.vars.fontMain;
+    font: Opts.vars.mainFont
     text: `${root.volume}%`;
   }
 }
