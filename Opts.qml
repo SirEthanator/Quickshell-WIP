@@ -14,7 +14,7 @@ Singleton {
 
   // Bar
   readonly property var bar: QtObject {
-    property bool floating: true;  // Controls if the bar floats or is docked | true
+    property bool docked: false;  // Controls if the bar floats or is docked | false
     property bool floatingModules: false;  // Controls if the bar has a visible background | false
     property int truncationLength: 100;  // Controls the maximum length of modules with long text | 100
   }
