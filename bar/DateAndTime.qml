@@ -22,7 +22,7 @@ BarModule {
       const seconds = clock.seconds.toString().padStart(2, '0');
       const ampm = (clock.hours < 12) ? 'AM' : 'PM';
       const date = new Date().toLocaleString(Qt.locale(), "ddd dd/MM/yy");
-      return `${hours}:${minutes}:${seconds} ${ampm} | ${date}`;
+      return `${date} | ${hours}:${minutes}:${seconds} ${ampm}`;
     }
   }
 }
