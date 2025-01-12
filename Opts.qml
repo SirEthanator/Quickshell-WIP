@@ -34,7 +34,8 @@ Singleton {
 
     property font mainFont: Qt.font({
       family: "CaskaydiaCove Nerd Font",
-      pixelSize: 16
+      pixelSize: 16,
+      kerning: false
     })
 
     property int barHeight: vars.moduleIconSize + vars.paddingModule + vars.paddingBar*2;  // This results in the modules' top and bottom padding matching paddingModule

@@ -26,6 +26,7 @@ Variants {
     Rectangle {
       anchors {
         fill: parent
+        // Add a gap if docked without floating modules
         leftMargin: Opts.bar.floating || (! Opts.bar.floating && Opts.bar.floatingModules) ? Opts.vars.gap : 0
         rightMargin: Opts.bar.floating || (! Opts.bar.floating && Opts.bar.floatingModules) ? Opts.vars.gap : 0
       }
@@ -36,11 +37,17 @@ Variants {
       // ===== CONTENT START =====
       // =========================
       Item {
+        id: content;
+
+        // If docked without floating modules, use gap. Also see comment for tb
+        readonly property int lrMargins: Opts.bar.floatingModules ? 0 : (! Opts.bar.floating && ! Opts.bar.floatingModules) ? Opts.vars.gap : Opts.vars.paddingBar;
+        // No need for extra margins when modules are floating since the background is invisible.
+        readonly property int tbMargins: Opts.bar.floatingModules ? 0 : Opts.vars.paddingBar;
         anchors {
-          leftMargin: Opts.bar.floatingModules ? 0 : Opts.vars.paddingBar
-          rightMargin: Opts.bar.floatingModules ? 0 : Opts.vars.paddingBar
-          topMargin: Opts.bar.floatingModules ? 0 : Opts.vars.paddingBar
-          bottomMargin: Opts.bar.floatingModules ? 0 : Opts.vars.paddingBar
+          leftMargin: content.lrMargins
+          rightMargin: content.lrMargins
+          topMargin: content.tbMargins
+          bottomMargin: content.tbMargins
           fill: parent
         }
 
