@@ -16,6 +16,7 @@ Singleton {
   readonly property var bar: QtObject {
     property bool floating: true;  // Controls if the bar floats or is docked | true
     property bool floatingModules: false;  // Controls if the bar has a visible background | false
+    property int truncationLength: 100;  // Controls the maximum length of modules with long text | 100
   }
 
 /*  _   _____   ___  _______   ___  __   ________
@@ -33,13 +34,12 @@ Singleton {
 
     property int fontMain: 16;
 
-    property int barHeight: 45;
+    property int barHeight: vars.moduleIconSize + vars.paddingModule + vars.paddingBar*2;  // This results in the modules' top and bottom padding matching paddingModule
     property int paddingBar: 6;
     // Note that paddingModule will not affect the top and bottom padding. The top and bottom padding is based on the bar's height.
-    // Multiplying by two adds padding for both sides since this value is added to implicit width.
-    property int paddingModule: 15 * 2;
-
+    property int paddingModule: 8;
     property int marginModule: 16;
+    property int moduleIconSize: 22;
   }
 
 /*    ___________ ________  ___________

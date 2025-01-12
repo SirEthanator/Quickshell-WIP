@@ -63,7 +63,7 @@ Variants {
             horizontalCenter: parent.horizontalCenter
           }
 
-          Clock {}
+          DateAndTime {}
         }
 
         // ==========

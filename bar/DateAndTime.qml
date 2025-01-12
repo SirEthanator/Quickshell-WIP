@@ -3,7 +3,7 @@ import Quickshell;
 import QtQuick;
 
 BarModule {
-  implicitWidth: clockText.implicitWidth + Opts.vars.paddingModule;
+  icon: "calendar-symbolic";
 
   SystemClock {
     id: clock;
@@ -12,7 +12,6 @@ BarModule {
 
   Text {
     id: clockText
-    anchors.centerIn: parent;
     color: Opts.colours.fg;
     font.pixelSize: Opts.vars.fontMain;
 
