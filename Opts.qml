@@ -16,6 +16,7 @@ Singleton {
   readonly property var bar: QtObject {
     property bool docked: false;  // Controls if the bar floats or is docked | false
     property bool floatingModules: false;  // Controls if the bar has a visible background | false
+    property bool multiColourModules: false;  // Controls if modules should use different colours or the accent colour | false
     property int truncationLength: 100;  // Controls the maximum length of modules with long text | 100
   }
 
@@ -64,7 +65,11 @@ Singleton {
     property color grey: "#7A8478";
     property color wsInactive: everforest.bgHover;
     property color red: "#E67E80";
-    property color shadow: "#231E2326"  // 35% opacity
+    property color shadow: "#231E2326";  // 35% opacity
+
+    property color activeWindow: "#7FBBB3";
+    property color dateAndTime: "#DBBC7F";
+    property color volume: "#83C092";
   }
 
   readonly property var catMocha: QtObject {
@@ -80,7 +85,11 @@ Singleton {
     property color grey: "#585b70";
     property color wsInactive: catMocha.bgHover;
     property color red: "#F38BA8";
-    property color shadow: "#2311111B"  // 35% opacity
+    property color shadow: "#2311111B";  // 35% opacity
+
+    property color activeWindow: "#89b4fa";
+    property color dateAndTime: "#f9e2af";
+    property color volume: "#94e2d5";
   }
 }
 

@@ -6,6 +6,7 @@ import QtQuick;
 
 BarModule {
   icon: "window-symbolic";
+  iconbgColour: Opts.colours.activeWindow;
   id: root;
 
   readonly property string title: `${Utils.HyprlandIPC.windowTitle}`;

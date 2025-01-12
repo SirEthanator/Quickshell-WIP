@@ -1,0 +1,6 @@
+- Stack of 3 pages:
+  > Dashboard (system stats, quick tiles, greeting, power buttons, etc.)
+  > Launcher (Its search bar will show on dashboard too)
+  > Notifications
+- Use tab to switch pages
+- Use a separate stack for top section which is shared between dashboard and launcher but not notifications.

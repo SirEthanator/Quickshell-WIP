@@ -4,6 +4,7 @@ import QtQuick;
 
 BarModule {
   icon: "calendar-symbolic";
+  iconbgColour: Opts.colours.dateAndTime;
 
   SystemClock {
     id: clock;

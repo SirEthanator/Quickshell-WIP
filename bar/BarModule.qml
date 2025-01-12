@@ -10,6 +10,7 @@ Rectangle {
 
   property string icon: "";  // If this is an empty string the icon will not be displayed
   property color iconColour: Opts.colours.bgLight
+  property color iconbgColour: Opts.colours.accent
 
   color: Opts.colours.bgLight;
   // If the bar is docked but with floating modules, the top corners' border radius is removed
@@ -35,7 +36,7 @@ Rectangle {
     Rectangle {
       id: iconbg;
       visible: !!root.icon;  // Visible if icon is a non-empty string.
-      color: Opts.colours.accent;
+      color: Opts.bar.multiColourModules ? root.iconbgColour : Opts.colours.accent;
       implicitWidth: icon.implicitWidth + Opts.vars.paddingModule*2;  // This will add padding to both sides of the icon's background.
       Layout.fillHeight: true;
       topLeftRadius: Opts.bar.docked && Opts.bar.floatingModules ? 0 : Opts.vars.br;  // See comment on root's br
