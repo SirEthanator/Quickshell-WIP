@@ -76,7 +76,7 @@ Variants {
           }
           layoutDirection: Qt.RightToLeft
 
-          Text {text: "Placeholder"; color: Opts.colours.fg}
+          Volume {}
         }
       }
       // =======================
