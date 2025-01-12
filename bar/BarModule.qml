@@ -13,8 +13,8 @@ Rectangle {
 
   color: Opts.colours.bgLight;
   // If the bar is docked but with floating modules, the top corners' border radius is removed
-  topRightRadius: ! Opts.bar.floating && Opts.bar.floatingModules ? 0 : Opts.vars.br;
-  topLeftRadius: ! Opts.bar.floating && Opts.bar.floatingModules ? 0 : Opts.vars.br;
+  topRightRadius: Opts.bar.docked && Opts.bar.floatingModules ? 0 : Opts.vars.br;
+  topLeftRadius: Opts.bar.docked && Opts.bar.floatingModules ? 0 : Opts.vars.br;
   bottomLeftRadius: Opts.vars.br;
   bottomRightRadius: Opts.vars.br;
 
@@ -38,7 +38,7 @@ Rectangle {
       color: Opts.colours.accent;
       implicitWidth: icon.implicitWidth + Opts.vars.paddingModule*2;  // This will add padding to both sides of the icon's background.
       Layout.fillHeight: true;
-      topLeftRadius: ! Opts.bar.floating && Opts.bar.floatingModules ? 0 : Opts.vars.br;  // See comment on root's br
+      topLeftRadius: Opts.bar.docked && Opts.bar.floatingModules ? 0 : Opts.vars.br;  // See comment on root's br
       bottomLeftRadius: Opts.vars.br;
 
       Kirigami.Icon {
