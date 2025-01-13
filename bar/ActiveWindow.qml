@@ -5,7 +5,7 @@ import Quickshell.Io
 import QtQuick;
 
 BarModule {
-  icon: "window-symbolic";
+  icon: "display-symbolic";
   iconbgColour: Opts.colours.activeWindow;
   id: root;
 
