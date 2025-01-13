@@ -7,6 +7,7 @@ Variants {
   model: Quickshell.screens
 
   PanelWindow {
+    id: root;
     property var modelData
     screen: modelData
     color: "transparent"
@@ -60,6 +61,7 @@ Variants {
           spacing: Opts.vars.marginModule;
 
           LauncherButton {}
+          Workspaces {screen: root.screen}
           ActiveWindow {}
         }
 

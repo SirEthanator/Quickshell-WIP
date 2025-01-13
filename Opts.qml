@@ -17,6 +17,7 @@ Singleton {
     property bool docked: false;  // Controls if the bar floats or is docked | false
     property bool floatingModules: false;  // Controls if the bar has a visible background | false
     property bool multiColourModules: false;  // Controls if modules should use different colours or the accent colour | false
+    property int workspaceCount: 10;  // Controls how many workspaces are displayed in the workspace widget | 10
     property int truncationLength: 100;  // Controls the maximum length of modules with long text | 100
   }
 
@@ -51,6 +52,7 @@ Singleton {
     property int paddingModule: 8;
     property int marginModule: 8;
     property int moduleIconSize: 22;
+    property int wsSize: 7;
   }
 
 /*    ___________ ________  ___________
