@@ -9,9 +9,10 @@ import Quickshell.Hyprland;
 BarModule {
   id: root;
   icon: "node-symbolic";
+  iconbgColour: Opts.colours.workspaces;
 
   required property var screen;
-  readonly property HyprlandMonitor monitor: Hyprland.monitorFor(screen)
+  readonly property HyprlandMonitor monitor: Hyprland.monitorFor(screen);
 
   signal workspaceAdded(ws: HyprlandWorkspace);
 
@@ -47,7 +48,7 @@ BarModule {
         id: wsButtonRect;
         anchors.centerIn: parent;
 
-        radius: wsButtonRect.implicitHeight/2;  // Round caps
+        radius: wsButtonRect.implicitHeight / 2;  // Round caps
         color: wsButton.focused
           ? Opts.colours.accent
           : wsButton.occupied
@@ -63,13 +64,13 @@ BarModule {
     target: Hyprland.workspaces;
 
     function onObjectInsertedPost(ws) {
-      root.workspaceAdded(ws)
+      root.workspaceAdded(ws);
     }
   }
 
   Component.onCompleted: {
     Hyprland.workspaces.values.forEach(ws => {
-      root.workspaceAdded(ws)
+      root.workspaceAdded(ws);
     })
   }
 }
