@@ -8,11 +8,12 @@ Rectangle {
   id: root
   default property alias data: content.data;  // Place children in the RowLayout
 
+  property color background: Opts.colours.bgLight;
   property string icon: "";  // If this is an empty string the icon will not be displayed
   property color iconColour: Opts.colours.bgLight
   property color iconbgColour: Opts.colours.accent
 
-  color: Opts.colours.bgLight;
+  color: root.background;
   // If the bar is docked but with floating modules, the top corners' border radius is removed
   topRightRadius: Opts.bar.docked && Opts.bar.floatingModules ? 0 : Opts.vars.br;
   topLeftRadius: Opts.bar.docked && Opts.bar.floatingModules ? 0 : Opts.vars.br;

@@ -57,7 +57,9 @@ Variants {
             top: parent.top
             left: parent.left
           }
+          spacing: Opts.vars.marginModule;
 
+          LauncherButton {}
           ActiveWindow {}
         }
 
@@ -69,6 +71,7 @@ Variants {
             top: parent.top
             horizontalCenter: parent.horizontalCenter
           }
+          spacing: Opts.vars.marginModule;
 
           DateAndTime {}
         }
@@ -81,6 +84,7 @@ Variants {
             top: parent.top
             right: parent.right
           }
+          spacing: Opts.vars.marginModule;
           layoutDirection: Qt.RightToLeft
 
           Volume {}
