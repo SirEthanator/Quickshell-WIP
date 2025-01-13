@@ -34,16 +34,22 @@ Singleton {
     property int br: 6;  // Border Radius
 
     property font mainFont: Qt.font({
-      family: "CaskaydiaCove Nerd Font",
+      family: "Cascadia Code",
       pixelSize: 16,
       kerning: false
     })
 
-    property int barHeight: vars.moduleIconSize + vars.paddingModule + vars.paddingBar*2;  // This results in the modules' top and bottom padding matching paddingModule
+    property font nerdFont: Qt.font({
+      family: "Symbols Nerd Font Mono",
+      pixelSize: vars.moduleIconSize,
+      kerning: false
+    })
+
+    property int barHeight: vars.moduleIconSize + vars.paddingModule + vars.paddingBar*2;  // This results in the modules' top and bottom padding matching paddingModule - relies on icons being the tallest items
     property int paddingBar: 6;
     // Note that paddingModule will not affect the top and bottom padding. The top and bottom padding is based on the bar's height.
     property int paddingModule: 8;
-    property int marginModule: 16;
+    property int marginModule: 8;
     property int moduleIconSize: 22;
   }
 
