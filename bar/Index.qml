@@ -19,8 +19,8 @@ Variants {
       right: true;
     }
 
-    // If modules are floating this will add the padding to the height.
-    // This is to keep the height the same since the padding is removed from the bar's background.
+    // If modules are floating this will remove the padding from the height.
+    // This is to keep the modules' height the same since the padding is removed from the bar's background.
     // Then we add the gap. If it's docked we don't need a gap, so we multiply by 0, but if it's not we need the top gap.
     // If the bar is autohiding, we also need the bottom gap for the hover area. It will not reserve extra space as the exclusivity will be set to ignore
     height: (Opts.bar.floatingModules ? Opts.vars.barHeight - Opts.vars.paddingBar*2 : Opts.vars.barHeight)
