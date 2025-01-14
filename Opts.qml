@@ -14,12 +14,12 @@ Singleton {
 
   // Bar
   readonly property var bar: QtObject {
-    property bool autohide: true;  // Controls if the bar should hide itself until the screen edge is hovered | false
-    property bool docked: false;  // Controls if the bar floats or is docked | false
-    property bool floatingModules: false;  // Controls if the bar has a visible background | false
-    property bool multiColourModules: false;  // Controls if modules should use different colours or the accent colour | false
-    property int workspaceCount: 10;  // Controls how many workspaces are displayed in the workspace widget | 10
-    property int truncationLength: 100;  // Controls the maximum length of modules with long text | 100
+    property bool autohide:           false;  // If the bar should hide until hovered | false
+    property bool docked:             false;  // If the bar should be docked or floating | false
+    property bool floatingModules:    false;  // If the bar has a background behind the modules | false
+    property bool multiColourModules: false;  // If modules' icons should use different colours or the accent colour | false
+    property int  workspaceCount:     10   ;  // How many workspaces are displayed in the workspace widget | 10
+    property int  truncationLength:   100  ;  // The maximum length of modules with long text | 100
   }
 
 /*  _   _____   ___  _______   ___  __   ________
