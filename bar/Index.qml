@@ -79,7 +79,7 @@ Variants {
             }
             spacing: Opts.vars.marginModule;
 
-            LauncherButton {}
+            SidebarBtn {}
             Workspaces {screen: root.screen}
             ActiveWindow {}
           }
@@ -106,8 +106,8 @@ Variants {
               right: parent.right
             }
             spacing: Opts.vars.marginModule;
-            layoutDirection: Qt.RightToLeft
 
+            SysTrayBtn {}
             Volume {}
           }
         }
