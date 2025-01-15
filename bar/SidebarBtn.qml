@@ -3,7 +3,9 @@ import Quickshell;
 import QtQuick;
 
 BarModule {
-  background: Opts.colours.accent;
+  id: root;
+  hoverEnabled: true;
+  background: root.mouseArea.containsMouse ? Opts.colours.accentLight : Opts.colours.accent;
 
   Text {
     text: "";

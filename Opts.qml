@@ -65,7 +65,7 @@ Singleton {
     id: everforest
 
     property color accent: "#A7C080";
-    property color accentLight: Qt.lighter(everforest.accent, 1.1);
+    property color accentLight: Qt.lighter(everforest.accent, 1.2);
     property color fg: "#D3C6AA";
     property color bg: "#272E33";
     property color bgLight: "#2E383C";
@@ -86,7 +86,7 @@ Singleton {
     id: catMocha
 
     property color accent: "#B4BEFE";
-    property color accentLight: Qt.lighter(catMocha.accent, 1.1);
+    property color accentLight: Qt.lighter(catMocha.accent, 1.2);
     property color fg: "#CDD6F4";
     property color bg: "#1E1E2E";
     property color bgLight: "#313244";

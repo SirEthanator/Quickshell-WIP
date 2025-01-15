@@ -11,6 +11,15 @@ BarModule {
   icon: "node-symbolic";
   iconbgColour: Opts.colours.workspaces;
 
+  onWheel: event => {
+    const step = -Math.sign(event.angleDelta.y);
+    const active = root.monitor.activeWorkspace.id;
+    const target = step + active
+    if (target >= 1 && target <= Opts.bar.workspaceCount) {
+      Hyprland.dispatch(`workspace ${target}`);
+    }
+  }
+
   required property var screen;
   readonly property HyprlandMonitor monitor: Hyprland.monitorFor(screen);
 
