@@ -107,7 +107,7 @@ Variants {
             }
             spacing: Opts.vars.marginModule;
 
-            SysTrayBtn {}
+            SysTray {window: root}
             Volume {}
           }
         }

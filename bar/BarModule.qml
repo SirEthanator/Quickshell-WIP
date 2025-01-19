@@ -77,7 +77,7 @@ Rectangle {
 
     onClicked: event => root.clicked(event);
     onWheel: event => root.wheel(event);
-    }
+  }
 
 }
 
