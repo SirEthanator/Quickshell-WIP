@@ -4,6 +4,13 @@ import Quickshell;
 import "bar" as Bar;
 
 ShellRoot {
-  Bar.Index {}
+	Variants {
+		model: Quickshell.screens;
+
+		Bar.Index {
+			required property var modelData;
+			screen: modelData;
+		}
+	}
 }
 
