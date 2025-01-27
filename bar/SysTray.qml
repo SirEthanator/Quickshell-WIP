@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound;
 
-import "..";
+import "root:/";
 import Quickshell;
 import Quickshell.Widgets;
 import Quickshell.Services.SystemTray;

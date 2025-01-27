@@ -1,4 +1,4 @@
-import "..";  // For Opts
+import "root:/";  // For Opts
 import Quickshell;
 import Quickshell.Wayland;
 import QtQuick;
