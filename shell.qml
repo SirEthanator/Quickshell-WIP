@@ -2,15 +2,25 @@
 
 import Quickshell;
 import "bar" as Bar;
+import "sidebar" as Sidebar;
 
 ShellRoot {
 	Variants {
 		model: Quickshell.screens;
 
-		Bar.Index {
-			required property var modelData;
-			screen: modelData;
-		}
+    Scope {
+      id: scope;
+      required property var modelData;
+
+      Bar.Index {
+        screen: scope.modelData;
+      }
+
+      Sidebar.Index {
+        screen: scope.modelData;
+      }
+    }
+
 	}
 }
 
