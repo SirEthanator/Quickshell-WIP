@@ -1,4 +1,4 @@
-import "..";
+import "root:/";
 import Quickshell;
 import QtQuick;
 

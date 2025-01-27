@@ -1,4 +1,4 @@
-import "..";
+import "root:/";
 import "../utils" as Utils;
 import Quickshell;
 import Quickshell.Io
