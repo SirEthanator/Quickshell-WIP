@@ -9,10 +9,10 @@ Singleton {
    / /_/ / ___/ / / _/ // /_/ /    /\ \
    \____/_/    /_/ /___/\____/_/|_/___/  */
 
-  // Global
+  // -- Global --
   readonly property alias colours: everforest;
 
-  // Bar
+  // -- Bar --
   readonly property var bar: QtObject {
     property bool autohide:           false;  // If the bar should hide until hovered | false
     property bool docked:             false;  // If the bar should be docked or floating | false
@@ -20,6 +20,11 @@ Singleton {
     property bool multiColourModules: false;  // If modules' icons should use different colours or the accent colour | false
     property int  workspaceCount:     10   ;  // How many workspaces are displayed in the workspace widget | 10
     property int  truncationLength:   100  ;  // The maximum length of modules with long text | 100
+  }
+
+  // -- Sidebar --
+  readonly property var sidebar: QtObject {
+    property int width: 600;  // The sidebar's width | 600
   }
 
 /*  _   _____   ___  _______   ___  __   ________
@@ -54,6 +59,8 @@ Singleton {
     property int marginModule: 8;
     property int moduleIconSize: 22;
     property int wsSize: 7;
+
+    property int paddingWindow: 24;
   }
 
 /*    ___________ ________  ___________
