@@ -1,4 +1,4 @@
-import "..";
+import "root:/";
 import Quickshell;
 import QtQuick;
 import QtQuick.Layouts;
@@ -37,9 +37,6 @@ PanelWindow {
         margins: Opts.vars.paddingWindow
       }
 
-      // =========================
-      // ===== CONTENT START =====
-      // =========================
       Rectangle {  //!!! TEMP - User info: pfp, username, hostname, uptime and power buttons (similar to Vaxry's setup)
         color: "blueviolet";
         implicitHeight: 100;
@@ -54,37 +51,11 @@ PanelWindow {
 
       StackView {
         id: stack;
-        initialItem: dashboard;
+        initialItem: Dashboard {}
         Layout.fillHeight: true;
         Layout.fillWidth: true;
       }
     }
   }
-
-  Component {  //!!! TEMP - Will be moved to seperate file
-    id: dashboard;
-
-    ColumnLayout {
-      anchors.fill: parent;
-      spacing: Opts.vars.paddingWindow;
-
-      Rectangle {  //!!! TEMP - Main dashboard content
-        color: "slateblue";
-        implicitHeight: 450;
-        Layout.fillWidth: true;
-      }
-
-      Rectangle {  //!!! TEMP - Notification area
-        color: "darkslateblue";
-        Layout.fillWidth: true;
-        Layout.fillHeight: true;
-      }
-    }
-  }
-
-  // =======================
-  // ===== CONTENT END =====
-  // =======================
-
 }
 
