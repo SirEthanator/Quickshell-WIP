@@ -5,7 +5,6 @@ import QtQuick.Layouts;
 
 Item {
   id: dashboard;
-  anchors.fill: parent;
 
   ColumnLayout {
     anchors.fill: parent;

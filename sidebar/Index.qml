@@ -1,5 +1,6 @@
 import "root:/";
 import Quickshell;
+import Quickshell.Wayland;
 import QtQuick;
 import QtQuick.Layouts;
 import QtQuick.Controls;
@@ -16,46 +17,86 @@ PanelWindow {
 
   width: Opts.sidebar.width;
   visible: true;  //!!! TEMP
+  focusable: true;
   //exclusionMode: ExclusionMode.Normal;  //!!! TEMP - Keeping it exclusive makes development easier
+  WlrLayershell.layer: WlrLayer.Overlay;
+  WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand;  //!!! TEMP - Change to exclusive later
 
-  // Visible background of sidebar
-  Rectangle {
-    anchors {
-      fill: parent;
-      margins: Opts.vars.gapLarge;
+
+  Item {
+    anchors.fill: parent;
+    focus: true;
+
+    Keys.onPressed: (event) => {
+      if (event.key === Qt.Key_Tab) {
+        //!!! TEMP - Surely there's a better way of doing this (including not using the components):
+        if ( stack.currentItem.toString().includes("Dashboard") ) stack.replace(launcher)
+        else stack.replace(dashboard)
+      } else
+      if (event.key === Qt.Key_Escape) {
+        console.log("Placeholder - close sidebar here")
+      }
     }
 
-    color: Opts.colours.bg;
-    radius: Opts.vars.br;
-
-    ColumnLayout {
-      id: content;
-      spacing: Opts.vars.paddingWindow;
-
+    // Visible background of sidebar
+    Rectangle {
       anchors {
         fill: parent;
-        margins: Opts.vars.paddingWindow
+        margins: Opts.vars.gapLarge;
       }
 
-      Rectangle {  //!!! TEMP - User info: pfp, username, hostname, uptime and power buttons (similar to Vaxry's setup)
-        color: "blueviolet";
-        implicitHeight: 100;
-        Layout.fillWidth: true;
-      }
+      color: Opts.colours.bg;
+      radius: Opts.vars.br;
 
-      Rectangle {  //!!! TEMP - Search bar
-        color: "mediumslateblue";
-        implicitHeight: 50;
-        Layout.fillWidth: true;
-      }
+      ColumnLayout {
+        id: content;
+        spacing: Opts.vars.paddingWindow;
+        clip: true;
 
-      StackView {
-        id: stack;
-        initialItem: Dashboard {}
-        Layout.fillHeight: true;
-        Layout.fillWidth: true;
+        anchors {
+          fill: parent;
+          margins: Opts.vars.paddingWindow
+        }
+
+        MouseArea {
+          implicitHeight: 100;
+          Layout.fillWidth: true;
+          Rectangle {  //!!! TEMP - User info: pfp, username, hostname, uptime and power buttons (similar to Vaxry's setup)
+            color: "blueviolet";
+            anchors.fill: parent;
+          }
+          onPressed: {
+          }
+        }
+
+        Rectangle {  //!!! TEMP - Search bar
+          color: "mediumslateblue";
+          implicitHeight: 50;
+          Layout.fillWidth: true;
+        }
+
+        StackView {
+          id: stack;
+          initialItem: dashboard;
+          Layout.fillHeight: true;
+          Layout.fillWidth: true;
+
+          replaceEnter: Transition {
+            id: replaceEnter
+            NumberAnimation { properties: "x"; from: replaceEnter.ViewTransition.item.width; duration: 400; easing.type: Easing.OutCubic }
+            NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 400; easing.type: Easing.OutCubic }
+          }
+          replaceExit: Transition {
+            id: replaceExit
+            NumberAnimation { properties: "x"; to: -replaceExit.ViewTransition.item.width; duration: 400; easing.type: Easing.OutCubic }
+            NumberAnimation { property: "opacity"; from: 1; to: 0; duration: 400; easing.type: Easing.OutCubic }
+          }
+        }
       }
     }
   }
+
+  Component {id: dashboard; Dashboard {}}
+  Component {id: launcher; Launcher {}}
 }
 
