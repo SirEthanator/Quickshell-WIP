@@ -65,6 +65,20 @@ BarModule {
             : Opts.colours.wsInactive;
         implicitWidth: wsButton.focused ? Opts.vars.wsSize * 5 : Opts.vars.wsSize;
         implicitHeight: wsButton.focused ? Opts.vars.wsSize + 3 : Opts.vars.wsSize;
+
+        Behavior on implicitWidth {
+          NumberAnimation {
+            duration: 250;
+            easing.type: Easing.OutCubic;
+          }
+        }
+
+        Behavior on implicitHeight {
+          NumberAnimation {
+            duration: 250;
+            easing.type: Easing.OutCubic;
+          }
+        }
       }
     }
   }

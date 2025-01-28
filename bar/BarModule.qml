@@ -38,6 +38,10 @@ Rectangle {
   //signal released(event: MouseEvent);
   signal wheel(event: WheelEvent);
 
+  Behavior on background {
+    ColorAnimation { duration: 250; easing.type: Easing.OutCubic }
+  }
+
 
   MouseArea {
     id: mouseArea;
