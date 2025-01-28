@@ -3,12 +3,15 @@ import Quickshell;
 import QtQuick;
 import QtQuick.Layouts;
 
-Item {  //!!! TEMP = Will be moved to separate file
+//!!! Pretty much everything here is temporary
+
+Item {
   id: launcher;
 
   ColumnLayout {
     width: parent.width;
-    spacing: 5;
+    // Height should be controlled by content to avoid items being spaced incorrectly
+    spacing: 10;
 
     Repeater {
       model: 20;
