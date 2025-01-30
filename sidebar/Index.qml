@@ -27,7 +27,7 @@ LazyLoader {
     focusable: true;
     exclusionMode: ExclusionMode.Normal;
     WlrLayershell.layer: WlrLayer.Overlay;
-    WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand;  //!!! TEMP - Change to exclusive later
+    WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive;
 
 
     Item {
@@ -39,9 +39,9 @@ LazyLoader {
           //!!! TEMP - Surely there's a better way of doing this (including not using the components):
           if ( stack.currentItem.toString().includes("Dashboard") ) stack.replace(launcher)
           else stack.replace(dashboard)
-        } else
+        }
         if (event.key === Qt.Key_Escape) {
-          console.log("Placeholder - close sidebar here")
+          Globals.states.sidebarOpen = false;
         }
       }
 
