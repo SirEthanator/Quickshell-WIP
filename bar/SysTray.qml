@@ -13,7 +13,7 @@ BarModule {
   required property var window;
 
   hoverEnabled: true;
-  background: root.mouseArea.containsMouse ? Opts.colours.bgHover : Opts.colours.bgLight;
+  background: root.mouseArea.containsMouse ? Globals.colours.bgHover : Globals.colours.bgLight;
   onClicked: event => {
     popupLoader.active = !popupLoader.active;
   }
@@ -24,10 +24,10 @@ BarModule {
     source: "down-symbolic";
     fallback: "error-symbolic";
     isMask: true;
-    color: Opts.colours.fg;
+    color: Globals.colours.fg;
     roundToIconSize: false;
-    implicitWidth: Opts.vars.moduleIconSize;
-    implicitHeight: Opts.vars.moduleIconSize;
+    implicitWidth: Globals.vars.moduleIconSize;
+    implicitHeight: Globals.vars.moduleIconSize;
   }
 
   LazyLoader {
@@ -38,7 +38,7 @@ BarModule {
 
       anchor {
         window: root.window;
-        rect.y: root.window.height + Opts.vars.gapLarge;
+        rect.y: root.window.height + Globals.vars.gapLarge;
         edges: Edges.Top;
         gravity: Edges.Bottom;
         onAnchoring: {

@@ -1,4 +1,4 @@
-import "root:/";  // For Opts
+import "root:/";  // For Globals
 import Quickshell;
 import Quickshell.Wayland;
 import QtQuick;
@@ -18,15 +18,15 @@ PanelWindow {
   // This is to keep the modules' height the same since the padding is removed from the bar's background.
   // Then we add the gap. If it's docked we don't need a gap, so we multiply by 0, but if it's not we need the top gap.
   // If the bar is autohiding, we also need the bottom gap for the hover area. It will not reserve extra space as the exclusivity will be set to ignore
-  height: (Opts.bar.floatingModules ? Opts.vars.barHeight - Opts.vars.paddingBar*2 : Opts.vars.barHeight)
-    + Opts.vars.gap * (Opts.bar.docked && Opts.bar.autohide ? 1 : Opts.bar.docked ? 0 : Opts.bar.autohide ? 2 : 1);
+  height: (Globals.bar.floatingModules ? Globals.vars.barHeight - Globals.vars.paddingBar*2 : Globals.vars.barHeight)
+    + Globals.vars.gap * (Globals.bar.docked && Globals.bar.autohide ? 1 : Globals.bar.docked ? 0 : Globals.bar.autohide ? 2 : 1);
 
   // If the bar is autohiding and the always-on-screen part is hovered, the top margin will be 0. The top gap is handled by height and the Rectangle's margins.
   // The gap is subtracted from height to keep a transparent part of the bar on screen so it can be hovered.
   // We then add 1 just to move it a little bit higher to prevent one or two pixels of the bar from showing while they should be hidden.
-  margins.top: - (Opts.bar.autohide && ! hoverArea.containsMouse ? root.height - Opts.vars.gap + 1 : 0);
+  margins.top: - (Globals.bar.autohide && ! hoverArea.containsMouse ? root.height - Globals.vars.gap + 1 : 0);
 
-  exclusionMode: Opts.bar.autohide ? ExclusionMode.Ignore : ExclusionMode.Auto;
+  exclusionMode: Globals.bar.autohide ? ExclusionMode.Ignore : ExclusionMode.Auto;
 
   MouseArea {  // For autohidden bar to show on hover
     id: hoverArea;
@@ -38,15 +38,15 @@ PanelWindow {
       anchors {
         fill: parent
         // Add a gap if docked without floating modules
-        leftMargin: ! Opts.bar.docked || (Opts.bar.docked && Opts.bar.floatingModules) ? Opts.vars.gap : 0
-        rightMargin: ! Opts.bar.docked || (Opts.bar.docked && Opts.bar.floatingModules) ? Opts.vars.gap : 0
+        leftMargin: ! Globals.bar.docked || (Globals.bar.docked && Globals.bar.floatingModules) ? Globals.vars.gap : 0
+        rightMargin: ! Globals.bar.docked || (Globals.bar.docked && Globals.bar.floatingModules) ? Globals.vars.gap : 0
         // If docked, there should be no top margin.
-        topMargin: Opts.bar.docked ? 0 : Opts.vars.gap;
+        topMargin: Globals.bar.docked ? 0 : Globals.vars.gap;
         // If autohiding, there is extra space below for the always-on-screen area that is hovered to show the bar.
-        bottomMargin: Opts.bar.autohide ? Opts.vars.gap : 0;
+        bottomMargin: Globals.bar.autohide ? Globals.vars.gap : 0;
       }
-      color: Opts.bar.floatingModules ? "transparent" : Opts.colours.bg
-      radius: Opts.bar.docked ? 0 : Opts.vars.br
+      color: Globals.bar.floatingModules ? "transparent" : Globals.colours.bg
+      radius: Globals.bar.docked ? 0 : Globals.vars.br
 
       // =========================
       // ===== CONTENT START =====
@@ -55,9 +55,9 @@ PanelWindow {
         id: content;
 
         // If docked without floating modules, use gap. Also see comment for tb
-        readonly property int lrMargins: Opts.bar.floatingModules ? 0 : (Opts.bar.docked && ! Opts.bar.floatingModules) ? Opts.vars.gap : Opts.vars.paddingBar;
+        readonly property int lrMargins: Globals.bar.floatingModules ? 0 : (Globals.bar.docked && ! Globals.bar.floatingModules) ? Globals.vars.gap : Globals.vars.paddingBar;
         // No need for extra margins when modules are floating since the background is invisible.
-        readonly property int tbMargins: Opts.bar.floatingModules ? 0 : Opts.vars.paddingBar;
+        readonly property int tbMargins: Globals.bar.floatingModules ? 0 : Globals.vars.paddingBar;
         anchors {
           leftMargin: content.lrMargins
           rightMargin: content.lrMargins
@@ -72,7 +72,7 @@ PanelWindow {
             top: parent.top
             left: parent.left
           }
-          spacing: Opts.vars.marginModule;
+          spacing: Globals.vars.marginModule;
 
           SidebarBtn {}
           Workspaces {screen: root.screen}
@@ -87,7 +87,7 @@ PanelWindow {
             top: parent.top
             horizontalCenter: parent.horizontalCenter
           }
-          spacing: Opts.vars.marginModule;
+          spacing: Globals.vars.marginModule;
 
           DateAndTime {}
         }
@@ -100,7 +100,7 @@ PanelWindow {
             top: parent.top
             right: parent.right
           }
-          spacing: Opts.vars.marginModule;
+          spacing: Globals.vars.marginModule;
 
           // SysTray {window: root}
           Volume {}

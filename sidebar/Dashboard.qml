@@ -8,7 +8,7 @@ Item {
 
   ColumnLayout {
     anchors.fill: parent;
-    spacing: Opts.vars.paddingWindow;
+    spacing: Globals.vars.paddingWindow;
 
     Rectangle {  //!!! TEMP - Main dashboard content
       color: "slateblue";

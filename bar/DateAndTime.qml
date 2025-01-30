@@ -4,7 +4,7 @@ import QtQuick;
 
 BarModule {
   icon: "calendar-symbolic";
-  iconbgColour: Opts.colours.dateAndTime;
+  iconbgColour: Globals.colours.dateAndTime;
 
   SystemClock {
     id: clock;
@@ -13,8 +13,8 @@ BarModule {
 
   Text {
     id: clockText
-    color: Opts.colours.fg;
-    font: Opts.vars.mainFont
+    color: Globals.colours.fg;
+    font: Globals.vars.mainFont
 
     text: {
       const hoursTmp = (clock.hours < 13) ? clock.hours : clock.hours - 12;

@@ -9,13 +9,13 @@ import Quickshell.Hyprland;
 BarModule {
   id: root;
   icon: "node-symbolic";
-  iconbgColour: Opts.colours.workspaces;
+  iconbgColour: Globals.colours.workspaces;
 
   onWheel: event => {
     const step = -Math.sign(event.angleDelta.y);
     const active = root.monitor.activeWorkspace.id;
     const target = step + active
-    if (target >= 1 && target <= Opts.bar.workspaceCount) {
+    if (target >= 1 && target <= Globals.bar.workspaceCount) {
       Hyprland.dispatch(`workspace ${target}`);
     }
   }
@@ -27,7 +27,7 @@ BarModule {
 
   // No row layout because it's provided by BarModule
   Repeater {
-    model: Opts.bar.workspaceCount;
+    model: Globals.bar.workspaceCount;
 
     MouseArea {
       id: wsButton;
@@ -59,12 +59,12 @@ BarModule {
 
         radius: wsButtonRect.implicitHeight / 2;  // Round caps
         color: wsButton.focused
-          ? Opts.colours.accent
+          ? Globals.colours.accent
           : wsButton.occupied
-            ? Opts.colours.grey
-            : Opts.colours.wsInactive;
-        implicitWidth: wsButton.focused ? Opts.vars.wsSize * 5 : Opts.vars.wsSize;
-        implicitHeight: wsButton.focused ? Opts.vars.wsSize + 3 : Opts.vars.wsSize;
+            ? Globals.colours.grey
+            : Globals.colours.wsInactive;
+        implicitWidth: wsButton.focused ? Globals.vars.wsSize * 5 : Globals.vars.wsSize;
+        implicitHeight: wsButton.focused ? Globals.vars.wsSize + 3 : Globals.vars.wsSize;
 
         Behavior on implicitWidth {
           NumberAnimation {

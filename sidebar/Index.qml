@@ -10,7 +10,7 @@ import QtQuick.Controls;
 LazyLoader {
   id: loader;
   required property var screen;
-  active: Opts.states.sidebarOpen;
+  active: Globals.states.sidebarOpen;
 
   PanelWindow {
     id: root;
@@ -23,7 +23,7 @@ LazyLoader {
       left: true;
     }
 
-    width: Opts.sidebar.width;
+    width: Globals.sidebar.width;
     focusable: true;
     exclusionMode: ExclusionMode.Normal;
     WlrLayershell.layer: WlrLayer.Overlay;
@@ -49,20 +49,20 @@ LazyLoader {
       Rectangle {
         anchors {
           fill: parent;
-          margins: Opts.vars.gapLarge;
+          margins: Globals.vars.gapLarge;
         }
 
-        color: Opts.colours.bg;
-        radius: Opts.vars.br;
+        color: Globals.colours.bg;
+        radius: Globals.vars.br;
 
         ColumnLayout {
           id: content;
-          spacing: Opts.vars.paddingWindow;
+          spacing: Globals.vars.paddingWindow;
           clip: true;
 
           anchors {
             fill: parent;
-            margins: Opts.vars.paddingWindow
+            margins: Globals.vars.paddingWindow
           }
 
           MouseArea {
