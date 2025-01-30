@@ -4,16 +4,16 @@ import Quickshell
 import QtQuick
 
 Singleton {
-/*   ____  ___  ______________  _  ______
-    / __ \/ _ \/_  __/  _/ __ \/ |/ / __/
-   / /_/ / ___/ / / _/ // /_/ /    /\ \
-   \____/_/    /_/ /___/\____/_/|_/___/  */
+  /*   ____  ___  ______________  _  ______
+      / __ \/ _ \/_  __/  _/ __ \/ |/ / __/
+     / /_/ / ___/ / / _/ // /_/ /    /\ \
+     \____/_/    /_/ /___/\____/_/|_/___/   */
 
   // -- Global --
   readonly property alias colours: everforest;
 
   // -- Bar --
-  readonly property var bar: QtObject {
+  readonly property QtObject bar: QtObject {
     property bool autohide:           false;  // If the bar should hide until hovered | false
     property bool docked:             false;  // If the bar should be docked or floating | false
     property bool floatingModules:    false;  // If the bar has a background behind the modules | false
@@ -23,17 +23,18 @@ Singleton {
   }
 
   // -- Sidebar --
-  readonly property var sidebar: QtObject {
+  readonly property QtObject sidebar: QtObject {
     property int width: 600;  // The sidebar's width | 600
   }
 
-/*  _   _____   ___  _______   ___  __   ________
-   | | / / _ | / _ \/  _/ _ | / _ )/ /  / __/ __/
-   | |/ / __ |/ , _// // __ |/ _  / /__/ _/_\ \
-   |___/_/ |_/_/|_/___/_/ |_/____/____/___/___/  */
+  /*  _   _____   ___  _______   ___  __   ________
+     | | / / _ | / _ \/  _/ _ | / _ )/ /  / __/ __/
+     | |/ / __ |/ , _// // __ |/ _  / /__/ _/_\ \
+     |___/_/ |_/_/|_/___/_/ |_/____/____/___/___/   */
 
-  readonly property var vars: QtObject {
+  readonly property QtObject vars: QtObject {
     id: vars
+    // These variables aren't really meant to be changed, but you may if you wish.
 
     property int gap: 10;  // Size of Hyprland gap
     property int gapLarge: vars.gap + 8;
@@ -54,7 +55,7 @@ Singleton {
 
     property int barHeight: vars.moduleIconSize + vars.paddingModule + vars.paddingBar*2;  // This results in the modules' top and bottom padding matching paddingModule - relies on icons being the tallest items
     property int paddingBar: 6;
-    // Note that paddingModule will not affect the top and bottom padding. The top and bottom padding is based on the bar's height.
+    // Note that paddingModule will not directly affect the top and bottom padding. The top and bottom padding is based on the bar's height.
     property int paddingModule: 8;
     property int marginModule: 8;
     property int moduleIconSize: 22;
@@ -63,12 +64,12 @@ Singleton {
     property int paddingWindow: 24;
   }
 
-/*    ___________ ________  ___________
-     / __/ ___/ // / __/  |/  / __/ __/
-    _\ \/ /__/ _  / _// /|_/ / _/_\ \
-   /___/\___/_//_/___/_/  /_/___/___/  */
+  /*    ___________ ________  ___________
+       / __/ ___/ // / __/  |/  / __/ __/
+      _\ \/ /__/ _  / _// /|_/ / _/_\ \
+     /___/\___/_//_/___/_/  /_/___/___/   */
 
-  readonly property var everforest: QtObject {
+  readonly property QtObject everforest: QtObject {
     id: everforest
 
     property color accent: "#A7C080";
@@ -89,7 +90,7 @@ Singleton {
     property color volume: "#83C092";
   }
 
-  readonly property var catMocha: QtObject {
+  readonly property QtObject catMocha: QtObject {
     id: catMocha
 
     property color accent: "#B4BEFE";
@@ -108,6 +109,17 @@ Singleton {
     property color activeWindow: "#89b4fa";
     property color dateAndTime: "#F9E2AF";
     property color volume: "#94E2D5";
+  }
+
+  /*    _____________ ______________
+       / __/_  __/ _ /_  __/ __/ __/
+      _\ \  / / / __ |/ / / _/_\ \
+     /___/ /_/ /_/ |_/_/ /___/___/   */
+
+  property QtObject states: QtObject {
+    id: states;
+
+    property bool sidebarOpen: false;
   }
 }
 
