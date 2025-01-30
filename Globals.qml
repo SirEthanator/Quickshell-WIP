@@ -117,7 +117,7 @@ Singleton {
      /___/ /_/ /_/ |_/_/ /___/___/   */
 
   property QtObject states: QtObject {
-    id: states;
+    id: states
 
     property bool sidebarOpen: false;
   }

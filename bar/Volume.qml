@@ -19,11 +19,11 @@ BarModule {
     if (root?.volume >= 1      ) { return "audio-volume-low-panel-symbolic"    }
     else { return "audio-volume-muted-panel-symbolic" };
   }
-  iconbgColour: Opts.colours.volume;
+  iconbgColour: Globals.colours.volume;
 
   Text {
-    color: Opts.colours.fg;
-    font: Opts.vars.mainFont;
+    color: Globals.colours.fg;
+    font: Globals.vars.mainFont;
     text: `${root.volume}%`;
   }
 }
