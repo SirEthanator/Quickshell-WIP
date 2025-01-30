@@ -1,6 +1,8 @@
 - Stack of 2 pages:
   > Dashboard (system stats, notifications, quick tiles, greeting, power buttons, etc.)
   > Launcher (Its search bar will show on dashboard too)
-- Use tab to switch pages
-- Search bar is not part of the stack
-- Search bar focused when the panel is opened and cleared on close
+- Use tab to switch pages.
+- Search bar and user info is not part of the stack.
+- Search bar focused when the panel is opened and cleared on close.
+- User info will have pfp, username, hostname, uptime, and some power buttons on the side.
+- The power buttons will expand to show more and cover the rest of user info on hover.
