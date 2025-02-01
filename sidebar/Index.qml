@@ -45,7 +45,7 @@ LazyLoader {
     focusable: true;
     exclusionMode: ExclusionMode.Normal;
     WlrLayershell.layer: WlrLayer.Overlay;
-    WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive;
+    WlrLayershell.keyboardFocus: loader.open ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None;
 
     ParallelAnimation {  // Open animation
       running: !loader.loading;
@@ -58,7 +58,6 @@ LazyLoader {
         duration: Globals.vars.animLen;
       }
       NumberAnimation {
-        running: !loader.loading;
         target: background;
         property: "opacity";
         from: 0; to: 1;
@@ -78,7 +77,6 @@ LazyLoader {
         duration: Globals.vars.animLen;
       }
       NumberAnimation {
-        running: !loader.loading;
         target: background;
         property: "opacity";
         from: 1; to: 0;
