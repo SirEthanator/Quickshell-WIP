@@ -6,6 +6,7 @@ BarModule {
   hoverEnabled: true;
   background: root.mouseArea.containsMouse ? Globals.colours.accentLight : Globals.colours.accent;
   onClicked: Globals.states.sidebarOpen = !Globals.states.sidebarOpen;
+  padding: Globals.vars.paddingModule*2;
 
   Text {
     text: "";
