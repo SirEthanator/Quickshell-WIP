@@ -19,7 +19,7 @@ LazyLoader {
     if (!open) {
       // We need a timer so the component will not be unloaded until the animation finishes
       loader.timer = Qt.createQmlObject("import QtQuick; Timer {}", loader);
-      timer.interval = Globals.vars.animDuration;
+      timer.interval = Globals.vars.animLen;
       timer.triggered.connect(() => {
         loader.timer = null;
         loader.activeAsync = false
@@ -80,7 +80,7 @@ LazyLoader {
           property: "opacity";
           from: 0; to: 1;
           easing.type: Easing.OutCubic;
-          duration: Globals.vars.animDuration;
+          duration: Globals.vars.animLen;
         }
 
         NumberAnimation {  // Close animation
@@ -89,7 +89,7 @@ LazyLoader {
           property: "opacity";
           from: 1; to: 0;
           easing.type: Easing.OutCubic;
-          duration: Globals.vars.animDuration;
+          duration: Globals.vars.animLen;
         }
 
         ColumnLayout {
@@ -122,13 +122,13 @@ LazyLoader {
 
             replaceEnter: Transition {
               id: replaceEnter
-              NumberAnimation { properties: "x"; from: replaceEnter.ViewTransition.item.width; duration: 400; easing.type: Easing.OutCubic }
-              NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 400; easing.type: Easing.OutCubic }
+              NumberAnimation { properties: "x"; from: replaceEnter.ViewTransition.item.width; duration: Globals.vars.animLen; easing.type: Easing.OutCubic }
+              NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Globals.vars.animLen; easing.type: Easing.OutCubic }
             }
             replaceExit: Transition {
               id: replaceExit
-              NumberAnimation { properties: "x"; to: -replaceExit.ViewTransition.item.width; duration: 400; easing.type: Easing.OutCubic }
-              NumberAnimation { property: "opacity"; from: 1; to: 0; duration: 400; easing.type: Easing.OutCubic }
+              NumberAnimation { properties: "x"; to: -replaceExit.ViewTransition.item.width; duration: Globals.vars.animLen; easing.type: Easing.OutCubic }
+              NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Globals.vars.animLen; easing.type: Easing.OutCubic }
             }
           }
         }

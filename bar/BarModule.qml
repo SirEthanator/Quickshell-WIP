@@ -39,7 +39,7 @@ Rectangle {
   signal wheel(event: WheelEvent);
 
   Behavior on background {
-    ColorAnimation { duration: 250; easing.type: Easing.OutCubic }
+    ColorAnimation { duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
   }
 
 
