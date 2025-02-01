@@ -10,7 +10,25 @@ import QtQuick.Controls;
 LazyLoader {
   id: loader;
   required property var screen;
-  active: Globals.states.sidebarOpen;
+  activeAsync: false;
+
+  property bool open: Globals.states.sidebarOpen;
+  property var timer;
+  onOpenChanged: {
+    if (!!loader.timer) return
+    if (!open) {
+      // We need a timer so the component will not be unloaded until the animation finishes
+      loader.timer = Qt.createQmlObject("import QtQuick; Timer {}", loader);
+      timer.interval = Globals.vars.animDuration;
+      timer.triggered.connect(() => {
+        loader.timer = null;
+        loader.activeAsync = false
+      });
+      timer.start();
+    } else {
+      loader.activeAsync = true;
+    }
+  }
 
   PanelWindow {
     id: root;
@@ -29,7 +47,6 @@ LazyLoader {
     WlrLayershell.layer: WlrLayer.Overlay;
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive;
 
-
     Item {
       anchors.fill: parent;
       focus: true;
@@ -47,6 +64,8 @@ LazyLoader {
 
       // Visible background of sidebar
       Rectangle {
+        id: background;
+
         anchors {
           fill: parent;
           margins: Globals.vars.gapLarge;
@@ -54,6 +73,24 @@ LazyLoader {
 
         color: Globals.colours.bg;
         radius: Globals.vars.br;
+
+        NumberAnimation {  // Open animation
+          running: true;
+          target: background;
+          property: "opacity";
+          from: 0; to: 1;
+          easing.type: Easing.OutCubic;
+          duration: Globals.vars.animDuration;
+        }
+
+        NumberAnimation {  // Close animation
+          running: !loader.open;
+          target: background;
+          property: "opacity";
+          from: 1; to: 0;
+          easing.type: Easing.OutCubic;
+          duration: Globals.vars.animDuration;
+        }
 
         ColumnLayout {
           id: content;
@@ -65,15 +102,10 @@ LazyLoader {
             margins: Globals.vars.paddingWindow
           }
 
-          MouseArea {
+          Rectangle {  //!!! TEMP - User info: pfp, username, hostname, uptime and power buttons (similar to Vaxry's setup)
+            color: "blueviolet";
             implicitHeight: 100;
             Layout.fillWidth: true;
-            Rectangle {  //!!! TEMP - User info: pfp, username, hostname, uptime and power buttons (similar to Vaxry's setup)
-              color: "blueviolet";
-              anchors.fill: parent;
-            }
-            onPressed: {
-            }
           }
 
           Rectangle {  //!!! TEMP - Search bar
