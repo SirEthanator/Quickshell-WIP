@@ -47,6 +47,46 @@ LazyLoader {
     WlrLayershell.layer: WlrLayer.Overlay;
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive;
 
+    ParallelAnimation {  // Open animation
+      running: !loader.loading;
+
+      NumberAnimation {
+        target: root;
+        property: "margins.left";
+        from: -100; to: 0;
+        easing.type: Easing.OutCubic;
+        duration: Globals.vars.animLen;
+      }
+      NumberAnimation {
+        running: !loader.loading;
+        target: background;
+        property: "opacity";
+        from: 0; to: 1;
+        easing.type: Easing.OutCubic;
+        duration: Globals.vars.animLen;
+      }
+    }
+
+    ParallelAnimation {  // Close animation
+      running: !loader.open;
+
+      NumberAnimation {
+        target: root;
+        property: "margins.left";
+        from: 0; to: -100;
+        easing.type: Easing.OutCubic;
+        duration: Globals.vars.animLen;
+      }
+      NumberAnimation {
+        running: !loader.loading;
+        target: background;
+        property: "opacity";
+        from: 1; to: 0;
+        easing.type: Easing.OutCubic;
+        duration: Globals.vars.animLen;
+      }
+    }
+
     Item {
       anchors.fill: parent;
       focus: true;
@@ -73,24 +113,6 @@ LazyLoader {
 
         color: Globals.colours.bg;
         radius: Globals.vars.br;
-
-        NumberAnimation {  // Open animation
-          running: true;
-          target: background;
-          property: "opacity";
-          from: 0; to: 1;
-          easing.type: Easing.OutCubic;
-          duration: Globals.vars.animLen;
-        }
-
-        NumberAnimation {  // Close animation
-          running: !loader.open;
-          target: background;
-          property: "opacity";
-          from: 1; to: 0;
-          easing.type: Easing.OutCubic;
-          duration: Globals.vars.animLen;
-        }
 
         ColumnLayout {
           id: content;
@@ -127,7 +149,6 @@ LazyLoader {
             }
             replaceExit: Transition {
               id: replaceExit
-              NumberAnimation { properties: "x"; to: -replaceExit.ViewTransition.item.width; duration: Globals.vars.animLen; easing.type: Easing.OutCubic }
               NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Globals.vars.animLen; easing.type: Easing.OutCubic }
             }
           }
