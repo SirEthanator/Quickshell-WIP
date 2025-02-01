@@ -73,42 +73,63 @@ Singleton {
     id: everforest
 
     property color accent: "#A7C080";
-    property color accentLight: Qt.lighter(everforest.accent, 1.2);
+    property color accentLight: Qt.lighter(accent, 1.2);
     property color fg: "#D3C6AA";
     property color bg: "#272E33";
     property color bgLight: "#2E383C";
     property color bgHover: "#414B50";
     property color bgAccent: "#3C4841";
     property color grey: "#7A8478";
-    property color wsInactive: everforest.bgHover;
+    property color wsInactive: bgHover;
     property color red: "#E67E80";
     property color shadow: "#231E2326";  // 35% opacity
 
-    property color workspaces: "#D699B6";
+    property color workspaces: accent;
     property color activeWindow: "#7FBBB3";
     property color dateAndTime: "#DBBC7F";
-    property color volume: "#83C092";
+    property color volume: "#E69875";
   }
 
   readonly property QtObject catMocha: QtObject {
     id: catMocha
 
     property color accent: "#B4BEFE";
-    property color accentLight: Qt.lighter(catMocha.accent, 1.2);
+    property color accentLight: Qt.lighter(accent, 1.2);
     property color fg: "#CDD6F4";
     property color bg: "#1E1E2E";
     property color bgLight: "#313244";
     property color bgHover: "#45475A";
     property color bgAccent: "#5A5F7F";
     property color grey: "#585B70";
-    property color wsInactive: catMocha.bgHover;
+    property color wsInactive: bgHover;
     property color red: "#F38BA8";
     property color shadow: "#2311111B";  // 35% opacity
 
-    property color workspaces: "#B4BEFE";
+    property color workspaces: accent;
     property color activeWindow: "#89b4fa";
     property color dateAndTime: "#F9E2AF";
-    property color volume: "#94E2D5";
+    property color volume: "#FAB387";
+  }
+
+  readonly property QtObject rosePine: QtObject {
+    id: rosePine
+
+    property color accent: "#9CCFD8";
+    property color accentLight: Qt.lighter(accent, 1.2);
+    property color fg: "#E0DEF4";
+    property color bg: "#1F1D2E";
+    property color bgLight: "#26233A";
+    property color bgHover: "#403D52";
+    property color bgAccent: "#4E686C";
+    property color grey: "#6E6A86";
+    property color wsInactive: bgHover;
+    property color red: "#EB6F92";
+    property color shadow: "#23191724";  // 35% opacity
+
+    property color workspaces: accent;
+    property color activeWindow: "#31748F";
+    property color dateAndTime: "#F6C177";
+    property color volume: "#C4A7E7";
   }
 
   /*    _____________ ______________
