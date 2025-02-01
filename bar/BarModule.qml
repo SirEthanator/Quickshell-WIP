@@ -12,6 +12,7 @@ Rectangle {
   property string icon: "";  // If this is an empty string the icon will not be displayed
   property color iconColour: Globals.colours.bgLight;
   property color iconbgColour: Globals.colours.accent;
+  property int padding: Globals.vars.paddingModule;
 
   property alias mouseArea: mouseArea;
   property alias hoverEnabled: mouseArea.hoverEnabled;
@@ -28,7 +29,7 @@ Rectangle {
   // Fills the height of the RowLayout which it's inside of. The RowLayout has a margin so this won't stretch to the bar's full height.
   Layout.fillHeight: true;
   // If there is an icon it will include paddingModule for the left, so we only need to add for the right.
-  implicitWidth: root.icon ? content.implicitWidth + Globals.vars.paddingModule : content.implicitWidth + Globals.vars.paddingModule*2
+  implicitWidth: root.icon ? content.implicitWidth + root.padding : content.implicitWidth + root.padding*2
   // Note that paddingModule doesn't affect top and bottom padding. That is controlled by the bar's height.
 
   signal clicked(event: MouseEvent);
@@ -52,14 +53,14 @@ Rectangle {
       anchors.top: parent.top;
       anchors.bottom: parent.bottom;
       anchors.left: parent.left;
-      anchors.leftMargin: root.icon ? 0 : Globals.vars.paddingModule;
-      spacing: Globals.vars.paddingModule;
+      anchors.leftMargin: root.icon ? 0 : root.padding;
+      spacing: root.padding;
 
       Rectangle {
         id: iconbg;
         visible: !!root.icon;  // Visible if icon is a non-empty string.
         color: Globals.bar.multiColourModules ? root.iconbgColour : Globals.colours.accent;
-        implicitWidth: icon.implicitWidth + Globals.vars.paddingModule*2;  // This will add padding to both sides of the icon's background.
+        implicitWidth: icon.implicitWidth + root.padding*2;  // This will add padding to both sides of the icon's background.
         Layout.fillHeight: true;
         topLeftRadius: Globals.bar.docked && Globals.bar.floatingModules ? 0 : Globals.vars.br;  // See comment on root's br
         bottomLeftRadius: Globals.vars.br;
