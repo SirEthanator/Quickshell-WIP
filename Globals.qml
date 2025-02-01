@@ -62,6 +62,9 @@ Singleton {
     property int wsSize: 7;
 
     property int paddingWindow: 24;
+
+    property int animLen: 350;
+    property int transitionLen: 250;
   }
 
   /*    ___________ ________  ___________

@@ -68,14 +68,14 @@ BarModule {
 
         Behavior on implicitWidth {
           NumberAnimation {
-            duration: 250;
+            duration: Globals.vars.transitionLen;
             easing.type: Easing.OutCubic;
           }
         }
 
         Behavior on implicitHeight {
           NumberAnimation {
-            duration: 250;
+            duration: Globals.vars.transitionLen;
             easing.type: Easing.OutCubic;
           }
         }
