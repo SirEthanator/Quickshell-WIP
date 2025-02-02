@@ -28,6 +28,13 @@ PanelWindow {
 
   exclusionMode: Globals.bar.autohide ? ExclusionMode.Ignore : ExclusionMode.Auto;
 
+  Behavior on margins.top {
+    NumberAnimation {
+      duration: Globals.vars.animLen;
+      easing.type: Easing.OutExpo;
+    }
+  }
+
   MouseArea {  // For autohidden bar to show on hover
     id: hoverArea;
     anchors.fill: parent;
