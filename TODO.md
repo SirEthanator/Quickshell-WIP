@@ -1,2 +1,3 @@
-- [ ] Slide animation on sidebar (maybe slide fade depending on what looks best)
-
+- [ ] Complete sidebar
+- [ ] Implement notifications
+- [ ] Add more animations
