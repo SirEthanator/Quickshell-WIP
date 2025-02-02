@@ -1,7 +1,6 @@
 import "root:/";
-import "../utils" as Utils;
-import Quickshell;
-import Quickshell.Io
+import "root:/utils" as Utils;
+import "root:/animations" as Anims;
 import QtQuick;
 
 BarModule {
@@ -22,7 +21,7 @@ BarModule {
       return result;
     }
 
-    FadeAnimation on text {originalValue: 1}
+    Anims.OutIn on text {originalValue: 1}
   }
 }
 
