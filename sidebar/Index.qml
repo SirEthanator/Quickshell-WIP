@@ -67,9 +67,9 @@ LazyLoader {
 
       Keys.onPressed: (event) => {
         if (event.key === Qt.Key_Tab) {
-          //!!! TEMP - Surely there's a better way of doing this (including not using the components):
-          if ( stack.currentItem.toString().includes("Dashboard") ) stack.replace(launcher)
-          else stack.replace(dashboard)
+          if (stack.animPlaying) return;  //!!! Do nothing if animation is in progress - Currently switching too fast will make the active item invisible (need to fix)
+          if (stack.currentIndex < stack.count - 1) stack.currentIndex += 1
+          else stack.currentIndex = 0;
         }
         if (event.key === Qt.Key_Escape) {
           Globals.states.sidebarOpen = false;
@@ -110,28 +110,18 @@ LazyLoader {
             Layout.fillWidth: true;
           }
 
-          StackView {
+          Stack {
             id: stack;
-            initialItem: dashboard;
             Layout.fillHeight: true;
             Layout.fillWidth: true;
 
-            replaceEnter: Transition {
-              id: replaceEnter
-              NumberAnimation { property: "x"; from: 200; duration: Globals.vars.animLen; easing.type: Easing.OutCubic }
-              NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Globals.vars.animLen; easing.type: Easing.OutCubic }
-            }
-            replaceExit: Transition {
-              id: replaceExit
-              NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Globals.vars.animLen; easing.type: Easing.OutCubic }
-            }
+            currentIndex: 0;
+            Dashboard {}
+            Launcher {}
           }
         }
       }
     }
-
-    Component {id: dashboard; Dashboard {}}
-    Component {id: launcher; Launcher {}}
   }
 }
 
