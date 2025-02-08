@@ -53,7 +53,14 @@ PanelWindow {
         bottomMargin: Globals.bar.autohide ? Globals.vars.gap : 0;
       }
       color: Globals.bar.floatingModules ? "transparent" : Globals.colours.bg
+      border {
+        color: Globals.bar.backgroundOutline && !Globals.bar.floatingModules ? Globals.colours.outline : "transparent";
+        width: Globals.bar.backgroundOutline && !Globals.bar.floatingModules ? Globals.vars.outlineSize : 0;
+        pixelAligned: false;
+      }
       radius: Globals.bar.docked ? 0 : Globals.vars.br
+
+      antialiasing: true;
 
       // =========================
       // ===== CONTENT START =====
@@ -81,7 +88,7 @@ PanelWindow {
           }
           spacing: Globals.vars.marginModule;
 
-          SidebarBtn {}
+          MenuBtn {}
           Workspaces {screen: root.screen}
           ActiveWindow {}
         }

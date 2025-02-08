@@ -13,6 +13,7 @@ Rectangle {
   property color iconColour: Globals.colours.bgLight;
   property color iconbgColour: Globals.colours.accent;
   property int padding: Globals.vars.paddingModule;
+  property bool outline: Globals.bar.moduleOutlines;
 
   property alias mouseArea: mouseArea;
   property alias hoverEnabled: mouseArea.hoverEnabled;
@@ -20,6 +21,14 @@ Rectangle {
   property alias isPressed: mouseArea.pressed;
 
   color: root.background;
+  border {
+    color: root.outline ? Globals.colours.outline : "transparent";
+    width: root.outline ? Globals.vars.outlineSize : 0;
+    pixelAligned: false;
+  }
+
+  antialiasing: true;
+
   // If the bar is docked but with floating modules, the top corners' border radius is removed
   topRightRadius: Globals.bar.docked && Globals.bar.floatingModules ? 0 : Globals.vars.br;
   topLeftRadius: Globals.bar.docked && Globals.bar.floatingModules ? 0 : Globals.vars.br;
