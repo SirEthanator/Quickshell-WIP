@@ -2,7 +2,7 @@
 
 import Quickshell;
 import "bar" as Bar;
-import "sidebar" as Sidebar;
+import "menu" as Menu;
 import Quickshell.Hyprland;
 
 ShellRoot {
@@ -18,7 +18,7 @@ ShellRoot {
         name: "menu";
         description: "Opens the side menu on Quickshell.";
         onReleased: {
-          Globals.states.sidebarOpen = !Globals.states.sidebarOpen;
+          Globals.states.menuOpen = !Globals.states.menuOpen;
         }
       }
 
@@ -26,7 +26,7 @@ ShellRoot {
         screen: scope.modelData;
       }
 
-      Sidebar.Index {
+      Menu.Index {
         screen: scope.modelData;
       }
     }

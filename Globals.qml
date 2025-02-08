@@ -23,8 +23,8 @@ Singleton {
   }
 
   // -- Sidebar --
-  readonly property QtObject sidebar: QtObject {
-    property int width: 600;  // The sidebar's width | 600
+  readonly property QtObject menu: QtObject {
+    property int width: 600;  // The menu's width | 600
   }
 
   /*  _   _____   ___  _______   ___  __   ________
@@ -143,7 +143,7 @@ Singleton {
   property QtObject states: QtObject {
     id: states
 
-    property bool sidebarOpen: false;
+    property bool menuOpen: false;
   }
 }
 
