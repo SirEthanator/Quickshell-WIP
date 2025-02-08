@@ -18,6 +18,8 @@ Singleton {
     property bool docked:             false;  // If the bar should be docked or floating | false
     property bool floatingModules:    false;  // If the bar has a background behind the modules | false
     property bool multiColourModules: false;  // If modules' icons should use different colours or the accent colour | false
+    property bool moduleOutlines:     true ;  // If there should be outlines on modules | true
+    property bool backgroundOutline:  true ;  // If the bar's background should have an outline | true
     property int  workspaceCount:     10   ;  // How many workspaces are displayed in the workspace widget | 10
     property int  truncationLength:   100  ;  // The maximum length of modules with long text | 100
   }
@@ -40,6 +42,8 @@ Singleton {
     property int gapLarge: vars.gap + 8;
 
     property int br: 6;  // Border Radius
+
+    property real outlineSize: 1.5;
 
     property font mainFont: Qt.font({
       family: "Cascadia Code",
@@ -82,6 +86,7 @@ Singleton {
     property color bgLight: "#2E383C";
     property color bgHover: "#414B50";
     property color bgAccent: "#3C4841";
+    property color outline: bgAccent;
     property color grey: "#7A8478";
     property color wsInactive: bgHover;
     property color red: "#E67E80";
@@ -103,6 +108,7 @@ Singleton {
     property color bgLight: "#313244";
     property color bgHover: "#45475A";
     property color bgAccent: "#5A5F7F";
+    property color outline: bgAccent;
     property color grey: "#585B70";
     property color wsInactive: bgHover;
     property color red: "#F38BA8";
@@ -124,6 +130,7 @@ Singleton {
     property color bgLight: "#26233A";
     property color bgHover: "#403D52";
     property color bgAccent: "#4E686C";
+    property color outline: bgAccent;
     property color grey: "#6E6A86";
     property color wsInactive: bgHover;
     property color red: "#EB6F92";
