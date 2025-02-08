@@ -13,7 +13,7 @@ LazyLoader {
   required property var screen;
   activeAsync: false;
 
-  property bool open: Globals.states.sidebarOpen;
+  property bool open: Globals.states.menuOpen;
   property var timer;
   onOpenChanged: {
     if (!!loader.timer) return
@@ -42,7 +42,7 @@ LazyLoader {
       left: true;
     }
 
-    width: Globals.sidebar.width;
+    width: Globals.menu.width;
     focusable: true;
     exclusionMode: ExclusionMode.Normal;
     WlrLayershell.layer: WlrLayer.Overlay;
@@ -72,11 +72,11 @@ LazyLoader {
           else stack.currentIndex = 0;
         }
         if (event.key === Qt.Key_Escape) {
-          Globals.states.sidebarOpen = false;
+          Globals.states.menuOpen = false;
         }
       }
 
-      // Visible background of sidebar
+      // Visible background of menu
       Rectangle {
         id: background;
 

@@ -1,3 +1,3 @@
-- [ ] Complete sidebar
+- [ ] Complete menu
 - [ ] Implement notifications
 - [ ] Add more animations
