@@ -69,9 +69,7 @@ LazyLoader {
 
       Keys.onPressed: (event) => {
         if (event.key === Qt.Key_Tab) {
-          if (stack.animPlaying) return;  //!!! Do nothing if animation is in progress - Currently switching too fast will make the active item invisible (need to fix)
-          if (stack.currentIndex < stack.count - 1) stack.currentIndex += 1
-          else stack.currentIndex = 0;
+          stack.currentIndex += 1;
         }
         if (event.key === Qt.Key_Escape) {
           Globals.states.menuOpen = false;
@@ -111,7 +109,6 @@ LazyLoader {
             Layout.fillHeight: true;
             Layout.fillWidth: true;
 
-            currentIndex: 0;
             Dashboard.Index {}
             Launcher.Index {}
           }
