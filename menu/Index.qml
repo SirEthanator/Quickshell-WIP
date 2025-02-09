@@ -2,6 +2,8 @@ pragma ComponentBehavior: Bound;
 
 import "root:/";
 import "root:/animations" as Anims;
+import "dashboard" as Dashboard;
+import "launcher" as Launcher;
 import Quickshell;
 import Quickshell.Wayland;
 import QtQuick;
@@ -98,12 +100,6 @@ LazyLoader {
             margins: Globals.vars.paddingWindow
           }
 
-          Rectangle {  //!!! TEMP - User info: pfp, username, hostname, uptime and power buttons (similar to Vaxry's setup)
-            color: "blueviolet";
-            implicitHeight: 100;
-            Layout.fillWidth: true;
-          }
-
           Rectangle {  //!!! TEMP - Search bar
             color: "mediumslateblue";
             implicitHeight: 50;
@@ -116,8 +112,8 @@ LazyLoader {
             Layout.fillWidth: true;
 
             currentIndex: 0;
-            Dashboard {}
-            Launcher {}
+            Dashboard.Index {}
+            Launcher.Index {}
           }
         }
       }
