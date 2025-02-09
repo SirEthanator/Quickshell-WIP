@@ -16,8 +16,8 @@ BarModule {
     font: Globals.vars.mainFont
 
     text: {
-      const tmp = root.title.length > Globals.bar.truncationLength;
-      const result = tmp ? `${root.title.substring(0, Globals.bar.truncationLength)}...` : root.title;
+      const truncate = root.title.length > Globals.bar.truncationLength;
+      const result = truncate ? `${root.title.substring(0, Globals.bar.truncationLength)}...` : root.title;
       return result;
     }
 

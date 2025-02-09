@@ -42,10 +42,6 @@ Rectangle {
   // Note that paddingModule doesn't affect top and bottom padding. That is controlled by the bar's height.
 
   signal clicked(event: MouseEvent);
-  //signal entered();
-  //signal exited();
-  //signal pressed(event: MouseEvent);
-  //signal released(event: MouseEvent);
   signal wheel(event: WheelEvent);
 
   Behavior on background {
@@ -59,10 +55,12 @@ Rectangle {
 
     RowLayout {
       id: content;
-      anchors.top: parent.top;
-      anchors.bottom: parent.bottom;
-      anchors.left: parent.left;
-      anchors.leftMargin: root.icon ? 0 : root.padding;
+      anchors {
+        top: parent.top;
+        bottom: parent.bottom;
+        left: parent.left;
+        leftMargin: root.icon ? 0 : root.padding;
+      }
       spacing: root.padding;
 
       Rectangle {

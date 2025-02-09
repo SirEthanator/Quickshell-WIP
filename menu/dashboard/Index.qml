@@ -10,6 +10,8 @@ Item {
     anchors.fill: parent;
     spacing: Globals.vars.paddingWindow;
 
+    UserInfo {}
+
     Rectangle {  //!!! TEMP - Main dashboard content
       color: "slateblue";
       implicitHeight: 450;
