@@ -8,7 +8,7 @@ BarModule {
 
   readonly property var battery: UPower.displayDevice;
   readonly property int percentage: Math.round(battery.percentage*100)
-  readonly property bool charging: battery.changeRate > 0;
+  readonly property bool charging: battery.timeToEmpty === 0;
 
   visible: battery.isLaptopBattery;
 
