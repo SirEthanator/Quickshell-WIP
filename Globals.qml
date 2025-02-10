@@ -26,7 +26,9 @@ Singleton {
 
   // -- Sidebar --
   readonly property QtObject menu: QtObject {
-    property int width: 600;  // The menu's width | 600
+    property bool capitaliseUsername: true ;  // If the username should be capitalised | true
+    property bool capitaliseHostname: false;  // If the hostname should be capitalised | false
+    property int  width:               600 ;  // The menu's width | 600
   }
 
   /*  _   _____   ___  _______   ___  __   ________
@@ -69,6 +71,7 @@ Singleton {
 
     property int paddingCard: 20;
     property int marginCardSmall: 5;
+    property int marginCard: 10;
 
     property int animLen: 350;
     property int transitionLen: 250;

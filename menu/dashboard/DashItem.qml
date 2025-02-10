@@ -6,6 +6,7 @@ import QtQuick.Layouts;
 Rectangle {
   id: root;
   default property alias data: content.data;
+  property bool fullContentWidth: false;
 
   color: Globals.colours.bgLight;
   radius: Globals.vars.br;
@@ -28,10 +29,14 @@ Rectangle {
       id: content;
       clip: true;
       anchors {
-        fill: parent;
+        top: parent.top;
+        bottom: parent.bottom;
+        left: parent.left;
+        right: root.fullContentWidth ? parent.right : undefined
         margins: Globals.vars.paddingCard;
       }
       spacing: Globals.vars.paddingCard;
+
     }
   }
 }
