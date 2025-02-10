@@ -12,6 +12,7 @@ Rectangle {
   property string icon: "";  // If this is an empty string the icon will not be displayed
   property color iconColour: Globals.colours.bgLight;
   property color iconbgColour: Globals.colours.accent;
+  property bool forceIconbgColour: false;
   property int padding: Globals.vars.paddingModule;
   property bool outline: Globals.bar.moduleOutlines;
 
@@ -66,7 +67,7 @@ Rectangle {
       Rectangle {
         id: iconbg;
         visible: !!root.icon;  // Visible if icon is a non-empty string.
-        color: Globals.bar.multiColourModules ? root.iconbgColour : Globals.colours.accent;
+        color: Globals.bar.multiColourModules || root.forceIconbgColour ? root.iconbgColour : Globals.colours.accent;
         implicitWidth: icon.implicitWidth + root.padding*2;  // This will add padding to both sides of the icon's background.
         Layout.fillHeight: true;
         topLeftRadius: Globals.bar.docked && Globals.bar.floatingModules ? 0 : Globals.vars.br;  // See comment on root's br
