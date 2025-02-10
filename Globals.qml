@@ -99,6 +99,11 @@ Singleton {
     property color activeWindow: "#7FBBB3";
     property color dateAndTime: "#DBBC7F";
     property color volume: "#E69875";
+
+    property color battery: "#A7C080";
+    property color batteryCharging: "#A7C080";
+    property color batteryMed: "#DBBC7F";
+    property color batteryLow: red;
   }
 
   readonly property QtObject catMocha: QtObject {
@@ -121,6 +126,11 @@ Singleton {
     property color activeWindow: "#89b4fa";
     property color dateAndTime: "#F9E2AF";
     property color volume: "#FAB387";
+
+    property color battery: "#A6E3A1";
+    property color batteryCharging: "#A6E3A1";
+    property color batteryMed: "#f9e2af";
+    property color batteryLow: red;
   }
 
   readonly property QtObject rosePine: QtObject {
@@ -143,6 +153,11 @@ Singleton {
     property color activeWindow: "#31748F";
     property color dateAndTime: "#F6C177";
     property color volume: "#C4A7E7";
+
+    property color battery: "#31748F";
+    property color batteryCharging: "#31748F";
+    property color batteryMed: "#F6C177";
+    property color batteryLow: red;
   }
 
   /*    _____________ ______________
