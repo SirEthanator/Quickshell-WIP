@@ -1,4 +1,4 @@
 - [ ] Disable top, left, and right outline when bar is docked
 - [ ] Complete menu
 - [ ] Implement notifications
-- [ ] Add more animations
+- [ ] Change network module for wired connections (maybe hide it?)
