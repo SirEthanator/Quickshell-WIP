@@ -50,7 +50,7 @@ Singleton {
 
   RepeatingProcess {
     command: ["sh", "-c", "nmcli -f IN-USE,SIGNAL,SSID device wifi | awk '/^\*/{if (NR!=1) {print $2}}'"];
-    interval: 1000;
+    interval: 10000;
     parseOut: SplitParser {
       onRead: data => root.networkStrength = parseInt(data);
     }
