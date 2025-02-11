@@ -73,17 +73,13 @@ Rectangle {
         topLeftRadius: Globals.bar.docked && Globals.bar.floatingModules ? 0 : Globals.vars.br;  // See comment on root's br
         bottomLeftRadius: Globals.vars.br;
 
-        Kirigami.Icon {
+        Icon {
           id: icon;
           anchors.centerIn: parent;
 
-          source: root.icon;
-          fallback: "error-symbolic";
-          isMask: true;  // Allows us to change the icon's colour. It replaces all non-transparent colours with ours.
-          color: root.iconColour;
-          roundToIconSize: false;  // Improves scaling for non-standard icon sizes
-          implicitWidth: Globals.vars.moduleIconSize;
-          implicitHeight: Globals.vars.moduleIconSize;
+          icon: root.icon;
+          colour: root.iconColour;
+          size: Globals.vars.moduleIconSize;
         }
       }
     }

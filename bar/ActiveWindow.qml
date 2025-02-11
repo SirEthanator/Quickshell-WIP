@@ -8,8 +8,8 @@ BarModule {
   iconbgColour: Globals.colours.activeWindow;
   id: root;
 
-  readonly property string title: `${Utils.HyprlandIPC.windowTitle}`;
-  visible: (title.length > 0) ? true : false;
+  readonly property string title: Utils.HyprlandIPC.windowTitle;
+  visible: title.length > 0;
 
   Text {
     color: Globals.colours.fg;
