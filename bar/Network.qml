@@ -12,6 +12,8 @@ BarModule {
     else { return "nm-signal-25" }
   }
 
+  visible: Utils.SysInfo.networkStrength > 0;
+
   Text {
     text: Utils.SysInfo.network;
     color: Globals.colours.fg;
