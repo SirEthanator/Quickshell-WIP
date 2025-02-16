@@ -9,7 +9,7 @@ Kirigami.Icon {
 
 
   source: icon;
-  fallback: "error-symbolic";
+  fallback: "warning-outline-symbolic";
   isMask: !!colour;  // Allows us to change the icon's colour. It replaces all non-transparent colours with ours.
   color: !!colour ? colour : undefined;
   roundToIconSize: false;  // Improves scaling for non-standard icon sizes
