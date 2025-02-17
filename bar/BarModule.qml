@@ -1,4 +1,5 @@
 import "root:/";
+import "root:/animations" as Anims;
 import Quickshell;
 import QtQuick;
 import QtQuick.Layouts;
@@ -45,10 +46,7 @@ Rectangle {
   signal clicked(event: MouseEvent);
   signal wheel(event: WheelEvent);
 
-  Behavior on background {
-    ColorAnimation { duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
-  }
-
+  Anims.ColourTransition on background {}
 
   MouseArea {
     id: mouseArea;
