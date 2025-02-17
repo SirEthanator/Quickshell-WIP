@@ -73,6 +73,8 @@ Singleton {
     property int marginCardSmall: 5;
     property int marginCard: 10;
 
+    property int paddingButton: 8;
+
     property int animLen: 350;
     property int transitionLen: 250;
   }
