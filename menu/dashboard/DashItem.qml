@@ -36,7 +36,6 @@ Rectangle {
         margins: Globals.vars.paddingCard;
       }
       spacing: Globals.vars.paddingCard;
-
     }
   }
 }

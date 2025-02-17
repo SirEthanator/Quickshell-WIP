@@ -10,10 +10,12 @@ Item {
 
   ColumnLayout {
     width: parent.width;
+    height: content.height;
     // Height should be controlled by content to avoid items being spaced incorrectly
     spacing: 10;
 
     Repeater {
+      id: content;
       model: 20;
 
       Rectangle {

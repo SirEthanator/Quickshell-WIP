@@ -4,8 +4,9 @@ import QtQuick.Controls;
 
 StackView {
   id: root;
-  property var items: children;
+  readonly property var items: children;
   property int currentIndex: 0;
+  property bool vertical: false;
   initialItem: items[currentIndex];
 
   replaceEnter: Transition {
@@ -18,7 +19,7 @@ StackView {
     }
 
     NumberAnimation {
-      property: "x";
+      property: root.vertical ? "y" : "x";
       from: 200;
       to: 0;
       duration: Globals.vars.animLen;
@@ -42,6 +43,13 @@ StackView {
     } else {
       root.replace(items[0]);
       root.currentIndex = 0;
+    }
+  }
+
+  Component.onCompleted: {
+    console.log(root.depth)
+    for (let i=0; i<items.length; i++) {
+      console.log(items[i])
     }
   }
 }
