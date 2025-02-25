@@ -1,4 +1,4 @@
-pragma ComponentBehavior: Bound;
+pragma ComponentBehavior: Bound
 
 import "root:/";
 import "root:/animations" as Anims;
@@ -13,6 +13,7 @@ import QtQuick.Controls;
 LazyLoader {
   id: loader;
   required property var screen;
+  required property var shellroot;
   activeAsync: false;
 
   property bool open: Globals.states.menuOpen;
@@ -65,7 +66,7 @@ LazyLoader {
 
     Item {
       anchors.fill: parent;
-      focus: true;
+      focus: loader.open;
 
       Keys.onPressed: (event) => {
         if (event.key === Qt.Key_Tab) {
@@ -109,7 +110,7 @@ LazyLoader {
             Layout.fillHeight: true;
             Layout.fillWidth: true;
 
-            Dashboard.Index {}
+            Dashboard.Index { shellroot: loader.shellroot; screen: root.screen }
             Launcher.Index {}
           }
         }

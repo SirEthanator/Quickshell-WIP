@@ -1,4 +1,4 @@
-pragma ComponentBehavior: Bound;
+pragma ComponentBehavior: Bound
 
 import "root:/";
 import Quickshell;
