@@ -5,12 +5,14 @@ import QtQuick.Layouts;
 
 Item {
   id: dashboard;
+  required property var shellroot;
+  required property var screen;
 
   ColumnLayout {
     anchors.fill: parent;
     spacing: Globals.vars.paddingWindow;
 
-    UserInfo {}
+    UserInfo { shellroot: dashboard.shellroot; screen: dashboard.screen }
 
     Rectangle {  //!!! TEMP - Main dashboard content
       color: "slateblue";

@@ -47,13 +47,20 @@ Singleton {
 
     property real outlineSize: 1.5;
 
-    property font mainFont: Qt.font({
+    property font mainFont: ({
       family: "Cascadia Code",
       pixelSize: 16,
       kerning: false
     })
 
-    property font nerdFont: Qt.font({
+    property font headingFontSmall: ({
+      family: "Cascadia Code",
+      pixelSize: 22,
+      bold: true,
+      kerning: false
+    })
+
+    property font nerdFont: ({
       family: "Symbols Nerd Font Mono",
       pixelSize: vars.moduleIconSize,
       kerning: false
@@ -74,6 +81,7 @@ Singleton {
     property int marginCard: 10;
 
     property int paddingButton: 8;
+    property int spacingButtonGroup: 3;
 
     property int animLen: 350;
     property int transitionLen: 250;
@@ -174,6 +182,7 @@ Singleton {
     id: states
 
     property bool menuOpen: false;
+    property bool dialogOpen: false;
   }
 }
 

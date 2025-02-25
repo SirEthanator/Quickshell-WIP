@@ -1,4 +1,8 @@
+pragma ComponentBehavior: Bound
+
 import "root:/";
+import "root:/dialog" as Dialog;
+import "root:/dialog/createDialog.js" as CreateDialog;
 import "root:/animations" as Anims;
 import Quickshell.Io;
 import QtQuick;
@@ -6,20 +10,22 @@ import QtQuick.Layouts;
 
 GridLayout {
   id: power;
+  required property var shellroot;
+  required property var screen;
   Layout.fillWidth: true;
   columns: 3;
   rows: 3;
-  columnSpacing: 3;
-  rowSpacing: 3;
+  columnSpacing: Globals.vars.spacingButtonGroup;
+  rowSpacing: Globals.vars.spacingButtonGroup;
 
   Repeater {
     model: [
-      ['system-shutdown-symbolic', 'systemctl poweroff'],
-      ['system-reboot-symbolic', 'systemctl reboot'],
-      ['logout-symbolic', 'hyprctl dispatch exit'],
-      ['system-hibernate-symbolic', 'gtklock & sleep 1; systemctl suspend'],
-      ['system-suspend-hibernate-symbolic', 'systemctl hibernate'],
-      ['preferences-advanced-symbolic', 'systemctl reboot --firmware-setup']
+      ['Shut Down', 'Shutting Down', 'system-shutdown-symbolic', 'systemctl poweroff'],
+      ['Reboot', 'Rebooting', 'system-reboot-symbolic', 'systemctl reboot'],
+      ['Log Out', 'Logging Out', 'logout-symbolic', 'hyprctl dispatch exit'],
+      ['Suspend', 'Suspending', 'system-hibernate-symbolic', 'gtklock & sleep 1; systemctl suspend'],
+      ['Hibernate', 'Hibernating', 'system-suspend-hibernate-symbolic', 'systemctl hibernate'],
+      ['Reboot to FW Settings', 'Rebooting to FW Settings', 'preferences-advanced-symbolic', 'systemctl reboot --firmware-setup']
     ]
 
     Rectangle {
@@ -49,14 +55,22 @@ GridLayout {
 
         hoverEnabled: true;
         onClicked: {
-          powercmd.command = ['sh', '-c', `${powerButton.modelData[1]}`];
-          powercmd.running = true;
+          //powercmd.command = ['sh', '-c', `${powerButton.modelData[1]}`];
+          //powercmd.running = true;
+          Globals.states.menuOpen = false;
+          CreateDialog.createDialog(power.shellroot,
+          powerButton.modelData[0],
+          `${powerButton.modelData[1]} in 5 seconds.`, [
+            { name: `${powerButton.modelData[0]} now`, action: () => console.log("test"), fadeOut: true },
+            { name: 'Cancel', close: true }
+          ],
+          power.screen);
         }
 
         Icon {
           id: powerIcon;
           anchors.centerIn: parent;
-          icon: powerButton.modelData[0];
+          icon: powerButton.modelData[2];
           color: powerButtonMouse.containsPress ? Globals.colours.bgLight : Globals.colours.fg;
           size: parent.height - Globals.vars.paddingButton*2;
           Anims.ColourTransition on color {}

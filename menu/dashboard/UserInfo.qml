@@ -7,6 +7,9 @@ import QtQuick.Layouts;
 
 DashItem {
   id: root;
+  required property var shellroot;
+  required property var screen;
+
   fullContentWidth: true;
   hoverEnabled: true;
   onContainsMouseChanged: { if (!containsMouse) stack.currentIndex = 0 }
@@ -21,7 +24,7 @@ DashItem {
       id: info
       onPowerHoveredChanged: { if (powerHovered) stack.currentIndex = 1 }
     }
-    Power {}
+    Power { shellroot: root.shellroot; screen: root.screen }
   }
 }
 

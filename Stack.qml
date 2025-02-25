@@ -45,11 +45,4 @@ StackView {
       root.currentIndex = 0;
     }
   }
-
-  Component.onCompleted: {
-    console.log(root.depth)
-    for (let i=0; i<items.length; i++) {
-      console.log(items[i])
-    }
-  }
 }

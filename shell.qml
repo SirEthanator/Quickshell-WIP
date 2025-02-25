@@ -3,9 +3,12 @@
 import Quickshell;
 import "bar" as Bar;
 import "menu" as Menu;
+import "dialog" as Dialog;
 import Quickshell.Hyprland;
 
 ShellRoot {
+  id: shellroot;
+
 	Variants {
 		model: Quickshell.screens;
 
@@ -28,6 +31,7 @@ ShellRoot {
 
       Menu.Index {
         screen: scope.modelData;
+        shellroot: shellroot;
       }
     }
 
