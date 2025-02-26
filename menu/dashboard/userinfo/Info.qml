@@ -1,8 +1,7 @@
 import "root:/";
 import "root:/utils" as Utils;
-import "..";
+import Quickshell.Widgets;
 import QtQuick;
-import QtQuick.Effects;
 import QtQuick.Layouts;
 
 RowLayout {
@@ -11,36 +10,16 @@ RowLayout {
   spacing: Globals.vars.paddingCard;
   property alias powerHovered: powerIconMouse.containsMouse;
 
-  Image {
-    id: pfp;
-    source: "root:/pfp.png";
-    sourceSize.width: 100;
-    sourceSize.height: 100;
-    visible: false;
-  }
+  ClippingWrapperRectangle {
+    width: pfp.width;
+    height: pfp.height;
+    radius: width / 2;
 
-  MultiEffect {
-    source: pfp;
-    implicitHeight: pfp.height;
-    implicitWidth: pfp.width;
-    maskEnabled: true;
-    maskSource: circleMask;
-    layer.smooth: true;
-    maskThresholdMin: 0.5;
-    maskSpreadAtMin: 1;
-  }
-
-  Item {
-    id: circleMask;
-    implicitWidth: pfp.width;
-    implicitHeight: pfp.height;
-    layer.enabled: true;
-    visible: false;
-
-    Rectangle {
-      width: parent.width;
-      height: parent.height;
-      radius: width/2
+    Image {
+      id: pfp;
+      source: "root:/pfp.png";
+      sourceSize.width: 100;
+      sourceSize.height: 100;
     }
   }
 
