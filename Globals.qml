@@ -48,23 +48,25 @@ Singleton {
     property real outlineSize: 1.5;
 
     property font mainFont: ({
-      family: "Cascadia Code",
-      pixelSize: 16,
-      kerning: false
-    })
+      family: "0xProto",
+      pixelSize: 16
+    });
+
+    property font headingFont: ({
+      family: "0xProto",
+      pixelSize: 34
+    });
 
     property font headingFontSmall: ({
-      family: "Cascadia Code",
+      family: "0xProto",
       pixelSize: 22,
-      bold: true,
-      kerning: false
-    })
+      bold: true
+    });
 
     property font nerdFont: ({
       family: "Symbols Nerd Font Mono",
-      pixelSize: vars.moduleIconSize,
-      kerning: false
-    })
+      pixelSize: vars.moduleIconSize
+    });
 
     property int barHeight: vars.moduleIconSize + vars.paddingModule + vars.paddingBar*2;  // This results in the modules' top and bottom padding matching paddingModule - relies on icons being the tallest items
     property int paddingBar: 6;
