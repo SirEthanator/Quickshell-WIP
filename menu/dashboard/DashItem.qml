@@ -7,11 +7,12 @@ Rectangle {
   id: root;
   default property alias data: content.data;
   property bool fullContentWidth: false;
+  property bool padding: true;
 
   color: Globals.colours.bgLight;
   radius: Globals.vars.br;
   Layout.fillWidth: true;
-  implicitHeight: content.implicitHeight + Globals.vars.paddingCard*2;
+  implicitHeight: content.implicitHeight + (padding ? Globals.vars.paddingCard*2 : 0);
 
   signal clicked(event: MouseEvent);
   property alias mouseArea: mouseArea;
@@ -33,7 +34,7 @@ Rectangle {
         bottom: parent.bottom;
         left: parent.left;
         right: root.fullContentWidth ? parent.right : undefined
-        margins: Globals.vars.paddingCard;
+        margins: root.padding ? Globals.vars.paddingCard : 0;
       }
       spacing: Globals.vars.paddingCard;
     }

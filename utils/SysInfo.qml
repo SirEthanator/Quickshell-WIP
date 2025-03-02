@@ -12,6 +12,8 @@ Singleton {
   property string network: "";
   property int    networkStrength;
   property string dateAndTime: "";
+  property int    cpuUsage;
+  property int    memUsage;
 
   Timer {
     running: true;
@@ -45,6 +47,22 @@ Singleton {
     running: true;
     stdout: SplitParser {
       onRead: data => root.network = data
+    }
+  }
+
+  RepeatingProcess {
+    command: ["sh", "-c", "top -b -n 1 | grep 'Cpu(s)' | awk '{print $2}'"];
+    interval: 1000;
+    parseOut: SplitParser {
+      onRead: data => root.cpuUsage = parseFloat(data).toFixed(0);
+    }
+  }
+
+  RepeatingProcess {
+    command: ["sh", "-c", `free -m | awk 'NR==2{printf "%.2f\\n", $3*100/$2 }'`];
+    interval: 1000;
+    parseOut: SplitParser {
+      onRead: data => root.memUsage = parseFloat(data).toFixed(0);
     }
   }
 
