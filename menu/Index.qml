@@ -76,7 +76,6 @@ LazyLoader {
         } else if (key === Qt.Key_Escape) {
           Globals.states.menuOpen = false;
         } else if ((key >= 48 && key <= 90) || (key >= 97 && key <= 122) || (key >= 186 && key <= 223)) {
-          stack.currentIndex = 1;
           appSearch.insert(0, event.text);
           appSearch.focus = true;
         }
@@ -119,7 +118,13 @@ LazyLoader {
               color: Globals.colours.fg;
 
               onFocusChanged: {
-                if (!focus) clear()
+                if (focus) stack.currentIndex = 1
+                else clear()
+              }
+
+              onAccepted: {
+                Globals.states.menuOpen = false;
+                launcher.execTop();
               }
             }
           }
@@ -130,7 +135,7 @@ LazyLoader {
             Layout.fillWidth: true;
 
             Dashboard.Index { shellroot: loader.shellroot; screen: root.screen }
-            Launcher.Index { searchText: appSearch.text }
+            Launcher.Index { id: launcher; searchText: appSearch.text }
           }
         }
       }

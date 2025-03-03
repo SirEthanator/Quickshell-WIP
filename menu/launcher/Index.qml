@@ -10,6 +10,10 @@ Item {
   id: root;
   required property string searchText;
 
+  function execTop() {
+    model.values[0].execute()
+  }
+
   ScrollView {
     anchors.fill: parent;
     clip: true;
@@ -19,6 +23,7 @@ Item {
       spacing: Globals.vars.marginModule;
 
       model: ScriptModel {
+        id: model;
         values: DesktopEntries.applications.values
         .map(entry => entry)
         .filter(entry => root.searchText.length === 0 || entry.name.toLowerCase().includes(root.searchText.toLowerCase()))
