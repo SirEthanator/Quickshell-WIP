@@ -59,8 +59,7 @@ Singleton {
 
     property font headingFontSmall: ({
       family: "0xProto",
-      pixelSize: 22,
-      bold: true
+      pixelSize: 22
     });
 
     property font nerdFont: ({

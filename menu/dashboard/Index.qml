@@ -15,12 +15,6 @@ Item {
 
     UserInfo { shellroot: dashboard.shellroot; screen: dashboard.screen }
 
-    // Rectangle {  //!!! TEMP - Main dashboard content
-    //   color: "slateblue";
-    //   implicitHeight: 450;
-    //   Layout.fillWidth: true;
-    // }
-
     SysStats.CPU {}
     SysStats.Memory {}
 

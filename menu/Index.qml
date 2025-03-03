@@ -46,7 +46,6 @@ LazyLoader {
     }
 
     width: Globals.menu.width;
-    focusable: true;
     exclusionMode: ExclusionMode.Normal;
     WlrLayershell.layer: WlrLayer.Overlay;
     WlrLayershell.keyboardFocus: loader.open ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None;
@@ -66,14 +65,20 @@ LazyLoader {
 
     Item {
       anchors.fill: parent;
-      focus: loader.open;
+      focus: true;
 
       Keys.onPressed: (event) => {
-        if (event.key === Qt.Key_Tab) {
+        const key = event.key;
+        if (key === Qt.Key_Tab) {
           stack.currentIndex += 1;
-        }
-        if (event.key === Qt.Key_Escape) {
+          appSearch.focus = false;
+          focus = true;
+        } else if (key === Qt.Key_Escape) {
           Globals.states.menuOpen = false;
+        } else if ((key >= 48 && key <= 90) || (key >= 97 && key <= 122) || (key >= 186 && key <= 223)) {
+          stack.currentIndex = 1;
+          appSearch.insert(0, event.text);
+          appSearch.focus = true;
         }
       }
 
@@ -99,10 +104,24 @@ LazyLoader {
             margins: Globals.vars.paddingWindow
           }
 
-          Rectangle {  //!!! TEMP - Search bar
-            color: "mediumslateblue";
-            implicitHeight: 50;
+          // Application search bar
+          Rectangle {
+            id: appSearchBg;
+            color: Globals.colours.bgLight;
+            radius: Globals.vars.br;
+            implicitHeight: appSearch.height + Globals.vars.paddingButton * 2;
             Layout.fillWidth: true;
+
+            TextInput {
+              id: appSearch;
+              width: parent.width - Globals.vars.paddingButton * 2;
+              anchors.centerIn: parent;
+              color: Globals.colours.fg;
+
+              onFocusChanged: {
+                if (!focus) clear()
+              }
+            }
           }
 
           Stack {
@@ -111,7 +130,7 @@ LazyLoader {
             Layout.fillWidth: true;
 
             Dashboard.Index { shellroot: loader.shellroot; screen: root.screen }
-            Launcher.Index {}
+            Launcher.Index { searchText: appSearch.text }
           }
         }
       }
