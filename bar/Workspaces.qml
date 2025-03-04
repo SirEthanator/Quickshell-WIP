@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import "root:/";
+import "root:/animations" as Anims;
 import Quickshell;
 import QtQuick;
 import QtQuick.Layouts;
@@ -65,6 +66,8 @@ BarModule {
             : Globals.colours.wsInactive;
         implicitWidth: wsButton.focused ? Globals.vars.wsSize * 5 : Globals.vars.wsSize;
         implicitHeight: wsButton.focused ? Globals.vars.wsSize + 3 : Globals.vars.wsSize;
+
+        Anims.ColourTransition on color {}
 
         Behavior on implicitWidth {
           NumberAnimation {

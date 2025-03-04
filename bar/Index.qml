@@ -115,7 +115,7 @@ PanelWindow {
           }
           spacing: Globals.vars.marginModule;
 
-          // SysTray {window: root}
+          //SysTray {window: root}
           Network {}
           Battery {}
           Volume {}

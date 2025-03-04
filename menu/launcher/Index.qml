@@ -95,7 +95,10 @@ Item {
           Text {
             text: modelData.name;
             color: entryMouseArea.containsPress ? Globals.colours.bgLight : Globals.colours.fg;
-            font: Globals.vars.headingFontSmall;
+            font {
+              family: Globals.vars.fontFamily;
+              pixelSize: Globals.vars.smallHeadingFontSize;
+            }
           }
         }
       }

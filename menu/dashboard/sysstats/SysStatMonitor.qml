@@ -40,13 +40,19 @@ DashItem {
       ColumnLayout {
         Text {
           text: root.title;
-          font: Globals.vars.headingFont;
+          font {
+            family: Globals.vars.fontFamily;
+            pixelSize: Globals.vars.headingFontSize;
+          }
           color: Globals.colours.fg;
         }
 
         Text {
           text: `${root.percentage}%`;
-          font: Globals.vars.headingFontSmall;
+          font {
+            family: Globals.vars.fontFamily;
+            pixelSize: Globals.vars.smallHeadingFontSize
+          }
           color: Globals.colours.fg;
         }
       }
