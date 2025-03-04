@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import "root:/";
 import "root:/animations" as Anims;
 import Quickshell;
@@ -14,70 +16,86 @@ Item {
     model.values[0].execute()
   }
 
-  ScrollView {
+  ListView {
+    id: listView;
     anchors.fill: parent;
+    spacing: Globals.vars.marginModule;
     clip: true;
 
-    ListView {
-      anchors.fill: parent;
-      spacing: Globals.vars.marginModule;
+    cacheBuffer: 0;
 
-      model: ScriptModel {
-        id: model;
-        values: DesktopEntries.applications.values
-        .map(entry => entry)
-        .filter(entry => root.searchText.length === 0 || entry.name.toLowerCase().includes(root.searchText.toLowerCase()))
-        .sort((a, b) => a.name.localeCompare(b.name))  // Alphabetical order
+    boundsBehavior: Flickable.StopAtBounds;
+
+    add: Transition {
+      NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Globals.vars.shortTransitionLen }
+    }
+    displaced: Transition {
+      NumberAnimation { property: "y"; duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
+      NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Globals.vars.transitionLen }
+    }
+    move: Transition {
+      NumberAnimation { property: "y"; duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
+      NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Globals.vars.transitionLen }
+    }
+    remove: Transition {
+      NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Globals.vars.shortTransitionLen }
+    }
+
+    model: ScriptModel {
+      id: model;
+      values: DesktopEntries.applications.values
+      .map(entry => entry)
+      .filter(entry => root.searchText.length === 0 || entry.name.toLowerCase().includes(root.searchText.toLowerCase()))
+      .sort((a, b) => a.name.localeCompare(b.name))  // Alphabetical order
+    }
+
+    delegate: MouseArea{
+      id: entryMouseArea;
+      required property DesktopEntry modelData;
+
+      width: listView.width;
+      height: entryContent.implicitHeight + Globals.vars.paddingButton * 2;
+
+      hoverEnabled: true;
+
+      onClicked: {
+        modelData.execute();
+        Globals.states.menuOpen = false;
       }
 
-      delegate: MouseArea{
-        id: entryMouseArea;
-        required property DesktopEntry modelData;
+      Rectangle {
+        id: entryBg;
+        anchors.fill: parent;
+        color: entryMouseArea.containsPress
+          ? Globals.colours.accent
+          : entryMouseArea.containsMouse
+            ? Globals.colours.bgHover
+            : Globals.colours.bgLight;
+        radius: Globals.vars.br;
 
-        width: parent.width;
-        height: entryContent.implicitHeight + Globals.vars.paddingButton * 2;
+        Anims.ColourTransition on color {}
 
-        hoverEnabled: true;
+        RowLayout {
+          id: entryContent;
+          anchors {
+            top: parent.top;
+            bottom: parent.bottom;
+            left: parent.left;
+            margins: Globals.vars.paddingButton;
+          }
+          spacing: Globals.vars.paddingButton;
 
-        onClicked: {
-          modelData.execute();
-          Globals.states.menuOpen = false;
-        }
+          IconImage {
+            Layout.alignment: Qt.AlignVCenter;
+            asynchronous: true;
+            implicitSize: 42;
+            source: Quickshell.iconPath(entryMouseArea.modelData.icon);
+          }
 
-        Rectangle {
-          id: entryBg;
-          anchors.fill: parent;
-          color: entryMouseArea.containsPress
-            ? Globals.colours.accent
-            : entryMouseArea.containsMouse
-              ? Globals.colours.bgHover
-              : Globals.colours.bgLight;
-          radius: Globals.vars.br;
-
-          Anims.ColourTransition on color {}
-
-          RowLayout {
-            id: entryContent;
-            anchors {
-              top: parent.top;
-              bottom: parent.bottom;
-              left: parent.left;
-              margins: Globals.vars.paddingButton;
-            }
-            spacing: Globals.vars.paddingButton;
-
-            IconImage {
-              Layout.alignment: Qt.AlignVCenter;
-              asynchronous: true;
-              implicitSize: 42;
-              source: Quickshell.iconPath(entryMouseArea.modelData.icon);
-            }
-
-            Text {
-              text: modelData.name;
-              color: Globals.colours.fg;
-              font: Globals.vars.headingFontSmall;
-            }
+          Text {
+            text: modelData.name;
+            color: entryMouseArea.containsPress ? Globals.colours.bgLight : Globals.colours.fg;
+            font: Globals.vars.headingFontSmall;
           }
         }
       }
