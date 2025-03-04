@@ -47,20 +47,10 @@ Singleton {
 
     property real outlineSize: 1.5;
 
-    property font mainFont: ({
-      family: "0xProto",
-      pixelSize: 16
-    });
-
-    property font headingFont: ({
-      family: "0xProto",
-      pixelSize: 34
-    });
-
-    property font headingFontSmall: ({
-      family: "0xProto",
-      pixelSize: 22
-    });
+    property string fontFamily: "0xProto";
+    property int mainFontSize: 16;
+    property int headingFontSize: 34;
+    property int smallHeadingFontSize: 22;
 
     property font nerdFont: ({
       family: "Symbols Nerd Font Mono",

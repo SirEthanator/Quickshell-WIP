@@ -13,7 +13,10 @@ BarModule {
 
   Text {
     color: Globals.colours.fg;
-    font: Globals.vars.mainFont
+    font {
+      family: Globals.vars.fontFamily;
+      pixelSize: Globals.vars.mainFontSize;
+    }
 
     text: {
       const truncate = root.title.length > Globals.bar.truncationLength;

@@ -17,7 +17,10 @@ BarModule {
   Text {
     text: Utils.SysInfo.network;
     color: Globals.colours.fg;
-    font: Globals.vars.mainFont;
+    font {
+      family: Globals.vars.fontFamily;
+      pixelSize: Globals.vars.mainFontSize;
+    }
   }
 }
 

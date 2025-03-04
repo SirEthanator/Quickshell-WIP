@@ -35,7 +35,10 @@ BarModule {
   Text {
     text: `${root.percentage}%`;
     color: Globals.colours.fg;
-    font: Globals.vars.mainFont;
+    font {
+      family: Globals.vars.fontFamily;
+      pixelSize: Globals.vars.mainFontSize;
+    }
   }
 }
 

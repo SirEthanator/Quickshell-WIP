@@ -128,6 +128,10 @@ LazyLoader {
                 id: appSearch;
                 Layout.fillWidth: true;
                 color: Globals.colours.fg;
+                font {
+                  family: Globals.vars.fontFamily;
+                  pixelSize: Globals.vars.mainFontSize
+                }
 
                 background: Rectangle { color: "transparent" }
 
