@@ -112,20 +112,38 @@ LazyLoader {
             implicitHeight: appSearch.height + Globals.vars.paddingButton * 2;
             Layout.fillWidth: true;
 
-            TextInput {
-              id: appSearch;
-              width: parent.width - Globals.vars.paddingButton * 2;
-              anchors.centerIn: parent;
-              color: Globals.colours.fg;
+            RowLayout {
+              spacing: Globals.vars.paddingButton;
+              anchors.fill: parent;
 
-              onFocusChanged: {
-                if (focus) stack.currentIndex = 1
-                else clear()
+              Item {}
+
+              Icon {
+                icon: "search-symbolic";
+                color: Globals.colours.fg;
+                Layout.alignment: Qt.AlignVCenter;
               }
 
-              onAccepted: {
-                Globals.states.menuOpen = false;
-                launcher.execTop();
+              TextField {
+                id: appSearch;
+                Layout.fillWidth: true;
+                color: Globals.colours.fg;
+
+                background: Rectangle { color: "transparent" }
+
+                placeholderText: "Search Applications"
+                placeholderTextColor: Globals.colours.grey
+
+                focusPolicy: Qt.ClickFocus;
+                onFocusChanged: {
+                  if (focus) stack.currentIndex = 1
+                  else clear()
+                }
+
+                onAccepted: {
+                  Globals.states.menuOpen = false;
+                  launcher.execTop();
+                }
               }
             }
           }
