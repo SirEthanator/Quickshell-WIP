@@ -67,6 +67,7 @@ LazyLoader {
       anchors.fill: parent;
       focus: true;
 
+      property int selectedAppIndex: 0;
       Keys.onPressed: (event) => {
         const key = event.key;
         if (key === Qt.Key_Tab) {

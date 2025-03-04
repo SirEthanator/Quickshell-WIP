@@ -86,6 +86,7 @@ Singleton {
 
     property int animLen: 350;
     property int transitionLen: 250;
+    property int shortTransitionLen: 150;
   }
 
   /*    ___________ ________  ___________
