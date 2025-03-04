@@ -3,8 +3,7 @@
 import Quickshell;
 import "bar" as Bar;
 import "menu" as Menu;
-import "dialog" as Dialog;
-import Quickshell.Hyprland;
+import Quickshell.Io;
 
 ShellRoot {
   id: shellroot;
@@ -16,13 +15,11 @@ ShellRoot {
       id: scope;
       required property var modelData;
 
-      // Hyprland keybindings
-      GlobalShortcut {
-        name: "menu";
-        description: "Opens the side menu on Quickshell.";
-        onReleased: {
-          Globals.states.menuOpen = !Globals.states.menuOpen;
-        }
+      // --- Keybindings ---
+      // Usage: quickshell ipc call <target> <function>
+      IpcHandler {
+        target: "menu";
+        function toggle(): void { Globals.states.menuOpen = !Globals.states.menuOpen }
       }
 
       Bar.Index {
