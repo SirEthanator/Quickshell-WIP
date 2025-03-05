@@ -13,7 +13,6 @@ import QtQuick.Controls;
 LazyLoader {
   id: loader;
   required property var screen;
-  required property var shellroot;
   activeAsync: false;
 
   property bool open: Globals.states.menuOpen;
@@ -157,7 +156,7 @@ LazyLoader {
             Layout.fillHeight: true;
             Layout.fillWidth: true;
 
-            Dashboard.Index { shellroot: loader.shellroot; screen: root.screen }
+            Dashboard.Index {}
             Launcher.Index { id: launcher; searchText: appSearch.text }
           }
         }

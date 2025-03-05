@@ -68,7 +68,7 @@ Singleton {
     property int paddingWindow: 24;
 
     property int paddingCard: 20;
-    property int marginCardSmall: 5;
+    property int marginCardSmall: 6;
     property int marginCard: 10;
 
     property int paddingButton: 8;

@@ -2,18 +2,17 @@ import "root:/";
 import Quickshell;
 import QtQuick;
 import QtQuick.Layouts;
+import "userinfo" as UserInfo;
 import "sysstats" as SysStats;
 
 Item {
   id: dashboard;
-  required property var shellroot;
-  required property var screen;
 
   ColumnLayout {
     anchors.fill: parent;
     spacing: Globals.vars.paddingWindow;
 
-    UserInfo { shellroot: dashboard.shellroot; screen: dashboard.screen }
+    UserInfo.Index {}
 
     SysStats.CPU {}
     SysStats.Memory {}
