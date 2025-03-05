@@ -143,10 +143,7 @@ LazyLoader {
                   else clear()
                 }
 
-                onAccepted: {
-                  Globals.states.menuOpen = false;
-                  launcher.execTop();
-                }
+                onAccepted: launcher.execTop()
               }
             }
           }
