@@ -44,5 +44,14 @@ StackView {
       root.replace(items[0]);
       root.currentIndex = 0;
     }
+    items[currentIndex].visible = true;
+  }
+
+  Component.onCompleted: {
+    for (let i = 0; i<items.length; i++) {
+      if (i !== currentIndex) {
+        items[i].visible = false;
+      }
+    }
   }
 }

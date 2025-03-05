@@ -1,4 +1,3 @@
-- [ ] Redo stack again since it doesn't seem to work in any other situation than the menu's pages
 - [ ] Disable top, left, and right outline when bar is docked
 - [ ] Complete menu
 - [ ] Implement notifications
