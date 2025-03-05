@@ -174,7 +174,6 @@ Singleton {
     id: states
 
     property bool menuOpen: false;
-    property bool dialogOpen: false;
   }
 }
 
