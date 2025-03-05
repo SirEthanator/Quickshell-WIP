@@ -1,8 +1,6 @@
 pragma ComponentBehavior: Bound
 
 import "root:/";
-import "root:/dialog" as Dialog;
-import "root:/dialog/createDialog.js" as CreateDialog;
 import "root:/animations" as Anims;
 import Quickshell.Io;
 import QtQuick;
