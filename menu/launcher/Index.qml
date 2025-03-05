@@ -13,7 +13,10 @@ Item {
   required property string searchText;
 
   function execTop() {
-    model.values[0].execute()
+    if (model.values.length > 0) {
+      model.values[0].execute()
+      Globals.states.menuOpen = false;
+    }
   }
 
   ListView {
