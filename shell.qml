@@ -28,7 +28,6 @@ ShellRoot {
 
       Menu.Index {
         screen: scope.modelData;
-        shellroot: shellroot;
       }
     }
 

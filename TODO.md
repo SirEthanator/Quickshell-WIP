@@ -1,4 +1,4 @@
+- [ ] Clean up repetitive code
 - [ ] Disable top, left, and right outline when bar is docked
 - [ ] Complete menu
 - [ ] Implement notifications
-- [ ] Change network module for wired connections (maybe hide it?)

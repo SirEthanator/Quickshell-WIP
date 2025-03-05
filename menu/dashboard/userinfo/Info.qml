@@ -5,10 +5,11 @@ import QtQuick;
 import QtQuick.Layouts;
 
 RowLayout {
-  Layout.fillWidth: true;
-  Layout.fillHeight: true;
+  id: root;
+  anchors.left: parent.left;
+  anchors.right: parent.right;
   spacing: Globals.vars.paddingCard;
-  property alias powerHovered: powerIconMouse.containsMouse;
+  signal clicked(event: MouseEvent);
 
   ClippingWrapperRectangle {
     width: pfp.width;
@@ -53,7 +54,7 @@ RowLayout {
     id: powerIconMouse;
     implicitHeight: powerIcon.height;
     implicitWidth: powerIcon.width;
-    hoverEnabled: true;
+    onClicked: event => root.clicked(event);
 
     Icon {
       id: powerIcon;

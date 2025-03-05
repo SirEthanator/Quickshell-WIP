@@ -44,7 +44,6 @@ Item {
     model: ScriptModel {
       id: model;
       values: DesktopEntries.applications.values
-      .map(entry => entry)
       .filter(entry => root.searchText.length === 0 || entry.name.toLowerCase().includes(root.searchText.toLowerCase()))
       .sort((a, b) => a.name.localeCompare(b.name))  // Alphabetical order
     }
