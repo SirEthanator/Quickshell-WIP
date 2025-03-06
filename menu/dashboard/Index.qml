@@ -17,6 +17,8 @@ Item {
     SysStats.CPU {}
     SysStats.Memory {}
 
+    SysTray {}
+
     Rectangle {  //!!! TEMP - Notification area
       color: "darkslateblue";
       Layout.fillWidth: true;
