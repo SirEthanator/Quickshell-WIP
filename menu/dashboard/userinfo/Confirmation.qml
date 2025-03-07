@@ -16,8 +16,6 @@ Item {
 
   property int countdown;
 
-  Process { id: cmd }
-
   function startTimer() {
     countdown = 5;
     countdownTimer.start();
@@ -30,8 +28,7 @@ Item {
     onTriggered: {
       root.countdown --;
       if (root.countdown === 0) {
-        cmd.command = ["sh", "-c", root.command];
-        cmd.running = true;
+        confirmButton.runCmd();
       }
     }
   }
@@ -69,6 +66,7 @@ Item {
       spacing: Globals.vars.spacingButtonGroup;
 
       ConfirmationButton {
+        id: confirmButton;
         index: 0;
         text: `${root.action} now`;
         command: root.command;
