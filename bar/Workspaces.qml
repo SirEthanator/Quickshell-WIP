@@ -37,10 +37,10 @@ BarModule {
 
       required property int index;
 
-      readonly property int wsIndex: index+1;  // Hyprland workspaces start at 1, not 0
+      readonly property int wsIndex: index+1;  // Hyprland workspaces start at 1, index starts at 0
       property HyprlandWorkspace ws: null;
-      property bool occupied: ws != null;
-      property bool focused: root.monitor.activeWorkspace == ws;
+      property bool occupied: ws !== null;
+      property bool focused: root.monitor.activeWorkspace === ws;
 
       onPressed: Hyprland.dispatch(`workspace ${wsIndex}`);
 
@@ -58,29 +58,39 @@ BarModule {
         id: wsButtonRect;
         anchors.centerIn: parent;
 
-        radius: wsButtonRect.implicitHeight / 2;  // Round caps
-        color: wsButton.focused
-          ? Globals.colours.accent
+        state: wsButton.focused
+          ? "focused"
           : wsButton.occupied
-            ? Globals.colours.grey
-            : Globals.colours.wsInactive;
-        implicitWidth: wsButton.focused ? Globals.vars.wsSize * 5 : Globals.vars.wsSize;
-        implicitHeight: wsButton.focused ? Globals.vars.wsSize + 3 : Globals.vars.wsSize;
+            ? "occupied"
+            : "inactive";
 
-        Anims.ColourTransition on color {}
+        radius: wsButtonRect.implicitHeight / 2;  // Round caps
+        implicitWidth: Globals.vars.wsSize;
+        implicitHeight: Globals.vars.wsSize;
 
-        Behavior on implicitWidth {
-          NumberAnimation {
-            duration: Globals.vars.transitionLen;
-            easing.type: Easing.OutCubic;
+        states: [
+          State {
+            name: "focused";
+            PropertyChanges { wsButtonRect {
+              color: Globals.colours.accent;
+              implicitWidth: Globals.vars.wsSize * 5;
+              implicitHeight: Globals.vars.wsSize + 3;
+          }}},
+
+          State {
+            name: "occupied";
+            PropertyChanges { wsButtonRect.color: Globals.colours.grey }
+          },
+
+          State {
+            name: "inactive";
+            PropertyChanges { wsButtonRect.color: Globals.colours.wsInactive }
           }
-        }
+        ]
 
-        Behavior on implicitHeight {
-          NumberAnimation {
-            duration: Globals.vars.transitionLen;
-            easing.type: Easing.OutCubic;
-          }
+        transitions: Transition {
+          Anims.ColourAnim { property: "color" }
+          Anims.NumberAnim { properties: "implicitWidth, implicitHeight" }
         }
       }
     }

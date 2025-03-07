@@ -21,7 +21,7 @@ Singleton {
     property bool moduleOutlines:     true ;  // If there should be outlines on modules | true
     property bool backgroundOutline:  true ;  // If the bar's background should have an outline | true
     property int  workspaceCount:     10   ;  // How many workspaces are displayed in the workspace widget | 10
-    property int  truncationLength:   100  ;  // The maximum length of modules with long text | 100
+    property int  truncationLength:   90   ;  // The maximum length of modules with long text | 90
   }
 
   // -- Sidebar --
