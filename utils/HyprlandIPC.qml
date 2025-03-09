@@ -40,53 +40,24 @@ Singleton {
     }
   }
 
-  // Hyprctl stuff taken from https://github.com/pterror/config-quickshell/blob/master/io/HyprlandIpc.qml (thanks)
-	property var currentExec: null
-
-  Socket {
-    id: hyprctl
-    onConnectedChanged: {
-      if (connected) {
-        if (root.currentExec) {
-          write(root.currentExec.cmd)
-          flush()
-        }
-      } else {
-        currentExec?.onSuccess?.(currentExec.ret)
-        if (currentExec) {
-          currentExec = currentExec.next
-        }
-        if (currentExec) {
-          hyprctl.connected = true
-        }
+  property string tmp: "";
+  Process {
+    command: ["hyprctl", "activewindow", "-j"];
+    running: true;
+    stdout: SplitParser {
+      onRead: (data) => {
+        root.tmp += data+"\n"
       }
     }
-    path: Quickshell.env("XDG_RUNTIME_DIR") + "/hypr/" + Quickshell.env("HYPRLAND_INSTANCE_SIGNATURE") + "/.socket.sock"
-    parser: SplitParser {
-      splitMarker: ""
-      onRead: data => {
-        if (root.currentExec) {
-          root.currentExec.ret = data
-        }
-        hyprctl.connected = false
+    onRunningChanged: {
+      if (!running) {
+        const json = JSON.parse(root.tmp);
+        root.windowTitle = json.title;
+        root.appTitle = json.class;
+        root.tmp = "";
       }
     }
   }
 
-  function exec(flags, args, onSuccess) {
-    const cmd = (flags ?? "") + "/" + args.join(" ")
-    const exec = { cmd, onSuccess, ret: "", next: null }
-      currentExec = exec
-      hyprctl.connected = true
-  }
-
-
-  Component.onCompleted: {
-		exec("j", ["activewindow"], json => {
-			const data = JSON.parse(json)
-			windowTitle = data.title
-			appTitle = data.class
-		})
-  }
 }
 
