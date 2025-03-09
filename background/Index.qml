@@ -5,6 +5,7 @@ import QtQuick;
 
 PanelWindow {
   WlrLayershell.layer: WlrLayer.Background;
+  WlrLayershell.exclusionMode: ExclusionMode.Ignore;
   color: Globals.background.bgColour;
 
   anchors {

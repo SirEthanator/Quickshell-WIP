@@ -9,19 +9,19 @@ import Quickshell.Io;
 ShellRoot {
   id: shellroot;
 
+  // --- Keybindings ---
+  // Usage: quickshell ipc call <target> <function>
+  IpcHandler {
+    target: "menu";
+    function toggle(): void { Globals.states.menuOpen = !Globals.states.menuOpen }
+  }
+
 	Variants {
 		model: Quickshell.screens;
 
     Scope {
       id: scope;
       required property var modelData;
-
-      // --- Keybindings ---
-      // Usage: quickshell ipc call <target> <function>
-      IpcHandler {
-        target: "menu";
-        function toggle(): void { Globals.states.menuOpen = !Globals.states.menuOpen }
-      }
 
       Bar.Index {
         screen: scope.modelData;
@@ -31,7 +31,9 @@ ShellRoot {
         screen: scope.modelData;
       }
 
-      Background.Index {}
+      Background.Index {
+        screen: scope.modelData;
+      }
     }
 
 	}
