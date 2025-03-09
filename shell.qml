@@ -3,6 +3,7 @@
 import Quickshell;
 import "bar" as Bar;
 import "menu" as Menu;
+import "background" as Background;
 import Quickshell.Io;
 
 ShellRoot {
@@ -29,6 +30,8 @@ ShellRoot {
       Menu.Index {
         screen: scope.modelData;
       }
+
+      Background.Index {}
     }
 
 	}

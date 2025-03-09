@@ -1,7 +1,8 @@
 pragma Singleton
 
-import Quickshell
-import QtQuick
+import "utils" as Utils;
+import Quickshell;
+import QtQuick;
 
 Singleton {
   /*   ____  ___  ______________  _  ______
@@ -14,21 +15,46 @@ Singleton {
 
   // -- Bar --
   readonly property QtObject bar: QtObject {
-    property bool autohide:           false;  // If the bar should hide until hovered | false
-    property bool docked:             false;  // If the bar should be docked or floating | false
-    property bool floatingModules:    false;  // If the bar has a background behind the modules | false
-    property bool multiColourModules: false;  // If modules' icons should use different colours or the accent colour | false
-    property bool moduleOutlines:     true ;  // If there should be outlines on modules | true
-    property bool backgroundOutline:  true ;  // If the bar's background should have an outline | true
-    property int  workspaceCount:     10   ;  // How many workspaces are displayed in the workspace widget | 10
-    property int  truncationLength:   90   ;  // The maximum length of modules with long text | 90
+    // If the bar should hide until hovered | false
+    property bool autohide: false;
+    // If the bar should be docked or floating | false
+    property bool docked: false;
+    // If the bar has a background behind the modules | false
+    property bool floatingModules: false;
+    // If modules' icons should use different colours or the accent colour | false
+    property bool multiColourModules: false;
+    // If there should be outlines on modules | true
+    property bool moduleOutlines: true;
+    // If the bar's background should have an outline | true
+    property bool backgroundOutline: true;
+    // How many workspaces are displayed in the workspace widget | 10
+    property int workspaceCount: 10;
+    // The maximum length of modules with long text | 90
+    property int truncationLength: 90;
   }
 
   // -- Sidebar --
   readonly property QtObject menu: QtObject {
-    property bool capitaliseUsername: true ;  // If the username should be capitalised | true
-    property bool capitaliseHostname: false;  // If the hostname should be capitalised | false
-    property int  width:               600 ;  // The menu's width | 600
+    // If the username should be capitalised | true
+    property bool capitaliseUsername: true;
+    // If the hostname should be capitalised | false
+    property bool capitaliseHostname: false;
+    // The menu's width | 600
+    property int width: 600;
+  }
+
+  // -- Background --
+  readonly property QtObject background: QtObject {
+    // The path of the wallpaper to use | $HOME/Hyprland-Dots/Wallpapers/Everforest/Hard.png
+    property string wallpaper: Quickshell.env("HOME") + "/Hyprland-Dots/Wallpapers/Everforest/Hard.png";
+    // How fast the wallpaper should fade in (0 for instant). Does not apply to shaders | 2000
+    property int fadeSpeed: 2000;
+    // The shader to apply (empty for none) - Options: Space
+    property string shader: "";
+    // Whether to hide the wallpaper (useful for shaders that work well alone) | false
+    property bool hideWallpaper: false;
+    // The colour to show behind everything (can be used for semi-transparent shaders or for a solid colour background) | black
+    property color bgColour: "black";
   }
 
   /*  _   _____   ___  _______   ___  __   ________
@@ -40,7 +66,7 @@ Singleton {
     id: vars
     // These variables aren't really meant to be changed, but you may if you wish.
 
-    property int gap: 10;  // Size of Hyprland gap
+    property int gap: Utils.SysInfo.gap;  // Size of Hyprland gap
     property int gapLarge: vars.gap + 8;
 
     property int br: 6;  // Border Radius

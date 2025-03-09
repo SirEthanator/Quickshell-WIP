@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import "root:/";
+import "root:/components";
 import "root:/animations" as Anims;
 import "dashboard" as Dashboard;
 import "launcher" as Launcher;

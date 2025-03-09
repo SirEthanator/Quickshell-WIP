@@ -1,4 +1,5 @@
 import "root:/";
+import "root:/components";
 import "root:/animations" as Anims;
 import Quickshell;
 import QtQuick;
