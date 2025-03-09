@@ -7,14 +7,14 @@ import QtQuick;
 Singleton {
   id: root
 
-  property int    gap: 10;  // use 10 until command has been run
-  property string username: "";
-  property string hostname: "";
-  property string network: "";
+  property int    gap: 10        ;  // use 10 until command has been run
+  property string username: ""   ;
+  property string hostname: ""   ;
+  property string network: ""    ;
   property int    networkStrength;
   property string dateAndTime: "";
-  property int    cpuUsage;
-  property int    memUsage;
+  property int    cpuUsage       ;
+  property int    memUsage       ;
 
   Timer {
     running: true;
