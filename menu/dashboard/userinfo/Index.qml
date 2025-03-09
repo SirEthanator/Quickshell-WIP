@@ -1,4 +1,5 @@
 import "root:/";
+import "root:/components";
 import "root:/utils" as Utils;
 import "..";
 import QtQuick.Layouts;

@@ -7,6 +7,7 @@ import QtQuick;
 Singleton {
   id: root
 
+  property int    gap: 10;  // use 10 until command has been run
   property string username: "";
   property string hostname: "";
   property string network: "";
@@ -26,6 +27,18 @@ Singleton {
   }
 
   // TODO: Try to find a better way than manually making a process for every item - maybe a repeater?
+
+  Process {
+    command: ["hyprctl", "getoption", "general:gaps_out", "-j"];
+    running: true;
+    stdout: SplitParser {
+      onRead: (data) => {
+        const json = JSON.parse(data);
+        root.gap = json.custom.split(' ')[0]
+      }
+    }
+  }
+
   Process {
     command: ["whoami"]
     running: true;

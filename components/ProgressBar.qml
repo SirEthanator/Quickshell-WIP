@@ -1,4 +1,5 @@
-import "animations" as Anims;
+import "root:/";
+import "root:/animations" as Anims;
 import QtQuick;
 
 Rectangle { // background
