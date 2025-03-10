@@ -1,4 +1,5 @@
 import "root:/";
+import "widgets" as Widgets;
 import Quickshell;
 import Quickshell.Wayland;
 import QtQuick;
@@ -20,10 +21,17 @@ PanelWindow {
     anchors.fill: parent;
     hoverEnabled: true;
 
+    // Bar will only be hidden if the background has focus, but widgets will be hidden regardless of whether the background is focused or not
+
     function mouseMove() {
       cursorHideTimer.restart();
+      widgetAndBarHideTimer.restart();
       mouseArea.cursorShape = Qt.ArrowCursor;
+      widgets.show();
+      Globals.states.barHidden = false;
     }
+
+    onContainsMouseChanged: if (!containsMouse) Globals.states.barHidden = false;
 
     onMouseXChanged: mouseMove();
     onMouseYChanged: mouseMove();
@@ -34,41 +42,18 @@ PanelWindow {
       onTriggered: mouseArea.cursorShape = Qt.BlankCursor;
     }
 
-    Item {
-      anchors.fill: parent;
-
-      Image {
-        id: img;
-        NumberAnimation on opacity {
-          from: 0; to: 1;
-          duration: Globals.background.fadeSpeed;
-          easing.type: Easing.OutCubic
-        }
-        visible: !Globals.background.hideWallpaper;
-        anchors.fill: parent;
-        asynchronous: true;
-        fillMode: Image.PreserveAspectCrop;
-        source: Globals.background.wallpaper;
-      }
-
-      ShaderEffect {
-        id: shader;
-        anchors.fill: parent;
-        visible: Globals.background.shader !== "";
-        // These are passed into the shader:
-        property vector2d resolution: Qt.vector2d(width, height);
-        property real time: 0;
-        FrameAnimation {
-          running: true;
-          onTriggered: {
-            shader.time = this.elapsedTime;
-          }
-        }
-
-        vertexShader: "shaders/default.vert.qsb";
-        fragmentShader: "shaders/"+Globals.background.shader+".frag.qsb";
+    Timer {
+      id: widgetAndBarHideTimer;
+      interval: 25_000;
+      onTriggered: {
+        widgets.hide();
+        if (mouseArea.containsMouse) Globals.states.barHidden = true
       }
     }
+
+    Wallpaper {}
+
+    Widgets.Index { id: widgets }
   }
 }
 

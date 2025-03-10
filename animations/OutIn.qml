@@ -1,3 +1,4 @@
+import "root:/";
 import QtQuick;
 
 Behavior {
@@ -5,7 +6,7 @@ Behavior {
 
   property QtObject fadeTarget: targetProperty.object;
   property string fadeProperty: "opacity";
-  property int fadeDuration: 100;
+  property int fadeDuration: Globals.vars.transitionLen;
   property int fadeOutDuration: fadeDuration;
   property int fadeInDuration: fadeDuration;
   property var fadeValue: 0;

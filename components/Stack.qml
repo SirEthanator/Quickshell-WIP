@@ -38,12 +38,10 @@ StackView {
   }
 
   onCurrentIndexChanged: {
-    if (currentIndex < items.length) {
-      root.replace(items[currentIndex]);
-    } else {
-      root.replace(items[0]);
-      root.currentIndex = 0;
-    }
+    const loop = currentIndex >= items.length;
+    const item = loop ? items[0] : items[currentIndex];
+    if (item !== undefined) root.replace(item);
+    if (loop) root.currentIndex = 0;
     items[currentIndex].visible = true;
   }
 
