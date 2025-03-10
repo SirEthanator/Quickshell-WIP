@@ -33,6 +33,6 @@ Item {
     }
 
     vertexShader: "shaders/default.vert.qsb";
-    fragmentShader: "shaders/"+Globals.background.shader+".frag.qsb";
+    fragmentShader: visible ? "shaders/"+Globals.background.shader+".frag.qsb" : undefined;
   }
 }

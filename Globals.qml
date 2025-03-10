@@ -55,6 +55,8 @@ Singleton {
     property bool hideWallpaper: false;
     // The colour to show behind everything (can be used for semi-transparent shaders or for a solid colour background) | black
     property color bgColour: "black";
+    // If the clock widget should be vertically centred | false
+    property bool centreClockWidget: false;
   }
 
   /*  _   _____   ___  _______   ___  __   ________
@@ -106,6 +108,7 @@ Singleton {
     property int shortTransitionLen: 150;
 
     property int clockWidgetSpacing: 8;
+    property int clockWidgetTopMargin: 100;
   }
 
   /*    ___________ ________  ___________

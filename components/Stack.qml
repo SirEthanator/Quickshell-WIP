@@ -40,9 +40,11 @@ StackView {
   onCurrentIndexChanged: {
     const loop = currentIndex >= items.length;
     const item = loop ? items[0] : items[currentIndex];
-    if (item !== undefined) root.replace(item);
+    if (item !== undefined) {
+      root.replace(item);
+      items[currentIndex].visible = true;
+    }
     if (loop) root.currentIndex = 0;
-    items[currentIndex].visible = true;
   }
 
   Component.onCompleted: {

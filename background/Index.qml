@@ -44,7 +44,7 @@ PanelWindow {
 
     Timer {
       id: widgetAndBarHideTimer;
-      interval: 25_000;
+      interval: 20_000;
       onTriggered: {
         widgets.hide();
         if (mouseArea.containsMouse) Globals.states.barHidden = true
