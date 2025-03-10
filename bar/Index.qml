@@ -22,9 +22,11 @@ PanelWindow {
     + Globals.vars.gap * (Globals.bar.docked && Globals.bar.autohide ? 1 : Globals.bar.docked ? 0 : Globals.bar.autohide ? 2 : 1);
 
   // If the bar is autohiding and the always-on-screen part is hovered, the top margin will be 0. The top gap is handled by height and the Rectangle's margins.
-  // The gap is subtracted from height to keep a transparent part of the bar on screen so it can be hovered.
-  // We then add 1 just to move it a little bit higher to prevent one or two pixels of the bar from showing while they should be hidden.
-  margins.top: - (Globals.bar.autohide && ! hoverArea.containsMouse ? root.height - Globals.vars.gap + 1 : 0);
+  // If autohiding, the gap is subtracted from height to keep a transparent part of the bar on screen so it can be hovered.
+  // We then add 1 just to move it a little bit higher to prevent a one pixel tall sliver of the bar showing when it shouldn't.
+  margins.top: - ((Globals.bar.autohide && ! hoverArea.containsMouse) || Globals.states.barHidden
+    ? root.height - (Globals.bar.autohide ? Globals.vars.gap : 0) + 1
+    : 0);
 
   exclusionMode: Globals.bar.autohide ? ExclusionMode.Ignore : ExclusionMode.Auto;
 

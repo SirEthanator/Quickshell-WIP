@@ -75,6 +75,7 @@ Singleton {
 
     property string fontFamily: "0xProto";
     property int mainFontSize: 16;
+    property int xlFontSize: 150;
     property int headingFontSize: 34;
     property int smallHeadingFontSize: 22;
 
@@ -103,6 +104,8 @@ Singleton {
     property int animLen: 350;
     property int transitionLen: 250;
     property int shortTransitionLen: 150;
+
+    property int clockWidgetSpacing: 8;
   }
 
   /*    ___________ ________  ___________
@@ -114,6 +117,7 @@ Singleton {
     id: everforest
 
     property color accent: "#A7C080";
+    property color accentDark: Qt.darker(accent, 1.2);
     property color accentLight: Qt.lighter(accent, 1.2);
     property color fg: "#D3C6AA";
     property color bg: "#272E33";
@@ -141,6 +145,7 @@ Singleton {
     id: catMocha
 
     property color accent: "#B4BEFE";
+    property color accentDark: Qt.darker(accent, 1.2);
     property color accentLight: Qt.lighter(accent, 1.2);
     property color fg: "#CDD6F4";
     property color bg: "#1E1E2E";
@@ -168,6 +173,7 @@ Singleton {
     id: rosePine
 
     property color accent: "#9CCFD8";
+    property color accentDark: Qt.darker(accent, 1.2);
     property color accentLight: Qt.lighter(accent, 1.2);
     property color fg: "#E0DEF4";
     property color bg: "#1F1D2E";
@@ -200,6 +206,7 @@ Singleton {
     id: states
 
     property bool menuOpen: false;
+    property bool barHidden: false;
   }
 }
 
