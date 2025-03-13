@@ -24,7 +24,7 @@ BarModule {
       return result;
     }
 
-    Anims.OutIn on text {originalValue: 1}
+    Anims.OutIn on text { originalValue: 1; fadeDuration: 100 }
   }
 }
 
