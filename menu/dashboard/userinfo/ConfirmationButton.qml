@@ -9,7 +9,6 @@ MouseArea {
   required property int index;
   required property string text;
   property string command: "";
-  property bool closeMenu: false;
   hoverEnabled: true;
 
   signal selected();
@@ -20,17 +19,14 @@ MouseArea {
   Process { id: cmd }
   function runCmd() {
     cmd.command = ["sh", "-c", command];
-    cmd.running = true;
+    cmd.startDetached();
+    Globals.states.menuOpen = false;
   }
 
   onClicked: {
     selected();
     if (command !== "") {
       runCmd();
-    }
-
-    if (closeMenu) {
-      Globals.states.menuOpen = false;
     }
   }
 
