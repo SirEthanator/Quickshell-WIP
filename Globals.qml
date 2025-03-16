@@ -55,6 +55,8 @@ Singleton {
     property bool hideWallpaper: false;
     // The colour to show behind everything (can be used for semi-transparent shaders or for a solid colour background) | black
     property color bgColour: "black";
+    // If the clock widget should be shown | true
+    property bool clockWidget: true;
     // If the clock widget should be vertically centred | false
     property bool centreClockWidget: false;
   }
