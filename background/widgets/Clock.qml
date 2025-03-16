@@ -9,6 +9,7 @@ import QtQuick.Layouts;
 
 RowLayout {
   id: root;
+  visible: Globals.background.clockWidget;
   anchors.horizontalCenter: parent.horizontalCenter;
   anchors.verticalCenter: parent.verticalCenter;
   // Baseline is on the centre of the widget
