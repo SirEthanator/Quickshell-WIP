@@ -70,7 +70,6 @@ Item {
         index: 0;
         text: `${root.action} now`;
         command: root.command;
-        closeMenu: true;
       }
 
       ConfirmationButton {
