@@ -16,7 +16,7 @@ Rectangle {
   property color iconbgColour: Globals.colours.accent;
   property bool forceIconbgColour: false;
   property int padding: Globals.vars.paddingModule;
-  property bool outline: Globals.bar.moduleOutlines;
+  property bool outline: Globals.conf.bar.moduleOutlines;
 
   property alias mouseArea: mouseArea;
   property alias hoverEnabled: mouseArea.hoverEnabled;
@@ -33,8 +33,8 @@ Rectangle {
   antialiasing: true;
 
   // If the bar is docked but with floating modules, the top corners' border radius is removed
-  topRightRadius: Globals.bar.docked && Globals.bar.floatingModules ? 0 : Globals.vars.br;
-  topLeftRadius: Globals.bar.docked && Globals.bar.floatingModules ? 0 : Globals.vars.br;
+  topRightRadius: Globals.conf.bar.docked && Globals.conf.bar.floatingModules ? 0 : Globals.vars.br;
+  topLeftRadius: Globals.conf.bar.docked && Globals.conf.bar.floatingModules ? 0 : Globals.vars.br;
   bottomLeftRadius: Globals.vars.br;
   bottomRightRadius: Globals.vars.br;
 
@@ -66,10 +66,10 @@ Rectangle {
       Rectangle {
         id: iconbg;
         visible: !!root.icon;  // Visible if icon is a non-empty string.
-        color: Globals.bar.multiColourModules || root.forceIconbgColour ? root.iconbgColour : Globals.colours.accent;
+        color: Globals.conf.bar.multiColourModules || root.forceIconbgColour ? root.iconbgColour : Globals.colours.accent;
         implicitWidth: icon.implicitWidth + root.padding*2;  // This will add padding to both sides of the icon's background.
         Layout.fillHeight: true;
-        topLeftRadius: Globals.bar.docked && Globals.bar.floatingModules ? 0 : Globals.vars.br;  // See comment on root's br
+        topLeftRadius: Globals.conf.bar.docked && Globals.conf.bar.floatingModules ? 0 : Globals.vars.br;  // See comment on root's br
         bottomLeftRadius: Globals.vars.br;
 
         Icon {

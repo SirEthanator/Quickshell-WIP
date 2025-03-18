@@ -1,0 +1,30 @@
+{
+  "colourScheme": "everforest",
+
+  "bar": {
+    "autohide": false,
+    "docked": false,
+    "floatingModules": false,
+    "multiColourModules": false,
+    "moduleOutlines": true,
+    "backgroundOutline": true,
+    "workspaceCount": 10,
+    "truncationLength": 90
+  },
+
+  "menu": {
+    "width": 600,
+    "capitaliseUsername": true,
+    "capitaliseHostname": false
+  },
+
+  "background": {
+    "wallpaper": "",
+    "fadeSpeed": 2000,
+    "shader": "",
+    "hideWallpaper": false,
+    "bgColour": "black",
+    "clockWidget": true,
+    "centreClockWidget": false
+  }
+}

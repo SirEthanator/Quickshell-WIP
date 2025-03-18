@@ -16,7 +16,7 @@ BarModule {
     const step = -Math.sign(event.angleDelta.y);
     const active = root.monitor.activeWorkspace.id;
     const target = step + active
-    if (target >= 1 && target <= Globals.bar.workspaceCount) {
+    if (target >= 1 && target <= Globals.conf.bar.workspaceCount) {
       Hyprland.dispatch(`workspace ${target}`);
     }
   }
@@ -28,7 +28,7 @@ BarModule {
 
   // No row layout because it's provided by BarModule
   Repeater {
-    model: Globals.bar.workspaceCount;
+    model: Globals.conf.bar.workspaceCount;
 
     MouseArea {
       id: wsButton;

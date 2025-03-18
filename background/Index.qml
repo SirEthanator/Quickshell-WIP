@@ -7,7 +7,7 @@ import QtQuick;
 PanelWindow {
   WlrLayershell.layer: WlrLayer.Background;
   exclusionMode: ExclusionMode.Ignore;
-  color: Globals.background.bgColour;
+  color: Globals.conf.background.bgColour;
 
   anchors {
     top: true;
