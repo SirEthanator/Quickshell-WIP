@@ -2,6 +2,7 @@ pragma Singleton
 
 import "utils" as Utils;
 import Quickshell;
+import Quickshell.Io;
 import QtQuick;
 
 Singleton {
@@ -10,55 +11,39 @@ Singleton {
      / /_/ / ___/ / / _/ // /_/ /    /\ \
      \____/_/    /_/ /___/\____/_/|_/___/   */
 
+  // -- ----- --
+  FileView {
+    id: confFile;
+    path: Qt.resolvedUrl("./config.json");
+    blockLoading: true;
+  }
+
+  FileView {
+    id: defaultConfFile;
+    path: Qt.resolvedUrl("./defaultConf.json");
+    blockLoading: true;
+  }
+
+  function deepMerge(defaultOptions, userOptions) {
+    Object.entries(userOptions).forEach(([key, value]) => {
+      if (value && typeof value === 'object') deepMerge(defaultOptions[key] = defaultOptions[key] || [], value)
+      else defaultOptions[key] = value;
+    });
+    return defaultOptions
+  }
+
+  readonly property var defaultConf: JSON.parse(defaultConfFile.text());
+  readonly property var userConf: JSON.parse(confFile.text());
+  readonly property var conf: deepMerge(defaultConf, userConf);
+
   // -- Global --
-  readonly property alias colours: everforest;
+  readonly property QtObject colours: schemes[conf.colourScheme];
 
-  // -- Bar --
-  readonly property QtObject bar: QtObject {
-    // If the bar should hide until hovered | false
-    property bool autohide: false;
-    // If the bar should be docked or floating | false
-    property bool docked: false;
-    // If the bar has a background behind the modules | false
-    property bool floatingModules: false;
-    // If modules' icons should use different colours or the accent colour | false
-    property bool multiColourModules: false;
-    // If there should be outlines on modules | true
-    property bool moduleOutlines: true;
-    // If the bar's background should have an outline | true
-    property bool backgroundOutline: true;
-    // How many workspaces are displayed in the workspace widget | 10
-    property int workspaceCount: 10;
-    // The maximum length of modules with long text | 90
-    property int truncationLength: 90;
-  }
-
-  // -- Sidebar --
-  readonly property QtObject menu: QtObject {
-    // If the username should be capitalised | true
-    property bool capitaliseUsername: true;
-    // If the hostname should be capitalised | false
-    property bool capitaliseHostname: false;
-    // The menu's width | 600
-    property int width: 600;
-  }
-
-  // -- Background --
-  readonly property QtObject background: QtObject {
-    // The path of the wallpaper to use | $HOME/Hyprland-Dots/Wallpapers/Everforest/Hard.png
-    property string wallpaper: Quickshell.env("HOME") + "/Hyprland-Dots/Wallpapers/Everforest/Hard.png";
-    // How fast the wallpaper should fade in (0 for instant). Does not apply to shaders | 2000
-    property int fadeSpeed: 2000;
-    // The shader to apply (empty for none) - Options: Space
-    property string shader: "";
-    // Whether to hide the wallpaper (useful for shaders that work well alone) | false
-    property bool hideWallpaper: false;
-    // The colour to show behind everything (can be used for semi-transparent shaders or for a solid colour background) | black
-    property color bgColour: "black";
-    // If the clock widget should be shown | true
-    property bool clockWidget: true;
-    // If the clock widget should be vertically centred | false
-    property bool centreClockWidget: false;
+  Component.onCompleted: {
+    if (colours === null) {
+      console.log(`Invalid colour scheme: ${conf.colourScheme}`);
+      Qt.callLater(Qt.quit);
+    }
   }
 
   /*  _   _____   ___  _______   ___  __   ________
@@ -68,7 +53,6 @@ Singleton {
 
   readonly property QtObject vars: QtObject {
     id: vars
-    // These variables aren't really meant to be changed, but you may if you wish.
 
     property int gap: Utils.SysInfo.gap;  // Size of Hyprland gap
     property int gapLarge: vars.gap + 8;
@@ -120,6 +104,8 @@ Singleton {
        / __/ ___/ // / __/  |/  / __/ __/
       _\ \/ /__/ _  / _// /|_/ / _/_\ \
      /___/\___/_//_/___/_/  /_/___/___/   */
+
+  readonly property var schemes: ({ everforest: everforest, catMocha: catMocha, rosePine: rosePine });
 
   readonly property QtObject everforest: QtObject {
     id: everforest
