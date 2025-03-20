@@ -2,3 +2,4 @@
 - [ ] Disable top, left, and right outline when bar is docked
 - [ ] Complete menu
 - [ ] Implement notifications
+- [ ] Unload modules that are disabled or not visible

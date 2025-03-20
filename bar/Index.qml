@@ -121,6 +121,7 @@ PanelWindow {
           //SysTray {window: root}
           Network {}
           Battery {}
+          Media {}
           Volume {}
         }
       }
