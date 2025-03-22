@@ -9,11 +9,15 @@ import Quickshell.Io;
 ShellRoot {
   id: shellroot;
 
-  // --- Keybindings ---
   // Usage: quickshell ipc call <target> <function>
   IpcHandler {
     target: "menu";
     function toggle(): void { Globals.states.menuOpen = !Globals.states.menuOpen }
+  }
+  IpcHandler {
+    target: "screensaver";
+    function open():  void { Globals.states.screensaverActive = true  }
+    function close(): void { Globals.states.screensaverActive = false }
   }
 
 	Variants {
@@ -23,17 +27,10 @@ ShellRoot {
       id: scope;
       required property var modelData;
 
-      Bar.Index {
-        screen: scope.modelData;
-      }
-
-      Menu.Index {
-        screen: scope.modelData;
-      }
-
-      Background.Index {
-        screen: scope.modelData;
-      }
+      Bar.Index { screen: scope.modelData }
+      Menu.Index { screen: scope.modelData }
+      Background.Index { screen: scope.modelData }
+      Screensaver { screen: scope.modelData }
     }
 
 	}

@@ -201,6 +201,7 @@ Singleton {
 
     property bool menuOpen: false;
     property bool barHidden: false;
+    property bool screensaverActive: false;
   }
 }
 
