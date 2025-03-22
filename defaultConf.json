@@ -25,6 +25,9 @@
     "hideWallpaper": false,
     "bgColour": "black",
     "clockWidget": true,
-    "centreClockWidget": false
+    "centreClockWidget": false,
+    "autohideWidgets": true,
+    "autohideBar": true,
+    "autohideCursor": true
   }
 }
