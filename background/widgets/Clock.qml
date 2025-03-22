@@ -65,20 +65,20 @@ RowLayout {
               stack.width = width
             }
 
-              Text {
-                id: numberText;
-                text: numberBg.index;
-                color: Globals.colours.bg;
-                anchors.centerIn: parent;
-                font {
-                  family: Globals.vars.fontFamily;
-                  pixelSize: Globals.vars.xlFontSize;
-                }
+            Text {
+              id: numberText;
+              text: numberBg.index;
+              color: Globals.colours.bg;
+              anchors.centerIn: parent;
+              font {
+                family: Globals.vars.fontFamily;
+                pixelSize: Globals.vars.xlFontSize;
               }
             }
           }
         }
       }
+    }
   }
 }
 
