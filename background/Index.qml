@@ -66,5 +66,19 @@ PanelWindow {
   Wallpaper {}
 
   Widgets.Index { id: widgets }
+
+  Rectangle {
+    id: fadeOverlay;
+    anchors.fill: parent;
+    color: Globals.conf.background.bgColour;
+    SequentialAnimation on opacity {
+      NumberAnimation {
+        from: 1; to: 0;
+        duration: Globals.conf.background.fadeSpeed;
+        easing.type: Easing.OutCubic;
+      }
+      PropertyAction { target: fadeOverlay; property: "visible"; value: false }
+    }
+  }
 }
 

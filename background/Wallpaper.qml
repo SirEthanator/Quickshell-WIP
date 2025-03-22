@@ -10,11 +10,6 @@ Item {
 
   Image {
     id: img;
-    NumberAnimation on opacity {
-      from: 0; to: 1;
-      duration: Globals.conf.background.fadeSpeed;
-      easing.type: Easing.OutCubic
-    }
     visible: !Globals.conf.background.hideWallpaper;
     anchors.fill: parent;
     asynchronous: true;
