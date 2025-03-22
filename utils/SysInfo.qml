@@ -12,19 +12,11 @@ Singleton {
   property string hostname: ""   ;
   property string network: ""    ;
   property int    networkStrength;
-  property string dateAndTime: "";
+  property string dateAndTime: Qt.formatDateTime(clock.date, "ddd dd/MM/yy | hh:mm:ss ap");
   property int    cpuUsage       ;
   property int    memUsage       ;
 
-  Timer {
-    running: true;
-    triggeredOnStart: true;
-    interval: 1000;
-    repeat: true;
-    onTriggered: {
-      root.dateAndTime = new Date().toLocaleString(Qt.locale(), "ddd dd/MM/yy | hh:mm:ss ap")
-    }
-  }
+  SystemClock { id: clock }
 
   // TODO: Try to find a better way than manually making a process for every item - maybe a repeater?
 
