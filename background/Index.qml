@@ -16,44 +16,55 @@ PanelWindow {
     right: true;
   }
 
-  MouseArea {
-    id: mouseArea;
+  Loader {
+    active: Globals.conf.background.autohideWidgets || Globals.conf.background.autohideBar || Globals.conf.background.autohideCursor;
+    asynchronous: true;
+    sourceComponent: children[0];
     anchors.fill: parent;
-    hoverEnabled: true;
 
-    // Bar will only be hidden if the background has focus, but widgets will be hidden regardless of whether the background is focused or not
+    MouseArea {
+      id: mouseArea;
+      anchors.fill: parent;
+      hoverEnabled: true;
 
-    function mouseMove() {
-      cursorHideTimer.restart();
-      widgetAndBarHideTimer.restart();
-      mouseArea.cursorShape = Qt.ArrowCursor;
-      widgets.show();
-      Globals.states.barHidden = false;
-    }
+      // Bar will only be hidden if the background has focus, but widgets will be hidden regardless of whether the background is focused or not
 
-    onContainsMouseChanged: if (!containsMouse) Globals.states.barHidden = false;
+      function mouseMove() {
+        if (Globals.conf.background.autohideCursor) {
+          cursorHideTimer.restart();
+          mouseArea.cursorShape = Qt.ArrowCursor;
+        }
+        if (Globals.conf.background.autohideWidgets || Globals.conf.background.autohideBar) {
+          widgetAndBarHideTimer.restart();
+          widgets.show();
+          Globals.states.barHidden = false;
+        }
+      }
 
-    onMouseXChanged: mouseMove();
-    onMouseYChanged: mouseMove();
+      onContainsMouseChanged: if (!containsMouse) Globals.states.barHidden = false;
 
-    Timer {
-      id: cursorHideTimer;
-      interval: 5000;
-      onTriggered: mouseArea.cursorShape = Qt.BlankCursor;
-    }
+      onMouseXChanged: mouseMove();
+      onMouseYChanged: mouseMove();
 
-    Timer {
-      id: widgetAndBarHideTimer;
-      interval: 20_000;
-      onTriggered: {
-        widgets.hide();
-        if (mouseArea.containsMouse) Globals.states.barHidden = true
+      Timer {
+        id: cursorHideTimer;
+        interval: 5000;
+        onTriggered: if (Globals.conf.background.autohideCursor) mouseArea.cursorShape = Qt.BlankCursor;
+      }
+
+      Timer {
+        id: widgetAndBarHideTimer;
+        interval: 20_000;
+        onTriggered: {
+          if (Globals.conf.background.autohideWidgets) widgets.hide();
+          if (Globals.conf.background.autohideBar && mouseArea.containsMouse) Globals.states.barHidden = true;
+        }
       }
     }
-
-    Wallpaper {}
-
-    Widgets.Index { id: widgets }
   }
+
+  Wallpaper {}
+
+  Widgets.Index { id: widgets }
 }
 
