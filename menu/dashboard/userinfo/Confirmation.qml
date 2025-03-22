@@ -68,13 +68,13 @@ Item {
       ConfirmationButton {
         id: confirmButton;
         index: 0;
-        text: `${root.action} now`;
+        label: `${root.action} now`;
         command: root.command;
       }
 
       ConfirmationButton {
         index: 1;
-        text: "Cancel";
+        label: "Cancel";
         onSelected: {
           countdownTimer.stop();
           root.goBack();
