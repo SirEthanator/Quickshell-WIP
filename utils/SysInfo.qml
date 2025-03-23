@@ -2,17 +2,30 @@ pragma Singleton
 
 import Quickshell;
 import Quickshell.Io;
+import Quickshell.Services.Pipewire;
 import QtQuick;
 
 Singleton {
   id: root
 
+  readonly property PwNode audioNode: Pipewire.defaultAudioSink;
+  PwObjectTracker { objects: [ root.audioNode ] }
+  readonly property int volume: Math.round(audioNode?.audio.volume * 100);
+  readonly property string volumeIcon: {
+    if (root.audioNode?.audio.muted) { return "audio-volume-muted-panel-symbolic"  } else
+    if (root?.volume >= 90         ) { return "audio-volume-high-danger-symbolic"  } else
+    if (root?.volume >= 60         ) { return "audio-volume-high-panel-symbolic"   } else
+    if (root?.volume >= 30         ) { return "audio-volume-medium-panel-symbolic" } else
+    if (root?.volume >= 1          ) { return "audio-volume-low-panel-symbolic"    }
+    else { return "audio-volume-muted-panel-symbolic" };
+  }
+
+  property string dateAndTime: Qt.formatDateTime(clock.date, "ddd dd/MM/yy | hh:mm:ss ap");
   property int    gap: 10        ;  // use 10 until command has been run
   property string username: ""   ;
   property string hostname: ""   ;
   property string network: ""    ;
   property int    networkStrength;
-  property string dateAndTime: Qt.formatDateTime(clock.date, "ddd dd/MM/yy | hh:mm:ss ap");
   property int    cpuUsage       ;
   property int    memUsage       ;
 
