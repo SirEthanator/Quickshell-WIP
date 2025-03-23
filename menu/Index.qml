@@ -17,7 +17,6 @@ LazyLoader {
   id: loader;
   required property var screen;
   activeAsync: false;
-  onActiveAsyncChanged: console.log(activeAsync)
 
   property bool open: Globals.states.menuOpen;
   property var timer;

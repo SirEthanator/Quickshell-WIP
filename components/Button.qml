@@ -13,7 +13,6 @@ MouseArea {
   property bool brRadius: false;
 
   hoverEnabled: true;
-  onContainsMouseChanged: console.log(containsMouse)
 
   Rectangle {
     id: background;
