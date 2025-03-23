@@ -22,7 +22,7 @@ Rectangle { // background
     anchors.bottom: parent.bottom;
     anchors.left: parent.left;
     width: !root.vertical ? length : parent.width;
-    height: icon.visible && length < icon.size ? icon.size : root.vertical ? length : parent.height;
+    height: icon.visible ? (root.height - icon.size) * root.value + icon.size : root.vertical ? length : parent.height;
     color: root.fg;
     radius: parent.radius;
 
