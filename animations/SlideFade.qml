@@ -6,11 +6,12 @@ ParallelAnimation {
   required property QtObject slideTarget;
   required property QtObject fadeTarget;
   property bool reverse: false;
+  property string direction: "right";
   property int slideOffset: 100;
 
   NumberAnimation {
     target: root.slideTarget;
-    property: "margins.left";
+    property: root.direction === "right" ? "margins.left" : "margins.right";
     from: root.reverse ? 0 : -root.slideOffset; to: root.reverse ? -root.slideOffset : 0;
     easing.type: Easing.OutCubic;
     duration: Globals.vars.animLen;

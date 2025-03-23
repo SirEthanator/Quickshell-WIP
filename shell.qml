@@ -4,6 +4,7 @@ import Quickshell;
 import "bar" as Bar;
 import "menu" as Menu;
 import "background" as Background;
+import "osd" as OSD;
 import Quickshell.Io;
 
 ShellRoot {
@@ -31,6 +32,7 @@ ShellRoot {
       Menu.Index { screen: scope.modelData }
       Background.Index { screen: scope.modelData }
       Screensaver { screen: scope.modelData }
+      OSD.Index { screen: scope.modelData }
     }
 
 	}

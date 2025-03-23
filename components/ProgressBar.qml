@@ -10,17 +10,36 @@ Rectangle { // background
   property color bg: "black";
   property color fg: "white";
 
-  border.width: 0.05 * root.height
+  property string icon: "";  // Only supported if bar is vertical rn
+  property bool vertical: false;
+
+
   radius: 0.5 * height
   color: bg;
 
   Rectangle { // foreground
-    x: 0;  y: 0;
-    width: root.width * root.value;
-    height: root.height;
+    readonly property int length: root.vertical ? root.height * root.value : root.width * root.value;
+    anchors.bottom: parent.bottom;
+    anchors.left: parent.left;
+    width: !root.vertical ? length : parent.width;
+    height: icon.visible && length < icon.size ? icon.size : root.vertical ? length : parent.height;
     color: root.fg;
     radius: parent.radius;
 
     Anims.NumberTransition on width {}
+    Anims.NumberTransition on height {}
+
+    Icon {
+      id: icon;
+      visible: root.icon !== "" && root.vertical;
+      anchors {
+        left: parent.left;
+        right: parent.right;
+        bottom: parent.bottom;
+      }
+      icon: root.icon;
+      color: root.bg;
+      size: parent.width;
+    }
   }
 }

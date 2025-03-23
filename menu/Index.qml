@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import "root:/";
+import "root:/utils" as Utils;
 import "root:/components";
 import "root:/animations" as Anims;
 import "dashboard" as Dashboard;
@@ -16,6 +17,7 @@ LazyLoader {
   id: loader;
   required property var screen;
   activeAsync: false;
+  onActiveAsyncChanged: console.log(activeAsync)
 
   property bool open: Globals.states.menuOpen;
   property var timer;
@@ -23,13 +25,7 @@ LazyLoader {
     if (!!loader.timer) return
     if (!open) {
       // We need a timer so the component will not be unloaded until the animation finishes
-      loader.timer = Qt.createQmlObject("import QtQuick; Timer {}", loader);
-      timer.interval = Globals.vars.animLen;
-      timer.triggered.connect(() => {
-        loader.timer = null;
-        loader.activeAsync = false
-      });
-      timer.start();
+      loader.timer = Utils.Timeout.setTimeout(() => loader.activeAsync = false, Globals.vars.animLen)
     } else {
       loader.activeAsync = true;
     }
