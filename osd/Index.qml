@@ -13,15 +13,18 @@ LazyLoader {
   activeAsync: false;
   property bool open: false;
 
-  readonly property int volume: Utils.SysInfo.volume;
+  readonly property int  volume: Utils.SysInfo.volume;
+  readonly property bool mute:   Utils.SysInfo.audioNode.audio.muted;
 
   property var autocloseTimer;
-  onVolumeChanged: {
+  function show() {
     if (unloading) return
     open = true;
     if (!!loader.autocloseTimer) {loader.autocloseTimer.destroy()}
     loader.autocloseTimer = Utils.Timeout.setTimeout(() => open = false, 3000);
   }
+  onVolumeChanged: show();
+  onMuteChanged: show();
 
   property var unloadTimer;
   readonly property bool unloading: !!unloadTimer;
