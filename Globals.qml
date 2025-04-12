@@ -58,6 +58,7 @@ Singleton {
     property int gapLarge: vars.gap + 8;
 
     property int br: 6;  // Border Radius
+    property int brSmall: 4;
 
     property real outlineSize: 1.5;
 
@@ -126,6 +127,7 @@ Singleton {
     property color grey: "#7A8478";
     property color wsInactive: bgHover;
     property color red: "#E67E80";
+    property color redHover: Qt.lighter(red, 1.2);
     property color shadow: "#1E2326";
 
     property color workspaces: accent;
@@ -154,6 +156,7 @@ Singleton {
     property color grey: "#585B70";
     property color wsInactive: bgHover;
     property color red: "#F38BA8";
+    property color redHover: Qt.lighter(red, 1.2);
     property color shadow: "#11111B";
 
     property color workspaces: accent;
@@ -182,6 +185,7 @@ Singleton {
     property color grey: "#6E6A86";
     property color wsInactive: bgHover;
     property color red: "#EB6F92";
+    property color redHover: Qt.lighter(red, 1.2);
     property color shadow: "#191724";
 
     property color workspaces: accent;
