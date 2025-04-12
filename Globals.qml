@@ -98,6 +98,10 @@ Singleton {
 
     property int clockWidgetSpacing: 8;
     property int clockWidgetTopMargin: 100;
+
+    property int notifPopupSpacing: 10;
+    property int paddingNotif: paddingCard;
+    property int notifInnerSpacing: 10;
   }
 
   /*    ___________ ________  ___________
