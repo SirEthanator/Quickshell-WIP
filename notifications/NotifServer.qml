@@ -9,11 +9,9 @@ import QtQuick;
 Singleton {
   id: root
 
-  readonly property int defaultTimeout: 5000;
-
   property alias notifList: server.trackedNotifications;
 
-  signal incoming(n: Notification, timeout: real)
+  signal incoming(n: Notification)
   signal dismissed(id: int)
 
   NotificationServer {
@@ -25,14 +23,7 @@ Singleton {
 
     onNotification: n => {
       n.tracked = true;
-      // root.notifList += n;
-      const timeout = n.expireTimeout > 0 ? n.expireTimeout : root.defaultTimeout
-      root.incoming(n, timeout);
-
-      const timer = Utils.Timeout.setTimeout(() => {
-        // n.expire();
-        root.dismissed(n.id)
-      }, timeout);
+      root.incoming(n);
 
       n.closed.connect(() => {
         root.dismissed(n.id)
