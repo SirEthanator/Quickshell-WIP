@@ -4,6 +4,7 @@ import "root:/";
 import "root:/animations" as Anims;
 import "root:/utils" as Utils;
 import Quickshell;
+import Quickshell.Io;
 import Quickshell.Wayland;
 import QtQuick;
 
@@ -40,11 +41,19 @@ PanelWindow {
     anchors.fill: parent;
     spacing: Globals.vars.notifPopupSpacing;
 
+    Process {
+      id: notifSound;
+      command: ["sh", "-c", "play /usr/share/sounds/ocean/stereo/message-new-instant.oga"];
+    }
+
     model: ListModel {
       id: data
       Component.onCompleted: () => {
         NotifServer.incoming.connect(n => {
-          if (!n.lastGeneration) data.insert(0, {n: n})
+          if (!n.lastGeneration) {
+            data.insert(0, {n: n});
+            if (Globals.conf.notifications.sounds) notifSound.running = true
+          }
         });
 
         NotifServer.dismissed.connect(id => {
@@ -56,8 +65,6 @@ PanelWindow {
       }
     }
 
-    ListView.delayRemove: true
-
     displaced: Transition {
       Anims.NumberAnim { property: "y"; duration: Globals.vars.animLen }
     }
@@ -67,11 +74,13 @@ PanelWindow {
           property: "anchors.rightMargin";
           from: -popups.width; to: 0;
           duration: Globals.vars.animLen;
+          easing.type: Easing.OutExpo;
         }
         Anims.NumberAnim {
           property: "anchors.leftMargin";
           from: popups.width; to: 0;
           duration: Globals.vars.animLen;
+          easing.type: Easing.OutExpo;
         }
       }
     }
@@ -81,11 +90,13 @@ PanelWindow {
           property: "anchors.rightMargin";
           from: 0; to: -popups.width;
           duration: Globals.vars.animLen;
+          easing.type: Easing.InExpo;
         }
         Anims.NumberAnim {
           property: "anchors.leftMargin";
           from: 0; to: popups.width;
           duration: Globals.vars.animLen;
+          easing.type: Easing.InExpo;
         }
       }
     }
