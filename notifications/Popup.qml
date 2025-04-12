@@ -11,7 +11,6 @@ MouseArea {
   required property Notification n;
   anchors.left: parent.left;
   anchors.right: parent.right;
-  // anchors.fill: bg;
   height: bg.height
 
   Rectangle {

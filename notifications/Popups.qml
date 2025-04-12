@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import "root:/";
+import "root:/animations" as Anims;
 import "root:/utils" as Utils;
 import Quickshell;
 import Quickshell.Wayland;
@@ -43,7 +44,7 @@ PanelWindow {
       id: data
       Component.onCompleted: () => {
         NotifServer.incoming.connect(n => {
-          data.insert(0, {n: n})
+          if (!n.lastGeneration) data.insert(0, {n: n})
         });
 
         NotifServer.dismissed.connect(id => {
@@ -52,6 +53,40 @@ PanelWindow {
             if (e.n.id === id) { data.remove(i); return }
           }
         })
+      }
+    }
+
+    ListView.delayRemove: true
+
+    displaced: Transition {
+      Anims.NumberAnim { property: "y"; duration: Globals.vars.animLen }
+    }
+    add: Transition {
+      ParallelAnimation {
+        Anims.NumberAnim {
+          property: "anchors.rightMargin";
+          from: -popups.width; to: 0;
+          duration: Globals.vars.animLen;
+        }
+        Anims.NumberAnim {
+          property: "anchors.leftMargin";
+          from: popups.width; to: 0;
+          duration: Globals.vars.animLen;
+        }
+      }
+    }
+    remove: Transition {
+      ParallelAnimation {
+        Anims.NumberAnim {
+          property: "anchors.rightMargin";
+          from: 0; to: -popups.width;
+          duration: Globals.vars.animLen;
+        }
+        Anims.NumberAnim {
+          property: "anchors.leftMargin";
+          from: 0; to: popups.width;
+          duration: Globals.vars.animLen;
+        }
       }
     }
 
