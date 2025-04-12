@@ -104,16 +104,22 @@ MouseArea {
             Item { Layout.fillWidth: true }
 
             Button {
+              implicitHeight: appName.height;
+              implicitWidth: implicitHeight;
+
               label: "close-symbolic";
               icon: true;
+              opacity: root.containsMouse ? 1 : 0;
+              Anims.NumberTransition on opacity {}
+
               bg: Globals.colours.red;
               bgHover: Globals.colours.redHover;
               bgPress: Globals.colours.redHover;
               labelColour: Globals.colours.bg;
+
               tlRadius: true; trRadius: true; blRadius: true; brRadius: true;
               padding: 0;
-              implicitHeight: appName.height;
-              implicitWidth: implicitHeight;
+
               onClicked: () => root.n.dismiss();
             }
           }
