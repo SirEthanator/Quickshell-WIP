@@ -13,6 +13,7 @@ Rectangle { // background
   property string icon: "";  // Only supported if bar is vertical rn
   property bool vertical: false;
 
+  property bool smoothing: true;
 
   radius: 0.5 * height
   color: bg;
@@ -26,8 +27,8 @@ Rectangle { // background
     color: root.fg;
     radius: parent.radius;
 
-    Anims.NumberTransition on width {}
-    Anims.NumberTransition on height {}
+    Anims.NumberTransition on width { enabled: root.smoothing }
+    Anims.NumberTransition on height { enabled: root.smoothing }
 
     Icon {
       id: icon;
