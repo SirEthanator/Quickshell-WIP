@@ -101,7 +101,7 @@ PanelWindow {
       }
     }
 
-    delegate: Popup {}
+    delegate: Toast { popup: true }
   }
 }
 
