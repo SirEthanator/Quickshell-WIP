@@ -11,10 +11,9 @@ Singleton {
 
   readonly property int defaultTimeout: 5000;
 
-  // property list<Notification> notifList;
   property alias notifList: server.trackedNotifications;
 
-  signal incoming(n: Notification)
+  signal incoming(n: Notification, timeout: real)
   signal dismissed(id: int)
 
   NotificationServer {
@@ -22,18 +21,18 @@ Singleton {
 
     actionIconsSupported: true;
     actionsSupported: true;
-    bodyMarkupSupported: true;
     imageSupported: true;
 
     onNotification: n => {
       n.tracked = true;
       // root.notifList += n;
-      root.incoming(n);
+      const timeout = n.expireTimeout > 0 ? n.expireTimeout : root.defaultTimeout
+      root.incoming(n, timeout);
 
       const timer = Utils.Timeout.setTimeout(() => {
         // n.expire();
         root.dismissed(n.id)
-      }, n.expireTimeout > 0 ? n.expireTimeout : root.defaultTimeout);
+      }, timeout);
 
       n.closed.connect(() => {
         root.dismissed(n.id)
