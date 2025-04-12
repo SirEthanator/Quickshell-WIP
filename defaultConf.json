@@ -29,5 +29,9 @@
     "autohideWidgets": true,
     "autohideBar": true,
     "autohideCursor": true
+  },
+
+  "notifications": {
+    "width": 500
   }
 }
