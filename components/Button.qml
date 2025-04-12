@@ -6,23 +6,27 @@ MouseArea {
   id: root;
   required property string label;
   property bool icon: false;
-  property alias bg: background.bg;
+  property color labelColour: Globals.colours.fg;
+  property color bg: Globals.colours.bg;
+  property color bgHover: Globals.colours.bgHover;
+  property color bgPress: Globals.colours.accent;
+  property bool invertTextOnPress: true;
   property bool tlRadius: false;
   property bool trRadius: false;
   property bool blRadius: false;
   property bool brRadius: false;
+  property int padding: Globals.vars.paddingButton;
 
   hoverEnabled: true;
 
   Rectangle {
     id: background;
-    property color bg: Globals.colours.bg;
     anchors.fill: parent;
     color: root.containsPress
-      ? Globals.colours.accent
+      ? root.bgPress
       : root.containsMouse
-        ? Globals.colours.bgHover
-        : bg;
+        ? root.bgHover 
+        : root.bg;
     topLeftRadius: root.tlRadius || root.containsMouse ? Globals.vars.br : 0;
     topRightRadius: root.trRadius || root.containsMouse ? Globals.vars.br : 0;
     bottomLeftRadius: root.blRadius || root.containsMouse ? Globals.vars.br : 0;
@@ -39,7 +43,7 @@ MouseArea {
       visible: !root.icon;
       anchors.centerIn: parent;
       text: root.label;
-      color: root.containsPress ? root.bg : Globals.colours.fg;
+      color: root.containsPress && root.invertTextOnPress ? root.bg : root.labelColour;
       Anims.ColourTransition on color {}
       font {
         family: Globals.vars.fontFamily;
@@ -51,9 +55,9 @@ MouseArea {
       visible: root.icon;
       anchors.centerIn: parent;
       icon: root.label;
-      color: root.containsPress ? root.bg : Globals.colours.fg;
+      color: root.containsPress && root.invertTextOnPress ? root.bg : root.labelColour;
       Anims.ColourTransition on color {}
-      size: parent.height - Globals.vars.paddingButton * 2;
+      size: parent.height - root.padding * 2;
     }
   }
 }

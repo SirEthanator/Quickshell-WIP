@@ -1,4 +1,6 @@
 import "root:/";
+import "root:/components";
+import "root:/animations" as Anims;
 import Quickshell;
 import Quickshell.Widgets;
 import QtQuick;
@@ -9,6 +11,7 @@ MouseArea {
   id: root
 
   required property Notification n;
+  property bool popup: false;
   anchors.left: parent.left;
   anchors.right: parent.right;
   height: bg.height
@@ -43,6 +46,8 @@ MouseArea {
 
       RowLayout {
         spacing: Globals.vars.notifInnerSpacing;
+        Layout.fillWidth: true;
+
         IconImage {
           visible: !!root.n.appIcon;
           source: !!root.n.appIcon ? Quickshell.iconPath(root.n.appIcon) : "";
@@ -58,6 +63,22 @@ MouseArea {
             pixelSize: Globals.vars.mainFontSize;
             italic: true;
           }
+        }
+
+        Item { Layout.fillWidth: true }
+
+        Button {
+          label: "close-symbolic";
+          icon: true;
+          bg: Globals.colours.red;
+          bgHover: Globals.colours.redHover;
+          bgPress: Globals.colours.redHover;
+          labelColour: Globals.colours.bg;
+          tlRadius: true; trRadius: true; blRadius: true; brRadius: true;
+          padding: 0;
+          implicitHeight: appName.height;
+          implicitWidth: implicitHeight;
+          onClicked: () => root.n.dismiss();
         }
       }
 
