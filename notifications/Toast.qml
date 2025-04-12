@@ -1,5 +1,6 @@
 import "root:/";
 import "root:/components";
+import "root:/utils" as Utils;
 import "root:/animations" as Anims;
 import Quickshell;
 import Quickshell.Widgets;
@@ -11,11 +12,36 @@ MouseArea {
   id: root
 
   required property Notification n;
-  required property real timeout;
+  readonly property real timeout: n.expireTimeout > 0 ? n.expireTimeout : Globals.conf.notifications.defaultTimeout;
   property bool popup: false;
   anchors.left: parent.left;
   anchors.right: parent.right;
   height: bg.height
+  hoverEnabled: true;
+  property var timer;
+
+  Component.onCompleted: {
+    if (!popup) return
+    root.timer = Utils.Timeout.setTimeout(() => {
+      NotifServer.dismissed(n.id)
+    }, root.timeout)
+  }
+
+  onContainsMouseChanged: {
+    if (!popup) return
+    if (containsMouse) {
+      root.timer.restart();
+      root.timer.stop();
+
+      progressController.stop();
+      progressBar.smoothing = true;
+      progressBar.value = 1;
+      progressBar.smoothing = false;
+    } else {
+      root.timer.start();
+      progressController.start();
+    }
+  }
 
   Rectangle {
     id: bg;
@@ -116,7 +142,7 @@ MouseArea {
       }
 
       ProgressBar {
-        id: countdownBar
+        id: progressBar
         value: 1;
         Layout.fillWidth: true;
         implicitHeight: 5;
@@ -127,12 +153,13 @@ MouseArea {
       }
 
       FrameAnimation {
+        id: progressController
+        running: true;
         onTriggered: {
-          if (countdownBar.value <= 0) stop()
-          else countdownBar.value -= (countdownBar.width / (root.timeout / 1000) * frameTime) / countdownBar.width
+          if (progressBar.value <= 0) stop()
+          else progressBar.value -= (progressBar.width / (root.timeout / 1000) * frameTime) / progressBar.width
           // Get how much the progress bar should recede then convert it into a decimal percentage
         }
-        Component.onCompleted: start()
       }
     }
   }

@@ -58,7 +58,7 @@ Singleton {
     property int gapLarge: vars.gap + 8;
 
     property int br: 6;  // Border Radius
-    property int brSmall: 4;
+    property int brSmall: 2;
 
     property real outlineSize: 1.5;
 

@@ -49,9 +49,9 @@ PanelWindow {
     model: ListModel {
       id: data
       Component.onCompleted: () => {
-        NotifServer.incoming.connect((n, timeout) => {
+        NotifServer.incoming.connect((n) => {
           if (!n.lastGeneration) {
-            data.insert(0, {n: n, timeout: timeout});
+            data.insert(0, {n: n});
             if (Globals.conf.notifications.sounds) notifSound.running = true
           }
         });

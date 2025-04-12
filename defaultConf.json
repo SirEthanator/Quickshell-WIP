@@ -33,6 +33,7 @@
 
   "notifications": {
     "width": 500,
+    "defaultTimeout": 5000,
     "sounds": true
   }
 }
