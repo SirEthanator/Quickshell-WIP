@@ -47,6 +47,8 @@ GridLayout {
       blRadius: index === 3;
       brRadius: index === 5;
 
+      padding: Globals.vars.paddingButtonIcon;
+
       Process { id: powerCmd }
       onClicked: {
         const action = powerBtn.modelData[3];

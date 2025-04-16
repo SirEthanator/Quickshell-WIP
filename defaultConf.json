@@ -34,6 +34,9 @@
   "notifications": {
     "width": 500,
     "defaultTimeout": 5000,
-    "sounds": true
+    "defaultCriticalTimeout": 8000,
+    "sounds": true,
+    "normalSound": "/usr/share/sounds/ocean/stereo/message-new-instant.oga",
+    "criticalSound": "/usr/share/sounds/ocean/stereo/dialog-error-critical.oga"
   }
 }

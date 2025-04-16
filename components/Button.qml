@@ -15,9 +15,12 @@ MouseArea {
   property bool trRadius: false;
   property bool blRadius: false;
   property bool brRadius: false;
+  property bool autoHeight: false;
   property int padding: Globals.vars.paddingButton;
 
   hoverEnabled: true;
+
+  height: autoHeight ? label.height + padding : undefined;
 
   Rectangle {
     id: background;
@@ -40,6 +43,7 @@ MouseArea {
     Anims.ColourTransition on color {}
 
     Text {
+      id: label
       visible: !root.icon;
       anchors.centerIn: parent;
       text: root.label;
