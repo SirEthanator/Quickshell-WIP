@@ -4,6 +4,7 @@ import "root:/";
 import "root:/animations" as Anims;
 import "root:/utils" as Utils;
 import Quickshell;
+import Quickshell.Services.Notifications;
 import Quickshell.Io;
 import Quickshell.Wayland;
 import QtQuick;
@@ -12,6 +13,7 @@ PanelWindow {
   id: root;
 
   WlrLayershell.namespace: "notifications";
+  WlrLayershell.layer: WlrLayer.Overlay;
   exclusionMode: ExclusionMode.Normal;
   color: "transparent";
   width: Globals.conf.notifications.width;
@@ -41,18 +43,18 @@ PanelWindow {
     anchors.fill: parent;
     spacing: Globals.vars.notifPopupSpacing;
 
-    Process {
-      id: notifSound;
-      command: ["sh", "-c", "play /usr/share/sounds/ocean/stereo/message-new-instant.oga"];
-    }
-
     model: ListModel {
       id: data
       Component.onCompleted: () => {
         NotifServer.incoming.connect((n) => {
           if (!n.lastGeneration) {
             data.insert(0, {n: n});
-            if (Globals.conf.notifications.sounds) notifSound.running = true
+            if (Globals.conf.notifications.sounds) {
+              const sound = n.urgency === NotificationUrgency.Critical
+              ? Globals.conf.notifications.criticalSound
+              : Globals.conf.notifications.normalSound;
+              Utils.Command.run(["sh", "-c", `play ${sound}`]);
+            }
           }
         });
 

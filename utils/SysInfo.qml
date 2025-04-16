@@ -91,5 +91,10 @@ Singleton {
       onRead: data => root.networkStrength = parseInt(data);
     }
   }
+
+  Component.onCompleted: {
+    const test = Command.run(["echo", "Hola"], true)
+    console.log(test)
+  }
 }
 

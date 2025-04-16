@@ -12,11 +12,15 @@ MouseArea {
   id: root
 
   required property Notification n;
-  readonly property real timeout: n.expireTimeout > 0 ? n.expireTimeout : Globals.conf.notifications.defaultTimeout;
+  readonly property real timeout: n.expireTimeout > 0
+    ? n.expireTimeout
+    : n.urgency === NotificationUrgency.Critical
+      ? Globals.conf.notifications.defaultCriticalTimeout
+      : Globals.conf.notifications.defaultTimeout;
   property bool popup: false;
   anchors.left: parent.left;
   anchors.right: parent.right;
-  height: bg.height
+  height: bg.height;
   hoverEnabled: true;
   property var timer;
 
@@ -82,7 +86,6 @@ MouseArea {
 
           RowLayout {
             spacing: Globals.vars.notifInnerSpacing;
-            Layout.fillWidth: true;
 
             IconImage {
               visible: !!root.n.appIcon;
@@ -99,29 +102,11 @@ MouseArea {
                 pixelSize: Globals.vars.mainFontSize;
                 italic: true;
               }
+              elide: Text.ElideRight
+              maximumLineCount: 1;
+              Layout.fillWidth: true;
             }
 
-            Item { Layout.fillWidth: true }
-
-            Button {
-              implicitHeight: appName.height;
-              implicitWidth: implicitHeight;
-
-              label: "close-symbolic";
-              icon: true;
-              opacity: root.containsMouse ? 1 : 0;
-              Anims.NumberTransition on opacity {}
-
-              bg: Globals.colours.red;
-              bgHover: Globals.colours.redHover;
-              bgPress: Globals.colours.redHover;
-              labelColour: Globals.colours.bg;
-
-              tlRadius: true; trRadius: true; blRadius: true; brRadius: true;
-              padding: 0;
-
-              onClicked: () => root.n.dismiss();
-            }
           }
 
           Text {
@@ -131,6 +116,10 @@ MouseArea {
               family: Globals.vars.fontFamily;
               pixelSize: Globals.vars.smallHeadingFontSize;
             }
+            wrapMode: Text.WordWrap;
+            maximumLineCount: 2;
+            elide: Text.ElideRight;
+            Layout.fillWidth: true;
           }
 
           Text {
@@ -140,7 +129,40 @@ MouseArea {
               family: Globals.vars.fontFamily;
               pixelSize: Globals.vars.mainFontSize;
             }
+            wrapMode: Text.WordWrap;
+            maximumLineCount: 3;
+            elide: Text.ElideRight;
+            Layout.fillWidth: true;
           }
+
+          RowLayout {
+            id: actions;
+            visible: root.popup && root.n.actions.length > 0;
+            Layout.fillWidth: true;
+            spacing: Globals.vars.spacingButtonGroup;
+
+            Repeater {
+              model: root.n?.actions;
+
+              delegate: Button {
+                required property NotificationAction modelData;
+                required property int index;
+
+                Layout.fillWidth: true;
+                autoHeight: true;
+
+                label: modelData.text;
+                onClicked: modelData.invoke();
+
+                tlRadius: index === 0;
+                blRadius: index === 0;
+                trRadius: index === root.n.actions.length - 1;
+                brRadius: index === root.n.actions.length - 1;
+                bg: Globals.colours.bgLight;
+              }
+            }
+          }
+
         }
 
         Item {}  // Padding
@@ -153,7 +175,7 @@ MouseArea {
         Layout.fillWidth: true;
         implicitHeight: 5;
         bg: "transparent";
-        fg: Globals.colours.accent;
+        fg: n.urgency === NotificationUrgency.Critical ? Globals.colours.red : Globals.colours.accent;
         radius: Globals.vars.br;
         smoothing: false;
       }
@@ -168,6 +190,34 @@ MouseArea {
         }
       }
     }
+
+    // Close button - displays on top of everything
+    Button {
+      anchors {
+        right: parent.right;
+        top: parent.top;
+        rightMargin: Globals.vars.paddingNotif;
+        topMargin: Globals.vars.paddingNotif;
+      }
+      implicitHeight: appName.height;
+      implicitWidth: implicitHeight;
+
+      label: "close-symbolic";
+      icon: true;
+      opacity: root.containsMouse ? 1 : 0;
+      Anims.NumberTransition on opacity {}
+
+      bg: Globals.colours.red;
+      bgHover: Globals.colours.redHover;
+      bgPress: Globals.colours.redHover;
+      labelColour: Globals.colours.bg;
+
+      tlRadius: true; trRadius: true; blRadius: true; brRadius: true;
+      padding: 0;
+
+      onClicked: root.n.dismiss();
+    }
+
   }
 }
 

@@ -90,7 +90,8 @@ Singleton {
     property int marginCardSmall: 6;
     property int marginCard: 10;
 
-    property int paddingButton: 8;
+    property int paddingButton: 12;
+    property int paddingButtonIcon: 8;
     property int spacingButtonGroup: 3;
 
     property int animLen: 350;

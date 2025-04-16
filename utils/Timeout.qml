@@ -7,13 +7,10 @@ Singleton {
   id: root;
 
   function setTimeout(callback, delay: int) {
-    function Timer() {
-      return Qt.createQmlObject("import QtQuick 2.0; Timer {}", root);
-    }
 
     if (typeof callback !== "function") return
 
-    const timer = new Timer();
+    const timer = Qt.createQmlObject("import QtQuick; Timer {}", root);
     timer.interval = delay;
     timer.repeat = false;
     timer.triggered.connect(() => {
