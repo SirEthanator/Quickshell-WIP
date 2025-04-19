@@ -60,14 +60,6 @@ Singleton {
     }
   }
 
-  Process {
-    command: ["sh", "-c", "nmcli -t -f NAME c show --active | head -1"]
-    running: true;
-    stdout: SplitParser {
-      onRead: data => root.network = data
-    }
-  }
-
   RepeatingProcess {
     command: ["sh", "-c", "top -b -n 1 | grep 'Cpu(s)' | awk '{print $2}'"];
     interval: 1000;
@@ -83,6 +75,15 @@ Singleton {
       onRead: data => root.memUsage = parseFloat(data).toFixed(0);
     }
   }
+
+  RepeatingProcess {
+    command: ["sh", "-c", "nmcli -t -f NAME c show --active | head -1"]
+    interval: 10000;
+    parseOut: SplitParser {
+      onRead: data => root.network = data
+    }
+  }
+
 
   RepeatingProcess {
     command: ["sh", "-c", "nmcli -f IN-USE,SIGNAL,SSID device wifi | awk '/^\*/{if (NR!=1) {print $2}}'"];
