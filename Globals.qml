@@ -124,6 +124,7 @@ Singleton {
     property color bgLight: "#2E383C";
     property color bgHover: "#414B50";
     property color bgAccent: "#3C4841";
+    property color bgRed: "#4C3743";
     property color outline: bgAccent;
     property color grey: "#7A8478";
     property color wsInactive: bgHover;
@@ -153,6 +154,7 @@ Singleton {
     property color bgLight: "#313244";
     property color bgHover: "#45475A";
     property color bgAccent: "#5A5F7F";
+    property color bgRed: "#7A4654";
     property color outline: bgAccent;
     property color grey: "#585B70";
     property color wsInactive: bgHover;
@@ -161,13 +163,13 @@ Singleton {
     property color shadow: "#11111B";
 
     property color workspaces: accent;
-    property color activeWindow: "#89b4fa";
+    property color activeWindow: "#89B4FA";
     property color dateAndTime: "#F9E2AF";
     property color volume: "#FAB387";
 
     property color battery: "#A6E3A1";
     property color batteryCharging: "#A6E3A1";
-    property color batteryMed: "#f9e2af";
+    property color batteryMed: "#F9E2AF";
     property color batteryLow: red;
   }
 
@@ -182,6 +184,7 @@ Singleton {
     property color bgLight: "#26233A";
     property color bgHover: "#403D52";
     property color bgAccent: "#4E686C";
+    property color bgRed: "#763849";
     property color outline: bgAccent;
     property color grey: "#6E6A86";
     property color wsInactive: bgHover;

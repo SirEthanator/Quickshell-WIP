@@ -1,8 +1,9 @@
 import "root:/";
 import "root:/animations" as Anims;
+import Quickshell.Widgets;
 import QtQuick;
 
-Rectangle { // background
+ClippingRectangle { // background
   id: root
 
   property real value:   0
@@ -12,8 +13,8 @@ Rectangle { // background
 
   property string icon: "";  // Only supported if bar is vertical rn
   property bool vertical: false;
-
   property bool smoothing: true;
+  property bool roundedFg: true;
 
   radius: 0.5 * height
   color: bg;
@@ -25,7 +26,7 @@ Rectangle { // background
     width: !root.vertical ? length : parent.width;
     height: icon.visible ? (root.height - icon.size) * root.value + icon.size : root.vertical ? length : parent.height;
     color: root.fg;
-    radius: parent.radius;
+    radius: root.roundedFg ? root.radius : 0;
 
     Anims.NumberTransition on width { enabled: root.smoothing }
     Anims.NumberTransition on height { enabled: root.smoothing }

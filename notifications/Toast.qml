@@ -174,10 +174,14 @@ MouseArea {
         value: 1;
         Layout.fillWidth: true;
         implicitHeight: 5;
-        bg: "transparent";
-        fg: n.urgency === NotificationUrgency.Critical ? Globals.colours.red : Globals.colours.accent;
-        radius: Globals.vars.br;
+        bg: root.n.urgency === NotificationUrgency.Critical ? Globals.colours.bgRed : Globals.colours.bgAccent;
+        fg: root.n.urgency === NotificationUrgency.Critical ? Globals.colours.red : Globals.colours.accent;
         smoothing: false;
+
+        radius: Globals.vars.br;
+        topRightRadius: 0;
+        topLeftRadius: 0;
+        roundedFg: false;
       }
 
       FrameAnimation {
