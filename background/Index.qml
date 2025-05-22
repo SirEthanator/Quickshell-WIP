@@ -16,11 +16,8 @@ PanelWindow {
     right: true;
   }
 
-  Loader {
-    active: Globals.conf.background.autohideWidgets || Globals.conf.background.autohideBar || Globals.conf.background.autohideCursor;
-    asynchronous: true;
-    sourceComponent: children[0];
-    anchors.fill: parent;
+  Component {
+    id: mouseAreaComponent;
 
     MouseArea {
       id: mouseArea;
@@ -61,6 +58,13 @@ PanelWindow {
         }
       }
     }
+  }
+
+  Loader {
+    active: Globals.conf.background.autohideWidgets || Globals.conf.background.autohideBar || Globals.conf.background.autohideCursor;
+    asynchronous: true;
+    sourceComponent: mouseAreaComponent;
+    anchors.fill: parent;
   }
 
   Wallpaper {}
