@@ -19,7 +19,7 @@ PanelWindow {
   // This is to keep the modules' height the same since the padding is removed from the bar's background.
   // Then we add the gap. If it's docked we don't need a gap, so we multiply by 0, but if it's not we need the top gap.
   // If the bar is autohiding, we also need the bottom gap for the hover area. It will not reserve extra space as the exclusivity will be set to ignore
-  height: (Globals.conf.bar.floatingModules ? Globals.vars.barHeight - Globals.vars.paddingBar*2 : Globals.vars.barHeight)
+  implicitHeight: (Globals.conf.bar.floatingModules ? Globals.vars.barHeight - Globals.vars.paddingBar*2 : Globals.vars.barHeight)
     + Globals.vars.gap * (Globals.conf.bar.docked && Globals.conf.bar.autohide ? 1 : Globals.conf.bar.docked ? 0 : Globals.conf.bar.autohide ? 2 : 1);
 
   // If the bar is autohiding and the always-on-screen part is hovered, the top margin will be 0. The top gap is handled by height and the Rectangle's margins.
@@ -30,6 +30,7 @@ PanelWindow {
     : 0);
 
   exclusionMode: Globals.conf.bar.autohide ? ExclusionMode.Ignore : ExclusionMode.Auto;
+  exclusiveZone: 0;  // Fixes exclusive zone being way too big
 
   Behavior on margins.top {
     NumberAnimation {

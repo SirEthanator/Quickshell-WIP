@@ -50,7 +50,7 @@ LazyLoader {
       right: true;
     }
 
-    width: progress.width + Globals.vars.gapLarge * 2;
+    implicitWidth: progress.width + Globals.vars.gapLarge * 2;
 
     Anims.SlideFade {
       running: true;

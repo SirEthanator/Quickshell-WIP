@@ -41,7 +41,7 @@ LazyLoader {
       left: true;
     }
 
-    width: Globals.conf.menu.width;
+    implicitWidth: Globals.conf.menu.width;
     exclusionMode: ExclusionMode.Normal;
     WlrLayershell.layer: WlrLayer.Overlay;
     WlrLayershell.keyboardFocus: loader.open ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None;
