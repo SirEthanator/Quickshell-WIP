@@ -4,7 +4,7 @@ import Quickshell;
 import QtQuick;
 
 BarModule {
-  icon: "calendar-symbolic";
+  icon: "calendar-month-symbolic";
   iconbgColour: Globals.colours.dateAndTime;
 
   Text {
