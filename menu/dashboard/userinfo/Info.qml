@@ -51,17 +51,15 @@ RowLayout {
 
   Item { Layout.fillWidth: true; }
 
-  MouseArea {
-    id: powerIconMouse;
-    implicitHeight: powerIcon.height;
-    implicitWidth: powerIcon.width;
-    onClicked: event => root.clicked(event);
+  Button {
+    label: "system-shutdown-symbolic";
+    icon: true;
+    implicitHeight: Globals.vars.largeIconSize + padding;
+    implicitWidth: implicitHeight;
+    labelColour: Globals.colours.red;
+    tlRadius: true; trRadius: true; blRadius: true; brRadius: true;
+    bgPress: Globals.colours.red;
 
-    Icon {
-      id: powerIcon;
-      icon: "system-shutdown-symbolic"
-      colour: Globals.colours.red;
-      size: 32;
-    }
+    onClicked: event => root.clicked(event);
   }
 }

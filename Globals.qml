@@ -104,6 +104,8 @@ Singleton {
     property int notifPopupSpacing: 10;
     property int paddingNotif: paddingCard;
     property int notifInnerSpacing: 10;
+
+    property int largeIconSize: 40;
   }
 
   /*    ___________ ________  ___________
