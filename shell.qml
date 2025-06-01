@@ -19,6 +19,9 @@ ShellRoot {
     function close(): void { Globals.states.screensaverActive = false }
   }
 
+  Notifications.Popups {}
+  OSD.Index {}
+
 	Variants {
 		model: Quickshell.screens;
 
@@ -27,10 +30,8 @@ ShellRoot {
       required property var modelData;
 
       Bar.Index { screen: scope.modelData }
-      Notifications.Popups { screen: scope.modelData }
       Background.Index { screen: scope.modelData }
       Screensaver { screen: scope.modelData }
-      OSD.Index { screen: scope.modelData }
     }
 
 	}
