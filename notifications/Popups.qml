@@ -16,7 +16,7 @@ PanelWindow {
   WlrLayershell.layer: WlrLayer.Overlay;
   exclusionMode: ExclusionMode.Normal;
   color: "transparent";
-  width: Globals.conf.notifications.width;
+  implicitWidth: Globals.conf.notifications.width;
 
   mask: Region {  // Make clicks pass through unless on notifications
     intersection: Intersection.Combine
