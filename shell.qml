@@ -7,15 +7,11 @@ import "notifications" as Notifications;
 import "background" as Background;
 import "osd" as OSD;
 import Quickshell.Io;
+import QtQuick;
 
 ShellRoot {
   id: shellroot;
-
-  // Usage: quickshell ipc call <target> <function>
-  IpcHandler {
-    target: "menu";
-    function toggle(): void { Globals.states.menuOpen = !Globals.states.menuOpen }
-  }
+  Component.onCompleted: Menu.Controller.init()
 
   IpcHandler {
     target: "screensaver";
@@ -31,7 +27,6 @@ ShellRoot {
       required property var modelData;
 
       Bar.Index { screen: scope.modelData }
-      Menu.Index { screen: scope.modelData }
       Notifications.Popups { screen: scope.modelData }
       Background.Index { screen: scope.modelData }
       Screensaver { screen: scope.modelData }
