@@ -9,7 +9,6 @@ import QtQuick.Layouts;
 
 LazyLoader {
   id: loader;
-  required property var screen;
   activeAsync: false;
   property bool open: false;
 
@@ -39,7 +38,6 @@ LazyLoader {
   PanelWindow {
     id: root;
     color: "transparent";
-    screen: loader.screen;
 
     exclusionMode: ExclusionMode.Ignore;
     WlrLayershell.layer: WlrLayer.Overlay;
