@@ -7,7 +7,7 @@ import QtQuick;
 PanelWindow {
   WlrLayershell.layer: WlrLayer.Background;
   exclusionMode: ExclusionMode.Ignore;
-  color: Globals.conf.background.bgColour;
+  color: Globals.conf.desktop.bgColour;
 
   anchors {
     top: true;
@@ -24,14 +24,14 @@ PanelWindow {
       anchors.fill: parent;
       hoverEnabled: true;
 
-      // Bar will only be hidden if the background has focus, but widgets will be hidden regardless of whether the background is focused or not
+      // Bar will only be hidden if the desktop has focus, but widgets will be hidden regardless of whether the desktop is focused or not
 
       function mouseMove() {
-        if (Globals.conf.background.autohideCursor) {
+        if (Globals.conf.desktop.autohideCursor) {
           cursorHideTimer.restart();
           mouseArea.cursorShape = Qt.ArrowCursor;
         }
-        if (Globals.conf.background.autohideWidgets || Globals.conf.background.autohideBar) {
+        if (Globals.conf.desktop.autohideWidgets || Globals.conf.desktop.autohideBar) {
           widgetAndBarHideTimer.restart();
           widgets.show();
           Globals.states.barHidden = false;
@@ -46,22 +46,22 @@ PanelWindow {
       Timer {
         id: cursorHideTimer;
         interval: 5000;
-        onTriggered: if (Globals.conf.background.autohideCursor) mouseArea.cursorShape = Qt.BlankCursor;
+        onTriggered: if (Globals.conf.desktop.autohideCursor) mouseArea.cursorShape = Qt.BlankCursor;
       }
 
       Timer {
         id: widgetAndBarHideTimer;
         interval: 20_000;
         onTriggered: {
-          if (Globals.conf.background.autohideWidgets) widgets.hide();
-          if (Globals.conf.background.autohideBar && mouseArea.containsMouse) Globals.states.barHidden = true;
+          if (Globals.conf.desktop.autohideWidgets) widgets.hide();
+          if (Globals.conf.desktop.autohideBar && mouseArea.containsMouse) Globals.states.barHidden = true;
         }
       }
     }
   }
 
   Loader {
-    active: Globals.conf.background.autohideWidgets || Globals.conf.background.autohideBar || Globals.conf.background.autohideCursor;
+    active: Globals.conf.desktop.autohideWidgets || Globals.conf.desktop.autohideBar || Globals.conf.desktop.autohideCursor;
     asynchronous: true;
     sourceComponent: mouseAreaComponent;
     anchors.fill: parent;
@@ -74,11 +74,11 @@ PanelWindow {
   Rectangle {
     id: fadeOverlay;
     anchors.fill: parent;
-    color: Globals.conf.background.bgColour;
+    color: Globals.conf.desktop.bgColour;
     SequentialAnimation on opacity {
       NumberAnimation {
         from: 1; to: 0;
-        duration: Globals.conf.background.fadeSpeed;
+        duration: Globals.conf.desktop.fadeSpeed;
         easing.type: Easing.OutCubic;
       }
       PropertyAction { target: fadeOverlay; property: "visible"; value: false }

@@ -6,11 +6,11 @@ Item {
   id: root;
   anchors.fill: parent;
   // The default wallpaper must be set here instead of defaultConf.json because it uses an environment variable
-  readonly property url wallSource: Globals.conf.background.wallpaper || Quickshell.env("HOME") + "/Hyprland-Dots/Wallpapers/Everforest/Hard.png";
+  readonly property url wallSource: Globals.conf.desktop.wallpaper || Quickshell.env("HOME") + "/Hyprland-Dots/Wallpapers/Everforest/Hard.png";
 
   Image {
     id: img;
-    visible: !Globals.conf.background.hideWallpaper;
+    visible: !Globals.conf.desktop.hideWallpaper;
     anchors.fill: parent;
     asynchronous: true;
     fillMode: Image.PreserveAspectCrop;
@@ -20,7 +20,7 @@ Item {
   ShaderEffect {
     id: shader;
     anchors.fill: parent;
-    visible: Globals.conf.background.shader !== "";
+    visible: Globals.conf.desktop.shader !== "";
     // These are passed into the shader:
     property vector2d resolution: Qt.vector2d(width, height);
     property real time: 0;
@@ -32,6 +32,6 @@ Item {
     }
 
     vertexShader: "shaders/default.vert.qsb";
-    fragmentShader: visible ? "shaders/"+Globals.conf.background.shader+".frag.qsb" : undefined;
+    fragmentShader: visible ? "shaders/"+Globals.conf.desktop.shader+".frag.qsb" : undefined;
   }
 }
