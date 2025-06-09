@@ -4,7 +4,7 @@ import Quickshell;
 import "bar" as Bar;
 import "menu" as Menu;
 import "notifications" as Notifications;
-import "background" as Background;
+import "desktop" as Desktop;
 import "osd" as OSD;
 import Quickshell.Io;
 import QtQuick;
@@ -30,7 +30,7 @@ ShellRoot {
       required property var modelData;
 
       Bar.Index { screen: scope.modelData }
-      Background.Index { screen: scope.modelData }
+      Desktop.Index { screen: scope.modelData }
       Screensaver { screen: scope.modelData }
     }
 
