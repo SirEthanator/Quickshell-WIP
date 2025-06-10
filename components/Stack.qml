@@ -7,6 +7,7 @@ StackView {
   readonly property var items: children;
   property int currentIndex: 0;
   property bool vertical: false;
+  property bool loopOutOfRange: false;
   initialItem: items[currentIndex];
 
   replaceEnter: Transition {
@@ -38,13 +39,12 @@ StackView {
   }
 
   onCurrentIndexChanged: {
-    const loop = currentIndex >= items.length;
-    const item = loop ? items[0] : items[currentIndex];
+    if (root.loopOutOfRange && currentIndex >= items.length) root.currentIndex = 0;
+    const item = items[currentIndex];
     if (item !== undefined) {
       root.replace(item);
       items[currentIndex].visible = true;
     }
-    if (loop) root.currentIndex = 0;
   }
 
   Component.onCompleted: {

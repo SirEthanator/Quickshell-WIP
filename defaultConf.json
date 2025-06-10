@@ -20,6 +20,7 @@
 
   "desktop": {
     "wallpaper": "",
+    "videoWallpaper": false,
     "fadeSpeed": 2000,
     "shader": "",
     "hideWallpaper": false,

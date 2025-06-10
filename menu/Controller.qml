@@ -157,6 +157,7 @@ Singleton {
               id: stack;
               Layout.fillHeight: true;
               Layout.fillWidth: true;
+              loopOutOfRange: true;
 
               Dashboard.Index {}
               Launcher.Index { id: launcher; searchText: appSearch.text }
