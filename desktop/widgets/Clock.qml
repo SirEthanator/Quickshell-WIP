@@ -10,10 +10,7 @@ import QtQuick.Layouts;
 RowLayout {
   id: root;
   visible: Globals.conf.desktop.clockWidget;
-  anchors.horizontalCenter: parent.horizontalCenter;
-  anchors.verticalCenter: parent.verticalCenter;
   // Baseline is on the centre of the widget
-  anchors.verticalCenterOffset: Globals.conf.desktop.centreClockWidget ? 0 : -(parent.height/2 - height/2) + Globals.vars.barHeight + Globals.vars.clockWidgetTopMargin;
   spacing: Globals.vars.clockWidgetSpacing;
 
   Repeater {
