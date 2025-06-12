@@ -162,6 +162,7 @@ MouseArea {
               }
 
               Button {
+                visible: summary.multiline || body.multiline;
                 label: root.expanded ? "arrow-up-symbolic" : "arrow-down-symbolic";
                 icon: true;
 
@@ -178,6 +179,7 @@ MouseArea {
 
             Text {
               id: summary;
+              readonly property bool multiline: implicitWidth > width;
               text: root.n.summary
               color: Globals.colours.fg;
               font {
@@ -194,6 +196,7 @@ MouseArea {
 
             Text {
               id: body;
+              readonly property bool multiline: implicitWidth > width;
               text: root.n.body
               color: Globals.colours.fg;
               font {
