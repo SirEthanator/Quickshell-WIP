@@ -15,32 +15,18 @@ PanelWindow {
     right: true;
   }
 
-  readonly property var barModules: ({
-    menu: {
-      url: "MenuBtn.qml", props: {}
-    },
+  readonly property var modules: ({
     workspaces: {
       url: "Workspaces.qml",
-      props: {screen: root.screen}
+      props: { screen: root.screen }
     },
-    activeWindow: {
-      url: "ActiveWindow.qml", props: {}
-    },
-    dateAndTime: {
-      url: "DateAndTime.qml", props: {}
-    },
-    network: {
-      url: "Network.qml", props: {}
-    },
-    battery: {
-      url: "Battery.qml", props: {}
-    },
-    media: {
-      url: "Media.qml", props: {}
-    },
-    volume: {
-      url: "Volume.qml", props: {}
-    }
+    menu:         { url: "MenuBtn.qml"      },
+    activeWindow: { url: "ActiveWindow.qml" },
+    dateAndTime:  { url: "DateAndTime.qml"  },
+    network:      { url: "Network.qml"      },
+    battery:      { url: "Battery.qml"      },
+    media:        { url: "Media.qml"        },
+    volume:       { url: "Volume.qml"       }
   });
 
   // If modules are floating this will remove the padding from the height.
@@ -110,19 +96,19 @@ PanelWindow {
         }
 
         BarSection {
-          barModules: root.barModules;
+          allModules: root.modules;
           modules: Globals.conf.bar.left;
           anchors.left: parent.left;
         }
 
         BarSection {
-          barModules: root.barModules;
+          allModules: root.modules;
           modules: Globals.conf.bar.centre;
           anchors.horizontalCenter: parent.horizontalCenter;
         }
 
         BarSection {
-          barModules: root.barModules;
+          allModules: root.modules;
           modules: Globals.conf.bar.right;
           anchors.right: parent.right;
         }
