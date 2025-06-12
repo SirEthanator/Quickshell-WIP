@@ -30,23 +30,23 @@ MouseArea {
 
   Component.onCompleted: {
     if (!popup) return
-    root.timer = Utils.Timeout.setTimeout(() => {
+    timer = Utils.Timeout.setTimeout(() => {
       NotifServer.dismissed(n.id)
-    }, root.timeout)
+    }, timeout)
   }
 
   onContainsMouseChanged: {
     if (!popup) return
     if (containsMouse) {
-      root.timer.restart();
-      root.timer.stop();
+      timer.restart();
+      timer.stop();
 
       progressController.stop();
       progressBar.smoothing = true;
       progressBar.value = 1;
       progressBar.smoothing = false;
     } else {
-      root.timer.start();
+      timer.start();
       progressController.start();
     }
   }
@@ -56,22 +56,20 @@ MouseArea {
   drag.minimumX: 0;  // Only allow dragging right
 
   onPressed: event => {
-    if (event.button === Qt.MiddleButton) root.n.dismiss();
+    if (event.button === Qt.MiddleButton) n.dismiss();
   }
   onReleased: event => {
     if (event.button !== Qt.LeftButton) return;
-    if (Math.abs(root.x) < root.width * 0.3) {
-      root.x = 0;
+    if (Math.abs(x) < width * 0.3) {
+      x = 0;
     } else {
-      root.x = root.width;
-      Utils.Timeout.setTimeout(() => NotifServer.dismissed(root.n.id), Globals.vars.transitionLen);
+      x = width;
+      Utils.Timeout.setTimeout(() => NotifServer.dismissed(n.id), Globals.vars.transitionLen);
     }
   }
   onClicked: event => {
-    if (event.button !== Qt.LeftButton) return;
-
-    const actions = root.n?.actions;
-    if (actions?.length >= 1) actions[0].invoke()
+    if (event.button !== Qt.LeftButton || !popup) return;
+    if (n?.actions?.length >= 1) n?.actions[0].invoke()
   }
 
   Anims.NumberTransition on x {}
