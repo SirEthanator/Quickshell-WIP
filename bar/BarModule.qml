@@ -23,6 +23,9 @@ Rectangle {
   property alias containsMouse: mouseArea.containsMouse;
   property alias isPressed: mouseArea.pressed;
 
+  // Used by the loader which the module is wrapped in to determine whether to show or not
+  property bool show: true;
+
   color: root.background;
   border {
     color: root.outline ? Globals.colours.outline : "transparent";
