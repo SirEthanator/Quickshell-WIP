@@ -43,6 +43,8 @@ PanelWindow {
     anchors.fill: parent;
     spacing: Globals.vars.notifPopupSpacing;
 
+    interactive: false;
+
     model: ListModel {
       id: data
       Component.onCompleted: () => {

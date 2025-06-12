@@ -1,7 +1,5 @@
 pragma Singleton
 
-import "root:/";
-import "root:/utils" as Utils;
 import Quickshell;
 import Quickshell.Services.Notifications;
 import QtQuick;
@@ -9,7 +7,7 @@ import QtQuick;
 Singleton {
   id: root
 
-  property alias notifList: server.trackedNotifications;
+  readonly property alias notifList: server.trackedNotifications;
 
   signal incoming(n: Notification)
   signal dismissed(id: int)
