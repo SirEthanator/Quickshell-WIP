@@ -5,13 +5,14 @@
     "left": [
       "menu",
       "workspaces",
-      "active-window"
+      "activeWindow"
     ],
     "centre": [
-      "date-and-time"
+      "dateAndTime"
     ],
     "right": [
       "network",
+      "battery",
       "media",
       "volume"
     ],
