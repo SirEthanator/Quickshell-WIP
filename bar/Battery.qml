@@ -10,7 +10,7 @@ BarModule {
   readonly property int percentage: Math.round(battery.percentage*100)
   readonly property bool charging: battery.timeToEmpty === 0;
 
-  visible: battery.isLaptopBattery;
+  show: battery.isLaptopBattery;
 
   icon: {
     const nearestTen = Math.ceil(percentage / 10) * 10;

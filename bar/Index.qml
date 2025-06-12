@@ -15,6 +15,34 @@ PanelWindow {
     right: true;
   }
 
+  readonly property var barModules: ({
+    menu: {
+      url: "MenuBtn.qml", props: {}
+    },
+    workspaces: {
+      url: "Workspaces.qml",
+      props: {screen: root.screen}
+    },
+    activeWindow: {
+      url: "ActiveWindow.qml", props: {}
+    },
+    dateAndTime: {
+      url: "DateAndTime.qml", props: {}
+    },
+    network: {
+      url: "Network.qml", props: {}
+    },
+    battery: {
+      url: "Battery.qml", props: {}
+    },
+    media: {
+      url: "Media.qml", props: {}
+    },
+    volume: {
+      url: "Volume.qml", props: {}
+    }
+  });
+
   // If modules are floating this will remove the padding from the height.
   // This is to keep the modules' height the same since the padding is removed from the bar's background.
   // Then we add the gap. If it's docked we don't need a gap, so we multiply by 0, but if it's not we need the top gap.
@@ -66,8 +94,6 @@ PanelWindow {
 
       antialiasing: true;
 
-      // =========================
-
       Item {
         id: content;
 
@@ -83,51 +109,24 @@ PanelWindow {
           fill: parent
         }
 
-        RowLayout {
-          anchors {
-            bottom: parent.bottom
-            top: parent.top
-            left: parent.left
-          }
-          spacing: Globals.vars.marginModule;
-
-          MenuBtn {}
-          Workspaces {screen: root.screen}
-          ActiveWindow {}
+        BarSection {
+          barModules: root.barModules;
+          modules: Globals.conf.bar.left;
+          anchors.left: parent.left;
         }
 
-        // ==========
-
-        RowLayout {
-          anchors {
-            bottom: parent.bottom
-            top: parent.top
-            horizontalCenter: parent.horizontalCenter
-          }
-          spacing: Globals.vars.marginModule;
-
-          DateAndTime {}
+        BarSection {
+          barModules: root.barModules;
+          modules: Globals.conf.bar.centre;
+          anchors.horizontalCenter: parent.horizontalCenter;
         }
 
-        // ==========
-
-        RowLayout {
-          anchors {
-            bottom: parent.bottom
-            top: parent.top
-            right: parent.right
-          }
-          spacing: Globals.vars.marginModule;
-
-          //SysTray {window: root}
-          Network {}
-          Battery {}
-          Media {}
-          Volume {}
+        BarSection {
+          barModules: root.barModules;
+          modules: Globals.conf.bar.right;
+          anchors.right: parent.right;
         }
       }
-
-      // =======================
     }
   }
 

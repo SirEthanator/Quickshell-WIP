@@ -2,6 +2,19 @@
   "colourScheme": "everforest",
 
   "bar": {
+    "left": [
+      "menu",
+      "workspaces",
+      "active-window"
+    ],
+    "centre": [
+      "date-and-time"
+    ],
+    "right": [
+      "network",
+      "media",
+      "volume"
+    ],
     "autohide": false,
     "docked": false,
     "floatingModules": false,

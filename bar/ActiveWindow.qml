@@ -9,7 +9,7 @@ BarModule {
   id: root;
 
   readonly property string title: Utils.HyprlandIPC.windowTitle;
-  visible: title.length > 0;
+  show: title.length > 0;
 
   Text {
     color: Globals.colours.fg;

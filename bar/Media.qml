@@ -9,7 +9,7 @@ BarModule {
   icon: activePlayer.isPlaying ? "music-note-16th" : "media-playback-paused-symbolic";
   readonly property list<MprisPlayer> players: Mpris.players.values;
   readonly property MprisPlayer activePlayer: players[0];
-  visible: !!activePlayer;
+  show: !!activePlayer;
 
   Text {
     color: Globals.colours.fg;
