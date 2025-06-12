@@ -73,35 +73,19 @@ PanelWindow {
       Anims.NumberAnim { property: "y"; duration: Globals.vars.animLen }
     }
     add: Transition {
-      ParallelAnimation {
-        Anims.NumberAnim {
-          property: "anchors.rightMargin";
-          from: -popups.width; to: 0;
-          duration: Globals.vars.animLen;
-          easing.type: Easing.OutExpo;
-        }
-        Anims.NumberAnim {
-          property: "anchors.leftMargin";
-          from: popups.width; to: 0;
-          duration: Globals.vars.animLen;
-          easing.type: Easing.OutExpo;
-        }
+      Anims.NumberAnim {
+        property: "x";
+        from: popups.width;
+        duration: Globals.vars.animLen;
+        easing.type: Easing.OutExpo;
       }
     }
     remove: Transition {
-      ParallelAnimation {
-        Anims.NumberAnim {
-          property: "anchors.rightMargin";
-          from: 0; to: -popups.width;
-          duration: Globals.vars.animLen;
-          easing.type: Easing.InExpo;
-        }
-        Anims.NumberAnim {
-          property: "anchors.leftMargin";
-          from: 0; to: popups.width;
-          duration: Globals.vars.animLen;
-          easing.type: Easing.InExpo;
-        }
+      Anims.NumberAnim {
+        property: "x";
+        to: popups.width;
+        duration: Globals.vars.animLen;
+        easing.type: Easing.InExpo;
       }
     }
 

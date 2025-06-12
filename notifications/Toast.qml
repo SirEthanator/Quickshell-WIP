@@ -18,10 +18,13 @@ MouseArea {
       ? Globals.conf.notifications.defaultCriticalTimeout
       : Globals.conf.notifications.defaultTimeout;
   property bool popup: false;
-  anchors.left: parent.left;
-  anchors.right: parent.right;
+  width: parent.width;
   height: bg.height;
+
   hoverEnabled: true;
+  acceptedButtons: Qt.LeftButton | Qt.MiddleButton;
+  preventStealing: true;
+
   property bool expanded: false;
   property var timer;
 
@@ -47,6 +50,31 @@ MouseArea {
       progressController.start();
     }
   }
+
+  drag.target: root;
+  drag.axis: Drag.XAxis;
+  drag.minimumX: 0;  // Only allow dragging right
+
+  onPressed: event => {
+    if (event.button === Qt.MiddleButton) root.n.dismiss();
+  }
+  onReleased: event => {
+    if (event.button !== Qt.LeftButton) return;
+    if (Math.abs(root.x) < root.width * 0.3) {
+      root.x = 0;
+    } else {
+      root.x = root.width;
+      Utils.Timeout.setTimeout(() => NotifServer.dismissed(root.n.id), Globals.vars.transitionLen);
+    }
+  }
+  onClicked: event => {
+    if (event.button !== Qt.LeftButton) return;
+
+    const actions = root.n?.actions;
+    if (actions?.length >= 1) actions[0].invoke()
+  }
+
+  Anims.NumberTransition on x {}
 
   Rectangle {
     id: bg;
