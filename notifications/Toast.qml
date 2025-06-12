@@ -87,7 +87,6 @@ MouseArea {
         implicitWidth: root.containsMouse ? Globals.vars.moduleIconSize + padding * 2 : 0;
         Anims.NumberTransition on implicitWidth {}
 
-        visible: root.containsMouse;
         tlRadius: true; blRadius: true;
         changeBrRadiusHover: false;
 
@@ -159,7 +158,7 @@ MouseArea {
                 family: Globals.vars.fontFamily;
                 pixelSize: Globals.vars.smallHeadingFontSize;
               }
-              wrapMode: Text.WordWrap;
+              wrapMode: Text.Wrap;
               maximumLineCount: root.expanded ? 5 : 1;
               elide: Text.ElideRight;
               Layout.fillWidth: true;
@@ -175,7 +174,7 @@ MouseArea {
                 family: Globals.vars.fontFamily;
                 pixelSize: Globals.vars.mainFontSize;
               }
-              wrapMode: Text.WordWrap;
+              wrapMode: Text.Wrap;
               maximumLineCount: root.expanded ? 8 : 1;
               elide: Text.ElideRight;
               Layout.fillWidth: true;
@@ -219,6 +218,7 @@ MouseArea {
 
         ProgressBar {
           id: progressBar
+          visible: root.popup;
           value: 1;
           Layout.fillWidth: true;
           implicitHeight: 5;
@@ -235,7 +235,7 @@ MouseArea {
 
         FrameAnimation {
           id: progressController
-          running: true;
+          running: root.popup;
           onTriggered: {
             if (progressBar.value <= 0) stop()
             else progressBar.value -= (progressBar.width / (root.timeout / 1000) * frameTime) / progressBar.width
