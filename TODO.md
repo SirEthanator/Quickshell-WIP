@@ -4,4 +4,3 @@
 - [ ] Notification centre
 - [ ] Use D-Bus for NetworkManager
 - [ ] Config menu
-- [ ] Collapse notifications with multiple lines and add a button to expand
