@@ -23,7 +23,7 @@
     "moduleOutlines": true,
     "backgroundOutline": true,
     "workspaceCount": 10,
-    "truncationLength": 90
+    "truncationLength": 60
   },
 
   "menu": {
@@ -39,11 +39,11 @@
     "shader": "",
     "hideWallpaper": false,
     "bgColour": "black",
-    "clockWidget": true,
+    "clockWidget": false,
     "centreClockWidget": false,
-    "autohideWidgets": true,
-    "autohideBar": true,
-    "autohideCursor": true
+    "autohideWidgets": false,
+    "autohideBar": false,
+    "autohideCursor": false
   },
 
   "notifications": {
@@ -52,6 +52,7 @@
     "defaultCriticalTimeout": 8000,
     "sounds": true,
     "normalSound": "/usr/share/sounds/ocean/stereo/message-new-instant.oga",
-    "criticalSound": "/usr/share/sounds/ocean/stereo/dialog-error-critical.oga"
+    "criticalSound": "/usr/share/sounds/ocean/stereo/dialog-error-critical.oga",
+    "dismissThreshold": 30
   }
 }
