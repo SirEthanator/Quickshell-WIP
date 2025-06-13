@@ -60,11 +60,13 @@ MouseArea {
   }
   onReleased: event => {
     if (event.button !== Qt.LeftButton) return;
-    if (Math.abs(x) < width * 0.3) {
+    if (Math.abs(x) < width * (Globals.conf.notifications.dismissThreshold / 100)) {
       x = 0;
     } else {
       x = width;
-      Utils.Timeout.setTimeout(() => NotifServer.dismissed(n.id), Globals.vars.transitionLen);
+      // Dismiss if popup, discard if not
+      const dimissAction = popup ? () => NotifServer.dismissed(n.id) : () => n.dismiss();
+      Utils.Timeout.setTimeout(dimissAction, Globals.vars.transitionLen);
     }
   }
   onClicked: event => {
