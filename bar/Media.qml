@@ -7,6 +7,7 @@ import Quickshell.Services.Mpris;
 BarModule {
   id: root;
   icon: activePlayer.isPlaying ? "music-note-16th" : "media-playback-paused-symbolic";
+  iconbgColour: Globals.colours.media;
   readonly property list<MprisPlayer> players: Mpris.players.values;
   readonly property MprisPlayer activePlayer: players[0];
   show: !!activePlayer;

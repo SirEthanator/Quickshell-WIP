@@ -11,6 +11,7 @@ BarModule {
     if (Utils.SysInfo.networkStrength > 25) { return "nm-signal-50"  }
     else { return "nm-signal-25" }
   }
+  iconbgColour: Globals.colours.network;
 
   show: Utils.SysInfo.networkStrength > 0;
 
