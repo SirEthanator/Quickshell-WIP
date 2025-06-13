@@ -25,6 +25,7 @@ Singleton {
   }
 
   function deepMerge(defaultOptions, userOptions) {
+    if (!userOptions) return defaultOptions;
     Object.entries(userOptions).forEach(([key, value]) => {
       if (value && typeof value === 'object') deepMerge(defaultOptions[key] = defaultOptions[key] || [], value)
       else defaultOptions[key] = value;
@@ -138,6 +139,8 @@ Singleton {
     property color activeWindow: "#7FBBB3";
     property color dateAndTime: "#DBBC7F";
     property color volume: "#E69875";
+    property color network: "#D699B6";
+    property color media: "#83C092";
 
     property color battery: "#A7C080";
     property color batteryCharging: "#A7C080";
@@ -168,6 +171,8 @@ Singleton {
     property color activeWindow: "#89B4FA";
     property color dateAndTime: "#F9E2AF";
     property color volume: "#FAB387";
+    property color network: "#CBA6F7";
+    property color media: "#94E2D5";
 
     property color battery: "#A6E3A1";
     property color batteryCharging: "#A6E3A1";
@@ -198,6 +203,8 @@ Singleton {
     property color activeWindow: "#31748F";
     property color dateAndTime: "#F6C177";
     property color volume: "#C4A7E7";
+    property color network: "#EBBCBA";
+    property color media: "#EB6F92";
 
     property color battery: "#31748F";
     property color batteryCharging: "#31748F";
