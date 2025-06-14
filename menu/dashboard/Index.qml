@@ -19,10 +19,6 @@ Item {
 
     SysTray {}
 
-    Rectangle {  //!!! TEMP - Notification area
-      color: "darkslateblue";
-      Layout.fillWidth: true;
-      Layout.fillHeight: true;
-    }
+    Item { Layout.fillHeight: true; } // TEMP - Notification area
   }
 }
