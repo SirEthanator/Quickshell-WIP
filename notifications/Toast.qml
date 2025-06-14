@@ -120,7 +120,8 @@ MouseArea {
 
         bg: Globals.colours.red;
         bgHover: Globals.colours.redHover;
-        bgPress: Globals.colours.redHover;  // TEMP
+        bgPress: Globals.colours.redPress;
+        invertTextOnPress: false;
         labelColour: Globals.colours.bg;
 
         onClicked: root.n.dismiss();
