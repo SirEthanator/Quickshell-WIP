@@ -9,7 +9,15 @@ Item {
   id: root;
   anchors.fill: parent;
   // The default wallpaper must be set here instead of defaultConf.json because it uses an environment variable
-  readonly property url wallSource: Globals.conf.desktop.wallpaper || Quickshell.env("HOME") + "/Hyprland-Dots/Wallpapers/Everforest/Hard.png";
+  readonly property string defaultWall: {
+    switch (Globals.conf.colourScheme) {
+      case "everforest": return "Everforest/Hard.png"
+      case "catMocha": return "Catppuccin/Crust.png"
+      case "rosePine": return "Rose-Pine/Base.png"
+    }
+  }
+  readonly property url wallSource: Globals.conf.desktop.wallpaper
+    || `${Quickshell.env("HOME")}/Hyprland-Dots/Wallpapers/${defaultWall}`;
   readonly property bool showWall: !Globals.conf.desktop.hideWallpaper;
 
   VideoOutput {
