@@ -5,7 +5,8 @@ import QtQuick.Layouts;
 
 RowLayout {
   id: root
-  required property var allModules;
+  required property var screen;
+  readonly property var allModules: Globals.vars.barModules;
   required property var modules;
 
   anchors {
@@ -19,20 +20,27 @@ RowLayout {
     delegate: Loader {
       id: loader
       required property string modelData;
-      readonly property string url: root.allModules[modelData].url;
-      readonly property var props: root.allModules[modelData].props;
+      readonly property string url: `${root.allModules[modelData].url}`;
+      readonly property list<string> passedProps: root.allModules[modelData].props;
+      readonly property var props: {
+        let result = {};
+        if (passedProps.indexOf("screen") !== -1) {
+          result.screen = root.screen
+        }
+        return result
+      };
 
       Layout.fillHeight: true;
       visible: item?.show ?? false;
 
       Component.onCompleted: {
-        setSource(url, props ?? {});
+        setSource(url, props);
       }
 
       onStatusChanged: {
         if (status === Loader.Error) {
           active = false;
-          throw new Error(`Failed to load bar module from: "${url}"`)
+          console.error(`Failed to load bar module from: "${url}"`)
         }
       }
     }

@@ -37,15 +37,7 @@ Singleton {
   readonly property var userConf: JSON.parse(confFile.text());
   readonly property var conf: deepMerge(defaultConf, userConf);
 
-  // -- Global --
   readonly property QtObject colours: schemes[conf.colourScheme];
-
-  Component.onCompleted: {
-    if (colours === null) {
-      console.log(`Invalid colour scheme: ${conf.colourScheme}`);
-      Qt.callLater(Qt.quit);
-    }
-  }
 
   /*  _   _____   ___  _______   ___  __   ________
      | | / / _ | / _ \/  _/ _ | / _ )/ /  / __/ __/
@@ -54,6 +46,20 @@ Singleton {
 
   readonly property QtObject vars: QtObject {
     id: vars
+
+    property var barModules: ({
+      workspaces: {
+        url: "Workspaces.qml",
+        props: ["screen"]
+      },
+      menu:         { url: "MenuBtn.qml"      },
+      activeWindow: { url: "ActiveWindow.qml" },
+      dateAndTime:  { url: "DateAndTime.qml"  },
+      network:      { url: "Network.qml"      },
+      battery:      { url: "Battery.qml"      },
+      media:        { url: "Media.qml"        },
+      volume:       { url: "Volume.qml"       }
+    });
 
     property int gap: Utils.SysInfo.gap;  // Size of Hyprland gap
     property int gapLarge: vars.gap + 8;

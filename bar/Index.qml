@@ -15,20 +15,6 @@ PanelWindow {
     right: true;
   }
 
-  readonly property var modules: ({
-    workspaces: {
-      url: "Workspaces.qml",
-      props: { screen: root.screen }
-    },
-    menu:         { url: "MenuBtn.qml"      },
-    activeWindow: { url: "ActiveWindow.qml" },
-    dateAndTime:  { url: "DateAndTime.qml"  },
-    network:      { url: "Network.qml"      },
-    battery:      { url: "Battery.qml"      },
-    media:        { url: "Media.qml"        },
-    volume:       { url: "Volume.qml"       }
-  });
-
   // If modules are floating this will remove the padding from the height.
   // This is to keep the modules' height the same since the padding is removed from the bar's background.
   // Then we add the gap. If it's docked we don't need a gap, so we multiply by 0, but if it's not we need the top gap.
@@ -96,19 +82,19 @@ PanelWindow {
         }
 
         BarSection {
-          allModules: root.modules;
+          screen: root.screen;
           modules: Globals.conf.bar.left;
           anchors.left: parent.left;
         }
 
         BarSection {
-          allModules: root.modules;
+          screen: root.screen;
           modules: Globals.conf.bar.centre;
           anchors.horizontalCenter: parent.horizontalCenter;
         }
 
         BarSection {
-          allModules: root.modules;
+          screen: root.screen;
           modules: Globals.conf.bar.right;
           anchors.right: parent.right;
         }
