@@ -164,7 +164,7 @@ Singleton {
     property color bg: "#1E1E2E";
     property color bgLight: "#313244";
     property color bgHover: "#45475A";
-    property color bgAccent: "#5A5F7F";
+    property color bgAccent: "#3F4359";
     property color bgRed: "#7A4654";
     property color outline: bgAccent;
     property color grey: "#585B70";
@@ -196,7 +196,7 @@ Singleton {
     property color bg: "#1F1D2E";
     property color bgLight: "#26233A";
     property color bgHover: "#403D52";
-    property color bgAccent: "#4E686C";
+    property color bgAccent: "#37484C";
     property color bgRed: "#763849";
     property color outline: bgAccent;
     property color grey: "#6E6A86";
