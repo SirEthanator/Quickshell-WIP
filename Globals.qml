@@ -139,6 +139,7 @@ Singleton {
     property color wsInactive: bgHover;
     property color red: "#E67E80";
     property color redHover: Qt.lighter(red, 1.2);
+    property color redPress: Qt.darker(red, 1.2);
     property color shadow: "#1E2326";
 
     property color workspaces: accent;
@@ -171,6 +172,7 @@ Singleton {
     property color wsInactive: bgHover;
     property color red: "#F38BA8";
     property color redHover: Qt.lighter(red, 1.2);
+    property color redPress: Qt.darker(red, 1.2);
     property color shadow: "#11111B";
 
     property color workspaces: accent;
@@ -203,6 +205,7 @@ Singleton {
     property color wsInactive: bgHover;
     property color red: "#EB6F92";
     property color redHover: Qt.lighter(red, 1.2);
+    property color redPress: Qt.darker(red, 1.2);
     property color shadow: "#191724";
 
     property color workspaces: accent;
