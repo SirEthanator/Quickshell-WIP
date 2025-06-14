@@ -6,12 +6,17 @@ import "menu" as Menu;
 import "notifications" as Notifications;
 import "desktop" as Desktop;
 import "osd" as OSD;
+import "utils" as Utils;
 import Quickshell.Io;
 import QtQuick;
 
 ShellRoot {
   id: shellroot;
-  Component.onCompleted: Menu.Controller.init()
+
+  Component.onCompleted: {
+    Utils.Validate.validateConfig();
+    Menu.Controller.init();
+  }
 
   IpcHandler {
     target: "screensaver";
