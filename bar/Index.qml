@@ -42,7 +42,7 @@ PanelWindow {
   MouseArea {  // For autohidden bar to show on hover
     id: hoverArea;
     anchors.fill: parent;
-    hoverEnabled: true;
+    hoverEnabled: Globals.conf.bar.autohide;
 
     // Visible background of bar
     Rectangle {
@@ -74,14 +74,15 @@ PanelWindow {
         // No need for extra margins when modules are floating since the background is invisible.
         readonly property int tbMargins: Globals.conf.bar.floatingModules ? 0 : Globals.vars.paddingBar;
         anchors {
-          leftMargin: content.lrMargins
-          rightMargin: content.lrMargins
-          topMargin: content.tbMargins
-          bottomMargin: content.tbMargins
+          leftMargin: lrMargins
+          rightMargin: lrMargins
+          topMargin: tbMargins
+          bottomMargin: tbMargins
           fill: parent
         }
 
         BarSection {
+          id: leftModules;
           screen: root.screen;
           modules: Globals.conf.bar.left;
           anchors.left: parent.left;
@@ -91,9 +92,27 @@ PanelWindow {
           screen: root.screen;
           modules: Globals.conf.bar.centre;
           anchors.horizontalCenter: parent.horizontalCenter;
+          anchors.horizontalCenterOffset: {
+            const contentCenter = content.width / 2
+            const leftModulesEdge = leftModules.x + leftModules.width + spacing;
+            const rightModulesEdge = rightModules.x - spacing;
+            const centerModulesMidPoint = width / 2;
+
+            // Check if centering would cause overlap with left
+            if (contentCenter - centerModulesMidPoint < leftModulesEdge) {
+              return leftModulesEdge + centerModulesMidPoint - contentCenter
+            }
+            // Check if centering would cause overlap with right
+            if (contentCenter + centerModulesMidPoint > rightModulesEdge) {
+              return rightModulesEdge - centerModulesMidPoint - contentCenter
+            }
+            // No overlap, stay at center of content
+            return 0
+          }
         }
 
         BarSection {
+          id: rightModules;
           screen: root.screen;
           modules: Globals.conf.bar.right;
           anchors.right: parent.right;
