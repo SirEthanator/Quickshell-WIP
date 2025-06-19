@@ -54,5 +54,9 @@
     "normalSound": "/usr/share/sounds/ocean/stereo/message-new-instant.oga",
     "criticalSound": "/usr/share/sounds/ocean/stereo/dialog-error-critical.oga",
     "dismissThreshold": 30
+  },
+
+  "osd": {
+    "backlightName": ""
   }
 }

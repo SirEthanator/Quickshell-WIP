@@ -1,5 +1,6 @@
 pragma Singleton
 
+import "root:/";
 import Quickshell;
 import Quickshell.Io;
 import Quickshell.Services.Pipewire;
@@ -17,21 +18,46 @@ Singleton {
     if (root?.volume >= 60         ) { return "audio-volume-high-panel-symbolic"   } else
     if (root?.volume >= 30         ) { return "audio-volume-medium-panel-symbolic" } else
     if (root?.volume >= 1          ) { return "audio-volume-low-panel-symbolic"    }
-    else { return "audio-volume-muted-panel-symbolic" };
+    else "audio-volume-muted-panel-symbolic";
   }
+  readonly property string brightnessIcon: root.brightness >= 50
+    ? "brightness-high-symbolic"
+    : "brightness-low-symbolic";
 
   property string dateAndTime: Qt.formatDateTime(clock.date, "ddd dd/MM/yy | hh:mm:ss ap");
-  property int    gap: 10        ;  // use 10 until command has been run
-  property string username: ""   ;
-  property string hostname: ""   ;
-  property string network: ""    ;
-  property int    networkStrength;
-  property int    cpuUsage       ;
-  property int    memUsage       ;
+  property int    gap: 10         ;  // use 10 until command has been run
+  property string username: ""    ;
+  property string hostname: ""    ;
+  property string network: ""     ;
+  property int    networkStrength ;
+  property int    cpuUsage        ;
+  property int    memUsage        ;
+  property int    brightness      ;
+  property int    maxBrightness: 0;
 
   SystemClock { id: clock }
 
+  FileView {
+    id: brightnessFile;
+    path: Qt.resolvedUrl(`/sys/class/backlight/${Globals.conf.osd.backlightName}/brightness`);
+    blockLoading: true;
+    watchChanges: true;
+    onFileChanged: {
+      brightnessFile.reload();
+      brightnessFile.waitForJob();
+      root.brightness = parseInt(brightnessFile.text()) / root.maxBrightness * 100;
+    }
+  }
+
   // TODO: Try to find a better way than manually making a process for every item - maybe a repeater?
+
+  Process {
+    command: ["cat", `/sys/class/backlight/${Globals.conf.osd.backlightName}/max_brightness`]
+    running: true;
+    stdout: SplitParser {
+      onRead: data => root.maxBrightness = data
+    }
+  }
 
   Process {
     command: ["hyprctl", "getoption", "general:gaps_out", "-j"];
