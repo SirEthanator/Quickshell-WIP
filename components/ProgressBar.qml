@@ -30,6 +30,7 @@ ClippingRectangle { // background
 
     Anims.NumberTransition on width { enabled: root.smoothing }
     Anims.NumberTransition on height { enabled: root.smoothing }
+    Anims.ColourTransition on color {}
 
     Icon {
       id: icon;

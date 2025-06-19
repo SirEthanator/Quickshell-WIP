@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import "root:/";
 import "root:/animations" as Anims;
 import "root:/components";
@@ -12,18 +14,25 @@ LazyLoader {
   activeAsync: false;
   property bool open: false;
 
-  readonly property int  volume: Utils.SysInfo.volume;
-  readonly property bool mute:   Utils.SysInfo.audioNode.audio.muted;
+  readonly property int  volume:     Utils.SysInfo.volume;
+  readonly property bool mute:       Utils.SysInfo.audioNode.audio.muted;
+  readonly property int  brightness: Utils.SysInfo.brightness;
 
   property var autocloseTimer;
-  function show() {
-    if (unloading) return
-    open = true;
-    if (!!loader.autocloseTimer) {loader.autocloseTimer.destroy()}
-    loader.autocloseTimer = Utils.Timeout.setTimeout(() => open = false, 3000);
+  function show(value, icon) {
+    currentValue = value;
+    currentIcon = icon;
+
+    if (!unloading) {
+      open = true;
+      if (!!loader.autocloseTimer) loader.autocloseTimer.destroy();
+      loader.autocloseTimer = Utils.Timeout.setTimeout(() => open = false, 3000);
+    }
   }
-  onVolumeChanged: show();
-  onMuteChanged: show();
+
+  onVolumeChanged: show(volume, Utils.SysInfo.volumeIcon);
+  onMuteChanged: show(volume, Utils.SysInfo.volumeIcon);
+  onBrightnessChanged: show(brightness, Utils.SysInfo.brightnessIcon);
 
   property var unloadTimer;
   readonly property bool unloading: !!unloadTimer;
@@ -34,6 +43,9 @@ LazyLoader {
       loader.activeAsync = true;
     }
   }
+
+  property string currentIcon;
+  property string currentValue;
 
   PanelWindow {
     id: root;
@@ -77,10 +89,10 @@ LazyLoader {
         height: 350;
         width: 50;
         radius: Globals.vars.br;
-        value: loader.volume / 100;
+        value: loader.currentValue / 100;
         bg: Globals.colours.bg;
-        fg: Globals.colours.accent;
-        icon: Utils.SysInfo.volumeIcon;
+        fg: loader.currentValue >= 90 ? Globals.colours.red : Globals.colours.accent;
+        icon: loader.currentIcon;
 
         border {
           color: Globals.colours.outline;
@@ -104,7 +116,7 @@ LazyLoader {
         Text {
           id: percentageText;
           anchors.centerIn: parent;
-          text: `${loader.volume}%`;
+          text: `${loader.currentValue}%`;
           color: Globals.colours.fg;
           font {
             family: Globals.vars.fontFamily;
