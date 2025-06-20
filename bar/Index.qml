@@ -1,9 +1,7 @@
 import "root:/";
 import "root:/components";
 import Quickshell;
-import Quickshell.Wayland;
 import QtQuick;
-import QtQuick.Layouts;
 
 PanelWindow {
   id: root;

@@ -51,6 +51,8 @@ Rectangle {
   signal wheel(event: WheelEvent);
 
   Anims.ColourTransition on background {}
+  Anims.NumberTransition on implicitWidth {}
+  clip: true;
 
   MouseArea {
     id: mouseArea;
