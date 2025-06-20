@@ -6,17 +6,17 @@ import QtQuick;
 ClippingRectangle { // background
   id: root
 
-  property real value:   0
+  property real value: 0;
 
-  property color bg: "black";
-  property color fg: "white";
+  property color bg: "transparent";
+  property color fg: Globals.colours.accent;
 
   property string icon: "";  // Only supported if bar is vertical rn
   property bool vertical: false;
   property bool smoothing: true;
   property bool roundedFg: true;
 
-  radius: 0.5 * height
+  radius: 0.5 * height;
   color: bg;
 
   Rectangle { // foreground

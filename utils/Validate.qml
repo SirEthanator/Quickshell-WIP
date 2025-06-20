@@ -5,7 +5,7 @@ import Quickshell;
 import QtQuick;
 
 Singleton {
-  function error(msg: string) {
+  function fatalError(msg: string) {
     Qt.callLater(() => {
       console.error(msg);
       Qt.quit();
@@ -17,7 +17,8 @@ Singleton {
     if (typeof val !== "number") reason = `Expected integer, found ${typeof val}: ${val}`;
     if (val % 1 !== 0) reason = `Expected integer, found real: ${val}`;
     if (val < min || val > max) reason = `Expected integer between ${min} and ${max}, found ${val}`;
-    if (reason) error(`${errMsg}: ${reason}`);
+    if (reason) return `${errMsg}: ${reason}`;
+    return ""
   }
 
   function validateString(val, opts: list<string>, errMsg: string) {
@@ -30,40 +31,52 @@ Singleton {
     if (opts.length < 1 || !opts) valid = true;
     if (!valid) reason = `Invalid option: ${val}`;
     if (typeof val !== "string") reason = `Expected string, found ${typeof val}: ${val}`;
-    if (reason) error(`${errMsg}: ${reason}`);
+    if (reason) return `${errMsg}: ${reason}`;
+    return ""
   }
 
   function validateColor(val, errMsg: string) {
     try { Qt.color(val) }
-    catch (e) { error(`${errMsg}: Expected color, found ${typeof val}: ${val}`) }
+    catch (e) { return `${errMsg}: Expected color, found ${typeof val}: ${val}` }
+    return ""
   }
 
   function validateObjKey(val, opts: QtObject, errMsg: string) {
     let reason;
     if (!(val in opts)) reason = `Invalid option: ${val}`;
     if (typeof val !== "string") reason = `Expected string, found ${typeof val}: ${val}`;
-    if (reason) error(`${errMsg}: ${reason}`)
+    if (reason) return `${errMsg}: ${reason}`;
+    return ""
   }
 
   function validateBool(val, errMsg: string) {
     if (typeof val !== "boolean")
-      error(`${errMsg}: Expected boolean, found ${typeof val}: ${val}`);
+      return `${errMsg}: Expected boolean, found ${typeof val}: ${val}`;
+    return ""
   }
 
   function validateStringArray(val, opts: list<string>, errMsg: string) {
     if (Array.isArray(val)) {
       for (let i=0; i < val.length; i++) {
-        validateString(val[i], opts, errMsg)
+        const result = validateString(val[i], opts, errMsg);
+        if (result) return result
       }
+      return ""
     }
   }
 
   function validateObjKeyArray(val, opts: QtObject, errMsg: string) {
     if (Array.isArray(val)) {
       for (let i=0; i < val.length; i++) {
-        validateObjKey(val[i], opts, errMsg)
+        const result = validateObjKey(val[i], opts, errMsg);
+        if (result) return result
       }
+      return ""
     }
+  }
+
+  function v(result) {
+    if (result) fatalError(result);
   }
 
   function validateConfig() {
@@ -72,43 +85,43 @@ Singleton {
     const conf = Globals.conf;
     if (!userConf) return;
 
-    validateObjKey(conf.colourScheme, Globals.schemes, "colourScheme");
+    v(validateObjKey(conf.colourScheme, Globals.schemes, "colourScheme"));
 
-    validateObjKeyArray(conf.bar.left, Globals.vars.barModules, "bar.left");
-    validateObjKeyArray(conf.bar.centre, Globals.vars.barModules, "bar.centre");
-    validateObjKeyArray(conf.bar.right, Globals.vars.barModules, "bar.right");
-    validateBool(conf.bar.autohide, "bar.autohide");
-    validateBool(conf.bar.docked, "bar.docked");
-    validateBool(conf.bar.floatingModules, "bar.floatingModules");
-    validateBool(conf.bar.multiColourModules, "bar.multiColourModules");
-    validateBool(conf.bar.moduleOutlines, "bar.moduleOutlines");
-    validateBool(conf.bar.backgroundOutline, "bar.backgroundOutline");
-    validateInt(conf.bar.workspaceCount, 1, 20, "bar.workspaceCount");
-    validateInt(conf.bar.truncationLength, 0, 1000, "bar.truncationLength");
+    v(validateObjKeyArray(conf.bar.left, Globals.vars.barModules, "bar.left"));
+    v(validateObjKeyArray(conf.bar.centre, Globals.vars.barModules, "bar.centre"));
+    v(validateObjKeyArray(conf.bar.right, Globals.vars.barModules, "bar.right"));
+    v(validateBool(conf.bar.autohide, "bar.autohide"));
+    v(validateBool(conf.bar.docked, "bar.docked"));
+    v(validateBool(conf.bar.floatingModules, "bar.floatingModules"));
+    v(validateBool(conf.bar.multiColourModules, "bar.multiColourModules"));
+    v(validateBool(conf.bar.moduleOutlines, "bar.moduleOutlines"));
+    v(validateBool(conf.bar.backgroundOutline, "bar.backgroundOutline"));
+    v(validateInt(conf.bar.workspaceCount, 1, 20, "bar.workspaceCount"));
+    v(validateInt(conf.bar.truncationLength, 0, 1000, "bar.truncationLength"));
 
-    validateInt(conf.menu.width, 450, 5000, "menu.width");
-    validateBool(conf.menu.capitaliseUsername, "menu.capitaliseUsername");
-    validateBool(conf.menu.capitaliseHostname, "menu.capitaliseHostname");
+    v(validateInt(conf.menu.width, 450, 5000, "menu.width"));
+    v(validateBool(conf.menu.capitaliseUsername, "menu.capitaliseUsername"));
+    v(validateBool(conf.menu.capitaliseHostname, "menu.capitaliseHostname"));
 
-    validateString(conf.desktop.wallpaper, [], "desktop.wallpaper");
-    validateBool(conf.desktop.videoWallpaper, "desktop.videoWallpaper");
-    validateInt(conf.desktop.fadeSpeed, 0, 60000, "desktop.fadeSpeed");
-    validateString(conf.desktop.shader, [], "desktop.shader");
-    validateBool(conf.desktop.hideWallpaper, "desktop.hideWallpaper");
-    validateColor(conf.desktop.bgColour, "desktop.bgColour");
-    validateBool(conf.desktop.clockWidget, "desktop.clockWidget");
-    validateBool(conf.desktop.centreClockWidget, "desktop.centreClockWidget");
-    validateBool(conf.desktop.autohideWidgets, "desktop.autohideWidgets");
-    validateBool(conf.desktop.autohideBar, "desktop.autohideBar");
-    validateBool(conf.desktop.autohideCursor, "desktop.autohideCursor");
+    v(validateString(conf.desktop.wallpaper, [], "desktop.wallpaper"));
+    v(validateBool(conf.desktop.videoWallpaper, "desktop.videoWallpaper"));
+    v(validateInt(conf.desktop.fadeSpeed, 0, 60000, "desktop.fadeSpeed"));
+    v(validateString(conf.desktop.shader, [], "desktop.shader"));
+    v(validateBool(conf.desktop.hideWallpaper, "desktop.hideWallpaper"));
+    v(validateColor(conf.desktop.bgColour, "desktop.bgColour"));
+    v(validateBool(conf.desktop.clockWidget, "desktop.clockWidget"));
+    v(validateBool(conf.desktop.centreClockWidget, "desktop.centreClockWidget"));
+    v(validateBool(conf.desktop.autohideWidgets, "desktop.autohideWidgets"));
+    v(validateBool(conf.desktop.autohideBar, "desktop.autohideBar"));
+    v(validateBool(conf.desktop.autohideCursor, "desktop.autohideCursor"));
 
-    validateInt(conf.notifications.width, 200, 5000, "notifications.width");
-    validateInt(conf.notifications.defaultTimeout, 100, 60000, "notifications.defaultTimeout");
-    validateInt(conf.notifications.defaultCriticalTimeout, 100, 60000, "notifications.defaultCriticalTimeout");
-    validateBool(conf.notifications.sounds, "notifications.sounds");
-    validateString(conf.notifications.normalSound, [], "notifications.normalSound");
-    validateString(conf.notifications.criticalSound, [], "notifications.criticalSound");
-    validateInt(conf.notifications.dismissThreshold, 1, 99, "notifications.dismissThreshold");
+    v(validateInt(conf.notifications.width, 200, 5000, "notifications.width"));
+    v(validateInt(conf.notifications.defaultTimeout, 100, 60000, "notifications.defaultTimeout"));
+    v(validateInt(conf.notifications.defaultCriticalTimeout, 100, 60000, "notifications.defaultCriticalTimeout"));
+    v(validateBool(conf.notifications.sounds, "notifications.sounds"));
+    v(validateString(conf.notifications.normalSound, [], "notifications.normalSound"));
+    v(validateString(conf.notifications.criticalSound, [], "notifications.criticalSound"));
+    v(validateInt(conf.notifications.dismissThreshold, 1, 99, "notifications.dismissThreshold"));
   }
 
 }

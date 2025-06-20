@@ -6,12 +6,12 @@ import Quickshell.Io;
 import QtQuick;
 
 Singleton {
+  id: root;
   /*   ____  ___  ______________  _  ______
       / __ \/ _ \/_  __/  _/ __ \/ |/ / __/
      / /_/ / ___/ / / _/ // /_/ /    /\ \
      \____/_/    /_/ /___/\____/_/|_/___/   */
 
-  // -- ----- --
   FileView {
     id: confFile;
     path: Qt.resolvedUrl("./config.json");
@@ -33,11 +33,17 @@ Singleton {
     return defaultOptions
   }
 
+  signal userConfUpdated(reload: bool);
   readonly property var defaultConf: JSON.parse(defaultConfFile.text());
-  readonly property var userConf: JSON.parse(confFile.text());
+  property var userConf: JSON.parse(confFile.text());
   readonly property var conf: deepMerge(defaultConf, userConf);
 
   readonly property QtObject colours: schemes[conf.colourScheme];
+
+  onUserConfUpdated: (reload) => {
+    confFile.setText(JSON.stringify(userConf, null, 2));
+    if (reload) Quickshell.reload(false);
+  }
 
   /*  _   _____   ___  _______   ___  __   ________
      | | / / _ | / _ \/  _/ _ | / _ )/ /  / __/ __/
@@ -168,7 +174,7 @@ Singleton {
     property color bgAccent: "#3F4359";
     property color bgRed: "#7A4654";
     property color outline: bgAccent;
-    property color grey: "#585B70";
+    property color grey: "#6C7086";
     property color wsInactive: bgHover;
     property color red: "#F38BA8";
     property color redHover: Qt.lighter(red, 1.2);
@@ -226,12 +232,14 @@ Singleton {
       _\ \  / / / __ |/ / / _/_\ \
      /___/ /_/ /_/ |_/_/ /___/___/   */
 
-  property QtObject states: QtObject {
-    id: states
+  PersistentProperties {
+    id: persist
 
     property bool menuOpen: false;
     property bool barHidden: false;
     property bool screensaverActive: false;
   }
+
+  property alias states: persist;
 }
 
