@@ -89,7 +89,7 @@ MouseArea {
     radius: Globals.vars.br;
     border {
       color: Globals.colours.bgAccent;
-      width: Globals.vars.outlineSize
+      width: root.popup ? Globals.vars.outlineSize : 0;
       pixelAligned: false;
     }
 
@@ -109,14 +109,15 @@ MouseArea {
         id: closeButton;
         label: "close-symbolic";
         icon: true;
-        iconSize: Globals.vars.moduleIconSize;
+        labelSize: Globals.vars.moduleIconSize;
 
         Layout.fillHeight: true;
         implicitWidth: root.containsMouse ? Globals.vars.moduleIconSize + padding * 2 : 0;
+        visible: implicitWidth > 0;
         Anims.NumberTransition on implicitWidth {}
 
         tlRadius: true; blRadius: true;
-        changeBrRadiusHover: false;
+        changeBrRadiusHover: !root.popup;
 
         bg: Globals.colours.red;
         bgHover: Globals.colours.redHover;
@@ -147,12 +148,12 @@ MouseArea {
               IconImage {
                 visible: !!root.n.appIcon;
                 source: !!root.n.appIcon ? Quickshell.iconPath(root.n.appIcon) : "";
-                implicitSize: appName.height
+                implicitSize: appName.height;
               }
 
               Text {
-                id: appName
-                text: root.n.appName
+                id: appName;
+                text: root.n.appName;
                 color: Globals.colours.fg;
                 font {
                   family: Globals.vars.fontFamily;
@@ -166,7 +167,8 @@ MouseArea {
 
               Button {
                 visible: summary.multiline || body.multiline;
-                label: root.expanded ? "arrow-up-symbolic" : "arrow-down-symbolic";
+                label: "notification-expand-symbolic";
+                iconRotation: root.expanded ? 180 : 0;
                 icon: true;
 
                 implicitHeight: appName.height;
@@ -183,7 +185,7 @@ MouseArea {
             Text {
               id: summary;
               readonly property bool multiline: implicitWidth > width;
-              text: root.n.summary
+              text: root.n.summary;
               color: Globals.colours.fg;
               font {
                 family: Globals.vars.fontFamily;
@@ -247,6 +249,8 @@ MouseArea {
           Item {}  // Padding
 
         }
+
+        Item { visible: !root.popup }  // Padding if progressBar is not visible
 
         ProgressBar {
           id: progressBar

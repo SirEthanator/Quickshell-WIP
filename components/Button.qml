@@ -6,7 +6,8 @@ MouseArea {
   id: root;
   required property string label;
   property bool icon: false;
-  property int iconSize: 0;
+  property int labelSize: 0;
+  property int iconRotation: 0;
 
   property color labelColour: Globals.colours.fg;
   property color bg: Globals.colours.bg;
@@ -32,12 +33,12 @@ MouseArea {
   hoverEnabled: true;
 
   readonly property int autoHeightVal: label.height + padding;
-  height: autoHeight ? autoHeightVal : undefined;
-  implicitHeight: autoImplicitHeight ? autoHeightVal : undefined;
+  height: autoHeight ? autoHeightVal : NaN;
+  implicitHeight: autoImplicitHeight ? autoHeightVal : NaN;
 
   readonly property int autoWidthVal: label.width + padding;
-  width: autoWidth ? autoWidthVal : undefined;
-  implicitWidth: autoImplicitWidth ? autoWidthVal : undefined;
+  width: autoWidth ? autoWidthVal : NaN;
+  implicitWidth: autoImplicitWidth ? autoWidthVal : NaN;
 
   Rectangle {
     id: background;
@@ -68,17 +69,23 @@ MouseArea {
       Anims.ColourTransition on color {}
       font {
         family: Globals.vars.fontFamily;
-        pixelSize: Globals.vars.mainFontSize;
+        pixelSize: root.labelSize > 0 ? root.labelSize : Globals.vars.mainFontSize;
       }
     }
 
     Icon {
+      id: icon;
       visible: root.icon;
       anchors.centerIn: parent;
       icon: root.label;
       color: root.containsPress && root.invertTextOnPress ? root.bg : root.labelColour;
       Anims.ColourTransition on color {}
-      size: root.iconSize > 0 ? root.iconSize : parent.height - root.padding * 2;
+      size: root.labelSize > 0 ? root.labelSize : parent.height - root.padding * 2;
+      transform: Rotation {
+        origin.x: icon.size/2; origin.y: icon.size/2;
+        angle: root.iconRotation
+        Anims.NumberTransition on angle {}
+      }
     }
   }
 }
