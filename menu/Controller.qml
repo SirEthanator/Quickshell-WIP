@@ -12,6 +12,7 @@ import Quickshell.Wayland;
 import Quickshell.Io;
 import QtQuick;
 import QtQuick.Layouts;
+import QtQuick.Effects;
 import QtQuick.Controls;
 
 Singleton {
@@ -54,17 +55,18 @@ Singleton {
       Anims.SlideFade {
         running: !loader.loading;
         slideTarget: root;
-        fadeTarget: background;
+        fadeTarget: wrapper;
       }
 
       Anims.SlideFade {
         running: !loader.open;
         slideTarget: root;
-        fadeTarget: background;
+        fadeTarget: wrapper;
         reverse: true;
       }
 
       Item {
+        id: wrapper;
         anchors.fill: parent;
         focus: true;
 
@@ -86,6 +88,14 @@ Singleton {
           }
         }
 
+        RectangularShadow {
+          anchors.fill: background;
+          radius: background.radius;
+          blur: 25;
+          spread: -3;
+          color: Qt.darker(background.color, 1.5)
+        }
+
         // Visible background of menu
         Rectangle {
           id: background;
@@ -97,8 +107,6 @@ Singleton {
 
           color: Globals.colours.bg;
           radius: Globals.vars.br;
-
-          Shadow { padding: Globals.vars.gapLarge }
 
           ColumnLayout {
             id: content;

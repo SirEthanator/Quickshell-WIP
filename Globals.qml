@@ -78,9 +78,6 @@ Singleton {
 
     property real outlineSize: 1.5;
 
-    property real shadowBlur: 3;
-    property real shadowOpacity: 0.9;
-
     property string fontFamily: "0xProto";
     property int mainFontSize: 16;
     property int xlFontSize: 150;
@@ -150,7 +147,6 @@ Singleton {
     property color red: "#E67E80";
     property color redHover: Qt.lighter(red, 1.2);
     property color redPress: Qt.darker(red, 1.2);
-    property color shadow: "#1E2326";
 
     property color workspaces: accent;
     property color activeWindow: "#7FBBB3";
@@ -183,7 +179,6 @@ Singleton {
     property color red: "#F38BA8";
     property color redHover: Qt.lighter(red, 1.2);
     property color redPress: Qt.darker(red, 1.2);
-    property color shadow: "#11111B";
 
     property color workspaces: accent;
     property color activeWindow: "#89B4FA";
@@ -216,7 +211,6 @@ Singleton {
     property color red: "#EB6F92";
     property color redHover: Qt.lighter(red, 1.2);
     property color redPress: Qt.darker(red, 1.2);
-    property color shadow: "#191724";
 
     property color workspaces: accent;
     property color activeWindow: "#31748F";
