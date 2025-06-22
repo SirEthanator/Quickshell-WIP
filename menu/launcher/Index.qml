@@ -12,12 +12,21 @@ import QtQuick.Layouts;
 Item {
   id: root;
   required property string searchText;
+  property int currentIndex: 0;
 
-  function execTop() {
+  function execSelected() {
     if (model.values.length > 0) {
-      model.values[0].execute()
+      model.values[currentIndex].execute();
       Globals.states.menuOpen = false;
     }
+  }
+
+  function down() {
+    if (currentIndex < model.values.length-1) currentIndex++;
+  }
+
+  function up() {
+    if (currentIndex > 0) currentIndex--;
   }
 
   ScrollView {
@@ -31,6 +40,7 @@ Item {
       id: listView;
       anchors.fill: parent;
       spacing: Globals.vars.marginModule;
+      currentIndex: root.currentIndex;
 
       cacheBuffer: 0;
 
@@ -55,12 +65,14 @@ Item {
         id: model;
         values: DesktopEntries.applications.values
         .filter(entry => root.searchText.length === 0 || entry.name.toLowerCase().includes(root.searchText.toLowerCase()))
-        .sort((a, b) => a.name.localeCompare(b.name))  // Alphabetical order
+        .sort((a, b) => a.name.localeCompare(b.name));  // Alphabetical order
+        onValuesChanged: root.currentIndex = 0;
       }
 
       delegate: MouseArea {
         id: entryMouseArea;
         required property DesktopEntry modelData;
+        required property int index;
 
         width: listView.width;
         height: entryContent.implicitHeight + Globals.vars.paddingButton * 2;
@@ -77,7 +89,7 @@ Item {
           anchors.fill: parent;
           color: entryMouseArea.containsPress
             ? Globals.colours.accent
-            : entryMouseArea.containsMouse
+            : entryMouseArea.containsMouse || entryMouseArea.index === root.currentIndex
               ? Globals.colours.bgHover
               : Globals.colours.bgLight;
           radius: Globals.vars.br;

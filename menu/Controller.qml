@@ -11,7 +11,6 @@ import Quickshell;
 import Quickshell.Wayland;
 import Quickshell.Io;
 import QtQuick;
-import QtQuick.Effects;
 import QtQuick.Layouts;
 import QtQuick.Controls;
 
@@ -69,11 +68,10 @@ Singleton {
         anchors.fill: parent;
         focus: true;
 
-        property int selectedAppIndex: 0;
         Keys.onPressed: (event) => {
           const key = event.key;
           if (key === Qt.Key_Tab) {
-            stack.currentIndex += 1;
+            stack.currentIndex++;
             appSearch.focus = false;
             focus = true;
           } else if (key === Qt.Key_Escape) {
@@ -81,6 +79,10 @@ Singleton {
           } else if ((key >= 48 && key <= 90) || (key >= 97 && key <= 122) || (key >= 186 && key <= 223)) {
             appSearch.insert(0, event.text);
             appSearch.focus = true;
+          } else if (stack.currentIndex === 1) {
+            if (key === Qt.Key_Return || key === Qt.Key_Enter) launcher.execSelected();
+            if (key === Qt.Key_Down) launcher.down();
+            if (key === Qt.Key_Up) launcher.up();
           }
         }
 
@@ -147,8 +149,6 @@ Singleton {
                     if (focus) stack.currentIndex = 1
                     else clear()
                   }
-
-                  onAccepted: launcher.execTop()
                 }
               }
             }
@@ -162,6 +162,8 @@ Singleton {
               Dashboard.Index {}
               Launcher.Index { id: launcher; searchText: appSearch.text }
             }
+
+            PageIndicator { stack: stack }  // Imported from components, not QtQuick.Controls
           }
         }
       }
