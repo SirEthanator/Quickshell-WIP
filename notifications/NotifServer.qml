@@ -7,13 +7,11 @@ import QtQuick;
 Singleton {
   id: root
 
-  readonly property alias notifList: server.trackedNotifications;
-
-  signal incoming(n: Notification)
-  signal dismissed(id: int)
+  signal incoming(n: Notification);
+  signal dismissed(id: int);
 
   NotificationServer {
-    id: server
+    id: notifServer
 
     actionIconsSupported: true;
     actionsSupported: true;
@@ -29,5 +27,7 @@ Singleton {
 
     }
   }
+
+  readonly property alias server: notifServer;
 }
 

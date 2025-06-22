@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import "root:/";
+import "root:/components";
 import "root:/animations" as Anims;
 import Quickshell;
 import Quickshell.Widgets;
@@ -24,30 +25,7 @@ Item {
     anchors.fill: parent;
     clip: true;
 
-    ScrollBar.vertical: ScrollBar {
-      id: scrollBar;
-      parent: scrollView.parent;
-      anchors.top: parent.top;
-      anchors.bottom: parent.bottom;
-      anchors.right: parent.right;
-
-      contentItem: Rectangle {
-        implicitWidth: 6; implicitHeight: 10;
-        color: scrollBar.pressed ? Globals.colours.accent : Globals.colours.fg;
-        opacity: scrollBarMouse.containsMouse ? 1 : 0.3;
-        radius: implicitWidth / 2;
-
-        Anims.ColourTransition on color {}
-        Anims.NumberTransition on opacity {}
-
-        MouseArea {
-          id: scrollBarMouse;
-          anchors.fill: parent;
-          hoverEnabled: true;
-          acceptedButtons: Qt.NoButton;
-        }
-      }
-    }
+    ScrollBar.vertical: StyledScrollBar { scrollView: scrollView }
 
     ListView {
       id: listView;

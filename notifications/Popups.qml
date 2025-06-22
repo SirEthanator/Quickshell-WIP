@@ -5,7 +5,6 @@ import "root:/animations" as Anims;
 import "root:/utils" as Utils;
 import Quickshell;
 import Quickshell.Services.Notifications;
-import Quickshell.Io;
 import Quickshell.Wayland;
 import QtQuick;
 
