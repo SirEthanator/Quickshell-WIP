@@ -61,10 +61,23 @@ DashItem {
   }
 
   ColumnLayout {
+    id: empty;
     visible: !column.visible;
     Layout.fillHeight: true;
     Layout.fillWidth: true;
     spacing: Globals.vars.paddingCard;
+
+    Anims.NumberAnim {
+      id: fadeInAnim;
+      target: empty;
+      property: "opacity";
+      from: 0; to: 1;
+      duration: 1500;
+    }
+
+    onVisibleChanged: {
+      if (visible) fadeInAnim.start();
+    }
 
     Icon {
       icon: "no-notifications-symbolic";
