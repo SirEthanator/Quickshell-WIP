@@ -25,13 +25,13 @@ Singleton {
     blockLoading: true;
   }
 
-  function deepMerge(defaultOptions, userOptions) {
-    if (!userOptions) return defaultOptions;
-    Object.entries(userOptions).forEach(([key, value]) => {
-      if (value && typeof value === 'object') deepMerge(defaultOptions[key] = defaultOptions[key] || [], value)
-      else defaultOptions[key] = value;
+  function deepMerge(def, user) {
+    if (!user) return def;
+    Object.entries(user).forEach(([key, value]) => {
+      if (value && typeof value === 'object' && !Array.isArray(value)) deepMerge(def[key] = def[key] || [], value)
+      else def[key] = value;
     });
-    return defaultOptions
+    return def
   }
 
   signal userConfUpdated(reload: bool);
