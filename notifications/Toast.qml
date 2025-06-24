@@ -17,6 +17,7 @@ MouseArea {
     : n.urgency === NotificationUrgency.Critical
       ? Globals.conf.notifications.defaultCriticalTimeout
       : Globals.conf.notifications.defaultTimeout;
+  property real timeRemaining: timeout;
   property bool popup: false;
   width: parent.width;
   height: bg.height;
@@ -26,34 +27,29 @@ MouseArea {
   preventStealing: true;
 
   property bool expanded: false;
-  property var timer;
 
-  Component.onCompleted: {
-    if (!popup) return
-    timer = Utils.Timeout.setTimeout(() => {
-      NotifServer.dismissed(n.id)
-    }, timeout)
+  NumberAnimation on timeRemaining {
+    id: progressController;
+    running: root.popup;
+    to: 0;
+    duration: root.timeout;
+    onFinished: {
+      NotifServer.dismissed(root.n.id);
+    }
   }
 
   onContainsMouseChanged: {
     if (!popup) return
     if (containsMouse) {
-      timer.restart();
-      timer.stop();
-
-      progressController.stop();
-      progressBar.smoothing = true;
-      progressBar.value = 1;
-      progressBar.smoothing = false;
+      progressController.pause();
     } else {
-      timer.start();
-      progressController.start();
+      progressController.resume();
     }
   }
 
   drag.target: root;
   drag.axis: Drag.XAxis;
-  drag.minimumX: 0;  // Only allow dragging right
+  drag.minimumX: root.popup ? 0 : undefined;  // Only allow dragging right if popup
 
   onPressed: event => {
     if (event.button === Qt.MiddleButton) n.dismiss();
@@ -63,7 +59,7 @@ MouseArea {
     if (Math.abs(x) < width * (Globals.conf.notifications.dismissThreshold / 100)) {
       x = 0;
     } else {
-      x = width;
+      x = width * (x < 0 ? -1 : 1);
       // Dismiss if popup, discard if not
       const dimissAction = popup ? () => NotifServer.dismissed(n.id) : () => n.dismiss();
       Utils.Timeout.setTimeout(dimissAction, Globals.vars.transitionLen);
@@ -255,7 +251,7 @@ MouseArea {
         ProgressBar {
           id: progressBar
           visible: root.popup;
-          value: 1;
+          value: root.timeRemaining / root.timeout;
           Layout.fillWidth: true;
           implicitHeight: 5;
           bg: root.n.urgency === NotificationUrgency.Critical ? Globals.colours.bgRed : Globals.colours.bgAccent;
@@ -267,17 +263,6 @@ MouseArea {
           topLeftRadius: 0;
           bottomLeftRadius: root.containsMouse ? 0 : Globals.vars.br;
           roundedFg: false;
-        }
-
-        FrameAnimation {
-          id: progressController
-          running: root.popup;
-          onTriggered: {
-            if (progressBar.value <= 0) stop()
-            else progressBar.value -= (progressBar.width / (root.timeout / 1000) * frameTime) / progressBar.width
-            // Get how much the progress bar should recede then convert it into a decimal percentage
-            // Multiplying by frameTime can be thought of as per second eg 3 * frameTime = 3 per second
-          }
         }
       }
     }
