@@ -3,26 +3,30 @@ import QtQuick;
 
 ParallelAnimation {
   id: root;
-  required property QtObject slideTarget;
-  required property QtObject fadeTarget;
+  required property QtObject target;
   property bool reverse: false;
   property string direction: "right";
   property int slideOffset: 100;
+  property int duration: Globals.vars.animLen;
 
   NumberAnimation {
-    target: root.slideTarget;
-    property: root.direction === "right" ? "margins.left" : "margins.right";
-    from: root.reverse ? 0 : -root.slideOffset; to: root.reverse ? -root.slideOffset : 0;
+    readonly property int fromVal: root.direction === "right" ? -root.slideOffset : root.slideOffset;
+    readonly property int toVal: 0;
+    target: root.target;
+    property: "x";
+    from: root.reverse ? toVal : fromVal;
+    to: root.reverse ? fromVal : toVal;
     easing.type: Easing.OutCubic;
-    duration: Globals.vars.animLen;
+    duration: root.duration;
   }
 
   NumberAnimation {
-    target: root.fadeTarget;
+    target: root.target;
     property: "opacity";
-    from: root.reverse ? 1 : 0; to: root.reverse ? 0 : 1;
+    from: root.reverse ? 1 : 0;
+    to: root.reverse ? 0 : 1;
     easing.type: Easing.OutCubic;
-    duration: Globals.vars.animLen;
+    duration: root.duration;
   }
 }
 
