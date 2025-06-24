@@ -2,6 +2,8 @@ import "root:/";
 import QtQuick;
 
 Behavior {
-  ColorAnimation { duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
+  id: root;
+  property int duration: Globals.vars.transitionLen;
+  ColorAnimation { duration: root.duration; easing.type: Easing.OutCubic }
 }
 
