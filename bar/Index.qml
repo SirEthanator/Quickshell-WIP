@@ -1,11 +1,16 @@
 import "root:/";
+import "root:/animations" as Anims;
 import "root:/components";
 import Quickshell;
 import QtQuick;
 
 PanelWindow {
   id: root;
-  color: "transparent";
+  color: Globals.conf.menu.dimBackground && Globals.states.menuOpen ? Globals.vars.menuDimmedColour : "transparent";
+
+  Anims.ColourTransition on color {
+    duration: Globals.vars.animLen;
+  }
 
   anchors {
     top: true;

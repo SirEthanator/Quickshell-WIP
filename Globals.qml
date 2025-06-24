@@ -120,6 +120,8 @@ Singleton {
 
     property int largeIconSize: 40;
     property int extraLargeIconSize: 90;
+
+    property color menuDimmedColour: "#4D000000";
   }
 
   /*    ___________ ________  ___________

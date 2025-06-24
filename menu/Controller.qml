@@ -39,7 +39,7 @@ Singleton {
 
     PanelWindow {
       id: root;
-      color: Globals.conf.menu.dimBackground ? "#4D000000" : "transparent";
+      color: Globals.conf.menu.dimBackground ? Globals.vars.menuDimmedColour : "transparent";
 
       anchors {
         top: true;
@@ -54,7 +54,7 @@ Singleton {
 
       Anims.ColourAnim on color {
         running: Globals.conf.menu.dimBackground;
-        from: "#00000000"; to: "#4D000000";
+        from: "#00000000"; to: Globals.vars.menuDimmedColour;
         duration: Globals.vars.animLen;
       }
 
