@@ -31,7 +31,7 @@ Singleton {
       if (!!loader.timer) return
       if (!open) {
         // We need a timer so the component will not be unloaded until the animation finishes
-        loader.timer = Utils.Timeout.setTimeout(() => loader.activeAsync = false, Globals.vars.animLen)
+        loader.timer = Utils.Timeout.setTimeout(() => loader.activeAsync = false, Globals.vars.animLen);
       } else {
         loader.activeAsync = true;
       }
@@ -39,35 +39,46 @@ Singleton {
 
     PanelWindow {
       id: root;
-      color: "transparent";
+      color: Globals.conf.menu.dimBackground ? "#4D000000" : "transparent";
 
       anchors {
         top: true;
         bottom: true;
         left: true;
+        right: true;
       }
 
-      implicitWidth: Globals.conf.menu.width;
       exclusionMode: ExclusionMode.Normal;
       WlrLayershell.layer: WlrLayer.Overlay;
       WlrLayershell.keyboardFocus: loader.open ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None;
 
+      Anims.ColourAnim on color {
+        running: Globals.conf.menu.dimBackground;
+        from: "#00000000"; to: "#4D000000";
+        duration: Globals.vars.animLen;
+      }
+
+      Anims.ColourAnim on color {
+        running: !loader.open && Globals.conf.menu.dimBackground;
+        to: "#00000000";
+        duration: Globals.vars.animLen;
+      }
+
       Anims.SlideFade {
         running: !loader.loading;
-        slideTarget: root;
-        fadeTarget: wrapper;
+        target: wrapper;
       }
 
       Anims.SlideFade {
         running: !loader.open;
-        slideTarget: root;
-        fadeTarget: wrapper;
+        target: wrapper;
         reverse: true;
       }
 
       Item {
         id: wrapper;
-        anchors.fill: parent;
+        width: Globals.conf.menu.width + Globals.vars.gapLarge * 2;
+        height: parent.height;
         focus: true;
 
         Keys.onPressed: (event) => {

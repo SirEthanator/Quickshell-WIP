@@ -1,6 +1,4 @@
-- [ ] Clean up repetitive code
 - [ ] Clean up animations
 - [ ] Disable top, left, and right outline when bar is docked
-- [ ] Notification centre
 - [ ] Use D-Bus for NetworkManager
 - [ ] Config menu

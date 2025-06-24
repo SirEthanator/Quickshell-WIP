@@ -55,39 +55,37 @@ LazyLoader {
     WlrLayershell.layer: WlrLayer.Overlay;
 
     anchors {
-      top: true;
-      bottom: true;
       right: true;
     }
 
-    implicitWidth: progress.width + Globals.vars.gapLarge * 2;
+    implicitWidth: content.width + Globals.vars.gapLarge;
+    implicitHeight: content.height;
 
     Anims.SlideFade {
       running: true;
-      slideTarget: root;
-      fadeTarget: content;
+      target: content;
       direction: "left";
+      slideOffset: 30;
     }
 
     Anims.SlideFade {
       running: !open;
-      slideTarget: root;
-      fadeTarget: content;
+      target: content;
       direction: "left";
       reverse: true;
+      slideOffset: 30;
     }
 
     ColumnLayout {
       id: content;
-      anchors.centerIn: parent;
       spacing: Globals.vars.gap;
 
       ProgressBar {
         id: progress;
 
         vertical: true;
-        height: 350;
-        width: 50;
+        implicitHeight: 350;
+        implicitWidth: 50;
         radius: Globals.vars.br;
         value: loader.currentValue / 100;
         bg: Globals.colours.bg;
