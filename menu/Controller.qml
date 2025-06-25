@@ -104,7 +104,7 @@ Singleton {
           radius: background.radius;
           blur: 25;
           spread: -3;
-          color: Qt.darker(background.color, 1.5)
+          color: Qt.darker(background.color, 1.5);
         }
 
         // Visible background of menu
@@ -119,6 +119,12 @@ Singleton {
           color: Globals.colours.bg;
           radius: Globals.vars.br;
 
+          border {
+            color: Globals.conf.menu.backgroundOutline ? Globals.colours.outline : "transparent";
+            width: Globals.conf.menu.backgroundOutline ? Globals.vars.outlineSize : 0;
+            pixelAligned: false;
+          }
+
           ColumnLayout {
             id: content;
             spacing: Globals.vars.paddingWindow;
@@ -126,7 +132,7 @@ Singleton {
 
             anchors {
               fill: parent;
-              margins: Globals.vars.paddingWindow
+              margins: Globals.vars.paddingWindow;
             }
 
             // Application search bar
@@ -134,6 +140,13 @@ Singleton {
               id: appSearchBg;
               color: Globals.colours.bgLight;
               radius: Globals.vars.br;
+
+              border {
+                color: Globals.conf.menu.moduleOutlines ? Globals.colours.outline : "transparent";
+                width: Globals.conf.menu.moduleOutlines ? Globals.vars.outlineSize : 0;
+                pixelAligned: false;
+              }
+
               implicitHeight: appSearch.height + Globals.vars.paddingButton * 2;
               Layout.fillWidth: true;
 
@@ -155,18 +168,18 @@ Singleton {
                   color: Globals.colours.fg;
                   font {
                     family: Globals.vars.fontFamily;
-                    pixelSize: Globals.vars.mainFontSize
+                    pixelSize: Globals.vars.mainFontSize;
                   }
 
                   background: Rectangle { color: "transparent" }
 
-                  placeholderText: "Search Applications"
-                  placeholderTextColor: Globals.colours.grey
+                  placeholderText: "Search Applications";
+                  placeholderTextColor: Globals.colours.grey;
 
                   focusPolicy: Qt.ClickFocus;
                   onFocusChanged: {
                     if (focus) stack.currentIndex = 1
-                    else clear()
+                    else clear();
                   }
                 }
               }

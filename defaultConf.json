@@ -30,7 +30,9 @@
     "width": 600,
     "capitaliseUsername": true,
     "capitaliseHostname": false,
-    "dimBackground": true
+    "dimBackground": true,
+    "backgroundOutline": true,
+    "moduleOutlines": true
   },
 
   "desktop": {
