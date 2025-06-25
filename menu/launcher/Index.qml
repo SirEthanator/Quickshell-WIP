@@ -29,11 +29,47 @@ Item {
     if (currentIndex > 0) currentIndex--;
   }
 
+  readonly property ScriptModel model: ScriptModel {
+    values: DesktopEntries.applications.values
+      .filter(entry => root.searchText.length === 0 || entry.name.toLowerCase().includes(root.searchText.toLowerCase()))
+      .sort((a, b) => a.name.localeCompare(b.name));  // Alphabetical order
+    onValuesChanged: root.currentIndex = 0;
+  }
+
+  ColumnLayout {
+    spacing: Globals.vars.paddingCard;
+    opacity: root.model.values.length > 0 ? 0 : 1;
+    anchors.centerIn: parent;
+
+    Anims.NumberTransition on opacity {}
+
+    Icon {
+      icon: "search-symbolic";
+      colour: Globals.colours.grey;
+      size: Globals.vars.extraLargeIconSize;
+      Layout.alignment: Qt.AlignHCenter;
+    }
+
+    Text {
+      text: "No Results Found";
+      font {
+        family: Globals.vars.fontFamily;
+        pixelSize: Globals.vars.smallHeadingFontSize;
+      }
+      color: Globals.colours.grey;
+      Layout.fillWidth: true;
+      horizontalAlignment: Text.AlignHCenter;
+    }
+  }
+
   ListView {
     id: listView;
     anchors.fill: parent;
     spacing: Globals.vars.marginModule;
     clip: true;
+    opacity: root.model.values.length > 0 ? 1 : 0;
+
+    Anims.NumberTransition on opacity {}
 
     currentIndex: root.currentIndex;
     highlightMoveDuration: 300;
@@ -61,14 +97,7 @@ Item {
       NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Globals.vars.shortTransitionLen }
     }
 
-    model: ScriptModel {
-      id: model;
-      values: DesktopEntries.applications.values
-        .filter(entry => root.searchText.length === 0 || entry.name.toLowerCase().includes(root.searchText.toLowerCase()))
-        .sort((a, b) => a.name.localeCompare(b.name));  // Alphabetical order
-      onValuesChanged: root.currentIndex = 0;
-    }
-
+    model: root.model;
     delegate: MouseArea {
       id: entryMouseArea;
       required property DesktopEntry modelData;
@@ -122,7 +151,7 @@ Item {
           }
 
           Text {
-            text: modelData.name;
+            text: entryMouseArea.modelData.name;
             color: entryMouseArea.containsPress ? Globals.colours.bgLight : Globals.colours.fg;
             font {
               family: Globals.vars.fontFamily;
