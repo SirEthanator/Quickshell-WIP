@@ -85,14 +85,22 @@ Item {
       }
 
       Rectangle {
-        id: entryBg;
         anchors.fill: parent;
-        color: entryMouseArea.containsPress
+        readonly property bool selected: entryMouseArea.containsMouse || entryMouseArea.index === root.currentIndex;
+        readonly property bool containsPress: entryMouseArea.containsPress;
+
+        color: containsPress
           ? Globals.colours.accent
-          : entryMouseArea.containsMouse || entryMouseArea.index === root.currentIndex
+          : selected
             ? Globals.colours.bgHover
             : Globals.colours.bgLight;
         radius: Globals.vars.br;
+
+        border {
+          color: Globals.conf.menu.moduleOutlines && !selected ? Globals.colours.outline : "transparent";
+          width: Globals.conf.menu.moduleOutlines ? Globals.vars.outlineSize : 0;
+          pixelAligned: false;
+        }
 
         Anims.ColourTransition on color {}
 

@@ -11,6 +11,13 @@ Rectangle {
 
   color: Globals.colours.bgLight;
   radius: Globals.vars.br;
+
+  border {
+    color: Globals.conf.menu.moduleOutlines ? Globals.colours.outline : "transparent";
+    width: Globals.conf.menu.moduleOutlines ? Globals.vars.outlineSize : 0;
+    pixelAligned: false;
+  }
+
   Layout.fillWidth: true;
   implicitHeight: content.implicitHeight + (padding ? Globals.vars.paddingCard*2 : 0);
 
@@ -33,7 +40,7 @@ Rectangle {
         top: parent.top;
         bottom: parent.bottom;
         left: parent.left;
-        right: root.fullContentWidth ? parent.right : undefined
+        right: root.fullContentWidth ? parent.right : undefined;
         margins: root.padding ? Globals.vars.paddingCard : 0;
       }
       spacing: Globals.vars.paddingCard;
