@@ -81,11 +81,7 @@ MouseArea {
       color: root.containsPress && root.invertTextOnPress ? root.bg : root.labelColour;
       Anims.ColourTransition on color {}
       size: root.labelSize > 0 ? root.labelSize : parent.height - root.padding * 2;
-      transform: Rotation {
-        origin.x: icon.size/2; origin.y: icon.size/2;
-        angle: root.iconRotation
-        Anims.NumberTransition on angle {}
-      }
+      rotation: root.iconRotation;
     }
   }
 }

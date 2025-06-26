@@ -87,12 +87,14 @@ PanelWindow {
         BarSection {
           id: leftModules;
           screen: root.screen;
+          window: root;
           modules: Globals.conf.bar.left;
           anchors.left: parent.left;
         }
 
         BarSection {
           screen: root.screen;
+          window: root;
           modules: Globals.conf.bar.centre;
           anchors.horizontalCenter: parent.horizontalCenter;
           anchors.horizontalCenterOffset: {
@@ -117,6 +119,7 @@ PanelWindow {
         BarSection {
           id: rightModules;
           screen: root.screen;
+          window: root;
           modules: Globals.conf.bar.right;
           anchors.right: parent.right;
         }

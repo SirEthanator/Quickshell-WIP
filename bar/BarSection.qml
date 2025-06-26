@@ -5,6 +5,7 @@ import QtQuick.Layouts;
 
 RowLayout {
   id: root
+  required property var window;
   required property var screen;
   readonly property var allModules: Globals.vars.barModules;
   required property var modules;
@@ -26,6 +27,9 @@ RowLayout {
         let result = {};
         if (passedProps.indexOf("screen") !== -1) {
           result.screen = root.screen
+        }
+        if (passedProps.indexOf("window") !== -1) {
+          result.window = root.window
         }
         return result
       };
