@@ -41,17 +41,46 @@ Singleton {
 
   readonly property QtObject colours: schemes[conf.colourScheme];
 
-  function setColours(scheme: string, reload: bool): string {
-    const validationResult = Utils.Validate.validateObjKey(scheme, schemes, "Failed to set colour scheme");
+  function setConf(property: list<string>, value, reload: bool, validate): string {
+    const validationResult = (typeof validate === "function") ? validate() : undefined;
     if (validationResult) return validationResult;
-    userConf.colourScheme = scheme;
-    userConfUpdated(reload);
+    if (!property || property.length === 0) return "";
+
+    let currentObj = userConf;
+    let currentDefault = defaultConf;
+
+    // Loop through the property
+    for (let i=0; i < property.length; i++) {
+      const propName = property[i];
+
+      if (!currentDefault.hasOwnProperty(propName)) {
+        console.warn(`setConf: Invalid property: ${property.join(".")}`);
+        return "";
+      }
+
+      if (i === property.length - 1) {  // Check if final property
+        currentObj[propName] = value;
+        userConfUpdated(reload);
+      } else {
+        // If property doesn't exist, create it
+        // This does not apply for the final property (e.g. autohide in bar.autohide)
+        // This is only used when an entire section does not exist (e.g. bar in bar.autohide)
+        if (!currentObj.hasOwnProperty(propName)) currentObj[propName] = {};
+
+        currentObj = currentObj[propName];
+        currentDefault = currentDefault[propName];
+      }
+    }
     return ""
   }
 
+  function setColours(scheme: string, reload: bool): string {
+    const validate = () => Utils.Validate.validateObjKey(scheme, schemes, "Failed to set colour scheme");
+    return setConf(["colourScheme"], scheme, reload, validate);
+  }
+
   function setWallpaper(path: string, reload: bool): void {
-    userConf.desktop.wallpaper = path;
-    userConfUpdated(reload);
+    setConf(['desktop', 'wallpaper'], path, reload);
   }
 
   onUserConfUpdated: (reload) => {
