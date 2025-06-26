@@ -16,7 +16,7 @@ ScrollBar {
   contentItem: Rectangle {
     implicitWidth: 6;
     color: root.pressed ? Globals.colours.accent : Globals.colours.fg;
-    opacity: scrollBarMouse.containsMouse || root.pressed ? 1 : root.scrollView.hovered || !root.scrollView.hoverEnabled ? 0.3 : 0;
+    opacity: scrollBarMouse.containsMouse || root.pressed ? 1 : !root.scrollView.hovered ? 0 : 0.3;
     radius: implicitWidth / 2;
 
     Anims.ColourTransition on color {}
