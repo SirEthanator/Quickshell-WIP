@@ -1,5 +1,4 @@
 import "root:/";
-import Quickshell;
 import QtQuick;
 import QtQuick.Layouts;
 
@@ -8,6 +7,7 @@ Rectangle {
   default property alias data: content.data;
   property bool fullContentWidth: false;
   property bool padding: true;
+  property int spacing: Globals.vars.paddingCard;
 
   color: Globals.colours.bgLight;
   radius: Globals.vars.br;
@@ -43,7 +43,7 @@ Rectangle {
         right: root.fullContentWidth ? parent.right : undefined;
         margins: root.padding ? Globals.vars.paddingCard : 0;
       }
-      spacing: Globals.vars.paddingCard;
+      spacing: root.spacing;
     }
   }
 }

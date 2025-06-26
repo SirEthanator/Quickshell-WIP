@@ -54,7 +54,7 @@ GridLayout {
         const action = powerBtn.modelData[3];
         if (typeof action === "function") action()
         else {
-          selectedAction = powerBtn.modelData;
+          root.selectedAction = powerBtn.modelData;
           root.launchConfirmation();
         }
       }

@@ -28,23 +28,20 @@ ShellRoot {
     target: "config";
 
     function colours(scheme: string, reload: bool): string {
-      const validationResult = Utils.Validate.validateObjKey(scheme, Globals.schemes, "Failed to set colour scheme");
-      if (validationResult) return validationResult;
-      Globals.userConf.colourScheme = scheme;
-      Globals.userConfUpdated(reload);
-      return ""
+      return Globals.setColours(scheme, reload);
     }
     function wallpaper(path: string, reload: bool): void {
-      Globals.userConf.desktop.wallpaper = path;
-      Globals.userConfUpdated(reload);
+      Globals.setWallpaper(path, reload)
     }
     function reload(): void {
       Quickshell.reload(false);
     }
   }
 
-  Notifications.Popups {}
-  OSD.Index {}
+  Scope {
+    Notifications.Popups {}
+    OSD.Index {}
+  }
 
 	Variants {
 		model: Quickshell.screens;
