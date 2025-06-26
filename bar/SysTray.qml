@@ -89,7 +89,7 @@ BarModule {
           columnSpacing: Globals.vars.marginCard;
           anchors.centerIn: parent;
 
-          TrayItems {}
+          TrayItems { window: popup }
         }
       }
 

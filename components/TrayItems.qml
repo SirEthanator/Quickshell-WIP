@@ -1,10 +1,14 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell;
 import Quickshell.Widgets;
 import Quickshell.Services.SystemTray;
 import QtQuick;
 
 Repeater {
+  id: root;
   model: SystemTray.items;
+  property var window;
 
   MouseArea {
     id: trayItem;
@@ -42,11 +46,11 @@ Repeater {
       id: menuAnchor;
       menu: trayItem.modelData.menu;
 
-      anchor.window: trayItem.QsWindow.window;
+      anchor.window: root.window ?? trayItem.QsWindow.window;
       anchor.adjustment: PopupAdjustment.Flip;
 
       anchor.onAnchoring: {
-        const win = trayItem.QsWindow.window;
+        const win = root.window ?? trayItem.QsWindow.window;
         const widgetRect = win.contentItem.mapFromItem(trayItem, 0, trayItem.height, trayItem.width, trayItem.height);
 
         menuAnchor.anchor.rect = widgetRect;
