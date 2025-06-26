@@ -41,6 +41,19 @@ Singleton {
 
   readonly property QtObject colours: schemes[conf.colourScheme];
 
+  function setColours(scheme: string, reload: bool): string {
+    const validationResult = Utils.Validate.validateObjKey(scheme, schemes, "Failed to set colour scheme");
+    if (validationResult) return validationResult;
+    userConf.colourScheme = scheme;
+    userConfUpdated(reload);
+    return ""
+  }
+
+  function setWallpaper(path: string, reload: bool): void {
+    userConf.desktop.wallpaper = path;
+    userConfUpdated(reload);
+  }
+
   onUserConfUpdated: (reload) => {
     confFile.setText(JSON.stringify(userConf, null, 2));
     if (reload) Quickshell.reload(false);
@@ -135,6 +148,8 @@ Singleton {
   readonly property QtObject everforest: QtObject {
     id: everforest
 
+    property string fullName: "Everforest";
+
     property color accent: "#A7C080";
     property color accentDark: Qt.darker(accent, 1.2);
     property color accentLight: Qt.lighter(accent, 1.2);
@@ -167,6 +182,8 @@ Singleton {
   readonly property QtObject catMocha: QtObject {
     id: catMocha
 
+    property string fullName: "Catppuccin Mocha";
+
     property color accent: "#B4BEFE";
     property color accentDark: Qt.darker(accent, 1.2);
     property color accentLight: Qt.lighter(accent, 1.2);
@@ -198,6 +215,8 @@ Singleton {
 
   readonly property QtObject rosePine: QtObject {
     id: rosePine
+
+    property string fullName: "Rose Pine";
 
     property color accent: "#9CCFD8";
     property color accentDark: Qt.darker(accent, 1.2);
