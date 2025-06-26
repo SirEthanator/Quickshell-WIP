@@ -62,100 +62,107 @@ Item {
     }
   }
 
-  ListView {
-    id: listView;
+  MouseArea {
     anchors.fill: parent;
-    spacing: Globals.vars.marginModule;
-    clip: true;
-    opacity: root.model.values.length > 0 ? 1 : 0;
+    hoverEnabled: true;
 
-    Anims.NumberTransition on opacity {}
+    ListView {
+      id: listView;
+      readonly property bool hovered: parent.containsMouse;
 
-    currentIndex: root.currentIndex;
-    highlightMoveDuration: 300;
-    highlightMoveVelocity: 0.8;
+      anchors.fill: parent;
+      spacing: Globals.vars.marginModule;
+      clip: true;
+      opacity: root.model.values.length > 0 ? 1 : 0;
 
-    flickableDirection: Flickable.VerticalFlick;
-    flickDeceleration: 2000;
-    boundsBehavior: Flickable.StopAtBounds;
-    ScrollBar.vertical: StyledScrollBar { scrollView: listView }
+      Anims.NumberTransition on opacity {}
 
-    cacheBuffer: 0;
+      currentIndex: root.currentIndex;
+      highlightMoveDuration: 300;
+      highlightMoveVelocity: 0.8;
 
-    add: Transition {
-      NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Globals.vars.shortTransitionLen }
-    }
-    displaced: Transition {
-      NumberAnimation { property: "y"; duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
-      NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Globals.vars.transitionLen }
-    }
-    move: Transition {
-      NumberAnimation { property: "y"; duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
-      NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Globals.vars.transitionLen }
-    }
-    remove: Transition {
-      NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Globals.vars.shortTransitionLen }
-    }
+      flickableDirection: Flickable.VerticalFlick;
+      flickDeceleration: 2000;
+      boundsBehavior: Flickable.StopAtBounds;
+      ScrollBar.vertical: StyledScrollBar { scrollView: listView }
 
-    model: root.model;
-    delegate: MouseArea {
-      id: entryMouseArea;
-      required property DesktopEntry modelData;
-      required property int index;
+      cacheBuffer: 0;
 
-      width: listView.width;
-      height: entryContent.implicitHeight + Globals.vars.paddingButton * 2;
-
-      hoverEnabled: true;
-
-      onClicked: {
-        modelData.execute();
-        Globals.states.menuOpen = false;
+      add: Transition {
+        NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Globals.vars.shortTransitionLen }
+      }
+      displaced: Transition {
+        NumberAnimation { property: "y"; duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
+        NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Globals.vars.transitionLen }
+      }
+      move: Transition {
+        NumberAnimation { property: "y"; duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
+        NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Globals.vars.transitionLen }
+      }
+      remove: Transition {
+        NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Globals.vars.shortTransitionLen }
       }
 
-      Rectangle {
-        anchors.fill: parent;
-        readonly property bool selected: entryMouseArea.containsMouse || entryMouseArea.index === root.currentIndex;
-        readonly property bool containsPress: entryMouseArea.containsPress;
+      model: root.model;
+      delegate: MouseArea {
+        id: entryMouseArea;
+        required property DesktopEntry modelData;
+        required property int index;
 
-        color: containsPress
-          ? Globals.colours.accent
-          : selected
-            ? Globals.colours.bgHover
-            : Globals.colours.bgLight;
-        radius: Globals.vars.br;
+        width: listView.width;
+        height: entryContent.implicitHeight + Globals.vars.paddingButton * 2;
 
-        border {
-          color: Globals.conf.menu.moduleOutlines && !selected ? Globals.colours.outline : "transparent";
-          width: Globals.conf.menu.moduleOutlines ? Globals.vars.outlineSize : 0;
-          pixelAligned: false;
+        hoverEnabled: true;
+
+        onClicked: {
+          modelData.execute();
+          Globals.states.menuOpen = false;
         }
 
-        Anims.ColourTransition on color {}
+        Rectangle {
+          anchors.fill: parent;
+          readonly property bool selected: entryMouseArea.containsMouse || entryMouseArea.index === root.currentIndex;
+          readonly property bool containsPress: entryMouseArea.containsPress;
 
-        RowLayout {
-          id: entryContent;
-          anchors {
-            top: parent.top;
-            bottom: parent.bottom;
-            left: parent.left;
-            margins: Globals.vars.paddingButton;
+          color: containsPress
+            ? Globals.colours.accent
+            : selected
+              ? Globals.colours.bgHover
+              : Globals.colours.bgLight;
+          radius: Globals.vars.br;
+
+          border {
+            color: Globals.conf.menu.moduleOutlines && !selected ? Globals.colours.outline : "transparent";
+            width: Globals.conf.menu.moduleOutlines ? Globals.vars.outlineSize : 0;
+            pixelAligned: false;
           }
-          spacing: Globals.vars.paddingButton;
 
-          IconImage {
-            Layout.alignment: Qt.AlignVCenter;
-            asynchronous: true;
-            implicitSize: 42;
-            source: Quickshell.iconPath(entryMouseArea.modelData.icon);
-          }
+          Anims.ColourTransition on color {}
 
-          Text {
-            text: entryMouseArea.modelData.name;
-            color: entryMouseArea.containsPress ? Globals.colours.bgLight : Globals.colours.fg;
-            font {
-              family: Globals.vars.fontFamily;
-              pixelSize: Globals.vars.smallHeadingFontSize;
+          RowLayout {
+            id: entryContent;
+            anchors {
+              top: parent.top;
+              bottom: parent.bottom;
+              left: parent.left;
+              margins: Globals.vars.paddingButton;
+            }
+            spacing: Globals.vars.paddingButton;
+
+            IconImage {
+              Layout.alignment: Qt.AlignVCenter;
+              asynchronous: true;
+              implicitSize: 42;
+              source: Quickshell.iconPath(entryMouseArea.modelData.icon);
+            }
+
+            Text {
+              text: entryMouseArea.modelData.name;
+              color: entryMouseArea.containsPress ? Globals.colours.bgLight : Globals.colours.fg;
+              font {
+                family: Globals.vars.fontFamily;
+                pixelSize: Globals.vars.smallHeadingFontSize;
+              }
             }
           }
         }
