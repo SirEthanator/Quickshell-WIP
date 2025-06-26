@@ -67,7 +67,8 @@ Singleton {
       network:      { url: "Network.qml"      },
       battery:      { url: "Battery.qml"      },
       media:        { url: "Media.qml"        },
-      volume:       { url: "Volume.qml"       }
+      volume:       { url: "Volume.qml"       },
+      tray:         { url: "SysTray.qml", props: ["window"] }
     });
 
     property int gap: Utils.SysInfo.gap;  // Size of Hyprland gap

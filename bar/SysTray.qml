@@ -1,37 +1,37 @@
 pragma ComponentBehavior: Bound
 
 import "root:/";
+import "root:/animations" as Anims;
+import "root:/components";
 import Quickshell;
-import Quickshell.Widgets;
-import Quickshell.Services.SystemTray;
 import QtQuick;
 import QtQuick.Layouts;
-import org.kde.kirigami as Kirigami;
 
 BarModule {
   id: root;
   required property var window;
+  readonly property int slideOffset: 20;
 
   hoverEnabled: true;
-  background: root.mouseArea.containsMouse ? Globals.colours.bgHover : Globals.colours.bgLight;
+  background: mouseArea.containsPress ? Globals.colours.accent : mouseArea.containsMouse ? Globals.colours.bgHover : Globals.colours.bgLight;
   onClicked: event => {
-    popupLoader.active = !popupLoader.active;
+    popupLoader.open = !popupLoader.open;
   }
 
-  Kirigami.Icon {
-    Layout.alignment: Qt.AlignCenter;
-
-    source: "down-symbolic";
-    fallback: "error-symbolic";
-    isMask: true;
-    color: Globals.colours.fg;
-    roundToIconSize: false;
-    implicitWidth: Globals.vars.moduleIconSize;
-    implicitHeight: Globals.vars.moduleIconSize;
+  Icon {
+    icon: "expand-symbolic";
+    colour: root.mouseArea.containsPress ? Globals.colours.bgLight : Globals.colours.fg;
+    rotation: popupLoader.open ? 180 : 0;
   }
 
   LazyLoader {
     id: popupLoader;
+    property bool open: false;
+    active: false;
+
+    onOpenChanged: {
+      if (open) active = true;
+    }
 
     PopupWindow {
       id: popup;
@@ -46,66 +46,50 @@ BarModule {
         }
       }
       visible: true;
+      color: "transparent";
 
-      // width: trayButtons.width;
-      // height: trayButtons.height;
+      width: bg.width;
+      height: bg.height;
 
-      GridLayout {
-        id: trayButtons;
-        columns: 3;
+      Rectangle {
+        id: bg;
+        width: trayButtons.width + Globals.vars.paddingWindow * 2;
+        height: trayButtons.height + Globals.vars.paddingWindow * 2;
+        color: Globals.colours.bg;
+        radius: Globals.vars.br;
 
-        Repeater {
-          model: SystemTray.items;
+        Anims.SlideFade {
+          running: popupLoader.open;
+          target: bg;
+          direction: "down";
+          slideOffset: root.slideOffset;
+        }
 
-          MouseArea {
-            id: delegate;
-            required property SystemTrayItem modelData;
-            property alias item: delegate.modelData;
-
-            implicitWidth: icon.implicitWidth;
-            implicitHeight: icon.implicitHeight;
-            acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton;
-            hoverEnabled: true;
-
-            onClicked: event => {
-              if (event.button == Qt.LeftButton) {
-                item.activate();
-              } else if (event.button == Qt.MiddleButton) {
-                item.secondaryActivate();
-              } else if (event.button == Qt.RightButton && item.hasMenu) {
-                menuAnchor.open();
-              }
-            }
-
-            onWheel: event => {
-              event.accepted = true;
-              const points = event.angleDelta.y / 120;
-              item.scroll(points, false);
-            }
-
-            IconImage {
-              id: icon
-              anchors.centerIn: parent;
-              source: delegate.item.icon;
-
-              implicitSize: 32;
-            }
-
-            QsMenuAnchor {
-              id: menuAnchor;
-              menu: delegate.item.menu;
-
-              anchor.window: delegate.QsWindow.window;
-              anchor.adjustment: PopupAdjustment.Flip;
-
-              anchor.onAnchoring: {
-                const win = delegate.QsWindow.window;
-                const widgetRect = win.contentItem.mapFromItem(delegate, 0, delegate.height, delegate.width, delegate.height);
-
-                menuAnchor.anchor.rect = widgetRect;
-              }
-            }
+        SequentialAnimation {
+          running: !popupLoader.open;
+          Anims.SlideFade {
+            target: bg;
+            direction: "down";
+            slideOffset: root.slideOffset;
+            reverse: true;
           }
+          PropertyAction { property: "active"; target: popupLoader; value: false }
+        }
+
+        border {
+          color: Globals.colours.outline;
+          width: Globals.vars.outlineSize;
+          pixelAligned: false;
+        }
+
+        GridLayout {
+          id: trayButtons;
+          columns: 5;
+          rowSpacing: Globals.vars.marginCard;
+          columnSpacing: Globals.vars.marginCard;
+          anchors.centerIn: parent;
+
+          TrayItems {}
         }
       }
 
