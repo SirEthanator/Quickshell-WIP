@@ -67,13 +67,18 @@ Loader {
           }
         }
 
-        Text {
-          Layout.alignment: Qt.AlignHCenter;
-          text: `Reason: ${Globals.configInvalidReason}`;
-          color: root.colours.grey;
-          font {
-            family: Globals.vars.fontFamily;
-            pixelSize: Globals.vars.mainFontSize;
+        Repeater {
+          model: Globals.configInvalidReasons;
+
+          delegate: Text {
+            required property string modelData;
+            Layout.alignment: Qt.AlignHCenter;
+            text: modelData;
+            color: root.colours.grey;
+            font {
+              family: Globals.vars.fontFamily;
+              pixelSize: Globals.vars.mainFontSize;
+            }
           }
         }
 

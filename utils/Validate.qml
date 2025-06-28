@@ -17,7 +17,7 @@ Singleton {
 
   function invalidConf(reason: string) {
     Globals.configValid = Globals.ConfigState.Invalid;
-    Globals.configInvalidReason = reason;
+    Globals.configInvalidReasons.push(reason);
   }
 
   function validateInt(val, min: int, max: int, errMsg: string) {
