@@ -132,7 +132,9 @@ Singleton {
       pixelSize: vars.moduleIconSize
     });
 
-    property int barHeight: vars.moduleIconSize + vars.paddingModule + vars.paddingBar*2;  // This results in the modules' top and bottom padding matching paddingModule - relies on icons being the tallest items
+    // This results in the modules' top and bottom padding matching paddingModule - relies on icons being the tallest items
+    // Changes due to configuration are handled in Bar/Index
+    property int barHeight: vars.moduleIconSize + vars.paddingModule + vars.paddingBar*2 + vars.outlineSize*2;
     property int paddingBar: 6;
     // Note that paddingModule will not directly affect the top and bottom padding. The top and bottom padding is based on the bar's height.
     property int paddingModule: 8;
