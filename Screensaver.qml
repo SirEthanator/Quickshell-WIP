@@ -7,8 +7,9 @@ import Qt5Compat.GraphicalEffects;
 
 LazyLoader {
   id: loader;
-  activeAsync: Globals.states.screensaverActive && Globals.configValid === Globals.ConfigState.Valid;
+  activeAsync: show;
   required property var screen;
+  required property bool show;
 
   PanelWindow {
     id: root;

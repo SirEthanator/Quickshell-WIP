@@ -51,7 +51,7 @@ ShellRoot {
 
       Bar.Index { screen: scope.modelData }
       Desktop.Index { screen: scope.modelData }
-      Screensaver { screen: scope.modelData }
+      Screensaver { screen: scope.modelData; show: Globals.states.screensaverActive }
       InvalidConf.Index { screen: scope.modelData }
     }
 	}
