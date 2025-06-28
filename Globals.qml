@@ -290,7 +290,7 @@ Singleton {
   }
 
   property int configValid: Globals.ConfigState.Validating;
-  property string configInvalidReason;
+  property list<string> configInvalidReasons: [];
 
   PersistentProperties {
     id: persist
