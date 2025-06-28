@@ -1,4 +1,4 @@
-# SYNOPSIS
+# OVERVIEW
 
 ```
 {
@@ -21,7 +21,10 @@
   "menu": {
     "width": int,
     "capitaliseUsername": bool,
-    "capitaliseHostname": bool
+    "capitaliseHostname": bool,
+    "dimBackground": bool,
+    "backgroundOutline": bool,
+    "moduleOutlines": bool
   },
 
   "desktop": {
@@ -46,6 +49,10 @@
     "normalSound": string,
     "criticalSound": string,
     "dismissThreshold": real
+  },
+
+  "osd": {
+    "backlightName": string
   }
 }
 ```
@@ -56,7 +63,9 @@
 
 Defines what colour scheme should be used.
 
-Type: "everforest" | "catMocha" | "rosePine"
+Type: String
+
+Constraints: Must be one of: "everforest" | "catMocha" | "rosePine"
 
 Default: `"everforest"`
 
@@ -141,6 +150,8 @@ Defines how many workspaces should be shown on the workspace module.
 
 Type: Integer
 
+Constraints: Minimum of 1 and maximum of 20
+
 Default: `10`
 
 
@@ -149,6 +160,8 @@ Default: `10`
 Defines the maximum length for modules with long text.
 
 Type: Integer
+
+Constraints: Minimum of 0 and maximum of 1000
 
 Default: `60`
 
@@ -160,6 +173,8 @@ Default: `60`
 Defines how wide the menu should be (px).
 
 Type: Integer
+
+Constraints: Minimum of 450 and maximum of 5000
 
 Default: `600`
 
@@ -178,6 +193,30 @@ Defines whether the system's hostname should be capitalised.
 Type: Boolean
 
 Default: `false`
+
+## dimBackground
+
+Defines whether the background behind the menu should be dimmed.
+
+Type: Boolean
+
+Default: true
+
+## backgroundOutline
+
+Defines whether the bar's background should have an outline around it.
+
+Type: Boolean
+
+Default: true
+
+## moduleOutlines
+
+Defines whether dashboard modules and launcher items should have outlines around them.
+
+Type: Boolean
+
+Default: true
 
 
 # DESKTOP
@@ -203,6 +242,8 @@ Default: `false`
 Defines how long the wallpaper should fade in for when the shell is launched (ms). Set to 0 to disable.
 
 Type: int
+
+Constraints: Minimum of 0 and maximum of 60000
 
 Default: `2000`
 
@@ -279,6 +320,8 @@ Defines the width of notifications (px).
 
 Type: Integer
 
+Constraints: Minimum of 200 and maximum of 5000
+
 Default: `500`
 
 ## defaultTimeout
@@ -287,6 +330,8 @@ Defines the default timeout for notifications when the sender does not specify o
 
 Type: Integer
 
+Constraints: Minimum of 100 and maximum of 60000
+
 Default: `5000`
 
 ## defaultCriticalTimeout
@@ -294,6 +339,8 @@ Default: `5000`
 Defines the default timeout for critical notifications when the sender does not specify one (ms).
 
 Type: Integer
+
+Constraints: Minimum of 100 and maximum of 60000
 
 Default: `8000`
 
@@ -328,5 +375,20 @@ Defines what percentage of `width` notifications must be dragged to dismiss them
 
 Type: Integer
 
+Constraints: Minimum of 1 and maximum of 99
+
 Default: `30`
+
+
+# OSD
+
+## backlightName
+
+Defines the name of the display's backlight. This is used to get the path of the backlight: `/sys/class/backlight/<backlightName>`
+
+Some common options for this are `intel_backlight` and `acpi_video0`. You can find the correct one for your display by running `ls /sys/class/backlight`. Note that only **internal displays** are supported currently.
+
+Type: String
+
+Default: `""`
 
