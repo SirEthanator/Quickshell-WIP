@@ -6,6 +6,7 @@ import "menu" as Menu;
 import "notifications" as Notifications;
 import "desktop" as Desktop;
 import "osd" as OSD;
+import "invalidConf" as InvalidConf;
 import "utils" as Utils;
 import Quickshell.Io;
 import QtQuick;
@@ -38,10 +39,8 @@ ShellRoot {
     }
   }
 
-  Scope {
-    Notifications.Popups {}
-    OSD.Index {}
-  }
+  Notifications.Popups {}
+  OSD.Index {}
 
 	Variants {
 		model: Quickshell.screens;
@@ -53,8 +52,8 @@ ShellRoot {
       Bar.Index { screen: scope.modelData }
       Desktop.Index { screen: scope.modelData }
       Screensaver { screen: scope.modelData }
+      InvalidConf.Index { screen: scope.modelData }
     }
-
 	}
 }
 

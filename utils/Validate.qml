@@ -5,11 +5,19 @@ import Quickshell;
 import QtQuick;
 
 Singleton {
+  function exit() {
+    Qt.callLater(Qt.quit);
+  }
   function fatalError(msg: string) {
     Qt.callLater(() => {
       console.error(msg);
       Qt.quit();
     });
+  }
+
+  function invalidConf(reason: string) {
+    Globals.configValid = Globals.ConfigState.Invalid;
+    Globals.configInvalidReason = reason;
   }
 
   function validateInt(val, min: int, max: int, errMsg: string) {
@@ -76,7 +84,7 @@ Singleton {
   }
 
   function v(result) {
-    if (result) fatalError(result);
+    if (result) invalidConf(result);
   }
 
   function validateConfig() {
@@ -122,6 +130,8 @@ Singleton {
     v(validateString(conf.notifications.normalSound, [], "notifications.normalSound"));
     v(validateString(conf.notifications.criticalSound, [], "notifications.criticalSound"));
     v(validateInt(conf.notifications.dismissThreshold, 1, 99, "notifications.dismissThreshold"));
+
+    if (Globals.configValid !== Globals.ConfigState.Invalid) Globals.configValid = Globals.ConfigState.Valid;
   }
 
 }

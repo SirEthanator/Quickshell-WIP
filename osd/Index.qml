@@ -50,6 +50,7 @@ LazyLoader {
   PanelWindow {
     id: root;
     color: "transparent";
+    visible: Globals.configValid === Globals.ConfigState.Valid;
 
     exclusionMode: ExclusionMode.Ignore;
     WlrLayershell.layer: WlrLayer.Overlay;

@@ -6,7 +6,8 @@ import QtQuick;
 
 PanelWindow {
   id: root;
-  color: Globals.conf.menu.dimBackground && Globals.states.menuOpen ? Globals.vars.menuDimmedColour : "transparent";
+  color: Globals.conf.menu.dimBackground && Globals.states.menuOpen ? Globals.vars.bgDimmedColour : "transparent";
+  visible: Globals.configValid === Globals.ConfigState.Valid;
 
   Anims.ColourTransition on color {
     duration: Globals.vars.animLen;
