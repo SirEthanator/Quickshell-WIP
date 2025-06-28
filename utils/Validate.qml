@@ -110,6 +110,9 @@ Singleton {
     v(validateInt(conf.menu.width, 450, 5000, "menu.width"));
     v(validateBool(conf.menu.capitaliseUsername, "menu.capitaliseUsername"));
     v(validateBool(conf.menu.capitaliseHostname, "menu.capitaliseHostname"));
+    v(validateBool(conf.menu.dimBackground, "menu.dimBackground"));
+    v(validateBool(conf.menu.backgroundOutline, "menu.backgroundOutline"));
+    v(validateBool(conf.menu.moduleOutlines, "menu.moduleOutlines"));
 
     v(validateString(conf.desktop.wallpaper, [], "desktop.wallpaper"));
     v(validateBool(conf.desktop.videoWallpaper, "desktop.videoWallpaper"));
@@ -130,6 +133,8 @@ Singleton {
     v(validateString(conf.notifications.normalSound, [], "notifications.normalSound"));
     v(validateString(conf.notifications.criticalSound, [], "notifications.criticalSound"));
     v(validateInt(conf.notifications.dismissThreshold, 1, 99, "notifications.dismissThreshold"));
+
+    v(validateString(conf.osd.backlightName, [], "osd.backlightName"));
 
     if (Globals.configValid !== Globals.ConfigState.Invalid) Globals.configValid = Globals.ConfigState.Valid;
   }
