@@ -164,7 +164,7 @@ Singleton {
     property int largeIconSize: 40;
     property int extraLargeIconSize: 90;
 
-    property color menuDimmedColour: "#4D000000";
+    property color bgDimmedColour: "#4D000000";
   }
 
   /*    ___________ ________  ___________
@@ -280,6 +280,15 @@ Singleton {
        / __/_  __/ _ /_  __/ __/ __/
       _\ \  / / / __ |/ / / _/_\ \
      /___/ /_/ /_/ |_/_/ /___/___/   */
+
+  enum ConfigState {
+    Valid,
+    Invalid,
+    Validating
+  }
+
+  property int configValid: Globals.ConfigState.Validating;
+  property string configInvalidReason;
 
   PersistentProperties {
     id: persist
