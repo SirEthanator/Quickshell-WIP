@@ -1,4 +1,5 @@
 import "root:/";
+import "root:/components";
 import QtQuick;
 
 BarModule {
@@ -9,10 +10,9 @@ BarModule {
   onClicked: Globals.states.menuOpen = !Globals.states.menuOpen;
   padding: Globals.vars.paddingModule*2;
 
-  Text {
-    text: "";
-    font: Globals.vars.nerdFont;
-    color: Globals.colours.bg;
+  Icon {
+    icon: "archlinux-logo";
+    colour: Globals.colours.bg;
   }
 }
 
