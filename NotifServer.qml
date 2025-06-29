@@ -10,6 +10,8 @@ Singleton {
   signal incoming(n: Notification);
   signal dismissed(id: int);
 
+  readonly property alias notifList: notifServer.trackedNotifications;
+
   NotificationServer {
     id: notifServer
 

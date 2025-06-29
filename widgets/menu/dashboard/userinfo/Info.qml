@@ -19,7 +19,7 @@ RowLayout {
 
     Image {
       id: pfp;
-      source: "root:/pfp.png";
+      source: "root:/assets/profile.png";
       sourceSize.width: 100;
       sourceSize.height: 100;
     }

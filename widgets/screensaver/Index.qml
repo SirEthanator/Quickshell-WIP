@@ -1,5 +1,6 @@
 pragma ComponentBehavior: Bound
 
+import "root:/";
 import Quickshell;
 import Quickshell.Wayland;
 import QtQuick;
@@ -10,6 +11,7 @@ LazyLoader {
   activeAsync: show;
   required property var screen;
   required property bool show;
+  signal hide;
 
   PanelWindow {
     id: root;
@@ -30,7 +32,7 @@ LazyLoader {
     Item {
       anchors.fill: parent;
       focus: true;
-      Keys.onEscapePressed: Globals.states.screensaverActive = false;
+      Keys.onEscapePressed: loader.hide();
 
       Rectangle {
         id: background;
@@ -43,8 +45,7 @@ LazyLoader {
 
           Image {
             id: logosrc;
-            // anchors.centerIn: parent;
-            source: Qt.resolvedUrl("./archlinux.svg");
+            source: Qt.resolvedUrl("root:/assets/arch-full.svg");
             visible: false;
           }
 
