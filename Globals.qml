@@ -124,11 +124,6 @@ Singleton {
     property int headingFontSize: 34;
     property int smallHeadingFontSize: 22;
 
-    property font nerdFont: ({
-      family: "Symbols Nerd Font Mono",
-      pixelSize: vars.moduleIconSize
-    });
-
     // This results in the modules' top and bottom padding matching paddingModule - relies on icons being the tallest items
     // Changes due to configuration are handled in Bar/Index
     property int barHeight: vars.moduleIconSize + vars.paddingModule + vars.paddingBar*2 + vars.outlineSize*2;
