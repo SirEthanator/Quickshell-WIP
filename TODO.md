@@ -1,4 +1,0 @@
-- [ ] Clean up animations
-- [ ] Disable top, left, and right outline when bar is docked
-- [ ] Use D-Bus for NetworkManager
-- [ ] Config menu

@@ -1,7 +1,7 @@
 import "root:/";
 import "root:/components";
 import "root:/animations" as Anims;
-import "root:/notifications" as Notifs;
+import "root:/widgets/notifications" as Notifs;
 import Quickshell.Services.Notifications;
 import QtQuick;
 import QtQuick.Controls;
@@ -12,7 +12,7 @@ DashItem {
   Layout.fillHeight: true;
   fullContentWidth: true;
 
-  readonly property var notifications: Globals.notifList.values;
+  readonly property var notifications: NotifServer.notifList.values;
 
   ColumnLayout {
     id: column;

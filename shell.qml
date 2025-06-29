@@ -1,12 +1,13 @@
 //@ pragma UseQApplication
 
 import Quickshell;
-import "bar" as Bar;
-import "menu" as Menu;
-import "notifications" as Notifications;
-import "desktop" as Desktop;
-import "osd" as OSD;
-import "invalidConf" as InvalidConf;
+import "widgets/bar" as Bar;
+import "widgets/menu" as Menu;
+import "widgets/notifications" as Notifications;
+import "widgets/desktop" as Desktop;
+import "widgets/osd" as OSD;
+import "widgets/screensaver" as Screensaver;
+import "widgets/invalidConf" as InvalidConf;
 import "utils" as Utils;
 import Quickshell.Io;
 import QtQuick;
@@ -51,7 +52,11 @@ ShellRoot {
 
       Bar.Index { screen: scope.modelData }
       Desktop.Index { screen: scope.modelData }
-      Screensaver { screen: scope.modelData; show: Globals.states.screensaverActive }
+      Screensaver.Index {
+        screen: scope.modelData;
+        show: Globals.states.screensaverActive;
+        onHide: Globals.states.screensaverActive = false;
+      }
       InvalidConf.Index { screen: scope.modelData }
     }
 	}

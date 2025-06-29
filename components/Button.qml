@@ -33,12 +33,12 @@ MouseArea {
   hoverEnabled: true;
 
   readonly property int autoHeightVal: label.height + padding;
-  height: autoHeight ? autoHeightVal : NaN;
-  implicitHeight: autoImplicitHeight ? autoHeightVal : NaN;
+  height: autoHeight ? autoHeightVal : undefined;
+  implicitHeight: autoImplicitHeight ? autoHeightVal : undefined;
 
   readonly property int autoWidthVal: label.width + padding;
-  width: autoWidth ? autoWidthVal : NaN;
-  implicitWidth: autoImplicitWidth ? autoWidthVal : NaN;
+  width: autoWidth ? autoWidthVal : undefined;
+  implicitWidth: autoImplicitWidth ? autoWidthVal : undefined;
 
   Rectangle {
     id: background;

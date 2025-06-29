@@ -1,7 +1,6 @@
 pragma Singleton
 
 import "utils" as Utils;
-import "notifications" as Notifs;
 import Quickshell;
 import Quickshell.Io;
 import QtQuick;
@@ -87,8 +86,6 @@ Singleton {
     confFile.setText(JSON.stringify(userConf, null, 2));
     if (reload) Quickshell.reload(false);
   }
-
-  readonly property var notifList: Notifs.NotifServer.server.trackedNotifications;
 
   /*  _   _____   ___  _______   ___  __   ________
      | | / / _ | / _ \/  _/ _ | / _ )/ /  / __/ __/
