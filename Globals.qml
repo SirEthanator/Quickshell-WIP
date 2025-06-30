@@ -123,6 +123,7 @@ Singleton {
     property int xlFontSize: 150;
     property int headingFontSize: 34;
     property int smallHeadingFontSize: 22;
+    property int mediumHeadingFontSize: 28;
 
     // This results in the modules' top and bottom padding matching paddingModule - relies on icons being the tallest items
     // Changes due to configuration are handled in Bar/Index

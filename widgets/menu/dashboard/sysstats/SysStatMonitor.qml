@@ -1,71 +1,42 @@
 import "root:/";
 import "root:/components";
-import "..";
 import QtQuick;
 import QtQuick.Layouts;
 
-DashItem {
+RowLayout {
   id: root;
   required property real percentage;
   required property string title;
-  required property string icon;
+  property string extraInfo;
+  spacing: Globals.vars.paddingCard;
 
-  fullContentWidth: true;
-  padding: false;
+  CircularProgress {
+    implicitHeight: 80;
+    implicitWidth: 80;
+    value: root.percentage / 100;
+    fg: value > 0.85 ? Globals.colours.red : Globals.colours.accent;
+  }
 
   ColumnLayout {
-    spacing: Globals.vars.paddingCard;
+    spacing: Globals.vars.marginCardSmall;
 
-    Item {}
-
-    RowLayout {
-      spacing: Globals.vars.paddingCard;
-
-      Item {}
-
-      Rectangle {
-        implicitHeight: 100;
-        implicitWidth: 100;
-        radius: width / 2;
-        color: Globals.colours.bg;
-
-        Icon {
-          anchors.centerIn: parent;
-
-          icon: root.icon;
-          colour: Globals.colours.fg;
-          size: parent.width / 2;
-        }
+    Text {
+      text: root.title;
+      font {
+        family: Globals.vars.fontFamily;
+        pixelSize: Globals.vars.mediumHeadingFontSize;
       }
-
-      ColumnLayout {
-        Text {
-          text: root.title;
-          font {
-            family: Globals.vars.fontFamily;
-            pixelSize: Globals.vars.headingFontSize;
-          }
-          color: Globals.colours.fg;
-        }
-
-        Text {
-          text: `${root.percentage}%`;
-          font {
-            family: Globals.vars.fontFamily;
-            pixelSize: Globals.vars.smallHeadingFontSize
-          }
-          color: Globals.colours.fg;
-        }
-      }
+      color: Globals.colours.fg;
     }
 
-    ProgressBar {
-      Layout.fillWidth: true;
-      implicitHeight: 6;
-      radius: Globals.vars.br;
-      value: root.percentage / 100;
-      bg: "transparent";
-      fg: Globals.colours.accent;
+    Text {
+      text: root.extraInfo;
+      visible: !!root.extraInfo;
+      font {
+        family: Globals.vars.fontFamily;
+        pixelSize: Globals.vars.mainFontSize;
+      }
+      color: Globals.colours.grey;
     }
   }
 }

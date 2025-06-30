@@ -5,7 +5,7 @@ import QtQuick;
 Scope {
   id: root
   required property var command;
-  required property SplitParser parseOut;
+  required property DataStreamParser parseOut;
   required property int interval;
 
   Process {
