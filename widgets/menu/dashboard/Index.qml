@@ -9,8 +9,7 @@ ColumnLayout {
 
   UserInfo.Index {}
 
-  SysStats.CPU {}
-  SysStats.Memory {}
+  SysStats.Index {}
 
   SysTray {}
 

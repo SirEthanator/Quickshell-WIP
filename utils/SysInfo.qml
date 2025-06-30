@@ -30,10 +30,15 @@ Singleton {
   property string hostname: ""    ;
   property string network: ""     ;
   property int    networkStrength ;
-  property int    cpuUsage        ;
-  property int    memUsage        ;
   property int    brightness      ;
   property int    maxBrightness: 0;
+
+  // In GiB
+  property real   totalMemory     ;
+  property real   freeMemory      ;
+
+  property int    cpuUsage        ;
+  property real   cpuTemp         ;
 
   SystemClock { id: clock }
 
@@ -86,6 +91,22 @@ Singleton {
     }
   }
 
+  Process {
+    command: ["sh", "-c", "grep MemTotal /proc/meminfo | awk '{print $2}'"];
+    running: true;
+    stdout: SplitParser {
+      onRead: data => root.totalMemory = (parseFloat(data) / 1024**2).toFixed(2);
+    }
+  }
+
+  RepeatingProcess {
+    command: ["sh", "-c", "grep MemAvailable /proc/meminfo | awk '{print $2}'"];
+    interval: 3000;
+    parseOut: SplitParser {
+      onRead: data => root.freeMemory = (parseFloat(data) / 1024**2).toFixed(2);
+    }
+  }
+
   RepeatingProcess {
     command: ["sh", "-c", "top -b -n 1 | grep 'Cpu(s)' | awk '{print $2}'"];
     interval: 1000;
@@ -95,10 +116,10 @@ Singleton {
   }
 
   RepeatingProcess {
-    command: ["sh", "-c", `free -m | awk 'NR==2{printf "%.2f\\n", $3*100/$2 }'`];
-    interval: 1000;
-    parseOut: SplitParser {
-      onRead: data => root.memUsage = parseFloat(data).toFixed(0);
+    command: ["sh", "-c", "echo $(basename $(sensors | grep 'Package id 0' | awk '{print $4}') '°C')"];
+    interval: 3000;
+    parseOut: StdioCollector {
+      onStreamFinished: root.cpuTemp = parseFloat(text).toFixed(1);
     }
   }
 
