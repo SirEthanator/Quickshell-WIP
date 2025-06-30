@@ -1,10 +1,8 @@
 import "root:/";
 import "root:/components";
 import "root:/animations" as Anims;
-import Quickshell;
 import QtQuick;
 import QtQuick.Layouts;
-import org.kde.kirigami as Kirigami;
 
 Rectangle {
   id: root
