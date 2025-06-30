@@ -8,10 +8,11 @@ ParallelAnimation {
   property string direction: "right";  // TODO: Change to enum
   property int slideOffset: 100;
   property int duration: Globals.vars.animLen;
+  property int originalPos: 0;
 
   NumberAnimation {
     readonly property int fromVal: root.direction === "right" || root.direction === "down" ? -root.slideOffset : root.slideOffset;
-    readonly property int toVal: 0;
+    readonly property int toVal: root.originalPos;
     target: root.target;
     property: root.direction === "right" || root.direction === "left" ? "x" : "y";
     from: root.reverse ? toVal : fromVal;

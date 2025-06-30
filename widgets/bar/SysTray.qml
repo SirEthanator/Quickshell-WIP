@@ -10,7 +10,7 @@ import QtQuick.Layouts;
 BarModule {
   id: root;
   required property var window;
-  readonly property int slideOffset: 20;
+  readonly property int slideOffset: 4;
 
   hoverEnabled: true;
   background: mouseArea.containsPress ? Globals.colours.accent : mouseArea.containsMouse ? Globals.colours.bgHover : Globals.colours.bgLight;
@@ -38,7 +38,7 @@ BarModule {
 
       anchor {
         window: root.window;
-        rect.y: root.window.height + Globals.vars.gapLarge;
+        rect.y: root.window.height;
         edges: Edges.Top;
         gravity: Edges.Bottom;
         onAnchoring: {
@@ -49,12 +49,13 @@ BarModule {
       color: "transparent";
 
       width: bg.width;
-      height: bg.height;
+      height: bg.height + Globals.vars.gapLarge;
 
       Rectangle {
         id: bg;
         width: trayButtons.width + Globals.vars.paddingWindow * 2;
         height: trayButtons.height + Globals.vars.paddingWindow * 2;
+        y: Globals.vars.gapLarge;
         color: Globals.colours.bg;
         radius: Globals.vars.br;
 
@@ -63,6 +64,7 @@ BarModule {
           target: bg;
           direction: "down";
           slideOffset: root.slideOffset;
+          originalPos: Globals.vars.gapLarge;
         }
 
         SequentialAnimation {
@@ -71,6 +73,7 @@ BarModule {
             target: bg;
             direction: "down";
             slideOffset: root.slideOffset;
+            originalPos: Globals.vars.gapLarge;
             reverse: true;
           }
           PropertyAction { property: "active"; target: popupLoader; value: false }
