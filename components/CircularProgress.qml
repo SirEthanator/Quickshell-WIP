@@ -21,6 +21,7 @@ Item {
   property color fontColour: Globals.colours.fg;
 
   Anims.NumberTransition on value {}
+  Anims.ColourTransition on fg {}
 
   Canvas {
     id: canvas;
