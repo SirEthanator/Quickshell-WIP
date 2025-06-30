@@ -19,6 +19,7 @@
   },
 
   "menu": {
+    "dashModules": [ string ],
     "width": int,
     "capitaliseUsername": bool,
     "capitaliseHostname": bool,
@@ -78,6 +79,8 @@ Defines what modules to show on the left of the bar (LTR).
 
 Type: Array of strings
 
+Constraints: Must be one of: "menu" | "workspaces" | "activeWindow" | "dateAndTime" | "tray" | "network" | "battery" | "media" | "volume"
+
 Default: `["menu", "workspaces", "activeWindow"]`
 
 ## centre
@@ -86,6 +89,8 @@ Defines what modules to show in the middle of the bar (LTR).
 
 Type: Array of strings
 
+Constraints: See [bar.left](#left)
+
 Default: `[ "dateAndTime" ]`
 
 ## right
@@ -93,6 +98,8 @@ Default: `[ "dateAndTime" ]`
 Defines what modules to show on the right of the bar (LTR).
 
 Type: Array of strings
+
+Constraints: See [bar.left](#left)
 
 Default: `[ "network", "battery", "media", "volume" ]`
 
@@ -167,6 +174,16 @@ Default: `60`
 
 
 # MENU
+
+## dashModules
+
+Defines which modules should be shown on the dashboard.
+
+Type: Array of strings
+
+Constraints: Must be one of: "userInfo" | "sysStats" | "notifCentre" | "tray"
+
+Default: `["userInfo", "sysStats", "notifCentre"]`
 
 ## width
 

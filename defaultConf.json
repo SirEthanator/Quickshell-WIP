@@ -28,6 +28,11 @@
   },
 
   "menu": {
+    "dashModules": [
+      "userInfo",
+      "sysStats",
+      "notifCentre"
+    ],
     "width": 600,
     "capitaliseUsername": true,
     "capitaliseHostname": false,

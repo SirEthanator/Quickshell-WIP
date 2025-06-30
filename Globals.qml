@@ -100,14 +100,24 @@ Singleton {
         url: "Workspaces.qml",
         props: ["screen"]
       },
+      tray: {
+        url: "SysTray.qml",
+        props: ["window"]
+      },
       menu:         { url: "MenuBtn.qml"      },
       activeWindow: { url: "ActiveWindow.qml" },
       dateAndTime:  { url: "DateAndTime.qml"  },
       network:      { url: "Network.qml"      },
       battery:      { url: "Battery.qml"      },
       media:        { url: "Media.qml"        },
-      volume:       { url: "Volume.qml"       },
-      tray:         { url: "SysTray.qml", props: ["window"] }
+      volume:       { url: "Volume.qml"       }
+    });
+
+    property var dashModules: ({
+      userInfo:    { url: "userinfo/Index.qml" },
+      sysStats:    { url: "sysstats/Index.qml" },
+      notifCentre: { url: "NotifCentre.qml"    },
+      tray:        { url: "SysTray.qml"        }
     });
 
     property int gap: Utils.SysInfo.gap;  // Size of Hyprland gap
