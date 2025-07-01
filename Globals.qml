@@ -82,6 +82,33 @@ Singleton {
     setConf(['desktop', 'wallpaper'], path, reload);
   }
 
+  function switchTheme(scheme: string): string {
+    const validationResult = Utils.Validate.validateObjKey(scheme, schemes, "Failed to set colour scheme");
+    if (validationResult) return validationResult;
+    states.themeSwitchInProgress = true;
+    states.themeOverlayOpen = true;
+    setTheme.scheme = scheme;
+    setTheme.running = true;
+    return "";
+  }
+
+  Process {
+    id: setTheme;
+
+    property string scheme: "";
+    command: ["sh", "-c", `${Quickshell.env("HOME")}/Scripts/SetTheme ${scheme} --noconfirm --noqsreload`];
+    stdout: SplitParser {
+      onRead: data => root.states.themeSwitchingState = data;
+    }
+    onExited: {
+      // Wait a little while before closing to show complete message
+      Utils.Timeout.setTimeout(() => {
+        root.states.themeSwitchInProgress = false;
+        Quickshell.reload(false);
+      }, 1000);
+    }
+  }
+
   onUserConfUpdated: (reload) => {
     confFile.setText(JSON.stringify(userConf, null, 2));
     if (reload) Quickshell.reload(false);
@@ -301,6 +328,9 @@ Singleton {
     property bool menuOpen: false;
     property bool barHidden: false;
     property bool screensaverActive: false;
+    property bool themeSwitchInProgress: false;
+    property bool themeOverlayOpen: false;
+    property string themeSwitchingState: "";
   }
 
   property alias states: persist;
