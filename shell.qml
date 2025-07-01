@@ -1,9 +1,11 @@
 //@ pragma UseQApplication
+//@ pragma Env QS_NO_RELOAD_POPUP=1
 
 import Quickshell;
 import "widgets/bar" as Bar;
 import "widgets/menu" as Menu;
 import "widgets/notifications" as Notifications;
+import "widgets/lock" as Lock;
 import "widgets/desktop" as Desktop;
 import "widgets/osd" as OSD;
 import "widgets/screensaver" as Screensaver;
@@ -44,6 +46,7 @@ ShellRoot {
   Menu.Index {}
   Notifications.Popups {}
   OSD.Index {}
+  Lock.Index {}
 
 	Variants {
 		model: Quickshell.screens;

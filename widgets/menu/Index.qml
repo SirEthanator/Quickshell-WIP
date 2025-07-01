@@ -90,8 +90,8 @@ Scope {
           } else if (key === Qt.Key_Escape) {
             Globals.states.menuOpen = false;
           } else if ((key >= 48 && key <= 90) || (key >= 97 && key <= 122) || (key >= 186 && key <= 223)) {
-            appSearch.insert(0, event.text);
             appSearch.focus = true;
+            appSearch.insert(0, event.text);
           } else if (stack.currentIndex === 1) {
             if (key === Qt.Key_Return || key === Qt.Key_Enter) launcher.execSelected();
             if (key === Qt.Key_Down) launcher.down();
@@ -135,53 +135,19 @@ Scope {
               margins: Globals.vars.paddingWindow;
             }
 
-            // Application search bar
-            Rectangle {
-              id: appSearchBg;
-              color: Globals.colours.bgLight;
-              radius: Globals.vars.br;
-
-              border {
-                color: Globals.conf.menu.moduleOutlines ? Globals.colours.outline : "transparent";
-                width: Globals.conf.menu.moduleOutlines ? Globals.vars.outlineSize : 0;
-                pixelAligned: false;
-              }
-
-              implicitHeight: appSearch.height + Globals.vars.paddingButton * 2;
+            Input {
+              id: appSearch;
               Layout.fillWidth: true;
 
-              RowLayout {
-                spacing: Globals.vars.paddingButton;
-                anchors.fill: parent;
+              showBorder: Globals.conf.menu.moduleOutlines;
 
-                Item {}
+              placeholderText: "Search Applications";
+              icon: "search-symbolic";
 
-                Icon {
-                  icon: "search-symbolic";
-                  color: Globals.colours.fg;
-                  Layout.alignment: Qt.AlignVCenter;
-                }
-
-                TextField {
-                  id: appSearch;
-                  Layout.fillWidth: true;
-                  color: Globals.colours.fg;
-                  font {
-                    family: Globals.vars.fontFamily;
-                    pixelSize: Globals.vars.mainFontSize;
-                  }
-
-                  background: Rectangle { color: "transparent" }
-
-                  placeholderText: "Search Applications";
-                  placeholderTextColor: Globals.colours.grey;
-
-                  focusPolicy: Qt.ClickFocus;
-                  onFocusChanged: {
-                    if (focus) stack.currentIndex = 1
-                    else clear();
-                  }
-                }
+              focusPolicy: Qt.ClickFocus;
+              onInputFocusChanged: {
+                if (inputFocus) stack.currentIndex = 1
+                else clear();
               }
             }
 
