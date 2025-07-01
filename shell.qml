@@ -16,10 +16,7 @@ import QtQuick;
 ShellRoot {
   id: shellroot;
 
-  Component.onCompleted: {
-    Utils.Validate.validateConfig();
-    Menu.Controller.init();
-  }
+  Component.onCompleted: Utils.Validate.validateConfig();
 
   IpcHandler {
     target: "screensaver";
@@ -44,6 +41,7 @@ ShellRoot {
     }
   }
 
+  Menu.Index {}
   Notifications.Popups {}
   OSD.Index {}
 
