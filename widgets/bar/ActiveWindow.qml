@@ -1,6 +1,7 @@
 import "root:/";
 import "root:/utils" as Utils;
 import "root:/animations" as Anims;
+import Quickshell.Wayland;
 import QtQuick;
 
 BarModule {
@@ -8,7 +9,7 @@ BarModule {
   iconbgColour: Globals.colours.activeWindow;
   id: root;
 
-  readonly property string title: Utils.HyprlandIPC.windowTitle;
+  readonly property string title: ToplevelManager.activeToplevel.title;
   show: title.length > 0;
 
   Text {
