@@ -1,4 +1,3 @@
-pragma Singleton
 pragma ComponentBehavior: Bound
 
 import "root:/";
@@ -15,7 +14,7 @@ import QtQuick.Layouts;
 import QtQuick.Effects;
 import QtQuick.Controls;
 
-Singleton {
+Scope {
   IpcHandler {
     target: "menu";
     function toggle(): void { Globals.states.menuOpen = !Globals.states.menuOpen }
@@ -202,7 +201,5 @@ Singleton {
       }
     }
   }
-
-  function init() {}
 }
 
