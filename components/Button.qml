@@ -15,6 +15,7 @@ MouseArea {
   property color bgPress: Globals.colours.accent;
   property bool invertTextOnPress: true;
 
+  property int radiusValue: Globals.vars.br;
   property bool tlRadius: false;
   property bool trRadius: false;
   property bool blRadius: false;
@@ -30,28 +31,34 @@ MouseArea {
   property bool autoImplicitWidth: false;
   property int padding: Globals.vars.paddingButton;
 
+  property bool disabled: false;
+
   hoverEnabled: true;
 
-  readonly property int autoHeightVal: label.height + padding;
+  readonly property int autoHeightVal: (icon ? iconLabel.height : label.height) + padding*2;
   height: autoHeight ? autoHeightVal : undefined;
   implicitHeight: autoImplicitHeight ? autoHeightVal : undefined;
 
-  readonly property int autoWidthVal: label.width + padding;
+  readonly property int autoWidthVal: (icon ? iconLabel.width : label.width) + padding*2;
   width: autoWidth ? autoWidthVal : undefined;
   implicitWidth: autoImplicitWidth ? autoWidthVal : undefined;
 
   Rectangle {
     id: background;
     anchors.fill: parent;
-    color: root.containsPress
-      ? root.bgPress
-      : root.containsMouse
-        ? root.bgHover
-        : root.bg;
-    topLeftRadius: root.tlRadius || root.containsMouse && root.changeTlRadiusHover ? Globals.vars.br : 0;
-    topRightRadius: root.trRadius || root.containsMouse && root.changeTrRadiusHover ? Globals.vars.br : 0;
-    bottomLeftRadius: root.blRadius || root.containsMouse && root.changeBlRadiusHover ? Globals.vars.br : 0;
-    bottomRightRadius: root.brRadius || root.containsMouse && root.changeBrRadiusHover ? Globals.vars.br : 0;
+    color: root.disabled
+      ? root.bg
+      : root.containsPress
+        ? root.bgPress
+        : root.containsMouse
+          ? root.bgHover
+          : root.bg;
+    topLeftRadius: root.tlRadius || root.containsMouse && root.changeTlRadiusHover ? root.radiusValue : 0;
+    topRightRadius: root.trRadius || root.containsMouse && root.changeTrRadiusHover ? root.radiusValue : 0;
+    bottomLeftRadius: root.blRadius || root.containsMouse && root.changeBlRadiusHover ? root.radiusValue : 0;
+    bottomRightRadius: root.brRadius || root.containsMouse && root.changeBrRadiusHover ? root.radiusValue : 0;
+
+    opacity: root.disabled ? 0.5 : 1;
 
     Anims.NumberTransition on topLeftRadius {}
     Anims.NumberTransition on topRightRadius {}
@@ -74,7 +81,7 @@ MouseArea {
     }
 
     Icon {
-      id: icon;
+      id: iconLabel;
       visible: root.icon;
       anchors.centerIn: parent;
       icon: root.label;
