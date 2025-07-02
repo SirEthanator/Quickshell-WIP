@@ -91,7 +91,7 @@ Scope {
             Globals.states.menuOpen = false;
           } else if ((key >= 48 && key <= 90) || (key >= 97 && key <= 122) || (key >= 186 && key <= 223)) {
             appSearch.focus = true;
-            appSearch.insert(0, event.text);
+            appSearch.field.insert(0, event.text);
           } else if (stack.currentIndex === 1) {
             if (key === Qt.Key_Return || key === Qt.Key_Enter) launcher.execSelected();
             if (key === Qt.Key_Down) launcher.down();
@@ -141,13 +141,15 @@ Scope {
 
               showBorder: Globals.conf.menu.moduleOutlines;
 
-              placeholderText: "Search Applications";
               icon: "search-symbolic";
 
-              focusPolicy: Qt.ClickFocus;
-              onInputFocusChanged: {
-                if (inputFocus) stack.currentIndex = 1
-                else clear();
+              field: InputField {
+                placeholderText: "Search Applications";
+                focusPolicy: Qt.ClickFocus;
+                onFocusChanged: {
+                  if (focus) stack.currentIndex = 1
+                  else clear();
+                }
               }
             }
 
@@ -158,7 +160,7 @@ Scope {
               loopOutOfRange: true;
 
               Dashboard.Index {}
-              Launcher.Index { id: launcher; searchText: appSearch.text }
+              Launcher.Index { id: launcher; searchText: appSearch.field.text }
             }
 
             PageIndicator { stack: stack }  // Imported from components, not QtQuick.Controls

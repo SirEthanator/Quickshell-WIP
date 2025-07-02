@@ -1,14 +1,15 @@
 import "root:/";
 import QtQuick;
 import QtQuick.Layouts;
-import QtQuick.Controls;
 
 Rectangle {
   id: root;
   color: borderColor;
   radius: Globals.vars.br;
 
-  default property alias data: row.data;
+  default property list<QtObject> data;
+
+  required property InputField field;
 
   property color bg: Globals.colours.bgLight;
   property bool leftPadding: true;
@@ -17,26 +18,12 @@ Rectangle {
   property color borderColor: Globals.colours.outline;
   property string icon: "";
 
-  property alias textColor: input.color;
-  property alias font: input.font;
-  property alias placeholderText: input.placeholderText;
-  property alias placeholderTextColor: input.placeholderTextColor;
-  property alias echoMode: input.echoMode;
-  property alias inputMethodHints: input.inputMethodHints;
-  property alias text: input.text;
-  property alias inputFocus: input.focus;
-
-  signal accepted;
-
-  function clear() { input.clear() }
-  function insert(pos: int, text: string) { input.insert(pos, text) }
-
-  implicitHeight: input.height + Globals.vars.paddingButton * 2 + Globals.vars.outlineSize * 2;
+  implicitHeight: row.height + Globals.vars.paddingButton * 2 + Globals.vars.outlineSize * 2;
 
   onFocusChanged: {
     if (focus) {
       focus = false;
-      input.focus = true;
+      field.focus = true;
     }
   }
 
@@ -62,21 +49,12 @@ Rectangle {
         Layout.alignment: Qt.AlignVCenter;
       }
 
-      TextField {
-        id: input;
-        Layout.fillWidth: true;
-        color: Globals.colours.fg;
-        font {
-          family: Globals.vars.fontFamily;
-          pixelSize: Globals.vars.mainFontSize;
+      Component.onCompleted: {
+        root.field.parent = this;
+        // Place children after the field
+        for (let i=0; i < root.data.length; i++) {
+          root.data[i].parent = this;
         }
-
-        background: Rectangle { color: "transparent" }
-        placeholderTextColor: Globals.colours.grey;
-
-        onAccepted: root.accepted();
-
-        focusPolicy: root.focusPolicy;
       }
     }
   }
