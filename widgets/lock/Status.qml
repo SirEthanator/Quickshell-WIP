@@ -6,7 +6,9 @@ import QtQuick.Layouts;
 ColumnLayout {
   id: root;
   required property Pam pam;
-  Layout.alignment: Qt.AlignHCenter;
+  anchors.bottom: parent.bottom;
+  anchors.horizontalCenter: parent.horizontalCenter;
+
   spacing: Globals.vars.marginCard;
 
   Text {

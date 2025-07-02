@@ -103,13 +103,7 @@ Scope {
           }
         }
 
-        RectangularShadow {
-          anchors.fill: background;
-          radius: background.radius;
-          blur: 25;
-          spread: -3;
-          color: Qt.darker(background.color, 1.5);
-        }
+        Shadow { target: background }
 
         // Visible background of menu
         Rectangle {

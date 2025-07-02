@@ -58,7 +58,7 @@ MouseArea {
     bottomLeftRadius: root.blRadius || root.containsMouse && root.changeBlRadiusHover ? root.radiusValue : 0;
     bottomRightRadius: root.brRadius || root.containsMouse && root.changeBrRadiusHover ? root.radiusValue : 0;
 
-    opacity: root.disabled ? 0.5 : 1;
+    opacity: root.disabled ? Globals.vars.disabledOpacity : 1;
 
     Anims.NumberTransition on topLeftRadius {}
     Anims.NumberTransition on topRightRadius {}
