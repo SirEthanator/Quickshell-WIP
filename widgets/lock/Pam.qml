@@ -8,7 +8,6 @@ PamContext {
   required property WlSessionLock lock;
   property string password;
   property string state;
-  property bool stateIsMessage: false;
 
   function attemptUnlock() {
     if (!active)
@@ -25,7 +24,6 @@ PamContext {
   }
 
   onCompleted: result => {
-    root.stateIsMessage = false;
     if (result === PamResult.Success) {
       lock.unlock();
     } else if (result === PamResult.Failed) {
@@ -35,11 +33,6 @@ PamContext {
     } else if (result === PamResult.Error) {
       state = "error"
     }
-  }
-
-  onPamMessage: {
-    state = message;
-    root.stateIsMessage = true;
   }
 }
 
