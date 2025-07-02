@@ -137,6 +137,9 @@ Singleton {
     v(validateString(conf.notifications.criticalSound, [], "notifications.criticalSound"));
     v(validateInt(conf.notifications.dismissThreshold, 1, 99, "notifications.dismissThreshold"));
 
+    v(validateBool(conf.lock.dimBackground), "lock.dimBackground");
+    v(validateBool(conf.lock.contentOutline), "lock.contentOutline");
+
     v(validateString(conf.osd.backlightName, [], "osd.backlightName"));
 
     if (Globals.configValid !== Globals.ConfigState.Invalid) Globals.configValid = Globals.ConfigState.Valid;

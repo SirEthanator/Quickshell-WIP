@@ -52,6 +52,11 @@
     "dismissThreshold": real
   },
 
+  "lock": {
+    "dimBackground": bool,
+    "contentOutline": bool
+  },
+
   "osd": {
     "backlightName": string
   }
@@ -395,6 +400,25 @@ Type: Integer
 Constraints: Minimum of 1 and maximum of 99
 
 Default: `30`
+
+
+# LOCK
+
+## dimBackground
+
+Defines whether the background should be dimmed.
+
+Type: Boolean
+
+Default: `false`
+
+## contentOutline
+
+Defines whether the rectangle containing the clock, input, etc. should have an outline around it.
+
+Type: Boolean
+
+Default: `true`
 
 
 # OSD

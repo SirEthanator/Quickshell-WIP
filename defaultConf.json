@@ -65,6 +65,11 @@
     "dismissThreshold": 30
   },
 
+  "lock": {
+    "dimBackground": false,
+    "contentOutline": true
+  },
+
   "osd": {
     "backlightName": ""
   }

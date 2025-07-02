@@ -25,6 +25,7 @@ WlSessionLockSurface {
 
   Rectangle {
     anchors.fill: parent;
+    visible: Globals.conf.lock.dimBackground;
     color: Globals.vars.bgDimmedColour;
   }
 
@@ -43,7 +44,7 @@ WlSessionLockSurface {
 
     border {
       color: Globals.colours.outline;
-      width: Globals.vars.outlineSize;
+      width: Globals.conf.lock.contentOutline ? Globals.vars.outlineSize : 0;
       pixelAligned: false;
     }
 
