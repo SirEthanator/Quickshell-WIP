@@ -7,15 +7,18 @@ Text {
   required property Pam pam;
   Layout.alignment: Qt.AlignHCenter;
 
-  text: pam.state === "authenticating"
-    ? "Authenticating..."
-    : pam.state === "failed"
-      ? "Incorrect password."
-      : pam.state === "error"
-        ? "Error authenticating."
-        : pam.state === "maxTries"
-          ? "Maximum attempts reached."
-          : `Logged in as: ${Utils.SysInfo.username}`
+  text: {
+    if (pam.stateIsMessage) {
+      return pam.state;
+    }
+    switch (pam.state) {
+      case "authenticating": return "Authenticating...";
+      case "failed": return "Incorrect password.";
+      case "error": return "Error authenticating.";
+      case "maxTries": return "Maximum attempts reached."
+      default: return `Logged in as: ${Utils.SysInfo.username}`
+    }
+  }
   font {
     family: Globals.vars.fontFamily;
     pixelSize: Globals.vars.mainFontSize;
@@ -25,4 +28,7 @@ Text {
       : pam.state === "maxTries"
         ? Globals.colours.red
         : Globals.colours.grey;
+
+  maximumLineCount: 1;
+  elide: Text.ElideRight;
 }
