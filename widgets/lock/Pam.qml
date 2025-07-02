@@ -6,6 +6,7 @@ PamContext {
   id: root;
 
   required property WlSessionLock lock;
+  required property WlSessionLockSurface surface;
   property string password;
   property string state;
 
@@ -25,7 +26,7 @@ PamContext {
 
   onCompleted: result => {
     if (result === PamResult.Success) {
-      lock.unlock();
+      surface.beginUnlock();
     } else if (result === PamResult.Failed) {
       state = "failed"
     } else if (result === PamResult.MaxTries) {

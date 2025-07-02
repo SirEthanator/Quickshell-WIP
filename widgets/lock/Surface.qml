@@ -1,5 +1,6 @@
 import "root:/";
 import "root:/components";
+import "root:/animations" as Anims;
 import "root:/utils" as Utils;
 import "root:/widgets/desktop" as Desktop;
 import Quickshell.Wayland;
@@ -11,17 +12,23 @@ WlSessionLockSurface {
 
   required property WlSessionLock lock;
 
-  color: Globals.colours.bg;
+  color: "transparent";
+
+  function beginUnlock() {
+    outAnim.start();
+    Utils.Timeout.setTimeout(lock.unlock, Globals.vars.animLen);
+  }
 
   Pam {
     id: pam;
     lock: root.lock;
+    surface: root;
     onPasswordChanged: {
       if (password !== input.field.text) input.field.text = password;
     }
   }
 
-  Desktop.Wallpaper {}
+  Desktop.Wallpaper { id: wallpaper }
 
   Rectangle {
     anchors.fill: parent;
@@ -29,31 +36,59 @@ WlSessionLockSurface {
     color: Globals.vars.bgDimmedColour;
   }
 
-  Shadow { target: contentBg }
-
-  Rectangle {
-    id: contentBg;
-
-    anchors {
-      left: parent.left;
-      top: parent.top;
-      bottom: parent.bottom;
-      margins: Globals.vars.gapLarge;
+  ParallelAnimation {
+    running: true;
+    Anims.NumberAnim {
+      target: wallpaper;
+      property: "opacity";
+      from: 0; to: 1;
+      duration: Globals.vars.animLen;
     }
+    Anims.SlideFade {
+      target: contentWrapper;
+    }
+  }
+
+  ParallelAnimation {
+    id: outAnim;
+    Anims.NumberAnim {
+      target: wallpaper;
+      property: "opacity";
+      from: 1; to: 0;
+      duration: Globals.vars.animLen;
+    }
+    Anims.SlideFade {
+      target: contentWrapper;
+      reverse: true;
+    }
+  }
+
+  Item {
+    id: contentWrapper;
+
+    height: parent.height;
     width: 600;
 
-    border {
-      color: Globals.colours.outline;
-      width: Globals.conf.lock.contentOutline ? Globals.vars.outlineSize : 0;
-      pixelAligned: false;
-    }
+    Shadow { target: contentBg }
 
-    color: Globals.colours.bg;
-    radius: Globals.vars.br;
+    Rectangle {
+      id: contentBg;
+      anchors.fill: parent;
+      anchors.margins: Globals.vars.gapLarge;
+
+      border {
+        color: Globals.colours.outline;
+        width: Globals.conf.lock.contentOutline ? Globals.vars.outlineSize : 0;
+        pixelAligned: false;
+      }
+
+      color: Globals.colours.bg;
+      radius: Globals.vars.br;
+    }
 
     Item {
       id: content;
-      anchors.fill: parent;
+      anchors.fill: contentBg;
       anchors.margins: Globals.vars.paddingWindow;
 
       ColumnLayout {

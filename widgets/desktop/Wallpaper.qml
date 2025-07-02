@@ -1,7 +1,6 @@
 pragma ComponentBehavior: Bound
 
 import "root:/";
-import Quickshell;
 import QtQuick;
 import QtMultimedia;
 

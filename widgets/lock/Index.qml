@@ -29,9 +29,6 @@ Scope {
     function lock(): void {
       loader.activeAsync = true;
     }
-    function status(): bool {
-      return loader.activeAsync
-    }
   }
 }
 
