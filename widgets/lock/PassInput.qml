@@ -20,6 +20,9 @@ Input {
 
     onAccepted: root.pam.attemptUnlock();
     onTextChanged: root.pam.password = text;
+
+    readOnly: root.pam.active;
+    opacity: root.pam.active ? Globals.vars.disabledOpacity : 1;
   }
 
   rightPadding: false;

@@ -24,6 +24,13 @@ WlSessionLockSurface {
   Desktop.Wallpaper {}
 
   Rectangle {
+    anchors.fill: parent;
+    color: Globals.vars.bgDimmedColour;
+  }
+
+  Shadow { target: contentBg }
+
+  Rectangle {
     id: contentBg;
 
     anchors {
@@ -34,21 +41,28 @@ WlSessionLockSurface {
     }
     width: 600;
 
+    border {
+      color: Globals.colours.outline;
+      width: Globals.vars.outlineSize;
+      pixelAligned: false;
+    }
+
     color: Globals.colours.bg;
     radius: Globals.vars.br;
 
-    ColumnLayout {
+    Item {
+      id: content;
       anchors.fill: parent;
       anchors.margins: Globals.vars.paddingWindow;
-      spacing: Globals.vars.paddingWindow * 4;
 
-      Item { Layout.fillHeight: true }
+      ColumnLayout {
+        anchors.centerIn: parent;
+        width: parent.width;
+        spacing: Globals.vars.paddingWindow * 2;
 
-      Clock {}
-
-      PassInput { id: input; pam: pam }
-
-      Item { Layout.fillHeight: true }
+        Clock {}
+        PassInput { id: input; pam: pam }
+      }
 
       Status { pam: pam }
     }

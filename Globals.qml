@@ -198,6 +198,7 @@ Singleton {
     property int extraLargeIconSize: 90;
 
     property color bgDimmedColour: "#4D000000";
+    property real disabledOpacity: 0.5;
   }
 
   /*    ___________ ________  ___________
