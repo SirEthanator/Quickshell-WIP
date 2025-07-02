@@ -13,7 +13,7 @@ WlSessionLockSurface {
   property string pamState;
 
   onPasswordChanged: {
-    if (password !== input.text) input.text = password;
+    if (password !== input.field.text) input.field.text = password;
   }
 
   color: Globals.colours.bg;
@@ -56,14 +56,17 @@ WlSessionLockSurface {
       id: input;
       focus: true;
       width: 600;
-      textColor: Globals.colours.fg;
-      placeholderText: "Enter your password";
       Layout.alignment: Qt.AlignHCenter;
-      echoMode: TextInput.Password;
-      inputMethodHints: Qt.ImhSensitiveData;
 
-      onAccepted: root.attemptUnlock()
-      onTextChanged: root.password = text;
+      field: InputField {
+        placeholderText: "Enter your password";
+
+        echoMode: TextInput.Password;
+        inputMethodHints: Qt.ImhSensitiveData;
+
+        onAccepted: root.attemptUnlock();
+        onTextChanged: root.password = text;
+      }
 
       rightPadding: false;
 
