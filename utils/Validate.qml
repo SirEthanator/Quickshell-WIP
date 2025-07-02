@@ -91,7 +91,10 @@ Singleton {
     const defaultConf = Globals.defaultConf;
     const userConf = Globals.userConf;
     const conf = Globals.conf;
-    if (!userConf) return;
+    if (!userConf) {
+      Globals.configValid = Globals.ConfigState.Valid
+      return
+    }
 
     v(validateObjKey(conf.colourScheme, Globals.schemes, "colourScheme"));
 
