@@ -32,7 +32,6 @@ RowLayout {
       text: Utils.SysInfo.username;
       color: Globals.colours.fg;
       font {
-        capitalization: Globals.conf.menu.capitaliseUsername ? Font.Capitalize : undefined;
         family: Globals.vars.fontFamily;
         pixelSize: Globals.vars.headingFontSize;
       }
@@ -42,7 +41,6 @@ RowLayout {
       text: Utils.SysInfo.hostname;
       color: Globals.colours.fg;
       font {
-        capitalization: Globals.conf.menu.capitaliseHostname ? Font.Capitalize : undefined;
         family: Globals.vars.fontFamily;
         pixelSize: Globals.vars.mainFontSize;
       }

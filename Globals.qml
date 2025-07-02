@@ -157,6 +157,7 @@ Singleton {
 
     property string fontFamily: "0xProto";
     property int mainFontSize: 16;
+    property int largeFontSize: 64;
     property int xlFontSize: 150;
     property int headingFontSize: 34;
     property int smallHeadingFontSize: 22;
@@ -224,6 +225,7 @@ Singleton {
     property color grey: "#7A8478";
     property color wsInactive: bgHover;
     property color red: "#E67E80";
+    property color warning: "#DBBC7F";
     property color redHover: Qt.lighter(red, 1.2);
     property color redPress: Qt.darker(red, 1.2);
 
@@ -258,6 +260,7 @@ Singleton {
     property color grey: "#6C7086";
     property color wsInactive: bgHover;
     property color red: "#F38BA8";
+    property color warning: "#F9E2AF";
     property color redHover: Qt.lighter(red, 1.2);
     property color redPress: Qt.darker(red, 1.2);
 
@@ -292,6 +295,7 @@ Singleton {
     property color grey: "#6E6A86";
     property color wsInactive: bgHover;
     property color red: "#EB6F92";
+    property color warning: "#F6C177";
     property color redHover: Qt.lighter(red, 1.2);
     property color redPress: Qt.darker(red, 1.2);
 
