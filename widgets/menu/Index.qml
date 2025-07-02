@@ -82,16 +82,20 @@ Scope {
         focus: true;
 
         Keys.onPressed: (event) => {
+          if (!loader.open) return;
           const key = event.key;
-          if (key === Qt.Key_Tab) {
+          if (key === Qt.Key_Tab && !event.isAutoRepeat) {
             stack.currentIndex++;
             appSearch.focus = false;
             focus = true;
+
           } else if (key === Qt.Key_Escape) {
             Globals.states.menuOpen = false;
+
           } else if ((key >= 48 && key <= 90) || (key >= 97 && key <= 122) || (key >= 186 && key <= 223)) {
             appSearch.focus = true;
             appSearch.field.insert(0, event.text);
+
           } else if (stack.currentIndex === 1) {
             if (key === Qt.Key_Return || key === Qt.Key_Enter) launcher.execSelected();
             if (key === Qt.Key_Down) launcher.down();
