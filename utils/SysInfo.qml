@@ -9,6 +9,11 @@ import QtQuick;
 Singleton {
   id: root
 
+  function capitalise(text: string, capitalise=true): string {
+    if (!capitalise) return text;
+    return text[0].toUpperCase() + text.slice(1);
+  }
+
   readonly property PwNode audioNode: Pipewire.defaultAudioSink;
   PwObjectTracker { objects: [ root.audioNode ] }
   readonly property int volume: Math.round(audioNode?.audio.volume * 100);
@@ -24,12 +29,19 @@ Singleton {
     ? "brightness-high-symbolic"
     : "brightness-low-symbolic";
 
-  property string dateAndTime: Qt.formatDateTime(clock.date, "ddd dd/MM/yy | hh:mm:ss ap");
-  property int    gap: 10         ;  // use 10 until command has been run
-  property string username: ""    ;
+  property alias clock: clock;
+  property string time: Qt.formatDateTime(clock.date, 'hh:mm:ss ap');
+  property string date: Qt.formatDateTime(clock.date, 'ddd dd/MM/yy');
+  property string dateAndTime: `${date} | ${time}`;
+
+  property string username: capitalise(Quickshell.env("USER"), Globals.conf.menu.capitaliseUsername);
   property string hostname: ""    ;
+
+  property int    gap: 10         ;  // use 10 until command has been run
+
   property string network: ""     ;
   property int    networkStrength ;
+
   property int    brightness      ;
   property int    maxBrightness: 0;
 
@@ -76,18 +88,10 @@ Singleton {
   }
 
   Process {
-    command: ["whoami"]
-    running: true;
-    stdout: SplitParser {
-      onRead: data => root.username = data
-    }
-  }
-
-  Process {
     command: ["hostname"]
     running: true;
     stdout: SplitParser {
-      onRead: data => root.hostname = data
+      onRead: data => root.hostname = root.capitalise(data, Globals.conf.menu.capitaliseHostname)
     }
   }
 
