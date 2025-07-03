@@ -29,7 +29,7 @@ GridLayout {
       ['Shut Down', 'Shutting Down', 'system-shutdown-symbolic', 'systemctl poweroff'],
       ['Reboot', 'Rebooting', 'system-reboot-symbolic', 'systemctl reboot'],
       ['Log Out', 'Logging Out', 'logout-symbolic', 'hyprctl dispatch exit'],
-      ['Suspend', 'Suspending', 'system-hibernate-symbolic', 'gtklock & sleep 1; systemctl suspend'],
+      ['Suspend', 'Suspending', 'system-hibernate-symbolic', 'loginctl lock-session & sleep 1; systemctl suspend'],
       ['Reboot to FW Settings', 'Rebooting to FW Settings', 'preferences-advanced-symbolic', 'systemctl reboot --firmware-setup']
     ]
 
