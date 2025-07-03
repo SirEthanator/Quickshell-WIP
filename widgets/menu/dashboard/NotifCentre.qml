@@ -32,6 +32,7 @@ DashItem {
 
         onClicked: {
           for (const notif of root.notifications) { notif.dismiss() }
+          emptyFadeInAnim.start();
         }
       }
     }
@@ -68,15 +69,11 @@ DashItem {
     spacing: Globals.vars.paddingCard;
 
     Anims.NumberAnim {
-      id: fadeInAnim;
+      id: emptyFadeInAnim;
       target: empty;
       property: "opacity";
       from: 0; to: 1;
       duration: 1500;
-    }
-
-    onVisibleChanged: {
-      if (visible) fadeInAnim.start();
     }
 
     Icon {
