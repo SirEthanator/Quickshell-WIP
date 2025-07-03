@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import "root:/";
+import Quickshell;
 import QtQuick;
 import QtMultimedia;
 
@@ -10,9 +11,9 @@ Item {
   // The default wallpaper must be set here instead of defaultConf.json because it uses an environment variable
   readonly property string defaultWall: {
     switch (Globals.conf.colourScheme) {
-      case "everforest": return "Everforest/Hard.png"
-      case "catMocha": return "Catppuccin/Crust.png"
-      case "rosePine": return "Rose-Pine/Base.png"
+      case "everforest": return "Everforest/Accent.png"
+      case "catMocha": return "Catppuccin/Accent.png"
+      case "rosePine": return "Rose-Pine/Accent.png"
     }
   }
   readonly property url wallSource: Globals.conf.desktop.wallpaper
