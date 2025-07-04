@@ -1,6 +1,8 @@
 pragma ComponentBehavior: Bound
 
 import "root:/";
+import "root:/animations" as Anims;
+import "root:/utils" as Utils;
 import Quickshell;
 import QtQuick;
 
@@ -10,22 +12,62 @@ Scope {
   required property var window;
   property TooltipItem currentItem: null;
   property BarModule module: null;
-  property bool open: currentItem !== null && module !== null;
+  property bool open: false;
+
+  property bool animatingIn: true;
+  property bool animatingOut: false;
+
+  readonly property int hideTimeout: 500;
+  readonly property int showTimeout: 100;
+
+  property var hideTimer: null;
+  property var showTimer: null;
 
   function setTooltip(i, m) {
-    currentItem = i;
-    module = m;
+    // For handling animations being interrupted
+    if (animatingOut) {
+      animatingOut = false;
+      animatingIn = true;
+    }
+
+    if (hideTimer !== null) {
+      hideTimer.destroy();
+      hideTimer = null;
+    } else {
+      showTimer = Utils.Timeout.setTimeout(() => {
+        animatingIn = true;
+        currentItem = i;
+        module = m;
+        open = true;
+      }, showTimeout);
+    }
   }
 
   function removeTooltip() {
-    currentItem = null;
-    module = null;
+    if (showTimer !== null) {
+      showTimer.destroy();
+      showTimer = null;
+    } else {
+      hideTimer = Utils.Timeout.setTimeout(() => {
+        animatingIn = false;
+        animatingOut = true;
+      }, hideTimeout);
+    }
+  }
+
+  onOpenChanged: {
+    if (open) loader.activeAsync = true;
+    else {
+      currentItem = null;
+      module = null;
+      loader.activeAsync = false;
+    }
   }
 
   LazyLoader {
     id: loader;
 
-    activeAsync: root.open;
+    activeAsync: false;
 
     PopupWindow {
       id: popup;
@@ -44,6 +86,29 @@ Scope {
       color: "transparent";
       implicitWidth: bg.width;
       implicitHeight: bg.height + Globals.vars.gapLarge;
+
+      readonly property int slideOffset: Globals.vars.gapLarge;
+
+      Anims.SlideFade {
+        running: root.animatingIn;
+        target: bg;
+        direction: "down";
+        slideOffset: popup.slideOffset;
+        originalPos: Globals.vars.gapLarge;
+      }
+
+      SequentialAnimation {
+        id: outAnim;
+        running: root.animatingOut;
+        Anims.SlideFade {
+          target: bg;
+          direction: "down";
+          slideOffset: popup.slideOffset;
+          originalPos: Globals.vars.gapLarge;
+          reverse: true;
+        }
+        PropertyAction { target: root; property: "open"; value: false }
+      }
 
       Rectangle {
         id: bg;

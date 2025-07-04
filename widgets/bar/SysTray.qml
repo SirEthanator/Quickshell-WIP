@@ -10,7 +10,7 @@ import QtQuick.Layouts;
 BarModule {
   id: root;
   required property var window;
-  readonly property int slideOffset: 4;
+  readonly property int slideOffset: Globals.vars.gapLarge;
 
   hoverEnabled: true;
   background: mouseArea.containsPress ? Globals.colours.accent : mouseArea.containsMouse ? Globals.colours.bgHover : Globals.colours.bgLight;
