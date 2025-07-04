@@ -11,7 +11,7 @@ ParallelAnimation {
   property int originalPos: 0;
 
   NumberAnimation {
-    readonly property int fromVal: root.direction === "right" || root.direction === "down" ? -root.slideOffset : root.slideOffset;
+    readonly property int fromVal: root.direction === "right" || root.direction === "down" ? -root.slideOffset + root.originalPos : root.slideOffset + root.originalPos;
     readonly property int toVal: root.originalPos;
     target: root.target;
     property: root.direction === "right" || root.direction === "left" ? "x" : "y";
