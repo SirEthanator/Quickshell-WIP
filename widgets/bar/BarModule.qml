@@ -8,6 +8,9 @@ Rectangle {
   id: root
   default property alias data: content.data;  // Place children in the RowLayout
 
+  required property var tooltipHandler;
+  property TooltipItem tooltip: null;
+
   property color background: Globals.colours.bgLight;
   property string icon: "";  // If this is an empty string the icon will not be displayed
   property color iconColour: Globals.colours.bgLight;
@@ -55,6 +58,15 @@ Rectangle {
   MouseArea {
     id: mouseArea;
     anchors.fill: parent;
+
+    hoverEnabled: !!root.tooltip;
+    onContainsMouseChanged: {
+      if (containsMouse && root.tooltip !== null) {
+        root.tooltipHandler.setTooltip(root.tooltip, root);
+      } else if (!containsMouse) {
+        root.tooltipHandler.removeTooltip();
+      }
+    }
 
     RowLayout {
       id: content;

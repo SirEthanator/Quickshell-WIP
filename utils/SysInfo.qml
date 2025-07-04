@@ -29,6 +29,7 @@ Singleton {
     ? "brightness-high-symbolic"
     : "brightness-low-symbolic";
 
+  // TODO: Cleanup date and time stuff
   property alias clock: clock;
   property string time: Qt.formatDateTime(clock.date, 'hh:mm:ss ap');
   property string date: Qt.formatDateTime(clock.date, 'ddd dd/MM/yy');
@@ -65,8 +66,6 @@ Singleton {
       root.brightness = parseInt(brightnessFile.text()) / root.maxBrightness * 100;
     }
   }
-
-  // TODO: Try to find a better way than manually making a process for every item - maybe a repeater?
 
   Process {
     command: ["cat", `/sys/class/backlight/${Globals.conf.osd.backlightName}/max_brightness`]
