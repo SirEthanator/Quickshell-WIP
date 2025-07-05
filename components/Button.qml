@@ -8,6 +8,9 @@ MouseArea {
   property bool icon: false;
   property int labelSize: 0;
   property int iconRotation: 0;
+  property bool centreLabel: true;
+
+  property bool active: false;
 
   property color labelColour: Globals.colours.fg;
   property color bg: Globals.colours.bg;
@@ -48,7 +51,7 @@ MouseArea {
     anchors.fill: parent;
     color: root.disabled
       ? root.bg
-      : root.containsPress
+      : root.containsPress || root.active
         ? root.bgPress
         : root.containsMouse
           ? root.bgHover
@@ -70,9 +73,13 @@ MouseArea {
     Text {
       id: label
       visible: !root.icon;
-      anchors.centerIn: parent;
+      anchors.verticalCenter: parent.verticalCenter;
+      anchors.horizontalCenter: root.centreLabel ? parent.horizontalCenter : undefined;
+      anchors.left: !root.centreLabel ? parent.left : undefined;
+      anchors.leftMargin: !root.centreLabel ? root.padding : 0;
+
       text: root.label;
-      color: root.containsPress && root.invertTextOnPress ? root.bg : root.labelColour;
+      color: (root.containsPress || root.active) && root.invertTextOnPress ? root.bg : root.labelColour;
       Anims.ColourTransition on color {}
       font {
         family: Globals.vars.fontFamily;
@@ -83,9 +90,13 @@ MouseArea {
     Icon {
       id: iconLabel;
       visible: root.icon;
-      anchors.centerIn: parent;
+      anchors.verticalCenter: parent.verticalCenter;
+      anchors.horizontalCenter: root.centreLabel ? parent.horizontalCenter : undefined;
+      anchors.left: !root.centreLabel ? parent.left : undefined;
+      anchors.leftMargin: !root.centreLabel ? root.padding : 0;
+
       icon: root.label;
-      color: root.containsPress && root.invertTextOnPress ? root.bg : root.labelColour;
+      color: (root.containsPress || root.active) && root.invertTextOnPress ? root.bg : root.labelColour;
       Anims.ColourTransition on color {}
       size: root.labelSize > 0 ? root.labelSize : parent.height - root.padding * 2;
       rotation: root.iconRotation;

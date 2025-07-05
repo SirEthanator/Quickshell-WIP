@@ -11,6 +11,7 @@ import "widgets/osd" as OSD;
 import "widgets/screensaver" as Screensaver;
 import "widgets/invalidConf" as InvalidConf;
 import "widgets/themeOverlay" as ThemeOverlay;
+import "widgets/config" as Config;
 import "utils" as Utils;
 import Quickshell.Io;
 import QtQuick;
@@ -43,6 +44,7 @@ ShellRoot {
     }
   }
 
+  Config.Index {}
   Menu.Index {}
   Notifications.Popups {}
   OSD.Index {}
