@@ -88,15 +88,9 @@ Singleton {
   }
 
   function validateConfig() {
-    const defaultConf = Globals.defaultConf;
-    const userConf = Globals.userConf;
     const conf = Globals.conf;
-    if (!userConf) {
-      Globals.configValid = Globals.ConfigState.Valid
-      return
-    }
 
-    v(validateObjKey(conf.colourScheme, Globals.schemes, "colourScheme"));
+    v(validateObjKey(conf.global.colourScheme, Globals.schemes, "global.colourScheme"));
 
     v(validateObjKeyArray(conf.bar.left, Globals.vars.barModules, "bar.left"));
     v(validateObjKeyArray(conf.bar.centre, Globals.vars.barModules, "bar.centre"));
