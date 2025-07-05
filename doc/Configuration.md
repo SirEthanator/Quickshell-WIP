@@ -226,7 +226,7 @@ Default: true
 
 ## backgroundOutline
 
-Defines whether the bar's background should have an outline around it.
+Defines whether the menu's background should have an outline around it.
 
 Type: Boolean
 

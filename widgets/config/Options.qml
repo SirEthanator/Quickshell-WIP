@@ -1,7 +1,8 @@
+pragma ComponentBehavior: Bound
+
 import "root:/";
 import QtQuick;
 import QtQuick.Layouts;
-import QtCore;
 
 Item {
   id: root;
@@ -10,18 +11,29 @@ Item {
   Layout.fillWidth: true;
   Layout.fillHeight: true;
 
-  ColumnLayout {
+  ListView {
     id: items;
 
+    anchors {
+      top: parent.top;
+      left: parent.left;
+      right: parent.right;
+      bottom: parent.bottom;
+      margins: Globals.vars.paddingWindow;
+    }
+
     spacing: Globals.vars.spacingButtonGroup;
+    clip: true;
 
-    Repeater {
-      model: root.controller.currentPage.getProperties();
+    model: root.controller.currentPage.getProperties();
 
-      delegate: Text {
-        required property var modelData;
-        text: modelData;
-      }
+    delegate: Option {
+      required property var modelData;
+      modelLen: items.model.length;
+      propName: modelData;
+      page: root.controller.currentPage;
+      propValue: root.controller.currentPage[modelData];
+      metadata: root.controller.currentPage.getMetadata(modelData);
     }
   }
 }

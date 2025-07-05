@@ -21,6 +21,250 @@ Singleton {
       );
     }
 
+    readonly property var metadata: ({
+      "Global": {
+        "colourScheme": {
+          "title": "Colour Scheme",
+          "description": "Defines what colour scheme should be used.",
+          "type": "string",
+          "options": Object.keys(root.schemes)
+        }
+      },
+
+      "Bar": {
+        "left": {
+          "title": "Left Modules",
+          "description": "Defines what modules to show on the left of the bar (LTR).",
+          "type": "list<string>",
+          "options": Object.keys(root.vars.barModules)
+        },
+        "centre": {
+          "title": "Centre Modules",
+          "description": "Defines what modules to show in the middle of the bar (LTR).",
+          "type": "list<string>",
+          "options": Object.keys(root.vars.barModules)
+        },
+        "right": {
+          "title": "Right Modules",
+          "description": "Defines what modules to show on the right of the bar (LTR).",
+          "type": "list<string>",
+          "options": Object.keys(root.vars.barModules)
+        },
+        "autohide": {
+          "title": "Autohide",
+          "description": "Defines whether the bar should automatically hide until the top edge of the screen is hovered.",
+          "type": "bool"
+        },
+        "docked": {
+          "title": "Docked",
+          "description": "Defines whether the bar should touch the screen edges.",
+          "type": "bool"
+        },
+        "floatingModules": {
+          "title": "Floating Modules",
+          "description": "Defines whether the bar's background should be shown.",
+          "type": "bool"
+        },
+        "multiColourModules": {
+          "title": "Multi-colour Modules",
+          "description": "Defines whether the icons should have different coloured backgrounds.",
+          "type": "bool"
+        },
+        "moduleOutlines": {
+          "title": "Module Outlines",
+          "description": "Defines whether modules should have an outline around them.",
+          "type": "bool"
+        },
+        "backgroundOutline": {
+          "title": "Background Outline",
+          "description": "Defines whether the bar's background should have an outline around it.",
+          "type": "bool"
+        },
+        "workspaceCount": {
+          "title": "Workspace Count",
+          "description": "Defines how many workspaces should be shown on the workspace module.",
+          "type": "int",
+          "max": 20,
+          "min": 1
+        },
+        "truncationLength": {
+          "title": "Truncation Length",
+          "description": "Defines the maximum length for modules with long text.",
+          "type": "int",
+          "max": 1000,
+          "min": 0
+        }
+      },
+
+      "Menu": {
+        "dashModules": {
+          "title": "Dashboard Modules",
+          "description": "Defines which modules should be shown on the dashboard.",
+          "type": "list<string>",
+          "options": Object.keys(root.vars.dashModules)
+        },
+        "capitaliseUsername": {
+          "title": "Capitalise Username",
+          "description": "Defines whether the user's username should be capitalised.",
+          "type": "bool"
+        },
+        "capitaliseHostname": {
+          "title": "Capitalise Hostname",
+          "description": "Defines whether the system's hostname should be capitalised.",
+          "type": "bool"
+        },
+        "dimBackground": {
+          "title": "Dim Background",
+          "description": "Defines whether the background behind the menu should be dimmed.",
+          "type": "bool"
+        },
+        "backgroundOutline": {
+          "title": "Background Outline",
+          "description": "Defines whether the menu's background should have an outline around it.",
+          "type": "bool"
+        },
+        "moduleOutlines": {
+          "title": "Module Outlines",
+          "description": "Defines whether dashboard modules and launcher items should have outlines around them.",
+          "type": "bool"
+        },
+        "width": {
+          "title": "Width",
+          "description": "Defines how wide the menu should be (px).",
+          "type": "int",
+          "max": 450,
+          "min": 5000
+        }
+      },
+
+      "Desktop": {
+        "wallpaper": {
+          "title": "Wallpaper",
+          "description": "Defines the path to the wallpaper to show. Setting it to an empty string will use the default.",
+          "type": "path"
+        },
+        "videoWallpaper": {
+          "title": "Video Wallpaper",
+          "description": "Defines whether the wallpaper specified in the 'wallpaper' option is a video.",
+          "type": "bool"
+        },
+        "fadeSpeed": {
+          "title": "Fade Duration",
+          "description": "Defines how long the wallpaper should fade in for when the shell is launched (ms). Set to 0 to disable.",
+          "type": "int",
+          "max": 60000,
+          "min": 0
+        },
+        "shader": {
+          "title": "Shader",
+          "description": "Defines the path to the shader to show. This is displayed on top of the wallpaper. Set to an empty string to disable.",
+          "type": "string"
+        },
+        "hideWallpaper": {
+          "title": "Hide Wallpaper",
+          "description": "Defines whether the wallpaper should be hidden.",
+          "type": "bool"
+        },
+        "bgColour": {
+          "title": "Background Colour",
+          "description": "Defines the colour that should be shown behind everything. If 'hideWallpaper' is true, this colour will be displayed. It is also useful for shaders which look better with a solid colour behind them.",
+          "type": "bool"
+        },
+        "clockWidget": {
+          "title": "Clock Widget",
+          "description": "Defines whether the clock widget should be shown.",
+          "type": "bool"
+        },
+        "centreClockWidget": {
+          "title": "Centre Clock Widget",
+          "description": "Defines whether the clock widget should be vertically centred.",
+          "type": "bool"
+        },
+        "autohideWidgets": {
+          "title": "Autohide Widgets",
+          "description": "Defines whether widgets should be hidden after a delay when there is no activity on the desktop.",
+          "type": "bool"
+        },
+        "autohideBar": {
+          "title": "Autohide Bar",
+          "description": "Defines whether the bar should be hidden after a delay when there is no activity on the desktop. This will only hide the bar when the desktop has focus.",
+          "type": "bool"
+        },
+        "autohideCursor": {
+          "title": "Autohide Cursor",
+          "description": "Defines whether the cursor should be hidden after a delay when there is no activity on the desktop. This will only hide the cursor when the desktop has focus.",
+          "type": "bool"
+        }
+      },
+
+      "Notifications": {
+        "width": {
+          "title": "Width",
+          "description": "Defines the width of notifications (px).",
+          "type": "int",
+          "max": 5000,
+          "min": 200
+        },
+        "defaultTimeout": {
+          "title": "Default Timeout",
+          "description": "Defines the default timeout for notifications when the sender does not specify one (ms).",
+          "type": "int",
+          "max": 60000,
+          "min": 100
+        },
+        "defaultCriticalTimeout": {
+          "title": "Default Critical Timeout",
+          "description": "Defines the default timeout for critical notifications when the sender does not specify one (ms).",
+          "type": "int",
+          "max": 60000,
+          "min": 100
+        },
+        "sounds": {
+          "title": "Sounds",
+          "description": "Defines whether to play a sound on incoming notifications.",
+          "type": "bool"
+        },
+        "normalSound": {
+          "title": "Normal Sound",
+          "description": "Defines the path to the sound to play for non-critical notifications.",
+          "type": "path"
+        },
+        "criticalSound": {
+          "title": "Critical Sound",
+          "description": "Defines the path to the sound to play for critical notifications.",
+          "type": "path"
+        },
+        "dismissThreshold": {
+          "title": "Dismiss Threshold",
+          "description": "Defines what percentage of 'width' notifications must be dragged to dismiss them.",
+          "type": "int",
+          "max": 99,
+          "min": 1
+        }
+      },
+
+      "Lock": {
+        "dimBackground": {
+          "title": "Dim Background",
+          "description": "Defines whether the background should be dimmed.",
+          "type": "bool"
+        },
+        "contentOutline": {
+          "title": "Content Outline",
+          "description": "Defines whether the rectangle containing the clock, input, etc. should have an outline around it.",
+          "type": "bool"
+        }
+      },
+
+      "OSD": {
+        "backlightName": {
+          "title": "Backlight Name",
+          "description": "Defines the name of the display's backlight. This is used to get the path of the backlight: `/sys/class/backlight/<backlightName>`",
+          "type": "string"
+        }
+      }
+    })
+
     property Config global: Config {
       category: "Global";
 
