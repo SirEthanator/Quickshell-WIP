@@ -4,7 +4,6 @@ import "utils" as Utils;
 import Quickshell;
 import Quickshell.Io;
 import QtQuick;
-import QtCore;
 
 Singleton {
   id: root;
@@ -16,16 +15,20 @@ Singleton {
   readonly property url confPath: Qt.resolvedUrl("./config.conf");
 
   property QtObject conf: QtObject {
-    property Settings global: Settings {
+    function getCategories() {
+      return Object.values(root.conf).filter((obj) =>
+        !!obj && obj.toString().indexOf("Config_QMLTYPE") === 0
+      );
+    }
+
+    property Config global: Config {
       category: "Global";
-      location: root.confPath;
 
       property string colourScheme: "everforest";
     }
 
-    property Settings bar: Settings {
+    property Config bar: Config {
       category: "Bar";
-      location: root.confPath;
 
       property list<string> left: [
         "menu",
@@ -50,9 +53,8 @@ Singleton {
       property int truncationLength: 60;
     }
 
-    property Settings menu: Settings {
+    property Config menu: Config {
       category: "Menu";
-      location: root.confPath;
 
       property list<string> dashModules: [
         "userInfo",
@@ -67,9 +69,8 @@ Singleton {
       property int width: 600;
     }
 
-    property Settings desktop: Settings {
+    property Config desktop: Config {
       category: "Desktop";
-      location: root.confPath;
 
       property string wallpaper: "";
       property bool videoWallpaper: false;
@@ -84,9 +85,8 @@ Singleton {
       property bool autohideCursor: false;
     }
 
-    property Settings notifications: Settings {
+    property Config notifications: Config {
       category: "Notifications";
-      location: root.confPath;
 
       property int width: 500;
       property int defaultTimeout: 5000;
@@ -97,17 +97,15 @@ Singleton {
       property int dismissThreshold: 30;
     }
 
-    property Settings lock: Settings {
+    property Config lock: Config {
       category: "Lock";
-      location: root.confPath;
 
       property bool dimBackground: false;
       property bool contentOutline: true;
     }
 
-    property Settings osd: Settings {
+    property Config osd: Config {
       category: "OSD";
-      location: root.confPath;
 
       property string backlightName: "";
     }

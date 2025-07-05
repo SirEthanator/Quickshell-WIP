@@ -9,7 +9,7 @@ BarModule {
   iconbgColour: Globals.colours.activeWindow;
   id: root;
 
-  readonly property string title: ToplevelManager.activeToplevel.title;
+  readonly property string title: ToplevelManager.activeToplevel.title ?? "";
   show: title.length > 0;
 
   Text {
