@@ -4,55 +4,131 @@ import "utils" as Utils;
 import Quickshell;
 import Quickshell.Io;
 import QtQuick;
+import QtCore;
 
 Singleton {
   id: root;
-  /*   ____  ___  ______________  _  ______
-      / __ \/ _ \/_  __/  _/ __ \/ |/ / __/
-     / /_/ / ___/ / / _/ // /_/ /    /\ \
-     \____/_/    /_/ /___/\____/_/|_/___/   */
 
-  FileView {
-    id: confFile;
-    path: Qt.resolvedUrl("./config.json");
-    blockLoading: true;
-  }
+  // =======================
+  // ==== Configuration ====
+  // =======================
 
-  FileView {
-    id: defaultConfFile;
-    path: Qt.resolvedUrl("./defaultConf.json");
-    blockLoading: true;
-  }
+  readonly property url confPath: Qt.resolvedUrl("./config.conf");
 
-  function deepMerge(def, user) {
-    if (!user) return def;
-    Object.entries(user).forEach(([key, value]) => {
-      if (value && typeof value === 'object' && !Array.isArray(value)) deepMerge(def[key] = def[key] || [], value)
-      else def[key] = value;
-    });
-    return def
+  property QtObject conf: QtObject {
+    property Settings global: Settings {
+      category: "Global";
+      location: root.confPath;
+
+      property string colourScheme: "everforest";
+    }
+
+    property Settings bar: Settings {
+      category: "Bar";
+      location: root.confPath;
+
+      property list<string> left: [
+        "menu",
+        "workspaces",
+        "activeWindow"
+      ];
+      property list<string> centre: ["dateAndTime"];
+      property list<string> right: [
+        "tray",
+        "network",
+        "battery",
+        "media",
+        "volume"
+      ];
+      property bool autohide: false;
+      property bool docked: false;
+      property bool floatingModules: false;
+      property bool multiColourModules: false;
+      property bool moduleOutlines: true;
+      property bool backgroundOutline: true;
+      property int workspaceCount: 10;
+      property int truncationLength: 60;
+    }
+
+    property Settings menu: Settings {
+      category: "Menu";
+      location: root.confPath;
+
+      property list<string> dashModules: [
+        "userInfo",
+        "sysStats",
+        "notifCentre"
+      ];
+      property bool capitaliseUsername: true;
+      property bool capitaliseHostname: false;
+      property bool dimBackground: true;
+      property bool backgroundOutline: true;
+      property bool moduleOutlines: true;
+      property int width: 600;
+    }
+
+    property Settings desktop: Settings {
+      category: "Desktop";
+      location: root.confPath;
+
+      property string wallpaper: "";
+      property bool videoWallpaper: false;
+      property int fadeSpeed: 2000;
+      property string shader: "";
+      property bool hideWallpaper: false;
+      property color bgColour: "black";
+      property bool clockWidget: false;
+      property bool centreClockWidget: false;
+      property bool autohideWidgets: false;
+      property bool autohideBar: false;
+      property bool autohideCursor: false;
+    }
+
+    property Settings notifications: Settings {
+      category: "Notifications";
+      location: root.confPath;
+
+      property int width: 500;
+      property int defaultTimeout: 5000;
+      property int defaultCriticalTimeout: 8000;
+      property bool sounds: true;
+      property string normalSound: "/usr/share/sounds/ocean/stereo/message-new-instant.oga";
+      property string criticalSound: "/usr/share/sounds/ocean/stereo/dialog-error-critical.oga";
+      property int dismissThreshold: 30;
+    }
+
+    property Settings lock: Settings {
+      category: "Lock";
+      location: root.confPath;
+
+      property bool dimBackground: false;
+      property bool contentOutline: true;
+    }
+
+    property Settings osd: Settings {
+      category: "OSD";
+      location: root.confPath;
+
+      property string backlightName: "";
+    }
   }
 
   signal userConfUpdated(reload: bool);
-  readonly property var defaultConf: JSON.parse(defaultConfFile.text());
-  property var userConf: JSON.parse(confFile.text());
-  readonly property var conf: deepMerge(defaultConf, userConf);
 
-  readonly property QtObject colours: schemes[conf.colourScheme];
+  readonly property QtObject colours: schemes[conf.global.colourScheme];
 
   function setConf(property: list<string>, value, reload: bool, validate): string {
     const validationResult = (typeof validate === "function") ? validate() : undefined;
     if (validationResult) return validationResult;
     if (!property || property.length === 0) return "";
 
-    let currentObj = userConf;
-    let currentDefault = defaultConf;
+    let currentObj = conf;
 
     // Loop through the property
     for (let i=0; i < property.length; i++) {
       const propName = property[i];
 
-      if (!currentDefault.hasOwnProperty(propName)) {
+      if (!currentObj.hasOwnProperty(propName)) {
         console.warn(`setConf: Invalid property: ${property.join(".")}`);
         return "";
       }
@@ -61,13 +137,7 @@ Singleton {
         currentObj[propName] = value;
         userConfUpdated(reload);
       } else {
-        // If property doesn't exist, create it
-        // This does not apply for the final property (e.g. autohide in bar.autohide)
-        // This is only used when an entire section does not exist (e.g. bar in bar.autohide)
-        if (!currentObj.hasOwnProperty(propName)) currentObj[propName] = {};
-
         currentObj = currentObj[propName];
-        currentDefault = currentDefault[propName];
       }
     }
     return ""
@@ -75,7 +145,7 @@ Singleton {
 
   function setColours(scheme: string, reload: bool): string {
     const validate = () => Utils.Validate.validateObjKey(scheme, schemes, "Failed to set colour scheme");
-    return setConf(["colourScheme"], scheme, reload, validate);
+    return setConf(["global", "colourScheme"], scheme, reload, validate);
   }
 
   function setWallpaper(path: string, reload: bool): void {
@@ -110,14 +180,13 @@ Singleton {
   }
 
   onUserConfUpdated: (reload) => {
-    confFile.setText(JSON.stringify(userConf, null, 2));
+    // TODO: Wait until conf is synced before reloading
     if (reload) Quickshell.reload(false);
   }
 
-  /*  _   _____   ___  _______   ___  __   ________
-     | | / / _ | / _ \/  _/ _ | / _ )/ /  / __/ __/
-     | |/ / __ |/ , _// // __ |/ _  / /__/ _/_\ \
-     |___/_/ |_/_/|_/___/_/ |_/____/____/___/___/   */
+  // ===================
+  // ==== Variables ====
+  // ===================
 
   readonly property QtObject vars: QtObject {
     id: vars
@@ -201,10 +270,9 @@ Singleton {
     property real disabledOpacity: 0.5;
   }
 
-  /*    ___________ ________  ___________
-       / __/ ___/ // / __/  |/  / __/ __/
-      _\ \/ /__/ _  / _// /|_/ / _/_\ \
-     /___/\___/_//_/___/_/  /_/___/___/   */
+  // =================
+  // ==== Schemes ====
+  // =================
 
   readonly property var schemes: ({ everforest: everforest, catMocha: catMocha, rosePine: rosePine });
 
@@ -313,10 +381,13 @@ Singleton {
     property color batteryLow: red;
   }
 
-  /*    _____________ ______________
-       / __/_  __/ _ /_  __/ __/ __/
-      _\ \  / / / __ |/ / / _/_\ \
-     /___/ /_/ /_/ |_/_/ /___/___/   */
+  function alpha(color: color, opacity: real): color {
+    return Qt.rgba(color.r, color.b, color.g, opacity)
+  }
+
+  // ================
+  // ==== States ====
+  // ================
 
   enum ConfigState {
     Valid,

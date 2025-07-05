@@ -1,7 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import "root:/";
-import Quickshell;
+import Quickshell;  // Despite what qmlls says, this is not unused. Do not remove.
 import QtQuick;
 import QtMultimedia;
 
@@ -10,14 +10,15 @@ Item {
   anchors.fill: parent;
   // The default wallpaper must be set here instead of defaultConf.json because it uses an environment variable
   readonly property string defaultWall: {
-    switch (Globals.conf.colourScheme) {
+    switch (Globals.conf.global.colourScheme) {
       case "everforest": return "Everforest/Accent.png"
       case "catMocha": return "Catppuccin/Accent.png"
       case "rosePine": return "Rose-Pine/Accent.png"
     }
   }
-  readonly property url wallSource: Globals.conf.desktop.wallpaper
-    || `${Quickshell.env("HOME")}/Hyprland-Dots/Wallpapers/${defaultWall}`;
+  readonly property url wallSource: Globals.conf.desktop.wallpaper !== ""
+    ? Globals.conf.desktop.wallpaper
+    : `${Quickshell.env("HOME")}/Hyprland-Dots/Wallpapers/${defaultWall}`;
   readonly property bool showWall: !Globals.conf.desktop.hideWallpaper;
 
   VideoOutput {
