@@ -90,6 +90,8 @@ Singleton {
   function validateConfig() {
     const conf = Globals.conf;
 
+    // TODO: Fix validation with new config system - Values are currently converted into the correct type
+
     v(validateObjKey(conf.global.colourScheme, Globals.schemes, "global.colourScheme"));
 
     v(validateObjKeyArray(conf.bar.left, Globals.vars.barModules, "bar.left"));

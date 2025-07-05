@@ -25,5 +25,9 @@ Settings {
 
     return res
   }
+
+  function getMetadata(property: string): var {
+    return Globals.conf.metadata[category][property]
+  }
 }
 
