@@ -70,11 +70,18 @@ Rectangle {
         switch (root.metadata.type) {
           case "bool":
             source = "Toggle.qml";
+            props = { propName: root.propName, page: root.page, controller: root.controller }
+            break;
+          case "string":
+            if (!!root.metadata.options) {
+              source = "Dropdown.qml";
+              props = { propName: root.propName, page: root.page, controller: root.controller, options: root.metadata.options }
+            } else return;
             break;
           default:
             return
         }
-        setSource(source, { propName: root.propName, page: root.page, controller: root.controller });
+        setSource(source, props);
         active = true;
       }
     }

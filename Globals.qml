@@ -36,7 +36,7 @@ Singleton {
           "title": "Colour Scheme",
           "description": "Defines what colour scheme should be used.",
           "type": "string",
-          "options": Object.keys(root.schemes)
+          "options": root.schemes
         }
       },
 
@@ -530,7 +530,7 @@ Singleton {
   readonly property QtObject everforest: QtObject {
     id: everforest
 
-    property string fullName: "Everforest";
+    property string title: "Everforest";
 
     property color accent: "#A7C080";
     property color accentDark: Qt.darker(accent, 1.2);
@@ -565,7 +565,7 @@ Singleton {
   readonly property QtObject catMocha: QtObject {
     id: catMocha
 
-    property string fullName: "Catppuccin Mocha";
+    property string title: "Catppuccin Mocha";
 
     property color accent: "#B4BEFE";
     property color accentDark: Qt.darker(accent, 1.2);
@@ -600,7 +600,7 @@ Singleton {
   readonly property QtObject rosePine: QtObject {
     id: rosePine
 
-    property string fullName: "Rose Pine";
+    property string title: "Rose Pine";
 
     property color accent: "#9CCFD8";
     property color accentDark: Qt.darker(accent, 1.2);
