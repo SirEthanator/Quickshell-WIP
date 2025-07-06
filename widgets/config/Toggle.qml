@@ -5,13 +5,17 @@ import QtQuick;
 MouseArea {
   id: root;
 
-  required property Config page;
+  required property var controller;
+  required property string page;
   required property string propName;
-  property bool checked: page[propName];
+  property bool checked: Globals.conf[page][propName];
 
   property color fg: Globals.colours.fg;
   property color bg: containsMouse ? Globals.colours.bgHover : Globals.colours.bg;
   property color checkedColour: containsMouse ? Globals.colours.accentLight : Globals.colours.accent;
+
+  property bool completed: false;
+  Component.onCompleted: completed = true;
 
   width: 40;
   height: 20;
@@ -23,7 +27,8 @@ MouseArea {
   }
 
   onCheckedChanged: {
-    page[propName] = checked
+    if (completed)
+      controller.changeVal(page, propName, checked);
   }
 
   Rectangle {

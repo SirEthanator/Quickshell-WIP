@@ -14,7 +14,33 @@ Scope {
     function close(): void { loader.activeAsync = false }
   }
 
-  property Config currentPage: Globals.conf["global"];
+  property string currentPage: "global";
+  property var changedProperties: ({});
+  property int changeCount: 0;
+
+  function changeVal(category, prop, value) {
+    if (!changedProperties[category]) changedProperties[category] = {};
+    changedProperties[category][prop] = value;
+
+    if (value === Globals.conf[category][prop]) {
+      delete changedProperties[category][prop];
+      changeCount--;
+    } else {
+      changeCount++;
+    }
+  }
+
+  function apply() {
+    if (changedProperties.length !== 0) {
+      for (const key in changedProperties) {
+        for (const option in changedProperties[key]) {
+          Globals.conf[key][option] = changedProperties[key][option];
+        }
+      }
+      changedProperties = {};
+      changeCount = 0;
+    }
+  }
 
   LazyLoader {
     id: loader;
@@ -29,7 +55,7 @@ Scope {
 
       visible: true;
 
-      title: "Quickshell - Configuration"
+      title: "Quickshell - Configuration";
 
       onClosing: e => {
         e.accepted = false;

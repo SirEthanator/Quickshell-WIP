@@ -25,15 +25,14 @@ Item {
     spacing: Globals.vars.spacingButtonGroup;
     clip: true;
 
-    model: root.controller.currentPage.getProperties();
+    model: Globals.conf[root.controller.currentPage].getProperties();
 
     delegate: Option {
-      required property var modelData;
+      required property string modelData;
       modelLen: items.model.length;
+      controller: root.controller
       propName: modelData;
       page: root.controller.currentPage;
-      propValue: root.controller.currentPage[modelData];
-      metadata: root.controller.currentPage.getMetadata(modelData);
     }
   }
 }

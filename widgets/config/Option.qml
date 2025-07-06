@@ -5,12 +5,14 @@ import QtQuick.Layouts;
 Rectangle {
   id: root;
 
-  required property Config page;
+  required property var controller;
+  required property string page;
   required property var propName;
-  required property var propValue;
   required property int index;
   required property int modelLen;
-  required property var metadata;
+
+  readonly property var propValue: Globals.conf[page][propName];
+  readonly property var metadata: Globals.conf[page].getMetadata(propName);
 
   height: content.height + Globals.vars.paddingCard*2;
   width: parent.width;
@@ -72,7 +74,7 @@ Rectangle {
           default:
             return
         }
-        setSource(source, { propName: root.propName, page: root.page });
+        setSource(source, { propName: root.propName, page: root.page, controller: root.controller });
         active = true;
       }
     }

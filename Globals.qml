@@ -17,8 +17,17 @@ Singleton {
   property QtObject conf: QtObject {
     function getCategories() {
       return Object.values(root.conf).filter((obj) =>
-        !!obj && obj.toString().indexOf("Config_QMLTYPE") === 0
+        !!obj && obj.toString().indexOf("Config_QMLTYPE") !== -1
       );
+    }
+
+    function getCategoryKeys() {
+      let result = [];
+      let allKeys = Object.keys(root.conf);
+      for (let i=0; i < allKeys.length; i++) {
+        if (root.conf[allKeys[i]].toString().indexOf("Config_QMLTYPE") !== -1) result.push(allKeys[i]);
+      }
+      return result
     }
 
     readonly property var metadata: ({
