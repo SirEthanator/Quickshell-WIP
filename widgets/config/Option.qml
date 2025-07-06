@@ -26,7 +26,11 @@ Rectangle {
     anchors.right: parent.right;
     anchors.margins: Globals.vars.paddingCard;
 
+    spacing: Globals.vars.paddingCard;
+
     ColumnLayout {
+      Layout.maximumWidth: content.width - valueLoader.width - content.spacing;
+
       Text {
         text: root.metadata.title;
         font {
@@ -34,6 +38,10 @@ Rectangle {
           pixelSize: Globals.vars.smallHeadingFontSize;
         }
         color: Globals.colours.fg;
+
+        Layout.fillWidth: true;
+        maximumLineCount: 1;
+        elide: Text.ElideRight;
       }
       Text {
         text: root.metadata.description;
@@ -42,6 +50,9 @@ Rectangle {
           pixelSize: Globals.vars.mainFontSize;
         }
         color: Globals.colours.grey;
+
+        Layout.fillWidth: true;
+        wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
       }
     }
 
@@ -61,7 +72,6 @@ Rectangle {
           default:
             return
         }
-        console.log(`${root.propName} ${root.metadata.type}`);
         setSource(source, { propName: root.propName, page: root.page });
         active = true;
       }
