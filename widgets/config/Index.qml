@@ -20,13 +20,20 @@ Scope {
     id: loader;
     activeAsync: false;
 
-    FloatingWindow {
+    Window {
       id: window;
       color: Globals.colours.bg;
-      minimumSize: Qt.size(50, 50);  // TEMP
 
-      onVisibleChanged: {
-        if (!visible) loader.activeAsync = false;
+      minimumHeight: 200;
+      minimumWidth: 800;
+
+      visible: true;
+
+      title: "Quickshell - Configuration"
+
+      onClosing: e => {
+        e.accepted = false;
+        loader.activeAsync = false;
       }
 
       RowLayout {
