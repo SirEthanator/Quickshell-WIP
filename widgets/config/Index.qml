@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import "root:/";
+import "root:/components";
 import Quickshell;
 import Quickshell.Io;
 import QtQuick;
@@ -42,6 +43,12 @@ Scope {
     }
   }
 
+  function quit() {
+    changedProperties = {};
+    changeCount = 0;
+    loader.activeAsync = false;
+  }
+
   LazyLoader {
     id: loader;
     activeAsync: false;
@@ -58,14 +65,51 @@ Scope {
       title: "Quickshell - Configuration";
 
       onClosing: e => {
-        e.accepted = false;
-        loader.activeAsync = false;
+        if (root.changeCount > 0) {
+          e.accepted = false;
+          changesDialog.open();
+        } else {
+          root.quit();
+        }
       }
 
       RowLayout {
         anchors.fill: parent;
         Sidebar { controller: root }
         Options { controller: root }
+      }
+
+      Dialog {
+        id: changesDialog;
+        title: "Save changes?";
+        description: "You have unsaved changes, would you like to save them?";
+
+        Button {
+          label: "Discard";
+          autoImplicitHeight: true;
+          Layout.fillWidth: true;
+          tlRadius: true; blRadius: true;
+          bg: Globals.colours.bgLight;
+          onClicked: root.quit();
+        }
+        Button {
+          label: "Cancel";
+          autoImplicitHeight: true;
+          Layout.fillWidth: true;
+          bg: Globals.colours.bgLight;
+          onClicked: changesDialog.close();
+        }
+        Button {
+          label: "Save";
+          autoImplicitHeight: true;
+          Layout.fillWidth: true;
+          trRadius: true; brRadius: true;
+          bg: Globals.colours.bgLight;
+          onClicked: {
+            root.apply();
+            root.quit();
+          }
+        }
       }
     }
   }
