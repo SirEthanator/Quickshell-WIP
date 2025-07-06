@@ -36,17 +36,18 @@ Rectangle {
       top: root.top;
       left: parent.left;
       right: parent.right;
+      bottom: parent.bottom;
       margins: Globals.vars.paddingWindow;
     }
     spacing: Globals.vars.spacingButtonGroup;
 
     Repeater {
       id: itemRepeater;
-      model: Globals.conf.getCategories();
+      model: Globals.conf.getCategoryKeys();
       delegate: Button {
-        required property Config modelData;
+        required property string modelData;
         required property int index;
-        label: modelData.category;
+        label: Globals.conf[modelData].category;
 
         active: modelData === root.controller.currentPage;
 
@@ -61,6 +62,27 @@ Rectangle {
 
         centreLabel: false;
       }
+    }
+
+    Item { Layout.fillHeight: true }
+
+    Button {
+      Layout.fillWidth: true;
+      autoImplicitHeight: true;
+
+      property int changeCount: root.controller.changeCount;
+      visible: changeCount > 0;
+
+      label: `Apply ${changeCount}`;
+
+      bg: Globals.colours.accent;
+      bgHover: Globals.colours.accentLight;
+      labelColour: Globals.colours.bgLight;
+      invertTextOnPress: false;
+
+      tlRadius: true; trRadius: true; blRadius: true; brRadius: true;
+
+      onClicked: root.controller.apply();
     }
   }
 }

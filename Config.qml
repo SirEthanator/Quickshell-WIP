@@ -19,7 +19,7 @@ Settings {
     // This leaves us with only our own properties
     const res = keys.filter((key) =>
       baseKeys.indexOf(key) === -1
-        && key.indexOf("Changed") === -1
+        && key.indexOf("Changed") === -1  // Remove xChanged signals
         && typeof root[key] !== "function"
     );
 
