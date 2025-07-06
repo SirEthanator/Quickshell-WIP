@@ -25,10 +25,16 @@ Scope {
 
     if (value === Globals.conf[category][prop]) {
       delete changedProperties[category][prop];
-      changeCount--;
-    } else {
-      changeCount++;
     }
+    changeCount = getChangeCount();
+  }
+
+  function getChangeCount() {
+    let result = 0;
+    for (const key in changedProperties) {
+      for (const _ in changedProperties[key]) { result++ }
+    }
+    return result;
   }
 
   function apply() {
