@@ -2,45 +2,134 @@ pragma ComponentBehavior: Bound
 
 import "root:/";
 import "root:/components";
+import "root:/animations" as Anims;
 import QtQuick;
-import QtQuick.Controls;
 
-ComboBox {
+Rectangle {
   id: root;
   required property var controller;
   required property var options;
   required property string page;
   required property string propName;
 
+  property int currentIndex: 0;
+  property string displayText: model[currentIndex].title;
+
+  property int padding: Globals.vars.paddingButton;
+
   property bool completed;
   Component.onCompleted: completed = true;
 
-  model: {
+  color: mouse.containsMouse && !popup.visible ? Globals.colours.bgHover : Globals.colours.bg;
+  // Radius set by border
+
+  Anims.ColourTransition on color {}
+
+  width: 200;
+  height: text.height + padding*2;
+
+  Border {
+    bottomBorder: !popup.visible;
+    bottomLeftRadius: !popup.visible ? Globals.vars.br : 0; bottomRightRadius: bottomLeftRadius;
+    setParentRadius: true;
+  }
+
+  MouseArea {
+    id: mouse;
+    anchors.fill: parent;
+    onClicked: popup.toggle();
+    hoverEnabled: true;
+  }
+
+  Text {
+    id: text;
+    text: root.displayText;
+    font {
+      family: Globals.vars.fontFamily;
+      pixelSize: Globals.vars.mainFontSize;
+    }
+    color: Globals.colours.fg;
+    anchors.verticalCenter: parent.verticalCenter;
+    anchors.left: parent.left;
+    anchors.leftMargin: root.padding;
+  }
+
+  Icon {
+    icon: "expand-symbolic";
+    colour: Globals.colours.fg;
+    rotation: popup.visible ? 180 : 0;
+    size: text.height;
+    anchors.verticalCenter: root.verticalCenter;
+    anchors.right: root.right;
+    anchors.rightMargin: root.padding;
+  }
+
+  property var model: {
     let result = [];
     for (const key in options) {
       result.push(Object.assign({ key: key }, options[key]));
     }
     return result;
   }
-  textRole: "title";
-
-  delegate: Button {
-    required property var modelData;
-    required property int index;
-
-    label: modelData.title;
-    autoWidth: true;
-    autoHeight: true;
-    onClicked: {
-      root.currentIndex = index;
-      root.popup.close();
-    }
-  }
 
   onCurrentIndexChanged: {
     if (completed) {
-      console.log(model[currentIndex].key);
       controller.changeVal(page, propName, model[currentIndex].key);
+    }
+  }
+
+  Rectangle {
+    id: popup;
+    width: root.width;
+    height: items.contentHeight;
+    anchors.top: root.bottom;
+
+    visible: false;
+
+    color: Globals.colours.bg;
+    // Radius set by border
+
+    Border {
+      topBorder: false;
+      setParentRadius: true;
+      topLeftRadius: 0; topRightRadius: 0;
+    }
+
+    function close() { visible = false }
+    function open() { visible = true; forceActiveFocus() }
+    function toggle() { visible = !visible; if (visible) forceActiveFocus() }
+
+    onActiveFocusChanged: {
+      if (!activeFocus) close();
+    }
+
+    ListView {
+      id: items;
+      anchors.fill: parent;
+      // No padding needed, the buttons have their own.
+
+      clip: true;
+      interactive: false;
+      boundsBehavior: Flickable.StopAtBounds;
+
+      model: root.model;
+      delegate: Button {
+        required property var modelData;
+        required property int index;
+
+        radiusValue: popup.bottomLeftRadius;  // Either of the bottom radii will work, not top because they are 0
+        tlRadius: true; trRadius: true; blRadius: true; brRadius: true;
+
+        label: modelData.title;
+        autoHeight: true;
+        onClicked: {
+          root.currentIndex = index;
+          popup.close();
+        }
+        anchors.right: parent.right;
+        anchors.left: parent.left;
+        anchors.horizontalCenter: parent.horizontalCenter;
+      }
     }
   }
 }
