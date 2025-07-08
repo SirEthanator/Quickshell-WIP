@@ -53,7 +53,10 @@ Rectangle {
         root.field.parent = this;
         // Place children after the field
         for (let i=0; i < root.data.length; i++) {
-          root.data[i].parent = this;
+          const item = root.data[i];
+          if (typeof item !== "undefined" && typeof item.parent !== "undefined") {
+            item.parent = this;
+          }
         }
       }
     }

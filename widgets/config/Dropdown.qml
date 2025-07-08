@@ -128,7 +128,6 @@ Rectangle {
         }
         anchors.right: parent.right;
         anchors.left: parent.left;
-        anchors.horizontalCenter: parent.horizontalCenter;
       }
     }
   }
