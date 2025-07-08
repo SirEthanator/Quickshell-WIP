@@ -66,21 +66,29 @@ Rectangle {
 
       Component.onCompleted: {
         let source = "";
-        let props = {};
+        let props = { propName: root.propName, page: root.page, controller: root.controller };
+
         switch (root.metadata.type) {
           case "bool":
             source = "Toggle.qml";
-            props = { propName: root.propName, page: root.page, controller: root.controller }
             break;
+
           case "string":
             if (!!root.metadata.options) {
               source = "Dropdown.qml";
-              props = { propName: root.propName, page: root.page, controller: root.controller, options: root.metadata.options }
+              props = Object.assign(props, { options: root.metadata.options })
             } else return;
             break;
+
+          case "int":
+            source = "IntInput.qml";
+            props = Object.assign(props, { max: root.metadata.max, min: root.metadata.min })
+            break;
+
           default:
             return
         }
+
         setSource(source, props);
         active = true;
       }
