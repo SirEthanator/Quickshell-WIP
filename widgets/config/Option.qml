@@ -15,7 +15,7 @@ Rectangle {
   readonly property var metadata: Globals.conf[page].getMetadata(propName);
 
   height: content.height + Globals.vars.paddingCard*2;
-  width: parent.width;
+  width: (!!parent && !!parent.width) ? parent.width : 0;
 
   color: Globals.colours.bgLight;
   topLeftRadius: index === 0 ? Globals.vars.br : 0; topRightRadius: topLeftRadius;
@@ -60,8 +60,8 @@ Rectangle {
 
     Loader {
       id: valueLoader;
-      Layout.preferredHeight: item.height;
-      Layout.preferredWidth: item.width;
+      Layout.preferredHeight: (!!item && !!item.height) ? item.height : 0;
+      Layout.preferredWidth: (!!item && !!item.width) ? item.width : 0;
       Layout.alignment: Qt.AlignRight;
 
       Component.onCompleted: {
@@ -77,7 +77,9 @@ Rectangle {
             if (!!root.metadata.options) {
               source = "Dropdown.qml";
               props = Object.assign(props, { options: root.metadata.options })
-            } else return;
+            } else {
+              source = "StringInput.qml";
+            }
             break;
 
           case "int":
