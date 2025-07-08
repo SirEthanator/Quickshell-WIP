@@ -11,16 +11,19 @@ Item {
   Layout.fillWidth: true;
   Layout.fillHeight: true;
 
+  readonly property int maxWidth: 1000;
+
   ListView {
     id: items;
 
     anchors {
       top: parent.top;
-      left: parent.left;
-      right: parent.right;
       bottom: parent.bottom;
       margins: Globals.vars.paddingWindow;
+      horizontalCenter: parent.horizontalCenter;
     }
+
+    width: Math.min(root.maxWidth, root.width - Globals.vars.paddingWindow * 2);
 
     spacing: Globals.vars.spacingButtonGroup;
     clip: true;

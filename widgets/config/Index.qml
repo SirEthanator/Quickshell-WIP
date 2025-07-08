@@ -81,6 +81,7 @@ Scope {
 
       RowLayout {
         anchors.fill: parent;
+        spacing: 0;
         Sidebar { controller: root }
         Options { controller: root }
       }
