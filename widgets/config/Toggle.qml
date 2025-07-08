@@ -8,7 +8,7 @@ MouseArea {
   required property var controller;
   required property string page;
   required property string propName;
-  property bool checked: Globals.conf[page][propName];
+  property bool checked: controller.getVal(page, propName)
 
   property color fg: Globals.colours.fg;
   property color bg: containsMouse ? Globals.colours.bgHover : Globals.colours.bg;

@@ -19,6 +19,14 @@ Scope {
   property var changedProperties: ({});
   property int changeCount: 0;
 
+  function getVal(category, prop) {
+    if (typeof changedProperties[category] !== "undefined" && typeof changedProperties[category][prop] !== "undefined") {
+      return changedProperties[category][prop]
+    } else {
+      return Globals.conf[category][prop]
+    }
+  }
+
   function changeVal(category, prop, value) {
     if (!changedProperties[category]) changedProperties[category] = {};
     changedProperties[category][prop] = value;

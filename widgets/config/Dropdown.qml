@@ -12,7 +12,7 @@ Rectangle {
   required property string page;
   required property string propName;
 
-  property int currentIndex: 0;
+  property int currentIndex: Object.keys(options).indexOf(controller.getVal(page, propName));
   property string displayText: model[currentIndex].title;
 
   property int padding: Globals.vars.paddingButton;

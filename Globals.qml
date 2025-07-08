@@ -141,8 +141,8 @@ Singleton {
           "title": "Width",
           "description": "Defines how wide the menu should be (px).",
           "type": "int",
-          "max": 450,
-          "min": 5000
+          "max": 5000,
+          "min": 450
         }
       },
 
