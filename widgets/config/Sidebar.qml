@@ -9,7 +9,7 @@ Rectangle {
   required property var controller;
 
   Layout.fillHeight: true;
-  implicitWidth: 250 + Globals.vars.outlineSize;
+  implicitWidth: 250;
 
   color: Globals.colours.bgLight;
 
