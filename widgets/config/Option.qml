@@ -28,33 +28,55 @@ Rectangle {
     anchors.right: parent.right;
     anchors.margins: Globals.vars.paddingCard;
 
-    spacing: Globals.vars.paddingCard;
+    spacing: longValueLoader.active ? 0 : Globals.vars.paddingCard;
 
     ColumnLayout {
       Layout.maximumWidth: content.width - valueLoader.width - content.spacing;
+      spacing: Globals.vars.marginCard;
 
-      Text {
-        text: root.metadata.title;
-        font {
-          family: Globals.vars.fontFamily;
-          pixelSize: Globals.vars.smallHeadingFontSize;
+      ColumnLayout {
+        spacing: Globals.vars.marginCardSmall;
+        Text {
+          text: root.metadata.title;
+          font {
+            family: Globals.vars.fontFamily;
+            pixelSize: Globals.vars.smallHeadingFontSize;
+          }
+          color: Globals.colours.fg;
+
+          Layout.fillWidth: true;
+          maximumLineCount: 1;
+          elide: Text.ElideRight;
         }
-        color: Globals.colours.fg;
+        Text {
+          text: root.metadata.description;
+          font {
+            family: Globals.vars.fontFamily;
+            pixelSize: Globals.vars.mainFontSize;
+          }
+          color: Globals.colours.grey;
 
-        Layout.fillWidth: true;
-        maximumLineCount: 1;
-        elide: Text.ElideRight;
+          Layout.fillWidth: true;
+          wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
+        }
       }
-      Text {
-        text: root.metadata.description;
-        font {
-          family: Globals.vars.fontFamily;
-          pixelSize: Globals.vars.mainFontSize;
-        }
-        color: Globals.colours.grey;
 
+      Loader {
+        id: longValueLoader;
         Layout.fillWidth: true;
-        wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
+        Layout.preferredHeight: (!!item && !!item.height) ? item.height : 0;
+
+        active: false;
+        visible: active;
+
+        Component.onCompleted: {
+          let source = "";
+          let props = { propName: root.propName, page: root.page, controller: root.controller };
+          if (root.metadata.type === "path") {
+            setSource("PathInput.qml", props)
+            active = true;
+          }
+        }
       }
     }
 
@@ -64,9 +86,13 @@ Rectangle {
       Layout.preferredWidth: (!!item && !!item.width) ? item.width : 0;
       Layout.alignment: Qt.AlignRight;
 
+      active: false;
+      visible: active;
+
       Component.onCompleted: {
         let source = "";
         let props = { propName: root.propName, page: root.page, controller: root.controller };
+        let show = true;
 
         switch (root.metadata.type) {
           case "bool":
@@ -86,13 +112,12 @@ Rectangle {
             source = "IntInput.qml";
             props = Object.assign(props, { max: root.metadata.max, min: root.metadata.min })
             break;
-
-          default:
-            return
         }
 
-        setSource(source, props);
-        active = true;
+        if (source !== "") {
+          setSource(source, props);
+          active = true;
+        }
       }
     }
   }

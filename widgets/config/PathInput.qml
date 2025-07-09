@@ -1,0 +1,41 @@
+import "root:/";
+import "root:/components";
+import QtQuick;
+import QtQuick.Dialogs;
+
+OptionInput {
+  id: root;
+
+  width: parent.width;
+
+  Button {
+    label: "Browse...";
+    autoImplicitHeight: true;
+    autoImplicitWidth: true;
+    radiusValue: parent.parent.radius;
+    tlRadius: true; trRadius: true; blRadius: true; brRadius: true;
+
+    onClicked: dialog.open();
+  }
+
+  rightPadding: false;
+
+  FileDialog {
+    id: dialog;
+    acceptLabel: "Select";
+    rejectLabel: "Cancel";
+    fileMode: FileDialog.OpenFile;
+
+    options: FileDialog.ReadOnly;
+    modality: Qt.ApplicationModal;
+
+    nameFilters: {
+      const isVideo = root.controller.getVal("desktop", "videoWallpaper");
+      if (isVideo) return ["Video files (*.mp4)"];
+      else return ["Image files (*.png *.jpg *.jpeg *.svg)"];
+    }
+
+    onAccepted: root.field.text = selectedFile;
+  }
+}
+
