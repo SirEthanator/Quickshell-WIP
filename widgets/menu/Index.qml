@@ -151,7 +151,7 @@ Scope {
               }
             }
 
-            Stack {
+            FlickableStack {
               id: stack;
               Layout.fillHeight: true;
               Layout.fillWidth: true;

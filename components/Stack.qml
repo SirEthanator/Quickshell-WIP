@@ -10,7 +10,7 @@ StackView {
   property bool loopOutOfRange: false;
   initialItem: items[currentIndex];
 
-  replaceEnter: Transition {
+  readonly property Transition defaultEnterTransition: Transition {
     NumberAnimation {
       property: "opacity";
       from: 0;
@@ -28,7 +28,7 @@ StackView {
     }
   }
 
-  replaceExit: Transition {
+  readonly property Transition defaultExitTransition: Transition {
     NumberAnimation {
       property: "opacity";
       from: 1;
@@ -38,8 +38,14 @@ StackView {
     }
   }
 
+  replaceEnter: defaultEnterTransition;
+  replaceExit: defaultExitTransition;
+
   onCurrentIndexChanged: {
-    if (root.loopOutOfRange && currentIndex >= items.length) root.currentIndex = 0;
+    if (root.loopOutOfRange) {
+      if (currentIndex >= items.length) root.currentIndex = 0;
+      if (currentIndex < 0) root.currentIndex = items.length-1;
+    }
     const item = items[currentIndex];
     if (item !== undefined) {
       root.replace(item);

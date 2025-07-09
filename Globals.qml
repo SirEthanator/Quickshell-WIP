@@ -503,6 +503,7 @@ Singleton {
     property int paddingButtonIcon: 8;
     property int spacingButtonGroup: 3;
 
+    property int longAnimLen: 500;
     property int animLen: 350;
     property int transitionLen: 250;
     property int shortTransitionLen: 150;
