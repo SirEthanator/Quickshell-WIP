@@ -66,8 +66,6 @@ PanelWindow {
       color: Globals.conf.bar.floatingModules ? "transparent" : Globals.colours.outline;
       radius: Globals.conf.bar.docked ? 0 : Globals.vars.br;
 
-      antialiasing: true;
-
       Rectangle {
         readonly property real marginSize: Globals.conf.bar.backgroundOutline && !Globals.conf.bar.floatingModules ? Globals.vars.outlineSize : 0;
         anchors {

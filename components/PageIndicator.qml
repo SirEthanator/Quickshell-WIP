@@ -7,8 +7,8 @@ import QtQuick.Layouts;
 
 RowLayout {
   id: root;
-  required property Stack stack;
-  readonly property int count: stack.children.length;
+  required property var stack;
+  readonly property int count: stack.data.length;
   readonly property int currentIndex: stack.currentIndex;
   property bool fullWidth: true;
 
