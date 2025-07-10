@@ -87,18 +87,16 @@ ColumnLayout {
       }
 
       onReleased: {
-        // TODO: Allow for moving by more than one place
         // TODO: Move while dragging, not on release
+
         const deltaY = y - originalY;
-        if (deltaY < 0) {
-          if (index > 0 && -deltaY > height/2) {
-            root.currentVal.values = swap(root.currentVal.values, index, index-1);
-          }
-        } else {
-          if (index < list.model.values.length-1 && deltaY > height/2) {
-            root.currentVal.values = swap(root.currentVal.values, index, index+1);
-          }
-        }
+        const swapDistance = Math.round(deltaY / (height+list.spacing));
+
+        let targetIndex = index+swapDistance;
+        if (targetIndex < 0) targetIndex = 0;
+        if (targetIndex > list.model.values.length-1) targetIndex = list.model.values.length-1;
+
+        root.currentVal.values = swap(root.currentVal.values, index, targetIndex);
 
         y = originalY;
       }
