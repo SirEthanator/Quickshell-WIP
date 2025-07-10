@@ -72,8 +72,16 @@ Rectangle {
         Component.onCompleted: {
           let source = "";
           let props = { propName: root.propName, page: root.page, controller: root.controller };
+
           if (root.metadata.type === "path") {
-            setSource("PathInput.qml", props)
+            source = "PathInput.qml";
+          } else if (root.metadata.type.match(/^list<[A-z]*>$/g)) {
+            source = "ListInput.qml";
+            props = Object.assign(props, { options: root.metadata.options });
+          }
+
+          if (source !== "") {
+            setSource(source, props);
             active = true;
           }
         }

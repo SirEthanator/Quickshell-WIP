@@ -93,11 +93,9 @@ Item {
       }
       displaced: Transition {
         NumberAnimation { property: "y"; duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
-        NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Globals.vars.transitionLen }
       }
       move: Transition {
         NumberAnimation { property: "y"; duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
-        NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Globals.vars.transitionLen }
       }
       remove: Transition {
         NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Globals.vars.shortTransitionLen }

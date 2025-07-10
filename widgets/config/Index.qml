@@ -31,7 +31,7 @@ Scope {
     if (!changedProperties[category]) changedProperties[category] = {};
     changedProperties[category][prop] = value;
 
-    if (value === Globals.conf[category][prop]) {
+    if (value.toString() === Globals.conf[category][prop].toString()) {
       delete changedProperties[category][prop];
     }
     changeCount = getChangeCount();
