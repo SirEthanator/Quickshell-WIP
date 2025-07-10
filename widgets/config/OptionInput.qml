@@ -13,6 +13,9 @@ Input {
   required property string propName;
   property bool allowEmpty: false;
 
+  readonly property var defaultvalueParser: (text) => text;
+  property var valueParser: defaultvalueParser;
+
   QtObject {
     id: internal;
     property bool completed: false;
@@ -37,8 +40,10 @@ Input {
 
     onTextChanged: {
       if (root.completed) {
-        if ((!!text || root.allowEmpty) && acceptableInput)
-          root.controller.changeVal(root.page, root.propName, text);
+        if ((!!text || root.allowEmpty) && acceptableInput) {
+          const value = (typeof root.valueParser === "function") ? root.valueParser(text) : root.defaultvalueParser(text);
+          root.controller.changeVal(root.page, root.propName, value);
+        }
         else
           root.controller.changeVal(root.page, root.propName, Globals.conf[root.page][root.propName]);
       }
