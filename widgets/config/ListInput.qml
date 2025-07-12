@@ -58,9 +58,8 @@ ColumnLayout {
       Rectangle {
         id: addPopup;
 
-        y: parent.y + parent.height + Globals.vars.marginCard;
-        // anchors.top: parent.bottom;
-        // anchors.margins: Globals.vars.marginCard;
+        anchors.top: parent.bottom;
+        anchors.margins: Globals.vars.marginCard;
 
         height: addPopupItems.contentHeight;
         width: 200;
@@ -68,9 +67,11 @@ ColumnLayout {
         color: Globals.colours.bg;
 
         visible: false;
-        function toggle() { visible=!visible }
-        function open() { visible=true }
+        function toggle() { visible=!visible; if (visible) forceActiveFocus() }
+        function open() { visible=true; forceActiveFocus() }
         function close() { visible=false }
+
+        onActiveFocusChanged: if (!activeFocus) close();
 
         Border {
           setParentRadius: true;
@@ -146,17 +147,17 @@ ColumnLayout {
 
       z: containsPress ? 1 : 0;
 
-      function swap(arr, a, b) {
+      function moveItem(arr, index, targetIndex) {
         let result = [...arr];
-        result[a] = arr[b];
-        result[b] = arr[a];
+        if (targetIndex >= arr.length || targetIndex < 0) {
+          console.error("moveItem: Failed to move: target index out of range")
+          return arr;
+        }
+        result.splice(targetIndex, 0, result.splice(index, 1)[0]);
         return result;
       }
 
       onReleased: {
-        // TODO: Move while dragging, not on release
-        // TODO: Instead of swapping, shift others
-
         const deltaY = y - originalY;
         const swapDistance = Math.round(deltaY / (height+list.spacing));
 
@@ -164,7 +165,7 @@ ColumnLayout {
         if (targetIndex < 0) targetIndex = 0;
         if (targetIndex > list.model.values.length-1) targetIndex = list.model.values.length-1;
 
-        root.currentVal.values = swap(root.currentVal.values, index, targetIndex);
+        root.currentVal.values = moveItem(root.currentVal.values, index, targetIndex);
 
         y = originalY;
       }
@@ -183,8 +184,6 @@ ColumnLayout {
           id: delegateRow;
           spacing: Globals.vars.paddingCard;
 
-          // Layout.maximumWidth: parent.width - Globals.vars.paddingCard * 2;
-
           anchors {
             left: parent.left;
             right: parent.right;
@@ -201,6 +200,7 @@ ColumnLayout {
 
           Text {
             text: delegate.modelData;
+            Layout.fillWidth: true;
             color: Globals.colours.fg;
             font {
               family: Globals.vars.fontFamily;
