@@ -17,8 +17,14 @@ Rectangle {
 
   property int padding: Globals.vars.paddingButton;
 
-  property bool completed;
-  Component.onCompleted: completed = true;
+  readonly property bool popupOpen: popup.visible;
+
+  readonly property bool completed: internal.completed;
+  QtObject {
+    id: internal;
+    property bool completed: false;
+  }
+  Component.onCompleted: internal.completed = true;
 
   color: mouse.containsMouse && !popup.visible ? Globals.colours.bgHover : Globals.colours.bg;
   // Radius set by border

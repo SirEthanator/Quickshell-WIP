@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import "root:/";
+import "root:/components";
 import "root:/animations" as Anims;
 import Quickshell;
 import QtQuick;
@@ -8,12 +9,21 @@ import QtQuick.Layouts;
 
 ColumnLayout {
   id: root;
-  spacing: Globals.vars.paddingCard;
+  spacing: Globals.vars.marginCard;
 
   required property var controller;
   required property string propName;
   required property string page;
   required property list<string> options;
+
+  readonly property bool popupOpen: addPopup.visible;
+
+  QtObject {
+    id: internal;
+    property bool completed: false;
+  }
+  Component.onCompleted: internal.completed = true;
+  readonly property bool completed: internal.completed;
 
   width: parent.width;
 
@@ -27,14 +37,71 @@ ColumnLayout {
     }
   }
 
-  QtObject {
-    id: internal;
-    property bool completed: false;
-  }
-  Component.onCompleted: internal.completed = true;
-  readonly property bool completed: internal.completed;
+  onImplicitHeightChanged: height = implicitHeight;
 
-  // BUTTONS HERE
+  RowLayout {
+    id: buttons;
+    spacing: Globals.vars.marginCardSmall;
+
+    z: 1000;  // For the add popup to show on top of options
+
+    Button {
+      id: addButton;
+
+      label: "Add New";
+      autoImplicitWidth: true;
+      autoImplicitHeight: true;
+      tlRadius: true; trRadius: true; blRadius: true; brRadius: true;
+
+      onClicked: addPopup.toggle();
+
+      Rectangle {
+        id: addPopup;
+
+        y: parent.y + parent.height + Globals.vars.marginCard;
+        // anchors.top: parent.bottom;
+        // anchors.margins: Globals.vars.marginCard;
+
+        height: addPopupItems.contentHeight;
+        width: 200;
+
+        color: Globals.colours.bg;
+
+        visible: false;
+        function toggle() { visible=!visible }
+        function open() { visible=true }
+        function close() { visible=false }
+
+        Border {
+          setParentRadius: true;
+        }
+
+        ListView {
+          id: addPopupItems;
+          anchors.fill: parent;
+
+          model: root.options;
+
+          delegate: Button {
+            required property string modelData;
+            label: modelData;
+
+            autoHeight: true;
+            anchors.right: parent.right;
+            anchors.left: parent.left;
+
+            radiusValue: addPopup.topLeftRadius;  // Any of the popup's radii except for radius itself are set by the border and are equal
+            tlRadius: true; trRadius: true; blRadius: true; brRadius: true;
+
+            onClicked: {
+              root.currentVal.values.push(modelData);
+              addPopup.close();
+            }
+          }
+        }
+      }
+    }
+  }
 
   ListView {
     id: list;
@@ -77,7 +144,7 @@ ColumnLayout {
       property double originalY: y;
       onPressed: originalY = y;
 
-      z: containsPress ? 100 : 0;
+      z: containsPress ? 1 : 0;
 
       function swap(arr, a, b) {
         let result = [...arr];
@@ -88,6 +155,7 @@ ColumnLayout {
 
       onReleased: {
         // TODO: Move while dragging, not on release
+        // TODO: Instead of swapping, shift others
 
         const deltaY = y - originalY;
         const swapDistance = Math.round(deltaY / (height+list.spacing));
@@ -114,10 +182,12 @@ ColumnLayout {
         RowLayout {
           id: delegateRow;
           spacing: Globals.vars.paddingCard;
-          Layout.maximumWidth: parent.width - Globals.vars.paddingCard * 2;
+
+          // Layout.maximumWidth: parent.width - Globals.vars.paddingCard * 2;
 
           anchors {
             left: parent.left;
+            right: parent.right;
             top: parent.top;
             margins: Globals.vars.paddingCard;
           }
@@ -138,6 +208,23 @@ ColumnLayout {
             }
             maximumLineCount: 1;
             elide: Text.ElideRight;
+          }
+
+          Item { Layout.fillWidth: true }
+
+          Button {
+            id: removeBtn;
+
+            label: "delete-symbolic";
+            icon: true;
+            labelSize: Globals.vars.moduleIconSize;
+            labelColour: Globals.colours.red;
+            bgPress: Globals.colours.red;
+
+            autoImplicitHeight: true;
+            autoImplicitWidth: true;
+
+            onClicked: root.currentVal.values.splice(delegate.index, 1);
           }
         }
       }
