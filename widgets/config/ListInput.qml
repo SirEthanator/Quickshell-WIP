@@ -137,15 +137,17 @@ ColumnLayout {
       width: parent.width;
       height: delegateBg.height;
 
-      cursorShape: containsPress ? Qt.DragMoveCursor : Qt.ArrowCursor;
+      cursorShape: drag.active ? Qt.DragMoveCursor : Qt.ArrowCursor;
 
       drag.target: delegate;
       drag.axis: Drag.YAxis;
+      drag.minimumY: 0;
+      drag.maximumY: list.implicitHeight - height;
 
       property double originalY: y;
       onPressed: originalY = y;
 
-      z: containsPress ? 1 : 0;
+      z: drag.active ? 1 : 0;
 
       function moveItem(arr, index, targetIndex) {
         let result = [...arr];
@@ -165,9 +167,11 @@ ColumnLayout {
         if (targetIndex < 0) targetIndex = 0;
         if (targetIndex > list.model.values.length-1) targetIndex = list.model.values.length-1;
 
-        root.currentVal.values = moveItem(root.currentVal.values, index, targetIndex);
-
-        y = originalY;
+        if (targetIndex !== index) {
+          root.currentVal.values = moveItem(root.currentVal.values, index, targetIndex);
+        } else {
+          y = originalY;
+        }
       }
 
       Anims.NumberTransition on y {}
