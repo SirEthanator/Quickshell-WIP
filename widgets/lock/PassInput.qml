@@ -9,7 +9,6 @@ Input {
   id: root;
   required property Pam pam;
 
-  focus: true;
   Layout.fillWidth: true;
 
   field: InputField {
@@ -23,6 +22,10 @@ Input {
 
     readOnly: root.pam.active;
     opacity: root.pam.active ? Globals.vars.disabledOpacity : 1;
+
+    focus: true;
+    onFocusChanged: { if (!focus) focus = true }
+    onActiveFocusChanged: { if (!activeFocus) forceActiveFocus() }
   }
 
   rightPadding: false;
