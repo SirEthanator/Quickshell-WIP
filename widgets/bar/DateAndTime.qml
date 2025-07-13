@@ -5,17 +5,6 @@ import QtQuick;
 BarModule {
   icon: "calendar-month-symbolic";
   iconbgColour: Globals.colours.dateAndTime;
-  tooltip: TooltipItem {
-    // Placeholder - Replace with calendar
-    Text {
-      text: Utils.SysInfo.dateAndTime;
-      color: Globals.colours.fg;
-      font {
-        family: Globals.vars.fontFamily;
-        pixelSize: Globals.vars.mainFontSize;
-      }
-    }
-  }
 
   Text {
     id: clockText

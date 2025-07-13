@@ -12,18 +12,6 @@ BarModule {
   icon: Utils.SysInfo.volumeIcon;
   iconbgColour: Globals.colours.volume;
 
-  tooltip: TooltipItem {
-    // Placeholder - Replace with list of audio devices with sliders
-    Text {
-      text: root.volume;
-      color: Globals.colours.fg;
-      font {
-        family: Globals.vars.fontFamily;
-        pixelSize: Globals.vars.mainFontSize;
-      }
-    }
-  }
-
   Text {
     color: Globals.colours.fg;
     font {
