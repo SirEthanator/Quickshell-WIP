@@ -39,7 +39,6 @@ Scope {
     PanelWindow {
       id: root;
       color: Globals.conf.menu.dimBackground ? Globals.vars.bgDimmedColour : "transparent";
-      visible: Globals.configValid === Globals.ConfigState.Valid;
 
       anchors {
         top: true;

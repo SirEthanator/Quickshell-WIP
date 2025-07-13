@@ -8,7 +8,6 @@ PanelWindow {
   WlrLayershell.layer: WlrLayer.Background;
   exclusionMode: ExclusionMode.Ignore;
   color: Globals.conf.desktop.bgColour;
-  visible: Globals.configValid === Globals.ConfigState.Valid;
 
   anchors {
     top: true;

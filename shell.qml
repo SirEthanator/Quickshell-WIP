@@ -12,14 +12,11 @@ import "widgets/screensaver" as Screensaver;
 import "widgets/invalidConf" as InvalidConf;
 import "widgets/themeOverlay" as ThemeOverlay;
 import "widgets/config" as Config;
-import "utils" as Utils;
 import Quickshell.Io;
 import QtQuick;
 
 ShellRoot {
   id: shellroot;
-
-  Component.onCompleted: Utils.Validate.validateConfig();
 
   IpcHandler {
     target: "screensaver";
@@ -72,7 +69,6 @@ ShellRoot {
         currentAction: Globals.states.themeSwitchingState;
         onClose: Globals.states.themeOverlayOpen = false;
       }
-      InvalidConf.Index { screen: scope.modelData }
     }
 	}
 }

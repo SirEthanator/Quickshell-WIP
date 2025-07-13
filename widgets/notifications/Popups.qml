@@ -23,8 +23,6 @@ PanelWindow {
     width: root.width
   }
 
-  visible: Globals.configValid === Globals.ConfigState.Valid;
-
   anchors {
     top: true;
     right: true;

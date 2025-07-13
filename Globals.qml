@@ -676,15 +676,6 @@ Singleton {
   // ==== States ====
   // ================
 
-  enum ConfigState {
-    Valid,
-    Invalid,
-    Validating
-  }
-
-  property int configValid: Globals.ConfigState.Validating;
-  property list<string> configInvalidReasons: [];
-
   PersistentProperties {
     id: persist
 

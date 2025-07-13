@@ -15,11 +15,6 @@ Singleton {
     });
   }
 
-  function invalidConf(reason: string) {
-    Globals.configValid = Globals.ConfigState.Invalid;
-    Globals.configInvalidReasons.push(reason);
-  }
-
   function validateInt(val, min: int, max: int, errMsg: string) {
     let reason;
     if (typeof val !== "number") reason = `Expected integer, found ${typeof val}: ${val}`;
@@ -82,64 +77,5 @@ Singleton {
       return ""
     }
   }
-
-  function v(result) {
-    if (result) invalidConf(result);
-  }
-
-  function validateConfig() {
-    const conf = Globals.conf;
-
-    // TODO: Fix validation with new config system - Values are currently converted into the correct type
-
-    v(validateObjKey(conf.global.colourScheme, Globals.schemes, "global.colourScheme"));
-
-    v(validateObjKeyArray(conf.bar.left, Globals.vars.barModules, "bar.left"));
-    v(validateObjKeyArray(conf.bar.centre, Globals.vars.barModules, "bar.centre"));
-    v(validateObjKeyArray(conf.bar.right, Globals.vars.barModules, "bar.right"));
-    v(validateBool(conf.bar.autohide, "bar.autohide"));
-    v(validateBool(conf.bar.docked, "bar.docked"));
-    v(validateBool(conf.bar.floatingModules, "bar.floatingModules"));
-    v(validateBool(conf.bar.multiColourModules, "bar.multiColourModules"));
-    v(validateBool(conf.bar.moduleOutlines, "bar.moduleOutlines"));
-    v(validateBool(conf.bar.backgroundOutline, "bar.backgroundOutline"));
-    v(validateInt(conf.bar.workspaceCount, 1, 20, "bar.workspaceCount"));
-    v(validateInt(conf.bar.truncationLength, 0, 1000, "bar.truncationLength"));
-
-    v(validateInt(conf.menu.width, 450, 5000, "menu.width"));
-    v(validateBool(conf.menu.capitaliseUsername, "menu.capitaliseUsername"));
-    v(validateBool(conf.menu.capitaliseHostname, "menu.capitaliseHostname"));
-    v(validateBool(conf.menu.dimBackground, "menu.dimBackground"));
-    v(validateBool(conf.menu.backgroundOutline, "menu.backgroundOutline"));
-    v(validateBool(conf.menu.moduleOutlines, "menu.moduleOutlines"));
-
-    v(validateString(conf.desktop.wallpaper, [], "desktop.wallpaper"));
-    v(validateBool(conf.desktop.videoWallpaper, "desktop.videoWallpaper"));
-    v(validateInt(conf.desktop.fadeSpeed, 0, 60000, "desktop.fadeSpeed"));
-    v(validateString(conf.desktop.shader, [], "desktop.shader"));
-    v(validateBool(conf.desktop.hideWallpaper, "desktop.hideWallpaper"));
-    v(validateColor(conf.desktop.bgColour, "desktop.bgColour"));
-    v(validateBool(conf.desktop.clockWidget, "desktop.clockWidget"));
-    v(validateBool(conf.desktop.centreClockWidget, "desktop.centreClockWidget"));
-    v(validateBool(conf.desktop.autohideWidgets, "desktop.autohideWidgets"));
-    v(validateBool(conf.desktop.autohideBar, "desktop.autohideBar"));
-    v(validateBool(conf.desktop.autohideCursor, "desktop.autohideCursor"));
-
-    v(validateInt(conf.notifications.width, 200, 5000, "notifications.width"));
-    v(validateInt(conf.notifications.defaultTimeout, 100, 60000, "notifications.defaultTimeout"));
-    v(validateInt(conf.notifications.defaultCriticalTimeout, 100, 60000, "notifications.defaultCriticalTimeout"));
-    v(validateBool(conf.notifications.sounds, "notifications.sounds"));
-    v(validateString(conf.notifications.normalSound, [], "notifications.normalSound"));
-    v(validateString(conf.notifications.criticalSound, [], "notifications.criticalSound"));
-    v(validateInt(conf.notifications.dismissThreshold, 1, 99, "notifications.dismissThreshold"));
-
-    v(validateBool(conf.lock.dimBackground), "lock.dimBackground");
-    v(validateBool(conf.lock.contentOutline), "lock.contentOutline");
-
-    v(validateString(conf.osd.backlightName, [], "osd.backlightName"));
-
-    if (Globals.configValid !== Globals.ConfigState.Invalid) Globals.configValid = Globals.ConfigState.Valid;
-  }
-
 }
 
