@@ -1,12 +1,14 @@
 import "root:/";
 import "root:/animations" as Anims;
 import QtQuick;
+import QtQuick.Layouts;
 
 MouseArea {
   id: root;
-  required property string label;
-  property bool icon: false;
-  property int labelSize: 0;
+  property string label;
+  property string icon;
+  property int fontSize;
+  property int iconSize;
   property int iconRotation: 0;
   property bool centreLabel: true;
 
@@ -19,32 +21,25 @@ MouseArea {
   property bool invertTextOnPress: true;
 
   property int radiusValue: Globals.vars.br;
+  property bool allRadius: false;
   property bool tlRadius: false;
   property bool trRadius: false;
   property bool blRadius: false;
   property bool brRadius: false;
+  property bool changeRadiusHover: true;
   property bool changeTlRadiusHover: true;
   property bool changeTrRadiusHover: true;
   property bool changeBlRadiusHover: true;
   property bool changeBrRadiusHover: true;
 
-  property bool autoHeight: false;
-  property bool autoImplicitHeight: false;
-  property bool autoWidth: false;
-  property bool autoImplicitWidth: false;
   property int padding: Globals.vars.paddingButton;
 
   property bool disabled: false;
 
   hoverEnabled: true;
 
-  readonly property int autoHeightVal: (icon ? iconLabel.height : label.height) + padding*2;
-  height: autoHeight ? autoHeightVal : undefined;
-  implicitHeight: autoImplicitHeight ? autoHeightVal : undefined;
-
-  readonly property int autoWidthVal: (icon ? iconLabel.width : label.width) + padding*2;
-  width: autoWidth ? autoWidthVal : undefined;
-  implicitWidth: autoImplicitWidth ? autoWidthVal : undefined;
+  implicitHeight: label.implicitHeight + padding*2;
+  implicitWidth: label.implicitWidth + padding*2;
 
   Rectangle {
     id: background;
@@ -56,10 +51,11 @@ MouseArea {
         : root.containsMouse
           ? root.bgHover
           : root.bg;
-    topLeftRadius: root.tlRadius || root.containsMouse && root.changeTlRadiusHover ? root.radiusValue : 0;
-    topRightRadius: root.trRadius || root.containsMouse && root.changeTrRadiusHover ? root.radiusValue : 0;
-    bottomLeftRadius: root.blRadius || root.containsMouse && root.changeBlRadiusHover ? root.radiusValue : 0;
-    bottomRightRadius: root.brRadius || root.containsMouse && root.changeBrRadiusHover ? root.radiusValue : 0;
+
+    topLeftRadius: root.tlRadius || root.allRadius || root.containsMouse && root.changeTlRadiusHover ? root.radiusValue : 0;
+    topRightRadius: root.trRadius || root.allRadius || root.containsMouse && root.changeTrRadiusHover ? root.radiusValue : 0;
+    bottomLeftRadius: root.blRadius || root.allRadius || root.containsMouse && root.changeBlRadiusHover ? root.radiusValue : 0;
+    bottomRightRadius: root.brRadius || root.allRadius || root.containsMouse && root.changeBrRadiusHover ? root.radiusValue : 0;
 
     opacity: root.disabled ? Globals.vars.disabledOpacity : 1;
 
@@ -70,36 +66,37 @@ MouseArea {
 
     Anims.ColourTransition on color {}
 
-    Text {
-      id: label
-      visible: !root.icon;
+    RowLayout {
+      id: label;
+      spacing: root.padding;
       anchors.verticalCenter: parent.verticalCenter;
       anchors.horizontalCenter: root.centreLabel ? parent.horizontalCenter : undefined;
       anchors.left: !root.centreLabel ? parent.left : undefined;
       anchors.leftMargin: !root.centreLabel ? root.padding : 0;
 
-      text: root.label;
-      color: (root.containsPress || root.active) && root.invertTextOnPress ? root.bg : root.labelColour;
-      Anims.ColourTransition on color {}
-      font {
-        family: Globals.vars.fontFamily;
-        pixelSize: root.labelSize > 0 ? root.labelSize : Globals.vars.mainFontSize;
+      Icon {
+        id: iconLabel;
+        visible: !!root.icon;
+
+        icon: root.icon;
+        color: (root.containsPress || root.active) && root.invertTextOnPress ? root.bg : root.labelColour;
+        Anims.ColourTransition on color {}
+        size: !!root.iconSize ? root.iconSize : root.height - root.padding * 2;
+        rotation: root.iconRotation;
       }
-    }
 
-    Icon {
-      id: iconLabel;
-      visible: root.icon;
-      anchors.verticalCenter: parent.verticalCenter;
-      anchors.horizontalCenter: root.centreLabel ? parent.horizontalCenter : undefined;
-      anchors.left: !root.centreLabel ? parent.left : undefined;
-      anchors.leftMargin: !root.centreLabel ? root.padding : 0;
+      Text {
+        id: textLabel;
+        visible: !!root.label;
 
-      icon: root.label;
-      color: (root.containsPress || root.active) && root.invertTextOnPress ? root.bg : root.labelColour;
-      Anims.ColourTransition on color {}
-      size: root.labelSize > 0 ? root.labelSize : parent.height - root.padding * 2;
-      rotation: root.iconRotation;
+        text: root.label;
+        color: (root.containsPress || root.active) && root.invertTextOnPress ? root.bg : root.labelColour;
+        Anims.ColourTransition on color {}
+        font {
+          family: Globals.vars.fontFamily;
+          pixelSize: !!root.fontSize ? root.fontSize : Globals.vars.mainFontSize;
+        }
+      }
     }
   }
 }

@@ -50,13 +50,9 @@ RowLayout {
   Item { Layout.fillWidth: true; }
 
   Button {
-    label: "settings-symbolic";
-    icon: true;
-    padding: Globals.vars.paddingButtonIcon;
-    labelSize: Globals.vars.largeIconSize;
-    autoImplicitHeight: true;
-    autoImplicitWidth: true;
-    tlRadius: true; trRadius: true; blRadius: true; brRadius: true;
+    icon: "settings-symbolic";
+    iconSize: Globals.vars.largeIconSize;
+    allRadius: true;
 
     onClicked: {
       Globals.launchConfMenu();
@@ -65,14 +61,10 @@ RowLayout {
   }
 
   Button {
-    label: "system-shutdown-symbolic";
-    icon: true;
-    padding: Globals.vars.paddingButtonIcon;
-    labelSize: Globals.vars.largeIconSize;
-    autoImplicitHeight: true;
-    autoImplicitWidth: true;
+    icon: "system-shutdown-symbolic";
+    iconSize: Globals.vars.largeIconSize;
     labelColour: Globals.colours.red;
-    tlRadius: true; trRadius: true; blRadius: true; brRadius: true;
+    allRadius: true;
     bgPress: Globals.colours.red;
 
     onClicked: event => root.clicked(event);

@@ -9,7 +9,6 @@ import "widgets/lock" as Lock;
 import "widgets/desktop" as Desktop;
 import "widgets/osd" as OSD;
 import "widgets/screensaver" as Screensaver;
-import "widgets/invalidConf" as InvalidConf;
 import "widgets/themeOverlay" as ThemeOverlay;
 import "widgets/config" as Config;
 import Quickshell.Io;

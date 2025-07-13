@@ -124,16 +124,16 @@ Rectangle {
         required property int index;
 
         radiusValue: popup.bottomLeftRadius;  // Either of the bottom radii will work, not top because they are 0
-        tlRadius: true; trRadius: true; blRadius: true; brRadius: true;
+        allRadius: true;
 
         label: modelData.title;
-        autoHeight: true;
+        height: implicitHeight;
+        anchors.right: parent.right;
+        anchors.left: parent.left;
         onClicked: {
           root.currentIndex = index;
           popup.close();
         }
-        anchors.right: parent.right;
-        anchors.left: parent.left;
       }
     }
   }

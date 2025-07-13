@@ -18,7 +18,7 @@ Scope {
 
   Connections {
     target: Globals;
-    onLaunchConfMenu: loader.activeAsync = true;
+    function onLaunchConfMenu() { loader.activeAsync = true }
   }
 
   property string currentPage: "global";
@@ -107,7 +107,6 @@ Scope {
 
         Button {
           label: "Discard";
-          autoImplicitHeight: true;
           Layout.fillWidth: true;
           tlRadius: true; blRadius: true;
           bg: Globals.colours.bgLight;
@@ -115,14 +114,12 @@ Scope {
         }
         Button {
           label: "Cancel";
-          autoImplicitHeight: true;
           Layout.fillWidth: true;
           bg: Globals.colours.bgLight;
           onClicked: changesDialog.close();
         }
         Button {
           label: "Save";
-          autoImplicitHeight: true;
           Layout.fillWidth: true;
           trRadius: true; brRadius: true;
           bg: Globals.colours.bgLight;

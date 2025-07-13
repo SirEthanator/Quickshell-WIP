@@ -52,7 +52,6 @@ Rectangle {
         active: modelData === root.controller.currentPage;
 
         Layout.fillWidth: true;
-        autoImplicitHeight: true;
 
         tlRadius: index === 0; trRadius: tlRadius;
         blRadius: index === itemRepeater.model.length - 1; brRadius: blRadius;
@@ -68,19 +67,18 @@ Rectangle {
 
     Button {
       Layout.fillWidth: true;
-      autoImplicitHeight: true;
 
       property int changeCount: root.controller.changeCount;
       visible: changeCount > 0;
 
+      icon: "filesave-symbolic";
       label: `Apply ${changeCount}`;
 
       bg: Globals.colours.accent;
       bgHover: Globals.colours.accentLight;
       labelColour: Globals.colours.bgLight;
       invertTextOnPress: false;
-
-      tlRadius: true; trRadius: true; blRadius: true; brRadius: true;
+      allRadius: true;
 
       onClicked: root.controller.apply();
     }

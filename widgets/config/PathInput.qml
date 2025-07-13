@@ -10,10 +10,8 @@ OptionInput {
 
   Button {
     label: "Browse...";
-    autoImplicitHeight: true;
-    autoImplicitWidth: true;
     radiusValue: parent.parent.radius;
-    tlRadius: true; trRadius: true; blRadius: true; brRadius: true;
+    allRadius: true;
 
     onClicked: dialog.open();
   }
