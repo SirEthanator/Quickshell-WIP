@@ -74,6 +74,8 @@ MouseArea {
       anchors.left: !root.centreLabel ? parent.left : undefined;
       anchors.leftMargin: !root.centreLabel ? root.padding : 0;
 
+      width: Math.min(implicitWidth, root.width-root.padding*2)
+
       Icon {
         id: iconLabel;
         visible: !!root.icon;
@@ -88,6 +90,10 @@ MouseArea {
       Text {
         id: textLabel;
         visible: !!root.label;
+
+        Layout.fillWidth: true;
+        maximumLineCount: 1;
+        elide: Text.ElideRight;
 
         text: root.label;
         color: (root.containsPress || root.active) && root.invertTextOnPress ? root.bg : root.labelColour;
