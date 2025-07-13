@@ -14,7 +14,7 @@ ColumnLayout {
   required property var controller;
   required property string propName;
   required property string page;
-  required property list<string> options;
+  required property var options;
 
   readonly property bool popupOpen: addPopup.visible;
 
@@ -38,6 +38,8 @@ ColumnLayout {
   }
 
   onImplicitHeightChanged: height = implicitHeight;
+
+  Anims.NumberTransition on height { enabled: completed }
 
   RowLayout {
     id: buttons;
@@ -81,11 +83,11 @@ ColumnLayout {
           id: addPopupItems;
           anchors.fill: parent;
 
-          model: root.options;
+          model: Object.keys(root.options);
 
           delegate: Button {
             required property string modelData;
-            label: modelData;
+            label: root.options[modelData].title;
 
             autoHeight: true;
             anchors.right: parent.right;
@@ -144,9 +146,6 @@ ColumnLayout {
       drag.minimumY: 0;
       drag.maximumY: list.implicitHeight - height;
 
-      property double originalY: y;
-      onPressed: originalY = y;
-
       z: drag.active ? 1 : 0;
 
       function moveItem(arr, index, targetIndex) {
@@ -158,6 +157,9 @@ ColumnLayout {
         result.splice(targetIndex, 0, result.splice(index, 1)[0]);
         return result;
       }
+
+      property double originalY: y;
+      onPressed: originalY = y;
 
       onReleased: {
         const deltaY = y - originalY;
@@ -203,7 +205,7 @@ ColumnLayout {
           }
 
           Text {
-            text: delegate.modelData;
+            text: root.options[delegate.modelData].title;
             Layout.fillWidth: true;
             color: Globals.colours.fg;
             font {
