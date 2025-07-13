@@ -45,19 +45,19 @@ Singleton {
           "title": "Left Modules",
           "description": "Defines what modules to show on the left of the bar (LTR).",
           "type": "list<string>",
-          "options": Object.keys(root.vars.barModules)
+          "options": root.vars.barModules
         },
         "centre": {
           "title": "Centre Modules",
           "description": "Defines what modules to show in the middle of the bar (LTR).",
           "type": "list<string>",
-          "options": Object.keys(root.vars.barModules)
+          "options": root.vars.barModules
         },
         "right": {
           "title": "Right Modules",
           "description": "Defines what modules to show on the right of the bar (LTR).",
           "type": "list<string>",
-          "options": Object.keys(root.vars.barModules)
+          "options": root.vars.barModules
         },
         "autohide": {
           "title": "Autohide",
@@ -110,7 +110,7 @@ Singleton {
           "title": "Dashboard Modules",
           "description": "Defines which modules should be shown on the dashboard.",
           "type": "list<string>",
-          "options": Object.keys(root.vars.dashModules)
+          "options": root.vars.dashModules
         },
         "capitaliseUsername": {
           "title": "Capitalise Username",
@@ -444,27 +444,62 @@ Singleton {
 
     property var barModules: ({
       workspaces: {
+        title: "Workspaces",
         url: "Workspaces.qml",
         props: ["screen"]
       },
       tray: {
+        title: "System Tray",
         url: "SysTray.qml",
         props: ["window"]
       },
-      menu:         { url: "MenuBtn.qml"      },
-      activeWindow: { url: "ActiveWindow.qml" },
-      dateAndTime:  { url: "DateAndTime.qml"  },
-      network:      { url: "Network.qml"      },
-      battery:      { url: "Battery.qml"      },
-      media:        { url: "Media.qml"        },
-      volume:       { url: "Volume.qml"       }
+      menu: {
+        title: "Menu Button",
+        url: "MenuBtn.qml",
+      },
+      activeWindow: {
+        title: "Active Window",
+        url: "ActiveWindow.qml"
+      },
+      dateAndTime: {
+        title: "Date & Time",
+        url: "DateAndTime.qml"
+      },
+      network: {
+        title: "Network",
+        url: "Network.qml"
+      },
+      battery: {
+        title: "Battery",
+        url: "Battery.qml"
+      },
+      media: {
+        title: "Media",
+        url: "Media.qml"
+      },
+      volume: {
+        title: "Volume",
+        url: "Volume.qml"
+      }
     });
 
     property var dashModules: ({
-      userInfo:    { url: "userinfo/Index.qml" },
-      sysStats:    { url: "sysstats/Index.qml" },
-      notifCentre: { url: "NotifCentre.qml"    },
-      tray:        { url: "SysTray.qml"        }
+      userInfo: {
+        title: "User Info & Power",
+        url: "userinfo/Index.qml"
+      },
+      sysStats: {
+        title: "System Stats",
+        url: "sysstats/Index.qml"
+      },
+      notifCentre: {
+        title: "Notification Centre",
+        url: "NotifCentre.qml"
+      },
+      tray: {
+        title: "System Tray",
+        url: "SysTray.qml"
+      }
     });
 
     property int gap: Utils.SysInfo.gap;  // Size of Hyprland gap
