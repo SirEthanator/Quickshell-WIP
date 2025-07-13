@@ -550,7 +550,7 @@ Singleton {
     property int paddingNotif: paddingCard;
     property int notifInnerSpacing: 10;
 
-    property int largeIconSize: 40;
+    property int largeIconSize: 34;
     property int extraLargeIconSize: 90;
 
     property color bgDimmedColour: "#4D000000";
@@ -675,6 +675,8 @@ Singleton {
   // ================
   // ==== States ====
   // ================
+
+  signal launchConfMenu;
 
   PersistentProperties {
     id: persist
