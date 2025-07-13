@@ -4,6 +4,7 @@ import "root:/";
 import "root:/animations" as Anims;
 import "root:/components";
 import Quickshell;
+import Quickshell.Services.SystemTray;
 import QtQuick;
 import QtQuick.Layouts;
 
@@ -23,6 +24,8 @@ BarModule {
     colour: root.mouseArea.containsPress ? Globals.colours.bgLight : Globals.colours.fg;
     rotation: popupLoader.open ? 180 : 0;
   }
+
+  visible: SystemTray.items.values.length > 0;
 
   LazyLoader {
     id: popupLoader;
@@ -92,7 +95,10 @@ BarModule {
           columnSpacing: Globals.vars.marginCard;
           anchors.centerIn: parent;
 
-          TrayItems { window: popup }
+          TrayItems {
+            window: popup;
+            onActivated: popupLoader.open = false;
+          }
         }
       }
 

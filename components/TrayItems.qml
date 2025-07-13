@@ -10,6 +10,8 @@ Repeater {
   model: SystemTray.items;
   property var window;
 
+  signal activated;
+
   MouseArea {
     id: trayItem;
     required property SystemTrayItem modelData;
@@ -22,6 +24,7 @@ Repeater {
     onClicked: event => {
       if (event.button == Qt.LeftButton) {
         modelData.activate();
+        root.activated();
       } else if (event.button == Qt.MiddleButton) {
         modelData.secondaryActivate();
       } else if (event.button == Qt.RightButton && modelData.hasMenu) {
