@@ -4,7 +4,8 @@ My WIP quickshell config.
 
 ## Configuring
 
-Configuration file is located at `$HOME/.config/quickshell/config.json`
+> [!CAUTION]
+> It is highly recommended to use the configuration menu for changing options, rather than editing the config.conf manually. If you should choose to manually edit it anyways, your choices will not be validated, and therefore could cause things to break.
 
-See [configuration](doc/Configuration.md) for a full list of options.
+Configuration file is located at `$HOME/.config/quickshell/config.conf`
 
