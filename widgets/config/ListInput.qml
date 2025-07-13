@@ -51,9 +51,7 @@ ColumnLayout {
       id: addButton;
 
       label: "Add New";
-      autoImplicitWidth: true;
-      autoImplicitHeight: true;
-      tlRadius: true; trRadius: true; blRadius: true; brRadius: true;
+      allRadius: true;
 
       onClicked: addPopup.toggle();
 
@@ -89,12 +87,12 @@ ColumnLayout {
             required property string modelData;
             label: root.options[modelData].title;
 
-            autoHeight: true;
+            height: implicitHeight;
             anchors.right: parent.right;
             anchors.left: parent.left;
 
             radiusValue: addPopup.topLeftRadius;  // Any of the popup's radii except for radius itself are set by the border and are equal
-            tlRadius: true; trRadius: true; blRadius: true; brRadius: true;
+            allRadius: true;
 
             onClicked: {
               root.currentVal.values.push(modelData);
@@ -221,14 +219,10 @@ ColumnLayout {
           Button {
             id: removeBtn;
 
-            label: "delete-symbolic";
-            icon: true;
-            labelSize: Globals.vars.moduleIconSize;
+            icon: "delete-symbolic";
+            iconSize: Globals.vars.moduleIconSize;
             labelColour: Globals.colours.red;
             bgPress: Globals.colours.red;
-
-            autoImplicitHeight: true;
-            autoImplicitWidth: true;
 
             onClicked: root.currentVal.values.splice(delegate.index, 1);
           }

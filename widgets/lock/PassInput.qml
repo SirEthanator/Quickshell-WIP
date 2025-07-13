@@ -32,10 +32,8 @@ Input {
 
   Button {
     id: confirmBtn;
-    label: "checkmark-symbolic";
-    icon: true;
+    icon: "checkmark-symbolic";
 
-    autoImplicitWidth: true;
     Layout.fillHeight: true;
 
     radiusValue: root.radius - Globals.vars.outlineSize;

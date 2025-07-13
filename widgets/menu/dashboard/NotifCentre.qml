@@ -26,9 +26,7 @@ DashItem {
 
       Button {
         label: "Clear All";
-        autoImplicitHeight: true;
-        autoImplicitWidth: true;
-        tlRadius: true; trRadius: true; blRadius: true; brRadius: true;
+        allRadius: true;
 
         onClicked: {
           for (const notif of root.notifications) { notif.dismiss() }

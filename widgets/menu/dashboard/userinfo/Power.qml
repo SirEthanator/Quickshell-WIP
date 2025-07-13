@@ -37,8 +37,7 @@ GridLayout {
       id: powerBtn;
       required property var modelData;
       required property int index;
-      label: modelData[2];
-      icon: true;
+      icon: modelData[2];
       Layout.fillWidth: true;
       Layout.fillHeight: true;
 

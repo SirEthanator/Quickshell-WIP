@@ -103,9 +103,8 @@ MouseArea {
 
       Button {
         id: closeButton;
-        label: "close-symbolic";
-        icon: true;
-        labelSize: Globals.vars.moduleIconSize;
+        icon: "close-symbolic";
+        iconSize: Globals.vars.moduleIconSize;
 
         Layout.fillHeight: true;
         implicitWidth: root.containsMouse ? Globals.vars.moduleIconSize + padding * 2 : 0;
@@ -163,14 +162,13 @@ MouseArea {
 
               Button {
                 visible: summary.multiline || body.multiline;
-                label: "notification-expand-symbolic";
+                icon: "notification-expand-symbolic";
                 iconRotation: root.expanded ? 180 : 0;
-                icon: true;
 
                 implicitHeight: appName.height;
                 implicitWidth: implicitHeight;
 
-                tlRadius: true; trRadius: true; blRadius: true; brRadius: true;
+                allRadius: true;
                 padding: 2;
 
                 onClicked: root.expanded = !root.expanded;
@@ -226,7 +224,6 @@ MouseArea {
                   required property int index;
 
                   Layout.fillWidth: true;
-                  autoHeight: true;
 
                   label: modelData.text;
                   onClicked: modelData.invoke();
