@@ -96,7 +96,6 @@ PanelWindow {
             id: leftModules;
             screen: root.screen;
             window: root;
-            tooltipHandler: tooltip;
             modules: Globals.conf.bar.left;
             anchors.left: parent.left;
           }
@@ -104,7 +103,6 @@ PanelWindow {
           BarSection {
             screen: root.screen;
             window: root;
-            tooltipHandler: tooltip;
             modules: Globals.conf.bar.centre;
             anchors.horizontalCenter: parent.horizontalCenter;
             anchors.horizontalCenterOffset: {
@@ -130,7 +128,6 @@ PanelWindow {
             id: rightModules;
             screen: root.screen;
             window: root;
-            tooltipHandler: tooltip;
             modules: Globals.conf.bar.right;
             anchors.right: parent.right;
           }
@@ -138,6 +135,4 @@ PanelWindow {
       }
     }
   }
-
-  Tooltip { id: tooltip; window: root }
 }

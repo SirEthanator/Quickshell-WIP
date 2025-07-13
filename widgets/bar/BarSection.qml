@@ -7,7 +7,6 @@ RowLayout {
   id: root
   required property var window;
   required property var screen;
-  required property var tooltipHandler;
   readonly property var allModules: Globals.vars.barModules;
   required property var modules;
 
@@ -25,7 +24,7 @@ RowLayout {
       readonly property string url: `${root.allModules[modelData].url}`;
       readonly property list<string> passedProps: root.allModules[modelData].props;
       readonly property var props: {
-        let result = { tooltipHandler: root.tooltipHandler };
+        let result = {};
         if (passedProps.indexOf("screen") !== -1) {
           result.screen = root.screen
         }
