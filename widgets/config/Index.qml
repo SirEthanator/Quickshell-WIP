@@ -9,10 +9,16 @@ import QtQuick.Layouts;
 
 Scope {
   id: root;
+
   IpcHandler {
     target: "confMenu";
     function open(): void { loader.activeAsync = true }
     function close(): void { loader.activeAsync = false }
+  }
+
+  Connections {
+    target: Globals;
+    onLaunchConfMenu: loader.activeAsync = true;
   }
 
   property string currentPage: "global";
