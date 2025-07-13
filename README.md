@@ -5,7 +5,7 @@ My WIP quickshell config.
 ## Configuring
 
 > [!CAUTION]
-> It is highly recommended to use the configuration menu for changing options, rather than editing the config.conf manually. If you should choose to manually edit it anyways, your choices will not be validated, and therefore could cause things to break.
+> Configuration should be modified through the configuration menu rather than by directly editing config.conf. Manual edits to the configuration file bypass validation and may result in unexpected behavior.
 
 Configuration file is located at `$HOME/.config/quickshell/config.conf`
 
