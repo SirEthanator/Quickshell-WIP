@@ -121,9 +121,11 @@ ColumnLayout {
     }
     displaced: Transition {
       NumberAnimation { property: "y"; duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
+      PropertyAction { property: "opacity"; value: 1 }
     }
     move: Transition {
       NumberAnimation { property: "y"; duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
+      PropertyAction { property: "opacity"; value: 1 }
     }
     remove: Transition {
       NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Globals.vars.shortTransitionLen }
