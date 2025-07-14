@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import "root:/";
 import "root:/components";
+import "root:/utils" as Utils;
 import "root:/animations" as Anims;
 import Quickshell;
 import Quickshell.Widgets;
@@ -30,9 +31,7 @@ Item {
   }
 
   readonly property ScriptModel model: ScriptModel {
-    values: DesktopEntries.applications.values
-      .filter(entry => root.searchText.length === 0 || entry.name.toLowerCase().includes(root.searchText.toLowerCase()))
-      .sort((a, b) => a.name.localeCompare(b.name));  // Alphabetical order
+    values: Utils.Fuzzy.fuzzySearch(DesktopEntries.applications.values, root.searchText, "name");
     onValuesChanged: root.currentIndex = 0;
   }
 
@@ -93,9 +92,11 @@ Item {
       }
       displaced: Transition {
         NumberAnimation { property: "y"; duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
+        PropertyAction { property: "opacity"; value: 1 }
       }
       move: Transition {
         NumberAnimation { property: "y"; duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
+        PropertyAction { property: "opacity"; value: 1 }
       }
       remove: Transition {
         NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Globals.vars.shortTransitionLen }
