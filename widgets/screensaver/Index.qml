@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import "root:/";
+import qs
 import Quickshell;
 import Quickshell.Wayland;
 import QtQuick;

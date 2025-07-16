@@ -1,6 +1,6 @@
-import "root:/";
-import "root:/animations" as Anims;
-import "root:/utils" as Utils;
+import qs
+import qs.animations as Anims;
+import qs.utils as Utils;
 import QtQuick;
 
 Item {

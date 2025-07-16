@@ -1,6 +1,5 @@
-import "root:/";
-import "root:/utils" as Utils;
-import "root:/animations" as Anims;
+import qs
+import qs.animations as Anims;
 import Quickshell.Wayland;
 import QtQuick;
 

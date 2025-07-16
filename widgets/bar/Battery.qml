@@ -1,5 +1,4 @@
-import "root:/";
-import Quickshell;
+import qs
 import Quickshell.Services.UPower;
 import QtQuick;
 

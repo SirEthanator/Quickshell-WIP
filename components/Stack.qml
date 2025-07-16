@@ -1,4 +1,4 @@
-import "root:/";
+import qs
 import QtQuick;
 import QtQuick.Controls;
 

@@ -1,7 +1,7 @@
 pragma ComponentBehavior: Bound
 
-import "root:/";
-import "root:/components";
+import qs
+import qs.components
 import Quickshell;
 import Quickshell.Io;
 import QtQuick;
@@ -33,7 +33,7 @@ Scope {
     }
   }
 
-  function changeVal(category, prop, value) {
+  function changeVal(category: string, prop: string, value: var): void {
     if (!changedProperties[category]) changedProperties[category] = {};
     changedProperties[category][prop] = value;
 

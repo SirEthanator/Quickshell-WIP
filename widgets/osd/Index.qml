@@ -1,9 +1,9 @@
 pragma ComponentBehavior: Bound
 
-import "root:/";
-import "root:/animations" as Anims;
-import "root:/components";
-import "root:/utils" as Utils;
+import qs
+import qs.animations as Anims;
+import qs.components
+import qs.utils as Utils;
 import Quickshell;
 import Quickshell.Wayland;
 import QtQuick;

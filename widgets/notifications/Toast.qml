@@ -1,7 +1,7 @@
-import "root:/";
-import "root:/components";
-import "root:/utils" as Utils;
-import "root:/animations" as Anims;
+import qs
+import qs.components
+import qs.utils as Utils;
+import qs.animations as Anims;
 import Quickshell;
 import Quickshell.Widgets;
 import QtQuick;

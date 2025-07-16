@@ -1,4 +1,4 @@
-import "root:/";
+import qs
 import Quickshell.Services.Pam;
 import Quickshell.Wayland;
 

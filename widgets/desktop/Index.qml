@@ -1,4 +1,4 @@
-import "root:/";
+import qs
 import "widgets" as Widgets;
 import Quickshell;
 import Quickshell.Wayland;
