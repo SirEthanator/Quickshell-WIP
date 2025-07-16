@@ -1,8 +1,8 @@
 pragma ComponentBehavior: Bound
 
-import "root:/";
-import "root:/animations" as Anims;
-import "root:/components";
+import qs
+import qs.animations as Anims;
+import qs.components
 import Quickshell;
 import Quickshell.Services.SystemTray;
 import QtQuick;

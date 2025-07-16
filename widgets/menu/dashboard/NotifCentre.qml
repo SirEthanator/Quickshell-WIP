@@ -1,7 +1,7 @@
-import "root:/";
-import "root:/components";
-import "root:/animations" as Anims;
-import "root:/widgets/notifications" as Notifs;
+import qs
+import qs.components
+import qs.animations as Anims;
+import qs.widgets.notifications as Notifs;
 import Quickshell.Services.Notifications;
 import QtQuick;
 import QtQuick.Controls;

@@ -1,6 +1,6 @@
-import "root:/";
-import "root:/components";
-import "root:/utils" as Utils;
+import qs
+import qs.components
+import qs.utils as Utils;
 import "..";
 import QtQuick.Layouts;
 

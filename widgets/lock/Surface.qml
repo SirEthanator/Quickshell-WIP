@@ -1,8 +1,8 @@
-import "root:/";
-import "root:/components";
-import "root:/animations" as Anims;
-import "root:/utils" as Utils;
-import "root:/widgets/desktop" as Desktop;
+import qs
+import qs.components
+import qs.animations as Anims;
+import qs.utils as Utils;
+import qs.widgets.desktop as Desktop;
 import Quickshell.Wayland;
 import QtQuick;
 import QtQuick.Layouts;

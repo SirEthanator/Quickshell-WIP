@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import "root:/";
+import qs
 import Quickshell;  // Despite what qmlls says, this is not unused. Do not remove.
 import QtQuick;
 import QtMultimedia;

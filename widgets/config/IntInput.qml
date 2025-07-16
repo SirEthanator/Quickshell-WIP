@@ -1,7 +1,5 @@
 pragma ComponentBehavior: Bound
 
-import "root:/";
-import "root:/components";
 import QtQuick;
 
 OptionInput {

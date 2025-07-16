@@ -1,7 +1,7 @@
 pragma ComponentBehavior: Bound
 
-import "root:/";
-import "root:/components";
+import qs
+import qs.components
 import QtQuick;
 import QtQuick.Layouts;
 

@@ -1,6 +1,6 @@
 pragma Singleton
 
-import "root:/";
+import qs
 import Quickshell;
 import QtQuick;
 

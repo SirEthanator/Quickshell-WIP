@@ -1,7 +1,7 @@
 pragma ComponentBehavior: Bound
 
-import "root:/";
-import "root:/animations" as Anims;
+import qs
+import qs.animations as Anims;
 import QtQuick;
 import QtQuick.Layouts;
 import Quickshell.Hyprland;

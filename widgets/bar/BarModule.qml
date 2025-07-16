@@ -1,6 +1,6 @@
-import "root:/";
-import "root:/components";
-import "root:/animations" as Anims;
+import qs
+import qs.components
+import qs.animations as Anims;
 import QtQuick;
 import QtQuick.Layouts;
 

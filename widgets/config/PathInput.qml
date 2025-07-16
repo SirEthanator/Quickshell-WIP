@@ -1,5 +1,4 @@
-import "root:/";
-import "root:/components";
+import qs.components
 import QtQuick;
 import QtQuick.Dialogs;
 

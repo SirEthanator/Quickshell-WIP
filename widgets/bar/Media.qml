@@ -1,5 +1,4 @@
-import "root:/";
-import "root:/animations" as Anims;
+import qs
 import QtQuick;
 import Quickshell;
 import Quickshell.Services.Mpris;

@@ -1,6 +1,6 @@
 pragma Singleton
 
-import "root:/";
+import qs
 import Quickshell;
 import Quickshell.Io;
 import Quickshell.Services.Pipewire;

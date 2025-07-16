@@ -1,5 +1,5 @@
-import "root:/";
-import "root:/animations" as Anims;
+import qs
+import qs.animations as Anims;
 import org.kde.kirigami as Kirigami;
 import QtQuick;
 

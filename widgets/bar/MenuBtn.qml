@@ -1,5 +1,5 @@
-import "root:/";
-import "root:/components";
+import qs
+import qs.components
 import QtQuick;
 
 BarModule {
