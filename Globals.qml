@@ -14,7 +14,7 @@ Singleton {
 
   readonly property url confPath: Qt.resolvedUrl("./config.conf");
 
-  property QtObject conf: QtObject {
+  property var conf: QtObject {
     function getCategories() {
       return Object.values(root.conf).filter((obj) =>
         !!obj && obj.toString().indexOf("Config_QMLTYPE") !== -1
@@ -439,7 +439,7 @@ Singleton {
   // ==== Variables ====
   // ===================
 
-  readonly property QtObject vars: QtObject {
+  readonly property var vars: QtObject {
     id: vars
 
     property var barModules: ({
@@ -563,7 +563,7 @@ Singleton {
 
   readonly property var schemes: ({ everforest: everforest, catMocha: catMocha, rosePine: rosePine });
 
-  readonly property QtObject everforest: QtObject {
+  readonly property var everforest: QtObject {
     id: everforest
 
     property string title: "Everforest";
@@ -598,7 +598,7 @@ Singleton {
     property color batteryLow: red;
   }
 
-  readonly property QtObject catMocha: QtObject {
+  readonly property var catMocha: QtObject {
     id: catMocha
 
     property string title: "Catppuccin Mocha";
@@ -633,7 +633,7 @@ Singleton {
     property color batteryLow: red;
   }
 
-  readonly property QtObject rosePine: QtObject {
+  readonly property var rosePine: QtObject {
     id: rosePine
 
     property string title: "Rose Pine";
