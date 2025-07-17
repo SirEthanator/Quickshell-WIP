@@ -34,7 +34,6 @@ PanelWindow {
     : 0);
 
   exclusionMode: Globals.conf.bar.autohide ? ExclusionMode.Ignore : ExclusionMode.Auto;
-  exclusiveZone: 0;  // Fixes exclusive zone being way too big
 
   Behavior on margins.top {
     NumberAnimation {
