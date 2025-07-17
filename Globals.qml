@@ -1,5 +1,6 @@
 pragma Singleton
 
+import "components";
 import "utils" as Utils;
 import Quickshell;
 import Quickshell.Io;
@@ -367,7 +368,7 @@ Singleton {
 
   signal userConfUpdated(reload: bool);
 
-  readonly property QtObject colours: schemes[conf.global.colourScheme];
+  readonly property Scheme colours: schemes[conf.global.colourScheme];
 
   function setConf(property: list<string>, value, reload: bool, validate): string {
     const validationResult = (typeof validate === "function") ? validate() : undefined;
@@ -564,109 +565,109 @@ Singleton {
 
   readonly property var schemes: ({ everforest: everforest, catMocha: catMocha, rosePine: rosePine });
 
-  readonly property var everforest: QtObject {
+  readonly property Scheme everforest: Scheme {
     id: everforest
 
-    property string title: "Everforest";
+    title: "Everforest";
 
-    property color accent: "#A7C080";
-    property color accentDark: Qt.darker(accent, 1.2);
-    property color accentLight: Qt.lighter(accent, 1.2);
-    property color fg: "#D3C6AA";
-    property color bg: "#272E33";
-    property color bgLight: "#2E383C";
-    property color bgHover: "#414B50";
-    property color bgAccent: "#3C4841";
-    property color bgRed: "#4C3743";
-    property color outline: bgAccent;
-    property color grey: "#7A8478";
-    property color wsInactive: bgHover;
-    property color red: "#E67E80";
-    property color warning: "#DBBC7F";
-    property color redHover: Qt.lighter(red, 1.2);
-    property color redPress: Qt.darker(red, 1.2);
+    accent: "#A7C080";
+    accentDark: Qt.darker(accent, 1.2);
+    accentLight: Qt.lighter(accent, 1.2);
+    fg: "#D3C6AA";
+    bg: "#272E33";
+    bgLight: "#2E383C";
+    bgHover: "#414B50";
+    bgAccent: "#3C4841";
+    bgRed: "#4C3743";
+    outline: bgAccent;
+    grey: "#7A8478";
+    wsInactive: bgHover;
+    red: "#E67E80";
+    warning: "#DBBC7F";
+    redHover: Qt.lighter(red, 1.2);
+    redPress: Qt.darker(red, 1.2);
 
-    property color workspaces: accent;
-    property color activeWindow: "#7FBBB3";
-    property color dateAndTime: "#DBBC7F";
-    property color volume: "#E69875";
-    property color network: "#D699B6";
-    property color media: "#83C092";
+    workspaces: accent;
+    activeWindow: "#7FBBB3";
+    dateAndTime: "#DBBC7F";
+    volume: "#E69875";
+    network: "#D699B6";
+    media: "#83C092";
 
-    property color battery: "#A7C080";
-    property color batteryCharging: "#A7C080";
-    property color batteryMed: "#DBBC7F";
-    property color batteryLow: red;
+    battery: "#A7C080";
+    batteryCharging: "#A7C080";
+    batteryMed: "#DBBC7F";
+    batteryLow: red;
   }
 
-  readonly property var catMocha: QtObject {
+  readonly property Scheme catMocha: Scheme {
     id: catMocha
 
-    property string title: "Catppuccin Mocha";
+    title: "Catppuccin Mocha";
 
-    property color accent: "#B4BEFE";
-    property color accentDark: Qt.darker(accent, 1.2);
-    property color accentLight: Qt.lighter(accent, 1.2);
-    property color fg: "#CDD6F4";
-    property color bg: "#1E1E2E";
-    property color bgLight: "#313244";
-    property color bgHover: "#45475A";
-    property color bgAccent: "#3F4359";
-    property color bgRed: "#7A4654";
-    property color outline: bgAccent;
-    property color grey: "#6C7086";
-    property color wsInactive: bgHover;
-    property color red: "#F38BA8";
-    property color warning: "#F9E2AF";
-    property color redHover: Qt.lighter(red, 1.2);
-    property color redPress: Qt.darker(red, 1.2);
+    accent: "#B4BEFE";
+    accentDark: Qt.darker(accent, 1.2);
+    accentLight: Qt.lighter(accent, 1.2);
+    fg: "#CDD6F4";
+    bg: "#1E1E2E";
+    bgLight: "#313244";
+    bgHover: "#45475A";
+    bgAccent: "#3F4359";
+    bgRed: "#7A4654";
+    outline: bgAccent;
+    grey: "#6C7086";
+    wsInactive: bgHover;
+    red: "#F38BA8";
+    warning: "#F9E2AF";
+    redHover: Qt.lighter(red, 1.2);
+    redPress: Qt.darker(red, 1.2);
 
-    property color workspaces: accent;
-    property color activeWindow: "#89B4FA";
-    property color dateAndTime: "#F9E2AF";
-    property color volume: "#FAB387";
-    property color network: "#CBA6F7";
-    property color media: "#94E2D5";
+    workspaces: accent;
+    activeWindow: "#89B4FA";
+    dateAndTime: "#F9E2AF";
+    volume: "#FAB387";
+    network: "#CBA6F7";
+    media: "#94E2D5";
 
-    property color battery: "#A6E3A1";
-    property color batteryCharging: "#A6E3A1";
-    property color batteryMed: "#F9E2AF";
-    property color batteryLow: red;
+    battery: "#A6E3A1";
+    batteryCharging: "#A6E3A1";
+    batteryMed: "#F9E2AF";
+    batteryLow: red;
   }
 
-  readonly property var rosePine: QtObject {
+  readonly property Scheme rosePine: Scheme {
     id: rosePine
 
-    property string title: "Rose Pine";
+    title: "Rose Pine";
 
-    property color accent: "#9CCFD8";
-    property color accentDark: Qt.darker(accent, 1.2);
-    property color accentLight: Qt.lighter(accent, 1.2);
-    property color fg: "#E0DEF4";
-    property color bg: "#1F1D2E";
-    property color bgLight: "#26233A";
-    property color bgHover: "#403D52";
-    property color bgAccent: "#37484C";
-    property color bgRed: "#763849";
-    property color outline: bgAccent;
-    property color grey: "#6E6A86";
-    property color wsInactive: bgHover;
-    property color red: "#EB6F92";
-    property color warning: "#F6C177";
-    property color redHover: Qt.lighter(red, 1.2);
-    property color redPress: Qt.darker(red, 1.2);
+    accent: "#9CCFD8";
+    accentDark: Qt.darker(accent, 1.2);
+    accentLight: Qt.lighter(accent, 1.2);
+    fg: "#E0DEF4";
+    bg: "#1F1D2E";
+    bgLight: "#26233A";
+    bgHover: "#403D52";
+    bgAccent: "#37484C";
+    bgRed: "#763849";
+    outline: bgAccent;
+    grey: "#6E6A86";
+    wsInactive: bgHover;
+    red: "#EB6F92";
+    warning: "#F6C177";
+    redHover: Qt.lighter(red, 1.2);
+    redPress: Qt.darker(red, 1.2);
 
-    property color workspaces: accent;
-    property color activeWindow: "#31748F";
-    property color dateAndTime: "#F6C177";
-    property color volume: "#C4A7E7";
-    property color network: "#EBBCBA";
-    property color media: "#EB6F92";
+    workspaces: accent;
+    activeWindow: "#31748F";
+    dateAndTime: "#F6C177";
+    volume: "#C4A7E7";
+    network: "#EBBCBA";
+    media: "#EB6F92";
 
-    property color battery: "#31748F";
-    property color batteryCharging: "#31748F";
-    property color batteryMed: "#F6C177";
-    property color batteryLow: red;
+    battery: "#31748F";
+    batteryCharging: "#31748F";
+    batteryMed: "#F6C177";
+    batteryLow: red;
   }
 
   function alpha(color: color, opacity: real): color {
