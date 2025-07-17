@@ -150,7 +150,8 @@ Singleton {
         "wallpaper": {
           "title": "Wallpaper",
           "description": "Defines the path to the wallpaper to show. Setting it to an empty string will use the default.",
-          "type": "path"
+          "type": "path",
+          "allowEmpty": true
         },
         "videoWallpaper": {
           "title": "Video Wallpaper",
