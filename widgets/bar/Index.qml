@@ -1,4 +1,5 @@
 import qs
+import qs.components
 import qs.animations as Anims;
 import Quickshell;
 import QtQuick;
@@ -48,7 +49,7 @@ PanelWindow {
     hoverEnabled: Globals.conf.bar.autohide;
 
     // Visible background of bar
-    Rectangle {
+    OutlinedRectangle {
       anchors {
         fill: parent
         // Add a gap if docked without floating modules
@@ -59,75 +60,69 @@ PanelWindow {
         // If autohiding, there is extra space below for the always-on-screen area that is hovered to show the bar.
         bottomMargin: Globals.conf.bar.autohide ? Globals.vars.gap : 0;
       }
-      color: Globals.conf.bar.floatingModules ? "transparent" : Globals.colours.outline;
+
+      color: Globals.conf.bar.floatingModules ? "transparent" : Globals.colours.bg;
       radius: Globals.conf.bar.docked ? 0 : Globals.vars.br;
 
-      Rectangle {
-        readonly property real marginSize: Globals.conf.bar.backgroundOutline && !Globals.conf.bar.floatingModules ? Globals.vars.outlineSize : 0;
+      readonly property bool outlines: Globals.conf.bar.backgroundOutline && !Globals.conf.bar.floatingModules;
+      topOutline: outlines && !Globals.conf.bar.docked;
+      leftOutline: outlines && !Globals.conf.bar.docked;
+      rightOutline: outlines && !Globals.conf.bar.docked;
+      bottomOutline: outlines;
+
+      Item {
+        id: content;
+
+        // If docked without floating modules, use gap. Also see comment for tb
+        readonly property int lrMargins: Globals.conf.bar.floatingModules ? 0 : (Globals.conf.bar.docked && !Globals.conf.bar.floatingModules) ? Globals.vars.gap : Globals.vars.paddingBar;
+        // No need for extra margins when modules are floating since the background is invisible.
+        readonly property int tbMargins: Globals.conf.bar.floatingModules ? 0 : Globals.vars.paddingBar;
         anchors {
-          fill: parent;
-          topMargin: Globals.conf.bar.docked ? 0 : marginSize;
-          leftMargin: Globals.conf.bar.docked ? 0 : marginSize;
-          rightMargin: Globals.conf.bar.docked ? 0 : marginSize;
-          bottomMargin: marginSize;
+          leftMargin: lrMargins
+          rightMargin: lrMargins
+          topMargin: tbMargins
+          bottomMargin: tbMargins
+          fill: parent.content;
         }
-        color: Globals.conf.bar.floatingModules ? "transparent" : Globals.colours.bg;
-        radius: parent.radius - Globals.vars.outlineSize;  // inner = outer - padding
 
-        Item {
-          id: content;
+        BarSection {
+          id: leftModules;
+          screen: root.screen;
+          window: root;
+          modules: Globals.conf.bar.left;
+          anchors.left: parent.left;
+        }
 
-          // If docked without floating modules, use gap. Also see comment for tb
-          readonly property int lrMargins: Globals.conf.bar.floatingModules ? 0 : (Globals.conf.bar.docked && !Globals.conf.bar.floatingModules) ? Globals.vars.gap : Globals.vars.paddingBar;
-          // No need for extra margins when modules are floating since the background is invisible.
-          readonly property int tbMargins: Globals.conf.bar.floatingModules ? 0 : Globals.vars.paddingBar;
-          anchors {
-            leftMargin: lrMargins
-            rightMargin: lrMargins
-            topMargin: tbMargins
-            bottomMargin: tbMargins
-            fill: parent
-          }
+        BarSection {
+          screen: root.screen;
+          window: root;
+          modules: Globals.conf.bar.centre;
+          anchors.horizontalCenter: parent.horizontalCenter;
+          anchors.horizontalCenterOffset: {
+            const contentCenter = content.width / 2
+            const leftModulesEdge = leftModules.x + leftModules.width + spacing;
+            const rightModulesEdge = rightModules.x - spacing;
+            const centerModulesMidPoint = width / 2;
 
-          BarSection {
-            id: leftModules;
-            screen: root.screen;
-            window: root;
-            modules: Globals.conf.bar.left;
-            anchors.left: parent.left;
-          }
-
-          BarSection {
-            screen: root.screen;
-            window: root;
-            modules: Globals.conf.bar.centre;
-            anchors.horizontalCenter: parent.horizontalCenter;
-            anchors.horizontalCenterOffset: {
-              const contentCenter = content.width / 2
-              const leftModulesEdge = leftModules.x + leftModules.width + spacing;
-              const rightModulesEdge = rightModules.x - spacing;
-              const centerModulesMidPoint = width / 2;
-
-              // Check if centering would cause overlap with left
-              if (contentCenter - centerModulesMidPoint < leftModulesEdge) {
-                return leftModulesEdge + centerModulesMidPoint - contentCenter
-              }
-              // Check if centering would cause overlap with right
-              if (contentCenter + centerModulesMidPoint > rightModulesEdge) {
-                return rightModulesEdge - centerModulesMidPoint - contentCenter
-              }
-              // No overlap, stay at center of content
-              return 0
+            // Check if centering would cause overlap with left
+            if (contentCenter - centerModulesMidPoint < leftModulesEdge) {
+              return leftModulesEdge + centerModulesMidPoint - contentCenter
             }
+            // Check if centering would cause overlap with right
+            if (contentCenter + centerModulesMidPoint > rightModulesEdge) {
+              return rightModulesEdge - centerModulesMidPoint - contentCenter
+            }
+            // No overlap, stay at center of content
+            return 0
           }
+        }
 
-          BarSection {
-            id: rightModules;
-            screen: root.screen;
-            window: root;
-            modules: Globals.conf.bar.right;
-            anchors.right: parent.right;
-          }
+        BarSection {
+          id: rightModules;
+          screen: root.screen;
+          window: root;
+          modules: Globals.conf.bar.right;
+          anchors.right: parent.right;
         }
       }
     }
