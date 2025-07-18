@@ -2,9 +2,11 @@ import qs
 import QtQuick;
 import QtQuick.Layouts;
 
-Rectangle {
+OutlinedRectangle {
   id: root;
-  color: borderColor;
+
+  outlineColor: borderColor;
+  color: bg;
   radius: Globals.vars.br;
 
   default property list<QtObject> data;
@@ -18,6 +20,8 @@ Rectangle {
   property color borderColor: Globals.colours.outline;
   property string icon: "";
 
+  disableAllOutlines: !showBorder;
+
   implicitHeight: row.height + Globals.vars.paddingButton * 2 + Globals.vars.outlineSize * 2;
 
   onFocusChanged: {
@@ -27,18 +31,10 @@ Rectangle {
     }
   }
 
-  Rectangle {
-    anchors {
-      fill: parent;
-      margins: root.showBorder ? Globals.vars.outlineSize : 0;
-    }
-    color: root.bg;
-    radius: parent.radius - Globals.vars.outlineSize;  // inner = outer - padding
-
     RowLayout {
       id: row;
       spacing: Globals.vars.paddingButton;
-      anchors.fill: parent;
+      anchors.fill: parent.content;
       anchors.leftMargin: root.leftPadding ? spacing : 0;
       anchors.rightMargin: root.rightPadding ? spacing : 0;
 
@@ -60,5 +56,4 @@ Rectangle {
         }
       }
     }
-  }
 }
