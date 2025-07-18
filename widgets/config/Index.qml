@@ -55,7 +55,14 @@ Scope {
     if (changedProperties.length !== 0) {
       for (const key in changedProperties) {
         for (const option in changedProperties[key]) {
-          Globals.conf[key][option] = changedProperties[key][option];
+          const newValue = changedProperties[key][option];
+          const callback = Globals.conf[key].getMetadata(option).callback;
+
+          Globals.conf[key][option] = newValue;
+
+          if (typeof callback === "function") {
+            callback(newValue)
+          }
         }
       }
       changedProperties = {};
