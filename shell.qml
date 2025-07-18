@@ -29,11 +29,11 @@ ShellRoot {
     function theme(scheme: string): string {
       return Globals.switchTheme(scheme);
     }
-    function colours(scheme: string, reload: bool): string {
-      return Globals.setColours(scheme, reload);
+    function colours(scheme: string): string {
+      return Globals.setColours(scheme);
     }
-    function wallpaper(path: string, reload: bool): void {
-      Globals.setWallpaper(path, reload)
+    function wallpaper(path: string): void {
+      Globals.setWallpaper(path)
     }
     function reload(): void {
       Quickshell.reload(false);

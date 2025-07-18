@@ -35,9 +35,12 @@ Singleton {
       "Global": {
         "colourScheme": {
           "title": "Colour Scheme",
-          "description": "Defines what colour scheme should be used.",
+          "description": "Defines what colour scheme should be used throughout the system.",
           "type": "string",
-          "options": root.schemes
+          "options": root.schemes,
+          "callback": (val) => {
+            root.switchTheme(val)
+          }
         }
       },
 
@@ -366,11 +369,9 @@ Singleton {
     }
   }
 
-  signal userConfUpdated(reload: bool);
-
   readonly property Scheme colours: schemes[conf.global.colourScheme];
 
-  function setConf(property: list<string>, value, reload: bool, validate): string {
+  function setConf(property: list<string>, value, validate): string {
     const validationResult = (typeof validate === "function") ? validate() : undefined;
     if (validationResult) return validationResult;
     if (!property || property.length === 0) return "";
@@ -388,7 +389,6 @@ Singleton {
 
       if (i === property.length - 1) {  // Check if final property
         currentObj[propName] = value;
-        userConfUpdated(reload);
       } else {
         currentObj = currentObj[propName];
       }
@@ -396,13 +396,13 @@ Singleton {
     return ""
   }
 
-  function setColours(scheme: string, reload: bool): string {
+  function setColours(scheme: string): string {
     const validate = () => Utils.Validate.validateObjKey(scheme, schemes, "Failed to set colour scheme");
-    return setConf(["global", "colourScheme"], scheme, reload, validate);
+    return setConf(["global", "colourScheme"], scheme, validate);
   }
 
-  function setWallpaper(path: string, reload: bool): void {
-    setConf(['desktop', 'wallpaper'], path, reload);
+  function setWallpaper(path: string): void {
+    setConf(['desktop', 'wallpaper'], path);
   }
 
   function switchTheme(scheme: string): string {
@@ -424,17 +424,11 @@ Singleton {
       onRead: data => root.states.themeSwitchingState = data;
     }
     onExited: {
-      // Wait a little while before closing to show complete message
+      // Wait a little while before closing so completion message can be read
       Utils.Timeout.setTimeout(() => {
         root.states.themeSwitchInProgress = false;
-        Quickshell.reload(false);
       }, 1000);
     }
-  }
-
-  onUserConfUpdated: (reload) => {
-    // TODO: Wait until conf is synced before reloading
-    if (reload) Quickshell.reload(false);
   }
 
   // ===================
