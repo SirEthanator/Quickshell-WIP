@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import qs
 import QtQuick;
 import Quickshell;
@@ -7,9 +9,34 @@ BarModule {
   id: root;
   icon: activePlayer.isPlaying ? "music-note-16th" : "media-playback-paused-symbolic";
   iconbgColour: Globals.colours.media;
-  readonly property list<MprisPlayer> players: Mpris.players.values;
+
+  property list<MprisPlayer> players: Mpris.players.values;
   readonly property MprisPlayer activePlayer: players[0];
+
   show: !!activePlayer;
+
+  function sortPlayers() {
+    players.sort((a,b) => {
+      if (a.isPlaying && !b.isPlaying) return -1;
+      if (!a.isPlaying && b.isPlaying) return 1;
+      return 0;
+    })
+  }
+
+  Component.onCompleted: sortPlayers();
+
+  Instantiator {
+    model: root.players;
+
+    Connections {
+      required property MprisPlayer modelData;
+      target: modelData;
+
+      function onIsPlayingChanged() { root.sortPlayers() }
+      Component.onDestruction: root.sortPlayers();
+      Component.onCompleted: root.sortPlayers();
+    }
+  }
 
   Text {
     color: Globals.colours.fg;
