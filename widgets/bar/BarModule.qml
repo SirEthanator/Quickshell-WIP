@@ -74,7 +74,7 @@ OutlinedRectangle {
           anchors.centerIn: parent;
 
           icon: root.icon;
-          colour: root.iconColour;
+          color: root.iconColour;
           size: Globals.vars.moduleIconSize;
         }
       }

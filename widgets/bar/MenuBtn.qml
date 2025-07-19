@@ -12,7 +12,7 @@ BarModule {
 
   Icon {
     icon: "archlinux-logo";
-    colour: Globals.colours.bg;
+    color: Globals.colours.bg;
   }
 }
 

@@ -21,7 +21,7 @@ BarModule {
 
   Icon {
     icon: "expand-symbolic";
-    colour: root.mouseArea.containsPress ? Globals.colours.bgLight : Globals.colours.fg;
+    color: root.mouseArea.containsPress ? Globals.colours.bgLight : Globals.colours.fg;
     rotation: popupLoader.open ? 180 : 0;
   }
 
