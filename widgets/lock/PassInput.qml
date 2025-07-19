@@ -29,10 +29,13 @@ Input {
   }
 
   rightPadding: false;
+  topPadding: false;
+  bottomPadding: false;
 
   Button {
     id: confirmBtn;
     icon: "checkmark-symbolic";
+    iconSize: Globals.vars.moduleIconSize;
 
     Layout.fillHeight: true;
 
