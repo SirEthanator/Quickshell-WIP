@@ -16,13 +16,15 @@ OutlinedRectangle {
   property color bg: Globals.colours.bgLight;
   property bool leftPadding: true;
   property bool rightPadding: true;
+  property bool topPadding: true;
+  property bool bottomPadding: true;
   property bool showBorder: true;
   property color borderColor: Globals.colours.outline;
   property string icon: "";
 
   disableAllOutlines: !showBorder;
 
-  implicitHeight: row.height + Globals.vars.paddingButton * 2 + Globals.vars.outlineSize * 2;
+  implicitHeight: row.implicitHeight + Globals.vars.paddingButton * (topPadding && bottomPadding ? 2 : topPadding || bottomPadding ? 1 : 0) + Globals.vars.outlineSize * 2;
 
   onFocusChanged: {
     if (focus) {
@@ -34,9 +36,14 @@ OutlinedRectangle {
     RowLayout {
       id: row;
       spacing: Globals.vars.paddingButton;
-      anchors.fill: parent.content;
-      anchors.leftMargin: root.leftPadding ? spacing : 0;
-      anchors.rightMargin: root.rightPadding ? spacing : 0;
+
+      anchors {
+        fill: parent.content;
+        leftMargin: root.leftPadding ? spacing : 0;
+        rightMargin: root.rightPadding ? spacing : 0;
+        topMargin: root.topPadding ? spacing : 0;
+        bottomMargin: root.bottomPadding ? spacing : 0;
+      }
 
       Icon {
         visible: !!root.icon;
