@@ -9,13 +9,15 @@ OptionInput {
 
   Button {
     label: "Browse...";
-    radiusValue: parent.parent.radius;
+    radiusValue: root.content.topLeftRadius;
     allRadius: true;
 
     onClicked: dialog.open();
   }
 
   rightPadding: false;
+  topPadding: false;
+  bottomPadding: false;
 
   FileDialog {
     id: dialog;

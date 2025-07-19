@@ -71,7 +71,7 @@ Rectangle {
       Loader {
         id: longValueLoader;
         Layout.fillWidth: true;
-        Layout.preferredHeight: (!!item && !!item.height) ? item.height : 0;
+        Layout.preferredHeight: (!!item && !!item.implicitHeight) ? item.implicitHeight : 0;
 
         active: false;
         visible: active;
