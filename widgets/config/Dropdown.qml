@@ -62,7 +62,7 @@ Rectangle {
 
   Icon {
     icon: "expand-symbolic";
-    colour: Globals.colours.fg;
+    color: Globals.colours.fg;
     rotation: popup.visible ? 180 : 0;
     size: text.height;
     anchors.verticalCenter: root.verticalCenter;

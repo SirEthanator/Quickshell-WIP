@@ -44,7 +44,7 @@ Item {
 
     Icon {
       icon: "search-symbolic";
-      colour: Globals.colours.grey;
+      color: Globals.colours.grey;
       size: Globals.vars.extraLargeIconSize;
       Layout.alignment: Qt.AlignHCenter;
     }
