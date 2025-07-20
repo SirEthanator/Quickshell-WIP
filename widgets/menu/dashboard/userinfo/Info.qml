@@ -2,8 +2,8 @@ import qs
 import qs.components
 import qs.utils as Utils;
 import Quickshell;
-import Quickshell.Widgets;
 import QtQuick;
+import QtQuick.Effects;
 import QtQuick.Layouts;
 
 RowLayout {
@@ -13,17 +13,30 @@ RowLayout {
   spacing: Globals.vars.paddingCard;
   signal clicked(event: MouseEvent);
 
-  ClippingWrapperRectangle {
-    width: pfp.width;
-    height: pfp.height;
-    radius: width / 2;
+  Image {
+    id: pfp;
+    source: Quickshell.configPath("assets/profile.png");
+    sourceSize.width: 100;
+    sourceSize.height: 100;
+    visible: false;
+  }
 
-    Image {
-      id: pfp;
-      source: Quickshell.configPath("assets/profile.png");
-      sourceSize.width: 100;
-      sourceSize.height: 100;
-    }
+  MultiEffect {
+    source: pfp;
+    implicitHeight: pfp.height;
+    implicitWidth: pfp.width;
+    maskEnabled: true;
+    maskSource: pfpMask;
+  }
+
+  Rectangle {
+    id: pfpMask
+    implicitWidth: pfp.width;
+    implicitHeight: pfp.height;
+
+    radius: width/2;
+    visible: false;
+    layer.enabled: true;
   }
 
   ColumnLayout {
