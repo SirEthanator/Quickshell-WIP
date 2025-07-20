@@ -89,7 +89,7 @@ LazyLoader {
         radius: Globals.vars.br;
         value: loader.currentValue / 100;
         bg: Globals.colours.bg;
-        fg: loader.currentValue >= 90 ? Globals.colours.red : Globals.colours.accent;
+        fg: loader.currentValue >= 90 ? Globals.colours.red : loader.currentValue >= 75 ? Globals.colours.warning : Globals.colours.accent;
         icon: loader.currentIcon;
 
         border {
