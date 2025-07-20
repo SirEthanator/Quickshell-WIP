@@ -116,6 +116,12 @@ Singleton {
           "type": "list<string>",
           "options": root.vars.dashModules
         },
+        "profilePicture": {
+          "title": "Profile Picture",
+          "description": "Defines the path to the profile picture to use. Set to an empty string to use the default.",
+          "type": "path",
+          "allowEmpty": true
+        },
         "capitaliseUsername": {
           "title": "Capitalise Username",
           "description": "Defines whether the user's username should be capitalised.",
@@ -153,7 +159,7 @@ Singleton {
       "Desktop": {
         "wallpaper": {
           "title": "Wallpaper",
-          "description": "Defines the path to the wallpaper to show. Setting it to an empty string will use the default.",
+          "description": "Defines the path to the wallpaper to show. Set to an empty string to use the default.",
           "type": "path",
           "allowEmpty": true
         },
@@ -273,7 +279,9 @@ Singleton {
       "OSD": {
         "backlightName": {
           "title": "Backlight Name",
-          "description": "Defines the name of the display's backlight. This is used to get the path of the backlight: `/sys/class/backlight/<backlightName>`",
+          "description": `Defines the name of the display's backlight. This is used to get the path of the backlight: \`/sys/class/backlight/<backlightName>\`
+
+Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the correct one for your display by running ls /sys/class/backlight`,
           "type": "string"
         }
       }
@@ -319,6 +327,7 @@ Singleton {
         "sysStats",
         "notifCentre"
       ];
+      property string profilePicture: "";
       property bool capitaliseUsername: true;
       property bool capitaliseHostname: false;
       property bool dimBackground: true;
