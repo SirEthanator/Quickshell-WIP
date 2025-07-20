@@ -14,7 +14,7 @@ RowLayout {
     implicitHeight: 80;
     implicitWidth: 80;
     value: root.percentage / 100;
-    fg: value > 0.85 ? Globals.colours.red : Globals.colours.accent;
+    fg: value >= 0.9 ? Globals.colours.red : value >= 0.75 ? Globals.colours.warning : Globals.colours.accent;
   }
 
   ColumnLayout {
