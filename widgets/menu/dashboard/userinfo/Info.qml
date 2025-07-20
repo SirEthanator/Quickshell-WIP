@@ -13,16 +13,42 @@ RowLayout {
   spacing: Globals.vars.paddingCard;
   signal clicked(event: MouseEvent);
 
-  Image {
+  Item {
     id: pfp;
-    source: Quickshell.configPath("assets/profile.png");
-    sourceSize.width: 100;
-    sourceSize.height: 100;
+
+    visible: false;
+    implicitWidth: 100;
+    implicitHeight: 100;
+    readonly property alias status: pfpImg.status;
+
+    Image {
+      id: pfpImg;
+      readonly property url defaultPfpPath: Quickshell.shellPath("assets/profile.png");
+
+      source: Globals.conf.menu.profilePicture || defaultPfpPath;
+      anchors.fill: parent;
+      fillMode: Image.PreserveAspectCrop;
+
+      onStatusChanged: {
+        if (status === Image.Error || status === Image.Null) {
+          source = defaultPfpPath;
+        }
+      }
+
+      asynchronous: true
+    }
+  }
+
+  Rectangle {
+    id: loading;
+    implicitHeight: 100;
+    implicitWidth: 100;
+    color: Globals.colours.bg;
     visible: false;
   }
 
   MultiEffect {
-    source: pfp;
+    source: pfp.status === Image.Ready ? pfp : loading;
     implicitHeight: pfp.height;
     implicitWidth: pfp.width;
     maskEnabled: true;

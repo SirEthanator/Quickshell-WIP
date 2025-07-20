@@ -11,7 +11,6 @@ import Quickshell.Wayland;
 import Quickshell.Io;
 import QtQuick;
 import QtQuick.Layouts;
-import QtQuick.Effects;
 import QtQuick.Controls;
 
 Scope {
