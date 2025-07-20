@@ -44,7 +44,7 @@ LazyLoader {
 
           Image {
             id: logosrc;
-            source: Qt.resolvedUrl("root:/assets/arch-full.svg");
+            source: Quickshell.configPath("assets/arch-full.svg");
             visible: false;
           }
 

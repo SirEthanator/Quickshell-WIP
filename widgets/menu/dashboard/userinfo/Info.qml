@@ -1,6 +1,7 @@
 import qs
 import qs.components
 import qs.utils as Utils;
+import Quickshell;
 import Quickshell.Widgets;
 import QtQuick;
 import QtQuick.Layouts;
@@ -19,7 +20,7 @@ RowLayout {
 
     Image {
       id: pfp;
-      source: "root:/assets/profile.png";
+      source: Quickshell.configPath("assets/profile.png");
       sourceSize.width: 100;
       sourceSize.height: 100;
     }
