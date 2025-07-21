@@ -15,7 +15,7 @@ BarModule {
     const nearestTen = Math.ceil(percentage / 10) * 10;
     const number = nearestTen.toString().padStart(3, "0");
     const charging = root.charging ? "-charging" : "";
-    return `battery-${number}${charging}`
+    return `battery-${number}${charging}-symbolic`
   }
 
   forceIconbgColour: true;
