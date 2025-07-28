@@ -12,10 +12,10 @@ BarModule {
   show: battery.isLaptopBattery;
 
   icon: {
-    const nearestTen = Math.ceil(percentage / 10) * 10;
-    const number = nearestTen.toString().padStart(3, "0");
+    const nearestTwenty = Math.round(percentage / 20) * 20;
+    const number = nearestTwenty.toString().padStart(3, "0");
     const charging = root.charging ? "-charging" : "";
-    return `battery-${number}${charging}-symbolic`
+    return `battery-${number}${charging}`
   }
 
   forceIconbgColour: true;
