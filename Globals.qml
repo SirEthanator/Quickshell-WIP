@@ -239,6 +239,20 @@ Singleton {
           "max": 60000,
           "min": 100
         },
+        "minimumTimeout": {
+          "title": "Minimum Timeout",
+          "description": "Defines the minimum timeout for all notifications.",
+          "type": "int",
+          "max": 60000,
+          "min": 100
+        },
+        "minimumCriticalTimeout": {
+          "title": "Minimum Critical Timeout",
+          "description": "Defines the minimum timeout for all critical notifications.",
+          "type": "int",
+          "max": 60000,
+          "min": 100
+        },
         "sounds": {
           "title": "Sounds",
           "description": "Defines whether to play a sound on incoming notifications.",
@@ -358,6 +372,8 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
       property int width: 500;
       property int defaultTimeout: 5000;
       property int defaultCriticalTimeout: 8000;
+      property int minimumTimeout: 2000;
+      property int minimumCriticalTimeout: 4000;
       property bool sounds: true;
       property string normalSound: "/usr/share/sounds/ocean/stereo/message-new-instant.oga";
       property string criticalSound: "/usr/share/sounds/ocean/stereo/dialog-error-critical.oga";
