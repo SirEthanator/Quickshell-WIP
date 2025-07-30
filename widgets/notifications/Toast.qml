@@ -12,11 +12,11 @@ MouseArea {
   id: root
 
   required property Notification n;
-  readonly property real timeout: n.expireTimeout > 0
-    ? n.expireTimeout
-    : n.urgency === NotificationUrgency.Critical
-      ? Globals.conf.notifications.defaultCriticalTimeout
-      : Globals.conf.notifications.defaultTimeout;
+  readonly property real timeout: {
+    const min = n.urgency === NotificationUrgency.Critical ? Globals.conf.notifications.minimumCriticalTimeout : Globals.conf.notifications.minimumTimeout;
+    const def = n.urgency === NotificationUrgency.Critical ? Globals.conf.notifications.defaultCriticalTimeout : Globals.conf.notifications.defaultTimeout;
+    return n.expireTimeout > 0 ? Math.max(n.expireTimeout, min) : def;
+  }
   property real timeRemaining: timeout;
   property bool popup: false;
   width: parent.width;
