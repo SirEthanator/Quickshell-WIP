@@ -1,6 +1,7 @@
 //@ pragma UseQApplication
 //@ pragma Env QS_NO_RELOAD_POPUP=1
 
+import qs
 import Quickshell;
 import "widgets/bar" as Bar;
 import "widgets/menu" as Menu;
@@ -34,6 +35,9 @@ ShellRoot {
     }
     function wallpaper(path: string): void {
       Globals.setWallpaper(path)
+    }
+    function get(category: string, key: string): string {
+      return Globals.conf[category][key]
     }
     function reload(): void {
       Quickshell.reload(false);

@@ -84,7 +84,7 @@ MouseArea {
     color: Globals.colours.bg;
     radius: Globals.vars.br;
     border {
-      color: Globals.colours.bgAccent;
+      color: Globals.colours.outline;
       width: root.popup ? Globals.vars.outlineSize : 0;
       pixelAligned: false;
     }

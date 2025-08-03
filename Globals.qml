@@ -582,7 +582,7 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
   // ==== Schemes ====
   // =================
 
-  readonly property var schemes: ({ everforest: everforest, catMocha: catMocha, rosePine: rosePine });
+  readonly property var schemes: ({ everforest: everforest, catMocha: catMocha, rosePine: rosePine, material: material });
 
   readonly property Scheme everforest: Scheme {
     id: everforest
@@ -688,6 +688,8 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
     batteryMed: "#F6C177";
     batteryLow: red;
   }
+
+  readonly property Scheme material: Material { id: material }
 
   function alpha(color: color, opacity: real): color {
     return Qt.rgba(color.r, color.b, color.g, opacity)
