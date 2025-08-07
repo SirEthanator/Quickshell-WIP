@@ -80,40 +80,34 @@ LazyLoader {
       id: content;
       spacing: Globals.vars.gap;
 
-      ProgressBar {
-        id: progress;
+      OutlinedRectangle {
+        id: progressWrapper;
+        color: Globals.colours.bg;
+        implicitHeight: 350 + outlineSize * 2;
+        implicitWidth: 50 + outlineSize * 2;
 
-        vertical: true;
-        implicitHeight: 350;
-        implicitWidth: 50;
-        radius: Globals.vars.br;
-        value: loader.currentValue / 100;
-        bg: Globals.colours.bg;
-        fg: loader.currentValue >= 90 ? Globals.colours.red : loader.currentValue >= 75 ? Globals.colours.warning : Globals.colours.accent;
-        icon: loader.currentIcon;
+        ProgressBar {
+          id: progress;
+          anchors.fill: progressWrapper.content;
+          radius: progressWrapper.content.topLeftRadius;  // All radii are the same
 
-        border {
-          color: Globals.colours.outline;
-          width: Globals.vars.outlineSize;
-          pixelAligned: false;
+          vertical: true;
+          value: loader.currentValue / 100;
+          bg: Globals.colours.bg;
+          fg: loader.currentValue >= 90 ? Globals.colours.red : loader.currentValue >= 75 ? Globals.colours.warning : Globals.colours.accent;
+          icon: loader.currentIcon;
         }
       }
 
-      Rectangle {
+      OutlinedRectangle {
         color: Globals.colours.bg;
         Layout.fillWidth: true;
-        implicitHeight: percentageText.height + Globals.vars.paddingButton * 2;
+        implicitHeight: percentageText.height + Globals.vars.paddingButton * 2 + outlineSize * 2;
         radius: Globals.vars.br;
-
-        border {
-          color: Globals.colours.outline;
-          width: Globals.vars.outlineSize;
-          pixelAligned: false;
-        }
 
         Text {
           id: percentageText;
-          anchors.centerIn: parent;
+          anchors.centerIn: parent.content;
           text: `${loader.currentValue}%`;
           color: Globals.colours.fg;
           font {
