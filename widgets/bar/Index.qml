@@ -6,7 +6,9 @@ import QtQuick;
 
 PanelWindow {
   id: root;
-  color: Globals.conf.menu.dimBackground && Globals.states.menuOpen ? Globals.vars.bgDimmedColour : "transparent";
+  // If the menu's background is configured to be dimmed and the menu is open, we want to dim behind the bar too
+  // However, if autohide is enabled, we don't need to do this
+  color: Globals.conf.menu.dimBackground && Globals.states.menuOpen && !Globals.conf.bar.autohide ? Globals.vars.bgDimmedColour : "transparent";
 
   Anims.ColourTransition on color {
     duration: Globals.vars.animLen;
