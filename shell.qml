@@ -37,7 +37,12 @@ ShellRoot {
       Globals.setWallpaper(path)
     }
     function get(category: string, key: string): string {
-      return Globals.conf[category][key]
+      const cat = Globals.conf[category]
+      const val = cat[key]
+      if (cat.getMetadata(key).type == 'path') {
+        return val.replace('file://', '')
+      }
+      return val;
     }
     function reload(): void {
       Quickshell.reload(false);
