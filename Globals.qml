@@ -444,7 +444,7 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
     id: setTheme;
 
     property string scheme: "";
-    command: ["sh", "-c", `${Quickshell.env("HOME")}/Scripts/SetTheme ${scheme} --noconfirm --noqsreload`];
+    command: ["sh", "-c", `${Quickshell.env("HOME")}/Scripts/SetTheme ${scheme} --noconfirm`];
     stdout: SplitParser {
       onRead: data => root.states.themeSwitchingState = data;
     }
