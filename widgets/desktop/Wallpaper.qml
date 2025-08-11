@@ -11,14 +11,15 @@ Item {
   // The default wallpaper must be set here instead of defaultConf.json because it uses an environment variable
   readonly property string defaultWall: {
     switch (Globals.conf.global.colourScheme) {
-      case "everforest": return "Everforest/Accent.png"
-      case "catMocha": return "Catppuccin/Accent.png"
-      case "rosePine": return "Rose-Pine/Accent.png"
+      case "everforest": return "Everforest"
+      case "catMocha": return "Catppuccin"
+      case "rosePine": return "Rose-Pine"
+      default: return "Everforest"
     }
   }
   readonly property url wallSource: Globals.conf.desktop.wallpaper !== ""
     ? Globals.conf.desktop.wallpaper
-    : `${Quickshell.env("HOME")}/Hyprland-Dots/Wallpapers/${defaultWall}`;
+    : `${Quickshell.env("HOME")}/Hyprland-Dots/Wallpapers/${defaultWall}/Accent.png`;
   readonly property bool showWall: !Globals.conf.desktop.hideWallpaper;
 
   VideoOutput {

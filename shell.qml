@@ -18,6 +18,8 @@ import QtQuick;
 ShellRoot {
   id: shellroot;
 
+  settings.watchFiles: false;
+
   IpcHandler {
     target: "screensaver";
     function open():  void { Globals.states.screensaverActive = true  }

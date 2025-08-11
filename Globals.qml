@@ -161,7 +161,12 @@ Singleton {
           "title": "Wallpaper",
           "description": "Defines the path to the wallpaper to show. Set to an empty string to use the default.",
           "type": "path",
-          "allowEmpty": true
+          "allowEmpty": true,
+          "callback": (val, getVal) => {
+            if (getVal("global", "colourScheme") === "material") {
+              Quickshell.execDetached(['sh', '-c', `${Quickshell.env("HOME")}/Scripts/SetTheme material --noconfirm --wallpaper ${val}`])
+            }
+          }
         },
         "videoWallpaper": {
           "title": "Video Wallpaper",
