@@ -164,7 +164,7 @@ Singleton {
           "allowEmpty": true,
           "callback": (val, getVal) => {
             if (getVal("global", "colourScheme") === "material") {
-              Quickshell.execDetached(['sh', '-c', `${Quickshell.env("HOME")}/Scripts/SetTheme material --noconfirm --wallpaper ${val}`])
+              Quickshell.execDetached(['bash', '-c', `${Quickshell.env("HOME")}/Scripts/SetTheme material --noconfirm --wallpaper '${val.replace('file://', '')}'`])
             }
           }
         },
