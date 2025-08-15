@@ -193,7 +193,7 @@ Singleton {
         "bgColour": {
           "title": "Background Colour",
           "description": "Defines the colour that should be shown behind everything. If 'hideWallpaper' is true, this colour will be displayed. It is also useful for shaders which look better with a solid colour behind them.",
-          "type": "bool"
+          "type": "string"
         },
         "clockWidget": {
           "title": "Clock Widget",
@@ -203,21 +203,6 @@ Singleton {
         "centreClockWidget": {
           "title": "Centre Clock Widget",
           "description": "Defines whether the clock widget should be vertically centred.",
-          "type": "bool"
-        },
-        "autohideWidgets": {
-          "title": "Autohide Widgets",
-          "description": "Defines whether widgets should be hidden after a delay when there is no activity on the desktop.",
-          "type": "bool"
-        },
-        "autohideBar": {
-          "title": "Autohide Bar",
-          "description": "Defines whether the bar should be hidden after a delay when there is no activity on the desktop. This will only hide the bar when the desktop has focus.",
-          "type": "bool"
-        },
-        "autohideCursor": {
-          "title": "Autohide Cursor",
-          "description": "Defines whether the cursor should be hidden after a delay when there is no activity on the desktop. This will only hide the cursor when the desktop has focus.",
           "type": "bool"
         }
       },
@@ -364,11 +349,6 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
       property string shader: "";
       property bool hideWallpaper: false;
       property color bgColour: "black";
-      property bool clockWidget: false;
-      property bool centreClockWidget: false;
-      property bool autohideWidgets: false;
-      property bool autohideBar: false;
-      property bool autohideCursor: false;
     }
 
     property Config notifications: Config {
