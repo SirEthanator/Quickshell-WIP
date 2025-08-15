@@ -11,7 +11,7 @@ import QtQuick.Layouts;
 BarModule {
   id: root;
   required property var window;
-  readonly property int slideOffset: Globals.vars.gapLarge;
+  readonly property int slideOffset: Globals.vars.gapLarge + 10;
 
   hoverEnabled: true;
   background: mouseArea.containsPress ? Globals.colours.accent : mouseArea.containsMouse ? Globals.colours.bgHover : Globals.colours.bgLight;
@@ -62,19 +62,20 @@ BarModule {
         color: Globals.colours.bg;
         radius: Globals.vars.br;
 
-        Anims.SlideFade {
+        Anims.Slide {
           running: popupLoader.open;
           target: bg;
-          direction: "down";
+          direction: Anims.Slide.Direction.Down;
           slideOffset: root.slideOffset;
           originalPos: Globals.vars.gapLarge;
+          grow: true;
         }
 
         SequentialAnimation {
           running: !popupLoader.open;
-          Anims.SlideFade {
+          Anims.Slide {
             target: bg;
-            direction: "down";
+            direction: Anims.Slide.Direction.Down;
             slideOffset: root.slideOffset;
             originalPos: Globals.vars.gapLarge;
             reverse: true;

@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import qs
 import qs.components
 import qs.animations as Anims;
@@ -39,9 +41,19 @@ PanelWindow {
   exclusionMode: Globals.conf.bar.autohide ? ExclusionMode.Ignore : ExclusionMode.Auto;
 
   Behavior on margins.top {
-    NumberAnimation {
-      duration: Globals.vars.animLen;
-      easing.type: Easing.OutExpo;
+    ParallelAnimation {
+      NumberAnimation {
+        property: "margins.top";
+        duration: Globals.vars.animLen;
+        easing.type: Easing.OutExpo;
+      }
+      NumberAnimation {
+        target: background;
+        property: "scale";
+        from: !hoverArea.containsMouse ? 0.9 : 1; to: 1;
+        duration: Globals.vars.animLen;
+        easing.type: Easing.OutExpo;
+      }
     }
   }
 
@@ -52,6 +64,7 @@ PanelWindow {
 
     // Visible background of bar
     OutlinedRectangle {
+      id: background;
       anchors {
         fill: parent
         // Add a gap if docked without floating modules

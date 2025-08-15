@@ -62,12 +62,14 @@ Scope {
         duration: Globals.vars.animLen;
       }
 
-      Anims.SlideFade {
+      Anims.Slide {
         running: !loader.loading;
         target: wrapper;
+        grow: true;
+        slideOffset: 200;
       }
 
-      Anims.SlideFade {
+      Anims.Slide {
         running: !loader.open;
         target: wrapper;
         reverse: true;

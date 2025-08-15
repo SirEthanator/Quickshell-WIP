@@ -44,8 +44,10 @@ WlSessionLockSurface {
       from: 0; to: 1;
       duration: Globals.vars.animLen;
     }
-    Anims.SlideFade {
+    Anims.Slide {
       target: contentWrapper;
+      grow: true;
+      slideOffset: 200;
     }
   }
 
@@ -57,7 +59,7 @@ WlSessionLockSurface {
       from: 1; to: 0;
       duration: Globals.vars.animLen;
     }
-    Anims.SlideFade {
+    Anims.Slide {
       target: contentWrapper;
       reverse: true;
     }

@@ -61,17 +61,19 @@ LazyLoader {
     implicitWidth: content.width + Globals.vars.gapLarge;
     implicitHeight: content.height;
 
-    Anims.SlideFade {
+    Anims.Slide {
       running: true;
       target: content;
-      direction: "left";
-      slideOffset: 30;
+      direction: Anims.Slide.Left;
+      slideOffset: 60;
+      scaleOffset: 0.85;
+      grow: true;
     }
 
-    Anims.SlideFade {
-      running: !open;
+    Anims.Slide {
+      running: !loader.open;
       target: content;
-      direction: "left";
+      direction: Anims.Slide.Left;
       reverse: true;
       slideOffset: 30;
     }
