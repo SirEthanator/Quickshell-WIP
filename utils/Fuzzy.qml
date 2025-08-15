@@ -5,9 +5,9 @@ import Quickshell;
 import QtQuick;
 
 Singleton {
-  readonly property real prefixWeight: 0.5;
+  readonly property real prefixWeight: 0.2;
   readonly property real distanceWeight: 0.3;
-  readonly property real consecutiveWeight: 0.2;
+  readonly property real consecutiveWeight: 0.5;
 
   function levenshteinDistance(a: string, b: string): int {
     // If one string is empty, the distance is the length of the other string
@@ -130,7 +130,7 @@ Singleton {
   }
 
   function fuzzySearch(items: var, query: string, key: string, threshold: real): var {
-    threshold = threshold || 0.65;
+    threshold = threshold || 0.60;
     key = key || null;
 
     if (!query || query.length === 0) {
