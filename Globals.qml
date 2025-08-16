@@ -556,6 +556,7 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
     property int paddingNotif: paddingCard;
     property int notifInnerSpacing: 10;
 
+    property int mainIconSize: 28;
     property int largeIconSize: 34;
     property int extraLargeIconSize: 90;
 

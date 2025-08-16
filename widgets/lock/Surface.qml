@@ -49,6 +49,11 @@ WlSessionLockSurface {
       grow: true;
       slideOffset: 200;
     }
+    Anims.Slide {
+      target: mediaWrapper;
+      originalPos: mediaWrapper.xPos;
+      direction: Anims.Slide.Direction.Left;
+    }
   }
 
   ParallelAnimation {
@@ -61,6 +66,12 @@ WlSessionLockSurface {
     }
     Anims.Slide {
       target: contentWrapper;
+      reverse: true;
+    }
+    Anims.Slide {
+      target: mediaWrapper;
+      originalPos: mediaWrapper.xPos;
+      direction: Anims.Slide.Direction.Left;
       reverse: true;
     }
   }
@@ -104,6 +115,22 @@ WlSessionLockSurface {
 
       Status { pam: pam }
     }
+  }
+
+  Item {
+    id: mediaWrapper;
+
+    height: 200;
+    width: 500;
+
+    readonly property real xPos: parent.width - width - Globals.vars.gapLarge;
+    readonly property real yPos: parent.height - height - Globals.vars.gapLarge;
+    x: xPos;
+    y: yPos;
+
+    visible: Utils.Mpris.activePlayer !== null;
+
+    Media {}
   }
 }
 
