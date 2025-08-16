@@ -674,15 +674,31 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
     batteryLow: red;
   }
 
+  FileView {
+    id: materialJson;
+    path: Qt.resolvedUrl("./utils/material.json");
+    blockLoading: true;
+    watchChanges: true;
+
+    function setLoaderSrc() {
+      materialSchemeLoader.setSource("components/Scheme.qml", JSON.parse(text()));
+    }
+
+    Component.onCompleted: setLoaderSrc();
+    onFileChanged: {
+      reload();
+      waitForJob();
+      setLoaderSrc();
+    }
+  }
+
   Loader {
     id: materialSchemeLoader;
-    source: "components/Material.qml";
   }
 
   readonly property Scheme material: {
     if (materialSchemeLoader.status === Loader.Error || materialSchemeLoader.item === null) {
-      console.warn("Failed to load material scheme! Falling back to Everforest. Has matugen been run?");
-      return everforest
+      return everforest  // Use Everforest as a fallback
     }
     return materialSchemeLoader.item as Scheme;
   }

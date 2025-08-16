@@ -1,4 +1,4 @@
 config.conf
 .qmlls.ini
-components/Material.qml
+utils/material.json
 **/*.bak
