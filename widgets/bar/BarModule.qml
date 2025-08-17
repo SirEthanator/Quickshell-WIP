@@ -27,6 +27,7 @@ OutlinedRectangle {
   color: root.background;
 
   disableAllOutlines: !outline;
+  topOutline: !(Globals.conf.bar.docked && Globals.conf.bar.floatingModules);
 
   // If the bar is docked but with floating modules, the top corners' border radius is removed
   topRightRadius: Globals.conf.bar.docked && Globals.conf.bar.floatingModules ? 0 : Globals.vars.br;
