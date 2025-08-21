@@ -10,7 +10,7 @@ BarModule {
   id: root;
 
   readonly property var battery: UPower.displayDevice;
-  readonly property int percentage: Math.round(battery.percentage*100)
+  readonly property int percentage: Math.round(battery.percentage*100);
   readonly property bool charging: battery.timeToEmpty === 0;
 
   show: battery.isLaptopBattery;
@@ -70,14 +70,23 @@ BarModule {
 
       SequentialAnimation {
         id: chargingAnim;
-        running: root.charging && root.show;
+        running: root.charging && root.show && root.percentage !== 100;
         loops: Animation.Infinite;
 
+        onRunningChanged: {
+          if (!running) {
+            batteryFill.width = Qt.binding(() => batteryFill.widthValue);
+          }
+        }
+
         ScriptAction {
+          id: chargingAnimSteps;
           script: {
             for (let i=0; i < batteryFill.stepCount; i++) {
               Utils.Timeout.setTimeout(() => {
-                batteryFill.width = batteryFill.widthValue + batteryFill.stepSize * (i+1);
+                if (chargingAnim.running) {
+                  batteryFill.width = batteryFill.widthValue + batteryFill.stepSize * (i+1);
+                }
               }, i * batteryFill.stepDuration)
             }
           }
