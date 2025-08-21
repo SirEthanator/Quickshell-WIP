@@ -1,4 +1,8 @@
+pragma ComponentBehavior: Bound
+
 import qs
+import qs.utils as Utils
+import qs.animations as Anims
 import Quickshell.Services.UPower;
 import QtQuick;
 
@@ -11,12 +15,102 @@ BarModule {
 
   show: battery.isLaptopBattery;
 
-  icon: {
-    const nearestTwenty = Math.round(percentage / 20) * 20;
-    const number = nearestTwenty.toString().padStart(3, "0");
-    const charging = root.charging ? "-charging" : "";
-    return `battery-${number}${charging}`
+  customIcon: Item {
+    anchors.fill: parent;
+
+    Rectangle {
+      id: batteryBorder;
+
+      anchors {
+        right: batteryKnob.left;
+        rightMargin: 1;
+        left: parent.left;
+        verticalCenter: parent.verticalCenter;
+      }
+
+      height: parent.height - 10;
+      color: "transparent";
+      radius: 3;
+
+      border {
+        color: root.iconColour;
+        width: 1.5;
+      }
+
+      Item {
+        id: batteryFillWrapper;
+        anchors {
+          fill: parent;
+          margins: parent.border.width + 0.8;
+        }
+
+        Rectangle {
+          id: batteryFill;
+          anchors {
+            left: parent.left;
+            top: parent.top;
+            bottom: parent.bottom
+          }
+
+          color: root.iconColour;
+          radius: batteryBorder.radius - 0.8;
+
+          readonly property real widthValue: parent.width * (root.percentage / 100);
+          width: widthValue;
+
+          // For charging animation
+          readonly property int stepCount: 5;
+          readonly property real targetWidth: parent.width;
+          readonly property real stepSize: (targetWidth - widthValue) / stepCount;
+          readonly property int stepDuration: 300;
+
+          Anims.NumberTransition on width {}
+        }
+      }
+
+      SequentialAnimation {
+        id: chargingAnim;
+        running: root.charging && root.show;
+        loops: Animation.Infinite;
+
+        ScriptAction {
+          script: {
+            for (let i=0; i < batteryFill.stepCount; i++) {
+              Utils.Timeout.setTimeout(() => {
+                batteryFill.width = batteryFill.widthValue + batteryFill.stepSize * (i+1);
+              }, i * batteryFill.stepDuration)
+            }
+          }
+        }
+
+        // Hold at full
+        PauseAnimation { duration: batteryFill.stepCount * batteryFill.stepDuration + 800 }
+
+        // Reset to original percentage
+        Anims.NumberAnim {
+          target: batteryFill;
+          property: "width";
+          to: batteryFill.widthValue;
+        }
+
+        // Pause before repeating
+        PauseAnimation { duration: 1000 }
+      }
+    }
+
+    Rectangle {
+      id: batteryKnob;
+
+      height: 5;
+      width: 2;
+      anchors.right: parent.right;
+      anchors.verticalCenter: parent.verticalCenter;
+
+      color: root.iconColour;
+      radius: width / 2;
+    }
   }
+
 
   forceIconbgColour: true;
   iconbgColour: {
