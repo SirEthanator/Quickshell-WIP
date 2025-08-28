@@ -62,9 +62,38 @@ BarModule {
           readonly property int stepCount: 5;
           readonly property real targetWidth: parent.width;
           readonly property real stepSize: (targetWidth - widthValue) / stepCount;
-          readonly property int stepDuration: 300;
+          readonly property int stepDuration: 350;
 
           Anims.NumberTransition on width {}
+        }
+      }
+
+      Instantiator {
+        id: chargingAnimStepTimers;
+        model: batteryFill.stepCount;
+
+        function restart() {
+          for (let i=0; i < count; i++) {
+            (objectAt(i) as Timer).restart();
+          }
+        }
+
+        function stop() {
+          for (let i=0; i < count; i++) {
+            (objectAt(i) as Timer).stop();
+          }
+        }
+
+        delegate: Timer {
+          required property int modelData;
+          interval: batteryFill.stepDuration * modelData;
+          repeat: false;
+
+          onTriggered: {
+            if (chargingAnim.running) {
+              batteryFill.width = batteryFill.widthValue + batteryFill.stepSize * (modelData+1);
+            }
+          }
         }
       }
 
@@ -76,20 +105,12 @@ BarModule {
         onRunningChanged: {
           if (!running) {
             batteryFill.width = Qt.binding(() => batteryFill.widthValue);
+            chargingAnimStepTimers.stop();
           }
         }
 
         ScriptAction {
-          id: chargingAnimSteps;
-          script: {
-            for (let i=0; i < batteryFill.stepCount; i++) {
-              Utils.Timeout.setTimeout(() => {
-                if (chargingAnim.running) {
-                  batteryFill.width = batteryFill.widthValue + batteryFill.stepSize * (i+1);
-                }
-              }, i * batteryFill.stepDuration)
-            }
-          }
+          script: { chargingAnimStepTimers.restart() }
         }
 
         // Hold at full
