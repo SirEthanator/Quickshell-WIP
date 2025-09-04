@@ -34,7 +34,11 @@ MouseArea {
     to: 0;
     duration: root.timeout;
     onFinished: {
-      NotifServer.dismissed(root.n.id);
+      if (root.n.transient) {
+        root.n.expire();
+      } else {
+        NotifServer.dismissed(root.n.id);
+      }
     }
   }
 
@@ -61,7 +65,7 @@ MouseArea {
     } else {
       x = width * (x < 0 ? -1 : 1);
       // Dismiss if popup, discard if not
-      const dimissAction = popup ? () => NotifServer.dismissed(n.id) : () => n.dismiss();
+      const dimissAction = popup && ! n.transient ? () => NotifServer.dismissed(n.id) : () => n.dismiss();
       Utils.Timeout.setTimeout(dimissAction, Globals.vars.transitionLen);
     }
   }
@@ -212,7 +216,7 @@ MouseArea {
 
             RowLayout {
               id: actions;
-              visible: root.popup && root.n.actions.length > 0;
+              visible: root.n.actions.length > 0;
               Layout.fillWidth: true;
               spacing: Globals.vars.spacingButtonGroup;
 

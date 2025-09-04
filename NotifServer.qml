@@ -17,10 +17,11 @@ Singleton {
 
     actionIconsSupported: true;
     actionsSupported: true;
-    imageSupported: true;
+    persistenceSupported: true;
 
     onNotification: n => {
       n.tracked = true;
+
       root.incoming(n);
 
       n.closed.connect(() => {
