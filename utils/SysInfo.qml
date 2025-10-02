@@ -76,17 +76,6 @@ Singleton {
   }
 
   Process {
-    command: ["hyprctl", "getoption", "general:gaps_out", "-j"];
-    running: true;
-    stdout: SplitParser {
-      onRead: (data) => {
-        const json = JSON.parse(data);
-        root.gap = json.custom.split(' ')[0]
-      }
-    }
-  }
-
-  Process {
     command: ["hostname"]
     running: true;
     stdout: SplitParser {

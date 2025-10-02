@@ -5,6 +5,7 @@ import QtQuick;
 
 PanelWindow {
   WlrLayershell.layer: WlrLayer.Background;
+  WlrLayershell.namespace: "wallpaper";
   exclusionMode: ExclusionMode.Ignore;
   color: Globals.conf.desktop.bgColour;
 

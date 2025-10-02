@@ -508,7 +508,7 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
       }
     });
 
-    property int gap: Utils.SysInfo.gap;  // Size of Hyprland gap
+    property int gap: Utils.Session.gap;  // Size of Hyprland/niri gap
     property int gapLarge: vars.gap + 8;
 
     property int br: 6;  // Border Radius

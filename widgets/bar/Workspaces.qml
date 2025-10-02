@@ -1,10 +1,10 @@
 pragma ComponentBehavior: Bound
 
 import qs
+import qs.utils as Utils;
 import qs.animations as Anims;
 import QtQuick;
 import QtQuick.Layouts;
-import Quickshell.Hyprland;
 
 BarModule {
   id: root;
@@ -13,17 +13,20 @@ BarModule {
 
   onWheel: event => {
     const step = -Math.sign(event.angleDelta.y);
-    const active = root.monitor.activeWorkspace.id;
-    const target = step + active
+    const activeIdx = workspaces.find(ws => ws.active === true).idx;
+    const target = step + activeIdx;
     if (target >= 1 && target <= Globals.conf.bar.workspaceCount) {
-      Hyprland.dispatch(`workspace ${target}`);
+      Utils.Session.setActiveWorkspace(target)
     }
   }
 
   required property var screen;
-  readonly property HyprlandMonitor monitor: Hyprland.monitorFor(screen);
+  // readonly property HyprlandMonitor monitor: Hyprland.monitorFor(screen);
+  readonly property string monitor: screen.name;
 
-  signal workspaceAdded(ws: HyprlandWorkspace);
+  readonly property list<var> workspaces: Utils.Session.workspaces.filter((ws) =>
+    ws.display === root.monitor
+  )
 
   // No row layout because it's provided by BarModule
   Repeater {
@@ -36,22 +39,12 @@ BarModule {
 
       required property int index;
 
-      readonly property int wsIndex: index+1;  // Hyprland workspaces start at 1, index starts at 0
-      property HyprlandWorkspace ws: null;
-      property bool occupied: ws !== null;
-      property bool focused: root.monitor.activeWorkspace === ws;
+      readonly property int wsIndex: index+1;  // Hyprland and Niri workspaces start at 1, index starts at 0
+      property var ws: root.workspaces.find(ws => ws.idx === wsIndex);
+      property bool occupied: ws !== undefined;
+      property bool focused: ws && ws.active ? ws.active : false;
 
-      onPressed: Hyprland.dispatch(`workspace ${wsIndex}`);
-
-      Connections {
-        target: root;
-
-        function onWorkspaceAdded(ws: HyprlandWorkspace) {
-          if (ws.id == wsButton.wsIndex) {
-            wsButton.ws = ws;
-          }
-        }
-      }
+      onPressed: Utils.Session.setActiveWorkspace(wsIndex);
 
       Rectangle {
         id: wsButtonRect;
@@ -93,20 +86,6 @@ BarModule {
         }
       }
     }
-  }
-
-  Connections {
-    target: Hyprland.workspaces;
-
-    function onObjectInsertedPost(ws) {
-      root.workspaceAdded(ws);
-    }
-  }
-
-  Component.onCompleted: {
-    Hyprland.workspaces.values.forEach(ws => {
-      root.workspaceAdded(ws);
-    })
   }
 }
 

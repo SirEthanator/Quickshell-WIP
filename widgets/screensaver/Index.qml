@@ -44,7 +44,7 @@ LazyLoader {
 
           Image {
             id: logosrc;
-            source: Quickshell.configPath("assets/arch-full.svg");
+            source: Quickshell.shellPath("assets/arch-full.svg");
             visible: false;
           }
 

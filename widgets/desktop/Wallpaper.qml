@@ -22,6 +22,8 @@ Item {
     : `${Quickshell.env("HOME")}/Hyprland-Dots/Wallpapers/${defaultWall}/Accent.png`;
   readonly property bool showWall: !Globals.conf.desktop.hideWallpaper;
 
+  layer.enabled: true;
+
   VideoOutput {
     id: videoOut;
     anchors.fill: parent;
