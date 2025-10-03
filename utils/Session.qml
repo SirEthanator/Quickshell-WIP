@@ -57,8 +57,14 @@ Singleton {
         break;
 
         case "WorkspaceActivated":
-          root.workspaces.find(ws => ws.active === true).active = false;
-          root.workspaces.find(ws => ws.id === msg[msgTitle].id).active = true;
+          const workspacesTmp = root.workspaces.slice();  // Clone
+
+          const targetWs = workspacesTmp.find(ws => ws.id === msg[msgTitle].id);
+          const prevActive = workspacesTmp.find(ws => ws.display === targetWs.display && ws.active === true);
+
+          prevActive.active = false;
+          targetWs.active = true;
+          root.workspaces = workspacesTmp;
         break;
         }
       }
