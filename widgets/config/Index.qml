@@ -61,7 +61,7 @@ Scope {
           Globals.conf[key][option] = newValue;
 
           if (typeof callback === "function") {
-            callback(newValue)
+            callback(newValue, getVal)
           }
         }
       }
