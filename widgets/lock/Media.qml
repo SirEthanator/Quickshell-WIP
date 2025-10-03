@@ -66,6 +66,7 @@ OutlinedRectangle {
           font {
             family: Globals.vars.fontFamily;
             pixelSize: Globals.vars.headingFontSize;
+            bold: true;
           }
           color: Globals.colours.fg;
 

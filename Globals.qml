@@ -516,7 +516,7 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
 
     property real outlineSize: 1.5;
 
-    property string fontFamily: "0xProto";
+    property string fontFamily: "Roboto Flex";
     property int mainFontSize: 16;
     property int largeFontSize: 64;
     property int xlFontSize: 150;

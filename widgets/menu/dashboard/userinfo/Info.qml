@@ -74,6 +74,10 @@ RowLayout {
       font {
         family: Globals.vars.fontFamily;
         pixelSize: Globals.vars.headingFontSize;
+        variableAxes: {
+          "wght": 700,
+          "wdth": 130
+        }
       }
     }
 

@@ -7,13 +7,17 @@ ColumnLayout {
   Layout.alignment: Qt.AlignHCenter;
 
   Text {
-    text: Qt.formatDateTime(Utils.SysInfo.clock.date, "hh:mm:ss AP");
+    text: Qt.formatDateTime(Utils.SysInfo.clock.date, "hh:mm AP");
     Layout.alignment: Qt.AlignHCenter;
 
     color: Globals.colours.fg;
     font {
       family: Globals.vars.fontFamily;
       pixelSize: Globals.vars.largeFontSize;
+      variableAxes: {
+        "wdth": 200,
+        "wght": 1000
+      }
     }
   }
 
