@@ -154,6 +154,7 @@ Scope {
           anchors.margins: Globals.vars.paddingWindow;
 
           ColumnLayout {
+            id: mainColumn;
             anchors.centerIn: parent;
             width: parent.width;
             spacing: Globals.vars.paddingWindow * 2;
@@ -170,7 +171,7 @@ Scope {
               }
 
               ColumnLayout {
-                spacing: 8;
+                spacing: Globals.vars.marginCard;
 
                 Text {
                   Layout.fillWidth: true;
@@ -198,6 +199,24 @@ Scope {
             }
 
             PassInput { polkit: polkit }
+          }
+
+          Button {
+            anchors {
+              right: parent.right;
+              top: mainColumn.bottom;
+              topMargin: Globals.vars.marginCard;
+            }
+
+            label: "Cancel";
+
+            allRadius: true;
+            bg: Globals.colours.bgLight;
+
+            onClicked: {
+              polkit.flow.cancelAuthenticationRequest();
+              loader.open = false;
+            }
           }
 
           Status {

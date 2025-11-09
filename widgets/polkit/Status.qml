@@ -29,6 +29,7 @@ ColumnLayout {
 
     maximumLineCount: 3;
     elide: Text.ElideRight;
+    wrapMode: Text.Wrap;
   }
 
   Text {
