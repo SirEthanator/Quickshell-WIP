@@ -11,7 +11,6 @@ import "widgets/polkit" as Polkit;
 import "widgets/desktop" as Desktop;
 import "widgets/osd" as OSD;
 import "widgets/screensaver" as Screensaver;
-import "widgets/themeOverlay" as ThemeOverlay;
 import "widgets/config" as Config;
 import Quickshell.Io;
 import QtQuick;
@@ -74,13 +73,6 @@ ShellRoot {
         screen: scope.modelData;
         show: Globals.states.screensaverActive;
         onHide: Globals.states.screensaverActive = false;
-      }
-      ThemeOverlay.Index {
-        screen: scope.modelData;
-        switchInProgress: Globals.states.themeSwitchInProgress;
-        overlayOpen: Globals.states.themeOverlayOpen;
-        currentAction: Globals.states.themeSwitchingState;
-        onClose: Globals.states.themeOverlayOpen = false;
       }
     }
 	}

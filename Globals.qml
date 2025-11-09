@@ -38,9 +38,7 @@ Singleton {
           "description": "Defines what colour scheme should be used throughout the system.",
           "type": "string",
           "options": root.schemes,
-          "callback": (val) => {
-            root.switchTheme(val)
-          }
+          "callback": root.switchTheme
         }
       },
 
@@ -434,8 +432,6 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
   function switchTheme(scheme: string): string {
     const validationResult = Utils.Validate.validateObjKey(scheme, schemes, "Failed to set colour scheme");
     if (validationResult) return validationResult;
-    states.themeSwitchInProgress = true;
-    states.themeOverlayOpen = true;
     setTheme.scheme = scheme;
     setTheme.running = true;
     return "";
@@ -446,15 +442,6 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
 
     property string scheme: "";
     command: ["sh", "-c", `${Quickshell.env("HOME")}/Scripts/SetTheme ${scheme} --noconfirm`];
-    stdout: SplitParser {
-      onRead: data => root.states.themeSwitchingState = data;
-    }
-    onExited: {
-      // Wait a little while before closing so completion message can be read
-      Utils.Timeout.setTimeout(() => {
-        root.states.themeSwitchInProgress = false;
-      }, 1000);
-    }
   }
 
   // ===================
@@ -733,9 +720,6 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
     property bool menuOpen: false;
     property bool barHidden: false;
     property bool screensaverActive: false;
-    property bool themeSwitchInProgress: false;
-    property bool themeOverlayOpen: false;
-    property string themeSwitchingState: "";
   }
 
   property alias states: persist;

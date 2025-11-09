@@ -1,6 +1,5 @@
 pragma Singleton
 
-import qs
 import Quickshell;
 import QtQuick;
 
