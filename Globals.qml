@@ -194,16 +194,6 @@ Singleton {
           "title": "Background Colour",
           "description": "Defines the colour that should be shown behind everything. If 'hideWallpaper' is true, this colour will be displayed. It is also useful for shaders which look better with a solid colour behind them.",
           "type": "string"
-        },
-        "clockWidget": {
-          "title": "Clock Widget",
-          "description": "Defines whether the clock widget should be shown.",
-          "type": "bool"
-        },
-        "centreClockWidget": {
-          "title": "Centre Clock Widget",
-          "description": "Defines whether the clock widget should be vertically centred.",
-          "type": "bool"
         }
       },
 
@@ -574,9 +564,6 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
     property int animLen: 350;
     property int transitionLen: 250;
     property int shortTransitionLen: 150;
-
-    property int clockWidgetSpacing: 8;
-    property int clockWidgetTopMargin: 100;
 
     property int notifPopupSpacing: 10;
     property int paddingNotif: paddingCard;
