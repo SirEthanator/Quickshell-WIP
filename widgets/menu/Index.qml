@@ -47,7 +47,7 @@ Scope {
       }
 
       exclusionMode: ExclusionMode.Normal;
-      WlrLayershell.layer: WlrLayer.Overlay;
+      WlrLayershell.layer: WlrLayer.Top;
       WlrLayershell.keyboardFocus: loader.open ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None;
 
       Anims.ColourAnim on color {
@@ -106,7 +106,7 @@ Scope {
         Shadow { target: background }
 
         // Visible background of menu
-        Rectangle {
+        OutlinedRectangle {
           id: background;
 
           anchors {
@@ -117,11 +117,7 @@ Scope {
           color: Globals.colours.bg;
           radius: Globals.vars.br;
 
-          border {
-            color: Globals.conf.menu.backgroundOutline ? Globals.colours.outline : "transparent";
-            width: Globals.conf.menu.backgroundOutline ? Globals.vars.outlineSize : 0;
-            pixelAligned: false;
-          }
+          disableAllOutlines: !Globals.conf.menu.backgroundOutline;
 
           ColumnLayout {
             id: content;

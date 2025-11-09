@@ -42,10 +42,10 @@ ColumnLayout {
       pixelSize: Globals.vars.mainFontSize;
     }
     color: root.pam.state === "failed" || root.pam.state === "error"
-        ? Globals.colours.warning
-        : root.pam.state === "maxTries"
-          ? Globals.colours.red
-          : Globals.colours.grey;
+      ? Globals.colours.warning
+      : root.pam.state === "maxTries"
+        ? Globals.colours.red
+        : Globals.colours.grey;
 
     maximumLineCount: 1;
     elide: Text.ElideRight;

@@ -7,6 +7,7 @@ import "widgets/bar" as Bar;
 import "widgets/menu" as Menu;
 import "widgets/notifications" as Notifications;
 import "widgets/lock" as Lock;
+import "widgets/polkit" as Polkit;
 import "widgets/desktop" as Desktop;
 import "widgets/osd" as OSD;
 import "widgets/screensaver" as Screensaver;
@@ -55,7 +56,7 @@ ShellRoot {
   Menu.Index {}
   Notifications.Popups {}
   OSD.Index {}
-  Lock.Index {}
+  Polkit.Index {}
 
 	Variants {
 		model: Quickshell.screens;
@@ -68,6 +69,7 @@ ShellRoot {
       Desktop.BlurredWallpaper { screen: scope.modelData }
       Desktop.Index { screen: scope.modelData }
       // Due to some issues with binding to Globals from screensaver and theme overlay, some properties are passed in here.
+      Lock.Index {}
       Screensaver.Index {
         screen: scope.modelData;
         show: Globals.states.screensaverActive;

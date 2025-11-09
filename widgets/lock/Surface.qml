@@ -132,5 +132,11 @@ WlSessionLockSurface {
 
     Media {}
   }
+
+  // Emergency unlock - for debugging
+  // Button {
+  //   onClicked: root.beginUnlock();
+  //   label: "Unlock"
+  // }
 }
 

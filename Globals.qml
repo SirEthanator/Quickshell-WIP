@@ -288,6 +288,24 @@ Singleton {
 Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the correct one for your display by running ls /sys/class/backlight`,
           "type": "string"
         }
+      },
+
+      "Polkit": {
+        "dimBackground": {
+          "title": "Dim Background",
+          "description": "Defines whether the background should be dimmed.",
+          "type": "bool"
+        },
+        "hideApplications": {
+          "title": "Hide Applications",
+          "description": "Defines whether applications should be hidden when a prompt is shown.",
+          "type": "bool"
+        },
+        "backgroundOutline": {
+          "title": "Outline",
+          "description": "Defines whether the content's background should have an outline around it.",
+          "type": "bool"
+        },
       }
     })
 
@@ -376,6 +394,14 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
       category: "OSD";
 
       property string backlightName: "";
+    }
+
+    property Config polkit: Config {
+      category: "Polkit";
+
+      property bool dimBackground: true;
+      property bool hideApplications: false;
+      property bool backgroundOutline: true;
     }
   }
 

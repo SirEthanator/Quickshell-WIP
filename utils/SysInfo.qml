@@ -35,6 +35,7 @@ Singleton {
   property string date: Qt.formatDateTime(clock.date, 'ddd dd/MM/yy');
   property string dateAndTime: `${date} | ${time}`;
 
+  // TODO: getent passwd "$USER" | cut -d ':' -f 5
   property string username: capitalise(Quickshell.env("USER"), Globals.conf.menu.capitaliseUsername);
   property string hostname: ""    ;
 
