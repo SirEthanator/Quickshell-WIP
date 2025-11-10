@@ -51,12 +51,6 @@ ShellRoot {
     }
   }
 
-  Config.Index {}
-  Menu.Index {}
-  Notifications.Popups {}
-  OSD.Index {}
-  Polkit.Index {}
-
 	Variants {
 		model: Quickshell.screens;
 
@@ -76,5 +70,18 @@ ShellRoot {
       }
     }
 	}
+
+  // This needs to be created after the bar in order to
+  // ensure exclusivity is handled correctly.
+  // When created before the bar, it does not
+  // respect the bar's exclusive zone when in niri.
+  Notifications.Popups {}
+
+  // These can be created in any order as they use
+  // lazy loaders - they are created after other windows
+  Config.Index {}
+  Menu.Index {}
+  OSD.Index {}
+  Polkit.Index {}
 }
 

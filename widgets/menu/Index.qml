@@ -27,11 +27,11 @@ Scope {
     property var timer;
     onOpenChanged: {
       if (!!loader.timer) return
-      if (!open) {
+      if (open) {
+        loader.activeAsync = true;
+      } else {
         // We need a timer so the component will not be unloaded until the animation finishes
         loader.timer = Utils.Timeout.setTimeout(() => loader.activeAsync = false, Globals.vars.animLen);
-      } else {
-        loader.activeAsync = true;
       }
     }
 
