@@ -2,15 +2,21 @@ pragma ComponentBehavior: Bound
 
 import qs
 import qs.components
+import qs.widgets.polkit as Polkit;
 import qs.animations as Anims;
 import Quickshell;
 import QtQuick;
 
 PanelWindow {
   id: root;
-  // If the menu's background is configured to be dimmed and the menu is open, we want to dim behind the bar too
-  // However, if autohide is enabled, we don't need to do this
-  color: Globals.conf.menu.dimBackground && Globals.states.menuOpen && !Globals.conf.bar.autohide ? Globals.vars.bgDimmedColour : "transparent";
+  readonly property bool bgIsDimmed:
+    // If the menu's background is configured to be dimmed and the menu is open, we want to dim behind the bar too
+    // However, if autohide is enabled, we don't need to do this
+       (Globals.conf.menu.dimBackground && Globals.states.menuOpen && !Globals.conf.bar.autohide)
+    || (Globals.conf.polkit.dimBackground && Polkit.Polkit.agent.isActive)
+  ;
+
+  color: bgIsDimmed ? Globals.vars.bgDimmedColour : "transparent";
 
   Anims.ColourTransition on color {
     duration: Globals.vars.animLen;

@@ -9,21 +9,11 @@ import QtQuick;
 import QtQuick.Layouts;
 
 Scope {
-  Polkit {
-    id: polkit;
-    onIsActiveChanged: {
-      if (isActive) loader.open = true;
-    }
-  }
-
   Connections {
-    target: polkit.flow;
+    target: Polkit.agent;
 
-    function onFailedChanged() {
-      polkit.isAuthenticating = false;
-    }
-    function onIsSuccessfulChanged() {
-      polkit.isAuthenticating = false;
+    function onIsActiveChanged() {
+      if (Polkit.agent.isActive) loader.open = true;
     }
   }
 
@@ -51,6 +41,18 @@ Scope {
       exclusionMode: Globals.conf.polkit.hideApplications ? ExclusionMode.Ignore : ExclusionMode.Normal;
       WlrLayershell.layer: WlrLayer.Overlay;
       WlrLayershell.keyboardFocus: loader.open ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None;
+
+      Connections {
+        target: Polkit.flow;
+
+        function onIsCompletedChanged() {
+          if (target.isCompleted) loader.open = false;
+        }
+
+        function onIsCancelledChanged() {
+          if (target.isCancelled) loader.open = false;
+        }
+      }
 
       Loader {
         id: wallpaperLoader;
@@ -104,18 +106,6 @@ Scope {
         }
       }
 
-      Connections {
-        target: polkit.flow;
-
-        function onIsCompletedChanged() {
-          if (polkit.flow.isCompleted) loader.open = false;
-        }
-
-        function onIsCancelledChanged() {
-          if (polkit.flow.isCancelled) loader.open = false;
-        }
-      }
-
       Item {
         id: wrapper;
         width: Globals.conf.menu.width + Globals.vars.gapLarge * 2;
@@ -127,7 +117,7 @@ Scope {
           const key = event.key;
 
           if (key === Qt.Key_Escape) {
-            polkit.flow.cancelAuthenticationRequest();
+            Polkit.flow.cancelAuthenticationRequest();
             loader.open = false;
           }
         }
@@ -165,7 +155,7 @@ Scope {
 
               Icon {
                 size: 64;
-                icon: polkit.flow.iconName;
+                icon: Polkit.flow.iconName;
                 fallback: "gtk-dialog-authentication";
                 isMask: false;
               }
@@ -175,7 +165,7 @@ Scope {
 
                 Text {
                   Layout.fillWidth: true;
-                  text: polkit.flow.message;
+                  text: Polkit.flow.message;
                   color: Globals.colours.fg;
                   font {
                     family: Globals.vars.fontFamily;
@@ -198,7 +188,7 @@ Scope {
               }
             }
 
-            PassInput { polkit: polkit }
+            PassInput {}
           }
 
           Button {
@@ -214,14 +204,12 @@ Scope {
             bg: Globals.colours.bgLight;
 
             onClicked: {
-              polkit.flow.cancelAuthenticationRequest();
+              Polkit.flow.cancelAuthenticationRequest();
               loader.open = false;
             }
           }
 
-          Status {
-            polkit: polkit;
-          }
+          Status {}
         }
       }
     }

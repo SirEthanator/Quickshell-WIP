@@ -4,15 +4,14 @@ import QtQuick.Layouts;
 
 PasswordInput {
   id: root;
-  required property Polkit polkit;
 
   Layout.fillWidth: true;
 
   forceFocus: true;
-  disabled: polkit.isAuthenticating;
+  disabled: Polkit.isAuthenticating;
 
   onSubmit: (text) => {
-    root.polkit.submit(text);
+    Polkit.submit(text);
   }
 }
 

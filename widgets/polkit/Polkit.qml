@@ -1,15 +1,31 @@
+pragma Singleton
+
+import Quickshell
 import Quickshell.Services.Polkit;
 import QtQuick;
 
-PolkitAgent {
+Singleton {
   id: root;
+
   property bool isAuthenticating: false;
 
+  readonly property PolkitAgent agent: PolkitAgent { id: agent }
+  readonly property alias flow: agent.flow;
+
   function submit(text: string) {
-    // isAuthenticating is set back to false using a
-    // Connections component in Index.qml
     isAuthenticating = true;
-    flow.submit(text);
+    agent.flow.submit(text);
+  }
+
+  Connections {
+    target: root.agent.flow;
+
+    function onFailedChanged() {
+      root.isAuthenticating = false;
+    }
+    function onIsSuccessfulChanged() {
+      root.isAuthenticating = false;
+    }
   }
 }
 

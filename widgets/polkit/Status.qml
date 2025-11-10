@@ -1,22 +1,18 @@
 import qs
 import QtQuick;
 import QtQuick.Layouts;
-import Quickshell.Services.Polkit;
 
 ColumnLayout {
   id: root;
-  required property Polkit polkit;
   anchors.bottom: parent.bottom;
   anchors.horizontalCenter: parent.horizontalCenter;
 
   spacing: Globals.vars.marginCard;
 
-  readonly property AuthFlow flow: polkit.flow;
-
   Text {
     Layout.alignment: Qt.AlignHCenter;
 
-    text: root.flow.supplementaryMessage;
+    text: Polkit.flow.supplementaryMessage;
 
     visible: !!text;
 
@@ -25,7 +21,7 @@ ColumnLayout {
       pixelSize: Globals.vars.mainFontSize;
     }
 
-    color: root.flow.supplementaryIsError ? Globals.colours.red : Globals.colours.grey;
+    color: Polkit.flow.supplementaryIsError ? Globals.colours.red : Globals.colours.grey;
 
     maximumLineCount: 3;
     elide: Text.ElideRight;
@@ -36,14 +32,14 @@ ColumnLayout {
     Layout.alignment: Qt.AlignHCenter;
 
     text: {
-      const flow = root.flow;
-      if (root.polkit.isAuthenticating) {
+      const flow = Polkit.flow;
+      if (Polkit.isAuthenticating) {
         return "Authenticating..."
       }
       if (flow.failed) {
         return "Authentication Failed."
       }
-      return `Authenticating as: ${root.flow.selectedIdentity.displayName}`
+      return `Authenticating as: ${Polkit.flow.selectedIdentity.displayName}`
     }
 
     font {
@@ -51,7 +47,7 @@ ColumnLayout {
       pixelSize: Globals.vars.mainFontSize;
     }
 
-    color: root.flow.failed ? Globals.colours.red : Globals.colours.grey;
+    color: Polkit.flow.failed ? Globals.colours.red : Globals.colours.grey;
 
     maximumLineCount: 1;
     elide: Text.ElideRight;
