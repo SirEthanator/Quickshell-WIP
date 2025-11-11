@@ -22,6 +22,8 @@ Item {
 
   readonly property alias content: content;
 
+  layer.enabled: true;
+
   Rectangle {
     id: outline;
     anchors.fill: parent;
