@@ -47,19 +47,10 @@ PanelWindow {
   exclusionMode: Globals.conf.bar.autohide ? ExclusionMode.Ignore : ExclusionMode.Auto;
 
   Behavior on margins.top {
-    ParallelAnimation {
-      NumberAnimation {
-        property: "margins.top";
-        duration: Globals.vars.animLen;
-        easing.type: Easing.OutExpo;
-      }
-      NumberAnimation {
-        target: background;
-        property: "scale";
-        from: !hoverArea.containsMouse ? 0.9 : 1; to: 1;
-        duration: Globals.vars.animLen;
-        easing.type: Easing.OutExpo;
-      }
+    NumberAnimation {
+      property: "margins.top";
+      duration: Globals.vars.animLen;
+      easing.type: Easing.OutExpo;
     }
   }
 
