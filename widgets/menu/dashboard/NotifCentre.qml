@@ -12,7 +12,7 @@ DashItem {
   Layout.fillHeight: true;
   fullContentWidth: true;
 
-  readonly property var notifications: NotifServer.notifList.values;
+  readonly property var notifications: Notifs.NotifServer.notifList.values;
 
   ColumnLayout {
     id: column;
