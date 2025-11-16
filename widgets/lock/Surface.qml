@@ -41,7 +41,8 @@ WlSessionLockSurface {
     Anims.NumberAnim {
       target: wallpaper;
       property: "opacity";
-      from: 0; to: 1;
+      from: Globals.conf.lock.noFade ? 1 : 0;
+      to: 1;
       duration: Globals.vars.animLen;
     }
     Anims.Slide {
@@ -61,7 +62,8 @@ WlSessionLockSurface {
     Anims.NumberAnim {
       target: wallpaper;
       property: "opacity";
-      from: 1; to: 0;
+      from: 1;
+      to: Globals.conf.lock.noFade ? 1 : 0;
       duration: Globals.vars.animLen;
     }
     Anims.Slide {

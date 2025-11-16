@@ -13,6 +13,7 @@ Singleton {
   // ==== Configuration ====
   // =======================
 
+  // TODO: move all config to a separate singleton
   readonly property url confPath: Qt.resolvedUrl("./config.conf");
 
   property var conf: QtObject {
@@ -265,6 +266,11 @@ Singleton {
           "title": "Content Outline",
           "description": "Defines whether the rectangle containing the clock, input, etc. should have an outline around it.",
           "type": "bool"
+        },
+        "noFade": {
+          "title": "Disable Fade In/Out",
+          "description": "Defines whether the background should fade in and out. Useful on niri where the fade will result in a red flash.",
+          "type": "bool"
         }
       },
 
@@ -376,6 +382,7 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
 
       property bool dimBackground: false;
       property bool contentOutline: true;
+      property bool noFade: false;
     }
 
     property Config osd: Config {
