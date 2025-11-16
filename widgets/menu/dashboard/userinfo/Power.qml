@@ -2,7 +2,7 @@ pragma ComponentBehavior: Bound
 
 import qs
 import qs.components
-import qs.animations as Anims;
+import qs.utils as Utils;
 import Quickshell.Io;
 import QtQuick;
 import QtQuick.Layouts;
@@ -21,23 +21,24 @@ GridLayout {
   signal goBack;
   signal launchConfirmation;
 
-  property list<string> selectedAction;
+  property var selectedAction;
 
   Repeater {
+    id: repeater;
     model: [
-      ['', '', 'back-symbolic', () => root.goBack()],
-      ['Shut Down', 'Shutting Down', 'system-shutdown-symbolic', 'systemctl poweroff'],
-      ['Reboot', 'Rebooting', 'system-reboot-symbolic', 'systemctl reboot'],
-      ['Log Out', 'Logging Out', 'logout-symbolic', 'hyprctl dispatch exit'],
-      ['Suspend', 'Suspending', 'system-hibernate-symbolic', 'loginctl lock-session & sleep 1; systemctl suspend'],
-      ['Reboot to FW Settings', 'Rebooting to FW Settings', 'preferences-advanced-symbolic', 'systemctl reboot --firmware-setup']
+      { icon: 'back-symbolic', action: root.goBack },
+      { title: 'Shut Down', titleFuture: 'Shutting Down', icon: 'system-shutdown-symbolic', command: 'systemctl poweroff' },
+      { title: 'Reboot', titleFuture: 'Rebooting', icon: 'system-reboot-symbolic', command: 'systemctl reboot' },
+      { title: 'Log Out', titleFuture: 'Logging Out', icon: 'logout-symbolic', action: Utils.Session.logOut },
+      { title: 'Suspend', titleFuture: 'Suspending', icon: 'system-hibernate-symbolic', command: 'loginctl lock-session & sleep 1; systemctl suspend' },
+      { title: 'Reboot to FW Settings', titleFuture: 'Rebooting to FW Settings', icon: 'preferences-advanced-symbolic', command: 'systemctl reboot --firmware-setup' }
     ]
 
     Button {
       id: powerBtn;
       required property var modelData;
       required property int index;
-      icon: modelData[2];
+      icon: modelData.icon;
       Layout.fillWidth: true;
       Layout.fillHeight: true;
 
@@ -50,10 +51,11 @@ GridLayout {
 
       Process { id: powerCmd }
       onClicked: {
-        const action = powerBtn.modelData[3];
-        if (typeof action === "function") action()
-        else {
-          root.selectedAction = powerBtn.modelData;
+        const action = modelData.action;
+        const hasText = !!modelData.title && !!modelData.titleFuture;
+        if (!!action && !hasText) action();
+        else if (hasText) {
+          root.selectedAction = modelData;
           root.launchConfirmation();
         }
       }

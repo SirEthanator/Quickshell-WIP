@@ -1,6 +1,5 @@
 pragma Singleton
 
-// import qs
 import Quickshell;
 import Quickshell.Io;
 import Quickshell.Hyprland;
@@ -76,6 +75,14 @@ Singleton {
       Quickshell.execDetached(["sh", "-c", `niri msg action focus-workspace ${idx}`])
     } else {
       Hyprland.dispatch(`workspace ${idx}`)
+    }
+  }
+
+  function logOut() {
+    if (root.session === "niri") {
+      Quickshell.execDetached(["sh", "-c", `niri msg action quit --skip-confirmation`])
+    } else {
+      Hyprland.dispatch("exit")
     }
   }
 }

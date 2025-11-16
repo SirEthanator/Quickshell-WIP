@@ -4,9 +4,10 @@ import QtQuick.Layouts;
 
 Item {
   id: root;
-  required property string action;
-  required property string actionFuture;
-  required property string command;
+  required property string title;
+  required property string titleFuture;
+  property string command;
+  property var action;
 
   signal goBack;
 
@@ -25,7 +26,7 @@ Item {
     repeat: true;
     interval: 1000;
     onTriggered: {
-      root.countdown --;
+      root.countdown--;
       if (root.countdown === 0) {
         confirmButton.runCmd();
       }
@@ -39,7 +40,7 @@ Item {
 
     Text {
       Layout.alignment: Qt.AlignHCenter;
-      text: `${root.action}?`;
+      text: `${root.title}?`;
       color: Globals.colours.fg;
       font {
         family: Globals.vars.fontFamily;
@@ -49,7 +50,7 @@ Item {
 
     Text {
       Layout.alignment: Qt.AlignHCenter;
-      text: `${root.actionFuture} in ${root.countdown} seconds...`;
+      text: `${root.titleFuture} in ${root.countdown} seconds...`;
       color: Globals.colours.fg;
       font {
         family: Globals.vars.fontFamily;
@@ -67,8 +68,9 @@ Item {
       ConfirmationButton {
         id: confirmButton;
         index: 0;
-        label: `${root.action} now`;
+        label: `${root.title} now`;
         command: root.command;
+        action: root.action;
       }
 
       ConfirmationButton {

@@ -1,6 +1,4 @@
-import qs
 import qs.components
-import qs.utils as Utils;
 import "..";
 import QtQuick.Layouts;
 
@@ -32,9 +30,10 @@ DashItem {
 
     Confirmation {
       id: confirmation;
-      action: power.selectedAction[0];
-      actionFuture: power.selectedAction[1];
-      command: power.selectedAction[3];
+      title: power.selectedAction.title;
+      titleFuture: power.selectedAction.titleFuture;
+      action: power.selectedAction.action;
+      command: power.selectedAction.command;
       onGoBack: { stack.currentIndex = 1 }
     }
   }

@@ -1,14 +1,14 @@
 import qs
 import qs.components
-import qs.animations as Anims;
-import Quickshell.Io;
+import Quickshell;
 import QtQuick;
 import QtQuick.Layouts;
 
 Button {
   required label;
   required property int index;
-  property string command: "";
+  property string command;
+  property var action;
   signal selected;
 
   Layout.fillWidth: true;
@@ -19,16 +19,19 @@ Button {
   blRadius: index === 0;
   brRadius: index === 1;
 
-  Process { id: cmd }
   function runCmd() {
-    cmd.command = ["sh", "-c", command];
-    cmd.startDetached();
+    if (typeof action === "function") {
+      action();
+    }
+    if (!!command) {
+      Quickshell.execDetached(["sh", "-c", command]);
+    }
     Globals.states.menuOpen = false;
   }
 
   onClicked: {
     selected();
-    if (command !== "") runCmd();
+    if (!!command || typeof action === "function") runCmd();
   }
 }
 
