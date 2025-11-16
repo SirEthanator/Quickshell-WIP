@@ -338,7 +338,7 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
         "notifCentre"
       ];
       property string profilePicture: "";
-      property bool capitaliseUsername: true;
+      property bool capitaliseUsername: false;
       property bool capitaliseHostname: false;
       property bool dimBackground: true;
       property bool backgroundOutline: true;

@@ -35,24 +35,21 @@ Singleton {
   property string date: Qt.formatDateTime(clock.date, 'ddd dd/MM/yy');
   property string dateAndTime: `${date} | ${time}`;
 
-  // TODO: getent passwd "$USER" | cut -d ':' -f 5
-  property string username: capitalise(Quickshell.env("USER"), Globals.conf.menu.capitaliseUsername);
-  property string hostname: ""    ;
+  property string username: "";
+  property string hostname: "";
 
-  property int    gap: 10         ;  // use 10 until command has been run
+  property string network: "";
+  property int networkStrength ;
 
-  property string network: ""     ;
-  property int    networkStrength ;
-
-  property int    brightness      ;
-  property int    maxBrightness: 0;
+  property int brightness;
+  property int maxBrightness: 0;
 
   // In GiB
-  property real   totalMemory     ;
-  property real   freeMemory      ;
+  property real totalMemory;
+  property real freeMemory;
 
-  property int    cpuUsage        ;
-  property real   cpuTemp         ;
+  property int cpuUsage;
+  property real cpuTemp;
 
   SystemClock { id: clock }
 
@@ -81,6 +78,21 @@ Singleton {
     running: true;
     stdout: SplitParser {
       onRead: data => root.hostname = root.capitalise(data, Globals.conf.menu.capitaliseHostname)
+    }
+  }
+
+  // Gets the display name rather than the actual username
+  // If getting the display name fails, the username is used instead
+  Process {
+    command: ["sh", "-c", `getent passwd "$USER" | cut -d ':' -f 5`];
+    running: true;
+    stdout: SplitParser {
+      onRead: data => {
+        const result = !!data
+          ? data
+          : Quickshell.env("USER");
+        root.username = root.capitalise(result, Globals.conf.menu.capitaliseUsername);
+      }
     }
   }
 
