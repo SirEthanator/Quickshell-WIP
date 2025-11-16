@@ -130,10 +130,11 @@ WlSessionLockSurface {
 
     visible: Utils.Mpris.activePlayer !== null;
 
-    Media {}
+    Shadow { target: media }
+    Media { id: media }
   }
 
-  // Emergency unlock - for debugging
+  // Unlock button for debugging
   // Button {
   //   onClicked: root.beginUnlock();
   //   label: "Unlock"

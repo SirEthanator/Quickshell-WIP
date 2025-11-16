@@ -8,8 +8,6 @@ import Quickshell.Widgets;
 OutlinedRectangle {
   id: root;
 
-  Shadow { target: root }
-
   radius: Globals.vars.br;
   color: Globals.colours.bg;
 
