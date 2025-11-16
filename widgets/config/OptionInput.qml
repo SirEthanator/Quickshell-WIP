@@ -45,7 +45,7 @@ Input {
           root.controller.changeVal(root.page, root.propName, value);
         }
         else
-          root.controller.changeVal(root.page, root.propName, Globals.conf[root.page][root.propName]);
+          root.controller.changeVal(root.page, root.propName, Conf[root.page][root.propName]);
       }
     }
   }

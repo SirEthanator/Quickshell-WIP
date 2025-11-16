@@ -15,7 +15,7 @@ PanelWindow {
   WlrLayershell.layer: WlrLayer.Overlay;
   exclusionMode: ExclusionMode.Normal;
   color: "transparent";
-  implicitWidth: Globals.conf.notifications.width;
+  implicitWidth: Conf.notifications.width;
 
   mask: Region {  // Make clicks pass through unless on notifications
     intersection: Intersection.Combine
@@ -48,10 +48,10 @@ PanelWindow {
         NotifServer.incoming.connect((n) => {
           if (!n.lastGeneration) {
             data.insert(0, {n: n});
-            if (Globals.conf.notifications.sounds) {
+            if (Conf.notifications.sounds) {
               const sound = n.urgency === NotificationUrgency.Critical
-              ? Globals.conf.notifications.criticalSound
-              : Globals.conf.notifications.normalSound;
+              ? Conf.notifications.criticalSound
+              : Conf.notifications.normalSound;
               Utils.Command.run(["sh", "-c", `play ${sound}`]);
             }
           }

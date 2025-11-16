@@ -25,7 +25,7 @@ RowLayout {
       id: pfpImg;
       readonly property url defaultPfpPath: Quickshell.shellPath("assets/profile.png");
 
-      source: Globals.conf.menu.profilePicture || defaultPfpPath;
+      source: Conf.menu.profilePicture || defaultPfpPath;
       anchors.fill: parent;
       fillMode: Image.PreserveAspectCrop;
 

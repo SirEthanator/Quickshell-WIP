@@ -13,8 +13,8 @@ Rectangle {
   radius: Globals.vars.br;
 
   border {
-    color: Globals.conf.menu.moduleOutlines ? Globals.colours.outline : "transparent";
-    width: Globals.conf.menu.moduleOutlines ? Globals.vars.outlineSize : 0;
+    color: Conf.menu.moduleOutlines ? Globals.colours.outline : "transparent";
+    width: Conf.menu.moduleOutlines ? Globals.vars.outlineSize : 0;
     pixelAligned: false;
   }
 

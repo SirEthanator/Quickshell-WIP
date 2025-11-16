@@ -37,7 +37,7 @@ Scope {
 
     PanelWindow {
       id: root;
-      color: Globals.conf.menu.dimBackground ? Globals.vars.bgDimmedColour : "transparent";
+      color: Conf.menu.dimBackground ? Globals.vars.bgDimmedColour : "transparent";
 
       anchors {
         top: true;
@@ -51,13 +51,13 @@ Scope {
       WlrLayershell.keyboardFocus: loader.open ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None;
 
       Anims.ColourAnim on color {
-        running: Globals.conf.menu.dimBackground;
+        running: Conf.menu.dimBackground;
         from: "#00000000"; to: Globals.vars.bgDimmedColour;
         duration: Globals.vars.animLen;
       }
 
       Anims.ColourAnim on color {
-        running: !loader.open && Globals.conf.menu.dimBackground;
+        running: !loader.open && Conf.menu.dimBackground;
         to: "#00000000";
         duration: Globals.vars.animLen;
       }
@@ -77,7 +77,7 @@ Scope {
 
       Item {
         id: wrapper;
-        width: Globals.conf.menu.width + Globals.vars.gapLarge * 2;
+        width: Conf.menu.width + Globals.vars.gapLarge * 2;
         height: parent.height;
         focus: true;
 
@@ -117,7 +117,7 @@ Scope {
           color: Globals.colours.bg;
           radius: Globals.vars.br;
 
-          disableAllOutlines: !Globals.conf.menu.backgroundOutline;
+          disableAllOutlines: !Conf.menu.backgroundOutline;
 
           ColumnLayout {
             id: content;
@@ -133,7 +133,7 @@ Scope {
               id: appSearch;
               Layout.fillWidth: true;
 
-              showBorder: Globals.conf.menu.moduleOutlines;
+              showBorder: Conf.menu.moduleOutlines;
 
               icon: "search-symbolic";
 

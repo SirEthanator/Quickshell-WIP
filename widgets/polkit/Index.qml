@@ -38,7 +38,7 @@ Scope {
         right: true;
       }
 
-      exclusionMode: Globals.conf.polkit.hideApplications ? ExclusionMode.Ignore : ExclusionMode.Normal;
+      exclusionMode: Conf.polkit.hideApplications ? ExclusionMode.Ignore : ExclusionMode.Normal;
       WlrLayershell.layer: WlrLayer.Overlay;
       WlrLayershell.keyboardFocus: loader.open ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None;
 
@@ -57,14 +57,14 @@ Scope {
       Loader {
         id: wallpaperLoader;
         anchors.fill: parent;
-        active: Globals.conf.polkit.hideApplications;
+        active: Conf.polkit.hideApplications;
         source: Quickshell.shellPath("widgets/desktop/Wallpaper.qml");
       }
 
       Rectangle {
         anchors.fill: parent;
         color: Globals.vars.bgDimmedColour;
-        visible: Globals.conf.polkit.dimBackground;
+        visible: Conf.polkit.dimBackground;
       }
 
       ParallelAnimation {
@@ -108,7 +108,7 @@ Scope {
 
       Item {
         id: wrapper;
-        width: Globals.conf.menu.width + Globals.vars.gapLarge * 2;
+        width: Conf.menu.width + Globals.vars.gapLarge * 2;
         height: parent.height;
         focus: true;
 
@@ -135,7 +135,7 @@ Scope {
           color: Globals.colours.bg;
           radius: Globals.vars.br;
 
-          disableAllOutlines: !Globals.conf.polkit.backgroundOutline;
+          disableAllOutlines: !Conf.polkit.backgroundOutline;
         }
 
         Item {

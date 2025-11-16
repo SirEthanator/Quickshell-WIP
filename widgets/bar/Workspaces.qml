@@ -15,7 +15,7 @@ BarModule {
     const step = -Math.sign(event.angleDelta.y);
     const activeIdx = workspaces.find(ws => ws.active === true).idx;
     const target = step + activeIdx;
-    if (target >= 1 && target <= Globals.conf.bar.workspaceCount) {
+    if (target >= 1 && target <= Conf.bar.workspaceCount) {
       Utils.Session.setActiveWorkspace(target)
     }
   }
@@ -30,7 +30,7 @@ BarModule {
 
   // No row layout because it's provided by BarModule
   Repeater {
-    model: Globals.conf.bar.workspaceCount;
+    model: Conf.bar.workspaceCount;
 
     MouseArea {
       id: wsButton;

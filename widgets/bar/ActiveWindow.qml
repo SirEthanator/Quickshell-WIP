@@ -19,8 +19,8 @@ BarModule {
     }
 
     text: {
-      const truncate = root.title.length > Globals.conf.bar.truncationLength;
-      const result = truncate ? `${root.title.substring(0, Globals.conf.bar.truncationLength)}...` : root.title;
+      const truncate = root.title.length > Conf.bar.truncationLength;
+      const result = truncate ? `${root.title.substring(0, Conf.bar.truncationLength)}...` : root.title;
       return result;
     }
 

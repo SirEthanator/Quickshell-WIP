@@ -29,7 +29,7 @@ Item {
     clip: true;
 
     boundsBehavior: dragging ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds;
-    model: Globals.conf[root.controller.currentPage].getProperties();
+    model: Conf[root.controller.currentPage].getProperties();
 
     delegate: Option {
       required property string modelData;

@@ -7,7 +7,7 @@ PanelWindow {
   WlrLayershell.layer: WlrLayer.Background;
   WlrLayershell.namespace: "wallpaper";
   exclusionMode: ExclusionMode.Ignore;
-  color: Globals.conf.desktop.bgColour;
+  color: Conf.desktop.bgColour;
 
   anchors {
     top: true;
@@ -21,11 +21,11 @@ PanelWindow {
   Rectangle {
     id: fadeOverlay;
     anchors.fill: parent;
-    color: Globals.conf.desktop.bgColour;
+    color: Conf.desktop.bgColour;
     SequentialAnimation on opacity {
       NumberAnimation {
         from: 1; to: 0;
-        duration: Globals.conf.desktop.fadeSpeed;
+        duration: Conf.desktop.fadeSpeed;
         easing.type: Easing.OutCubic;
       }
       PropertyAction { target: fadeOverlay; property: "visible"; value: false }

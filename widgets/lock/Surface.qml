@@ -32,7 +32,7 @@ WlSessionLockSurface {
 
   Rectangle {
     anchors.fill: parent;
-    visible: Globals.conf.lock.dimBackground;
+    visible: Conf.lock.dimBackground;
     color: Globals.vars.bgDimmedColour;
   }
 
@@ -41,7 +41,7 @@ WlSessionLockSurface {
     Anims.NumberAnim {
       target: wallpaper;
       property: "opacity";
-      from: Globals.conf.lock.noFade ? 1 : 0;
+      from: Conf.lock.noFade ? 1 : 0;
       to: 1;
       duration: Globals.vars.animLen;
     }
@@ -63,7 +63,7 @@ WlSessionLockSurface {
       target: wallpaper;
       property: "opacity";
       from: 1;
-      to: Globals.conf.lock.noFade ? 1 : 0;
+      to: Conf.lock.noFade ? 1 : 0;
       duration: Globals.vars.animLen;
     }
     Anims.Slide {
@@ -93,7 +93,7 @@ WlSessionLockSurface {
 
       border {
         color: Globals.colours.outline;
-        width: Globals.conf.lock.contentOutline ? Globals.vars.outlineSize : 0;
+        width: Conf.lock.contentOutline ? Globals.vars.outlineSize : 0;
         pixelAligned: false;
       }
 

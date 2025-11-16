@@ -9,7 +9,7 @@ PanelWindow {
   WlrLayershell.layer: WlrLayer.Background;
   WlrLayershell.namespace: "blurred-wallpaper";
   exclusionMode: ExclusionMode.Ignore;
-  color: Globals.conf.desktop.bgColour;
+  color: Conf.desktop.bgColour;
 
   visible: Utils.Session.session === "niri";
 

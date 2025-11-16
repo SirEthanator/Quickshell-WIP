@@ -13,7 +13,7 @@ ColumnLayout {
   spacing: Globals.vars.paddingWindow;
 
   Component.onCompleted: () => {
-    const modules = Globals.conf.menu.dashModules;
+    const modules = Conf.menu.dashModules;
     const allModules = Globals.vars.dashModules;
 
     for (let i=0; i < modules.length; i++) {

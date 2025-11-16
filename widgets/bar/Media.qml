@@ -27,8 +27,8 @@ BarModule {
     readonly property Scope posInfo: Utils.Mpris.posInfo;
 
     text: {
-      const truncate = player.trackTitle.length > Globals.conf.bar.truncationLength;
-      return `${truncate ? player.trackTitle.substring(0,Globals.conf.bar.truncationLength)+'...' : player.trackTitle}${player.positionSupported ? ' - ' + posInfo.posString : ''}`
+      const truncate = player.trackTitle.length > Conf.bar.truncationLength;
+      return `${truncate ? player.trackTitle.substring(0,Conf.bar.truncationLength)+'...' : player.trackTitle}${player.positionSupported ? ' - ' + posInfo.posString : ''}`
     }
   }
 }

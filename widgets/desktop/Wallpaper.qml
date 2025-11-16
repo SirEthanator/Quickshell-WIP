@@ -10,17 +10,17 @@ Item {
   anchors.fill: parent;
   // The default wallpaper must be set here instead of defaultConf.json because it uses an environment variable
   readonly property string defaultWall: {
-    switch (Globals.conf.global.colourScheme) {
+    switch (Conf.global.colourScheme) {
       case "everforest": return "Everforest"
       case "catMocha": return "Catppuccin"
       case "rosePine": return "Rose-Pine"
       default: return "Everforest"
     }
   }
-  readonly property url wallSource: Globals.conf.desktop.wallpaper !== ""
-    ? Globals.conf.desktop.wallpaper
+  readonly property url wallSource: Conf.desktop.wallpaper !== ""
+    ? Conf.desktop.wallpaper
     : `${Quickshell.env("HOME")}/Hyprland-Dots/Wallpapers/${defaultWall}/Accent.png`;
-  readonly property bool showWall: !Globals.conf.desktop.hideWallpaper;
+  readonly property bool showWall: !Conf.desktop.hideWallpaper;
 
   layer.enabled: true;
 
@@ -31,7 +31,7 @@ Item {
   }
 
   Loader {
-    active: Globals.conf.desktop.videoWallpaper && root.showWall;
+    active: Conf.desktop.videoWallpaper && root.showWall;
     sourceComponent: MediaPlayer {
       id: videoPlayer;
       source: root.wallSource;
@@ -43,7 +43,7 @@ Item {
   }
 
   Loader {
-    active: !Globals.conf.desktop.videoWallpaper && root.showWall;
+    active: !Conf.desktop.videoWallpaper && root.showWall;
     anchors.fill: parent;
     sourceComponent: Image {
       id: img;
@@ -55,7 +55,7 @@ Item {
   }
 
   Loader {
-    active: Globals.conf.desktop.shader !== "";
+    active: Conf.desktop.shader !== "";
     anchors.fill: parent;
     sourceComponent: ShaderEffect {
       id: shader;
@@ -71,7 +71,7 @@ Item {
       }
 
       vertexShader: Qt.resolvedUrl("shaders/default.vert.qsb");
-      fragmentShader: Qt.resolvedUrl("shaders/"+Globals.conf.desktop.shader+".frag.qsb");
+      fragmentShader: Qt.resolvedUrl("shaders/"+Conf.desktop.shader+".frag.qsb");
     }
   }
 }

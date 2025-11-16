@@ -15,7 +15,7 @@ OutlinedRectangle {
   property color iconbgColour: Globals.colours.accent;
   property bool forceIconbgColour: false;
   property int padding: Globals.vars.paddingModule;
-  property bool outline: Globals.conf.bar.moduleOutlines;
+  property bool outline: Conf.bar.moduleOutlines;
 
   property alias mouseArea: mouseArea;
   property alias hoverEnabled: mouseArea.hoverEnabled;
@@ -28,11 +28,11 @@ OutlinedRectangle {
   color: root.background;
 
   disableAllOutlines: !outline;
-  topOutline: !(Globals.conf.bar.docked && Globals.conf.bar.floatingModules);
+  topOutline: !(Conf.bar.docked && Conf.bar.floatingModules);
 
   // If the bar is docked but with floating modules, the top corners' border radius is removed
-  topRightRadius: Globals.conf.bar.docked && Globals.conf.bar.floatingModules ? 0 : Globals.vars.br;
-  topLeftRadius: Globals.conf.bar.docked && Globals.conf.bar.floatingModules ? 0 : Globals.vars.br;
+  topRightRadius: Conf.bar.docked && Conf.bar.floatingModules ? 0 : Globals.vars.br;
+  topLeftRadius: Conf.bar.docked && Conf.bar.floatingModules ? 0 : Globals.vars.br;
   bottomLeftRadius: Globals.vars.br;
   bottomRightRadius: Globals.vars.br;
 
@@ -68,7 +68,7 @@ OutlinedRectangle {
       Rectangle {
         id: iconbg;
         visible: !!root.icon || !!root.customIcon;  // Visible if icon is a non-empty string.
-        color: Globals.conf.bar.multiColourModules || root.forceIconbgColour ? root.iconbgColour : Globals.colours.accent;
+        color: Conf.bar.multiColourModules || root.forceIconbgColour ? root.iconbgColour : Globals.colours.accent;
         implicitWidth: Globals.vars.moduleIconSize + root.padding*2;  // This will add padding to both sides of the icon's background.
         Layout.fillHeight: true;
         topLeftRadius: root.content.topLeftRadius;

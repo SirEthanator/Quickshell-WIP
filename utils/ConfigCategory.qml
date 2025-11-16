@@ -1,3 +1,4 @@
+import qs
 import QtCore;
 import QtQuick;
 
@@ -5,10 +6,12 @@ Settings {
   id: root;
 
   required category;
-  location: Globals.confPath;
+  location: Conf.confPath;
 
   function getProperties() {
     const keys = Object.keys(root);
+
+    // TODO: Only get base properties once
 
     // Get properties included in Settings
     const emptySettings = Qt.createQmlObject("import QtCore; Settings {}", root)
@@ -24,10 +27,6 @@ Settings {
     );
 
     return res
-  }
-
-  function getMetadata(property: string): var {
-    return Globals.conf.metadata[category][property]
   }
 }
 

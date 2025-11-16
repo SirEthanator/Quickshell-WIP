@@ -55,7 +55,7 @@ Singleton {
 
   FileView {
     id: brightnessFile;
-    path: Qt.resolvedUrl(`/sys/class/backlight/${Globals.conf.osd.backlightName}/brightness`);
+    path: Qt.resolvedUrl(`/sys/class/backlight/${Conf.osd.backlightName}/brightness`);
     blockLoading: true;
     watchChanges: true;
     onFileChanged: {
@@ -66,7 +66,7 @@ Singleton {
   }
 
   Process {
-    command: ["cat", `/sys/class/backlight/${Globals.conf.osd.backlightName}/max_brightness`]
+    command: ["cat", `/sys/class/backlight/${Conf.osd.backlightName}/max_brightness`]
     running: true;
     stdout: SplitParser {
       onRead: data => root.maxBrightness = data
@@ -77,7 +77,7 @@ Singleton {
     command: ["hostname"]
     running: true;
     stdout: SplitParser {
-      onRead: data => root.hostname = root.capitalise(data, Globals.conf.menu.capitaliseHostname)
+      onRead: data => root.hostname = root.capitalise(data, Conf.menu.capitaliseHostname)
     }
   }
 
@@ -91,7 +91,7 @@ Singleton {
         const result = !!data
           ? data
           : Quickshell.env("USER");
-        root.username = root.capitalise(result, Globals.conf.menu.capitaliseUsername);
+        root.username = root.capitalise(result, Conf.menu.capitaliseUsername);
       }
     }
   }

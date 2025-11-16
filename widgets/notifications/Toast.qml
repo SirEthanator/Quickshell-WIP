@@ -13,8 +13,8 @@ MouseArea {
 
   required property Notification n;
   readonly property real timeout: {
-    const min = n.urgency === NotificationUrgency.Critical ? Globals.conf.notifications.minimumCriticalTimeout : Globals.conf.notifications.minimumTimeout;
-    const def = n.urgency === NotificationUrgency.Critical ? Globals.conf.notifications.defaultCriticalTimeout : Globals.conf.notifications.defaultTimeout;
+    const min = n.urgency === NotificationUrgency.Critical ? Conf.notifications.minimumCriticalTimeout : Conf.notifications.minimumTimeout;
+    const def = n.urgency === NotificationUrgency.Critical ? Conf.notifications.defaultCriticalTimeout : Conf.notifications.defaultTimeout;
     return n.expireTimeout > 0 ? Math.max(n.expireTimeout, min) : def;
   }
   property real timeRemaining: timeout;
@@ -60,7 +60,7 @@ MouseArea {
   }
   onReleased: event => {
     if (event.button !== Qt.LeftButton) return;
-    if (Math.abs(x) < width * (Globals.conf.notifications.dismissThreshold / 100)) {
+    if (Math.abs(x) < width * (Conf.notifications.dismissThreshold / 100)) {
       x = 0;
     } else {
       x = width * (x < 0 ? -1 : 1);

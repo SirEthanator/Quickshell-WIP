@@ -11,8 +11,8 @@ Rectangle {
   required property int index;
   required property int modelLen;
 
-  readonly property var propValue: Globals.conf[page][propName];
-  readonly property var metadata: Globals.conf[page].getMetadata(propName);
+  readonly property var propValue: Conf[page][propName];
+  readonly property var metadata: Conf.metadata[page][propName];
 
   height: content.height + Globals.vars.paddingCard*2;
   width: (!!parent && !!parent.width) ? parent.width : 0;

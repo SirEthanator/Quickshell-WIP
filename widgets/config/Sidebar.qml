@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import qs
 import qs.components
 import QtQuick;
@@ -43,11 +45,11 @@ Rectangle {
 
     Repeater {
       id: itemRepeater;
-      model: Globals.conf.getCategoryKeys();
+      model: Conf.getCategoryKeys();
       delegate: Button {
         required property string modelData;
         required property int index;
-        label: Globals.conf[modelData].category;
+        label: Conf[modelData].category;
 
         active: modelData === root.controller.currentPage;
 

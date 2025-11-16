@@ -30,18 +30,17 @@ ShellRoot {
     target: "config";
 
     function theme(scheme: string): string {
-      return Globals.switchTheme(scheme);
+      return Conf.switchTheme(scheme);
     }
     function colours(scheme: string): string {
-      return Globals.setColours(scheme);
+      return Conf.setColours(scheme);
     }
     function wallpaper(path: string): void {
-      Globals.setWallpaper(path)
+      Conf.setWallpaper(path)
     }
     function get(category: string, key: string): string {
-      const cat = Globals.conf[category]
-      const val = cat[key]
-      if (cat.getMetadata(key).type == 'path') {
+      const val = Conf[category][key];
+      if (Conf.metadata[category][key].type == 'path') {
         return val.replace('file://', '')
       }
       return val;

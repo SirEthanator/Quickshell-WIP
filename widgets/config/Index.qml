@@ -29,7 +29,7 @@ Scope {
     if (typeof changedProperties[category] !== "undefined" && typeof changedProperties[category][prop] !== "undefined") {
       return changedProperties[category][prop]
     } else {
-      return Globals.conf[category][prop]
+      return Conf[category][prop]
     }
   }
 
@@ -37,7 +37,7 @@ Scope {
     if (!changedProperties[category]) changedProperties[category] = {};
     changedProperties[category][prop] = value;
 
-    if (value.toString() === Globals.conf[category][prop].toString()) {
+    if (value.toString() === Conf[category][prop].toString()) {
       delete changedProperties[category][prop];
     }
     changeCount = getChangeCount();
@@ -56,9 +56,9 @@ Scope {
       for (const key in changedProperties) {
         for (const option in changedProperties[key]) {
           const newValue = changedProperties[key][option];
-          const callback = Globals.conf[key].getMetadata(option).callback;
+          const callback = Conf.metadata[key][option].callback;
 
-          Globals.conf[key][option] = newValue;
+          Conf[key][option] = newValue;
 
           if (typeof callback === "function") {
             callback(newValue, getVal)
