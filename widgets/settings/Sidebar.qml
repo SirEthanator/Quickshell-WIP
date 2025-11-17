@@ -15,27 +15,33 @@ Rectangle {
 
   color: Globals.colours.bgLight;
 
-  // Text {
-  //   id: title;
-  //
-  //   text: "Config";  // Placeholder
-  //
-  //   anchors.top: parent.top;
-  //   anchors.left: parent.left;
-  //   anchors.margins: Globals.vars.paddingWindow;
-  //
-  //   font {
-  //     family: Globals.vars.fontFamily;
-  //     pixelSize: Globals.vars.headingFontSize;
-  //   }
-  //   color: Globals.colours.fg;
-  // }
+  Text {
+    id: title;
+
+    text: "Settings";
+
+    anchors {
+      top: parent.top;
+      left: parent.left;
+      margins: Globals.vars.paddingWindow;
+      leftMargin: Globals.vars.paddingWindow + Globals.vars.paddingButton;
+    }
+
+    font {
+      family: Globals.vars.fontFamily;
+      pixelSize: Globals.vars.headingFontSize;
+      variableAxes: {
+        "wght": 650
+      }
+    }
+    color: Globals.colours.fg;
+  }
 
   ColumnLayout {
     id: items;
     anchors {
-      // top: title.bottom;
-      top: root.top;
+      top: title.bottom;
+      // top: root.top;
       left: parent.left;
       right: parent.right;
       bottom: parent.bottom;

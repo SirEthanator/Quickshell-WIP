@@ -11,7 +11,7 @@ import "widgets/polkit" as Polkit;
 import "widgets/desktop" as Desktop;
 import "widgets/osd" as OSD;
 import "widgets/screensaver" as Screensaver;
-import "widgets/config" as Config;
+import "widgets/settings" as Settings;
 import Quickshell.Io;
 import QtQuick;
 
@@ -78,7 +78,7 @@ ShellRoot {
 
   // These can be created in any order as they use
   // lazy loaders - they are created after other windows
-  Config.Index {}
+  Settings.Index {}
   Menu.Index {}
   OSD.Index {}
   Polkit.Index {}

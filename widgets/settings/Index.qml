@@ -89,7 +89,7 @@ Scope {
 
       visible: true;
 
-      title: "Quickshell - Configuration";
+      title: "Quickshell - Settings";
 
       onClosing: e => {
         if (root.changeCount > 0) {
