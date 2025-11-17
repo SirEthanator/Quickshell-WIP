@@ -25,6 +25,9 @@ RowLayout {
       font {
         family: Globals.vars.fontFamily;
         pixelSize: Globals.vars.mediumHeadingFontSize;
+        variableAxes: {
+          "wght": 600
+        }
       }
       color: Globals.colours.fg;
     }
