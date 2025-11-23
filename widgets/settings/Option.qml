@@ -7,15 +7,15 @@ Rectangle {
 
   required property var controller;
   required property string page;
+  required property string section;
   required property var propName;
   required property int index;
   required property int modelLen;
 
-  readonly property var propValue: Conf[page][propName];
-  readonly property var metadata: Conf.metadata[page][propName];
+  readonly property var metadata: Conf.metadata[page][section][propName];
 
-  height: content.height + Globals.vars.paddingCard*2;
-  width: (!!parent && !!parent.width) ? parent.width : 0;
+  implicitHeight: content.height + Globals.vars.paddingCard*2;
+  Layout.fillWidth: true;
 
   color: Globals.colours.bgLight;
   topLeftRadius: index === 0 ? Globals.vars.br : 0; topRightRadius: topLeftRadius;
@@ -78,7 +78,11 @@ Rectangle {
 
         Component.onCompleted: {
           let source = "";
-          let props = { propName: root.propName, page: root.page, controller: root.controller };
+          let props = {
+            page: root.page,
+            propName: root.propName,
+            controller: root.controller
+          }
 
           if (root.metadata.type === "path") {
             source = "PathInput.qml";
@@ -107,7 +111,11 @@ Rectangle {
 
       Component.onCompleted: {
         let source = "";
-        let props = { propName: root.propName, page: root.page, controller: root.controller };
+        let props = {
+          page: root.page,
+          propName: root.propName,
+          controller: root.controller
+        }
         let show = true;
 
         switch (root.metadata.type) {

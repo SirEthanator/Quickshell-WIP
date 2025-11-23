@@ -25,11 +25,14 @@ Scope {
   property var changedProperties: ({});
   property int changeCount: 0;
 
-  function getVal(category, prop) {
-    if (typeof changedProperties[category] !== "undefined" && typeof changedProperties[category][prop] !== "undefined") {
-      return changedProperties[category][prop]
+  function getVal(category: string, opt: string): var {
+    if (
+      typeof changedProperties[category] !== "undefined" &&
+      typeof changedProperties[category][opt] !== "undefined"
+    ) {
+      return changedProperties[category][opt]
     } else {
-      return Conf[category][prop]
+      return Conf[category][opt]
     }
   }
 
@@ -45,20 +48,20 @@ Scope {
 
   function getChangeCount() {
     let result = 0;
-    for (const key in changedProperties) {
-      for (const _ in changedProperties[key]) { result++ }
+    for (const c in changedProperties) {
+      for (const _ in changedProperties[c]) { result++ }
     }
     return result;
   }
 
   function apply() {
     if (changedProperties.length !== 0) {
-      for (const key in changedProperties) {
-        for (const option in changedProperties[key]) {
-          const newValue = changedProperties[key][option];
-          const callback = Conf.metadata[key][option].callback;
+      for (const category in changedProperties) {
+        for (const option in changedProperties[category]) {
+          const newValue = changedProperties[category][option];
+          const callback = Conf.getMetadata(category, option)?.callback;
 
-          Conf[key][option] = newValue;
+          Conf[category][option] = newValue;
 
           if (typeof callback === "function") {
             callback(newValue, getVal)
@@ -84,8 +87,8 @@ Scope {
       id: window;
       color: Globals.colours.bg;
 
-      minimumHeight: 200;
       minimumWidth: 800;
+      minimumHeight: 200;
 
       visible: true;
 

@@ -40,7 +40,7 @@ ShellRoot {
     }
     function get(category: string, key: string): string {
       const val = Conf[category][key];
-      if (Conf.metadata[category][key].type == 'path') {
+      if (Conf.getMetadata(category, key)?.type == 'path') {
         return val.replace('file://', '')
       }
       return val;

@@ -12,8 +12,8 @@ ColumnLayout {
   spacing: Globals.vars.marginCard;
 
   required property var controller;
-  required property string propName;
   required property string page;
+  required property string propName;
   required property var options;
 
   readonly property bool popupOpen: addPopup.visible;
@@ -27,7 +27,6 @@ ColumnLayout {
 
   width: parent.width;
 
-  // property list<string> currentVal: controller.getVal(page, propName);
   property ScriptModel currentVal: ScriptModel {
     values: root.controller.getVal(root.page, root.propName)
 

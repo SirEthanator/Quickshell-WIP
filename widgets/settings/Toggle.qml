@@ -8,6 +8,7 @@ MouseArea {
   required property var controller;
   required property string page;
   required property string propName;
+
   property bool checked: controller.getVal(page, propName)
 
   property color fg: Globals.colours.fg;
