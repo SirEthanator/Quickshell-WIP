@@ -127,9 +127,11 @@ Rectangle {
         allRadius: true;
 
         label: modelData.title;
+        centreLabel: false;
         height: implicitHeight;
         anchors.right: parent.right;
         anchors.left: parent.left;
+
         onClicked: {
           root.currentIndex = index;
           popup.close();

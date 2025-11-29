@@ -76,6 +76,12 @@ Singleton {
       }
     });
 
+    property var wallpaperTypes: {
+      "static": { title: "Static" },
+      "video": { title: "Video" },
+      "hidden": { title: "Hidden" }
+    }
+
     property int gap: Utils.Session.gap;  // Size of Hyprland/niri gap
     property int gapLarge: vars.gap + 8;
 

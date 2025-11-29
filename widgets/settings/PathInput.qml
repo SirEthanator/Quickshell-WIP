@@ -7,15 +7,16 @@ OptionInput {
 
   width: parent.width;
 
+  property var metadata;
   property list<string> dialogNameFilters: [];
 
   function showDialog() {
-    const isVideo = root.controller.getVal("desktop", "videoWallpaper");
-    if (isVideo) {
-      dialogNameFilters = ["Video files (*.mp4)"];
-    } else {
-      dialogNameFilters = ["Image files (*.png *.jpg *.jpeg *.svg)"];
+    if (typeof root.metadata.getFileTypes !== "function") {
+      root.dialogNameFilters = ["All files (*)"];
+      return
     }
+
+    dialogNameFilters = root.metadata.getFileTypes(root.controller.getVal);
     dialog.open();
   }
 

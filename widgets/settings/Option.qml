@@ -86,7 +86,10 @@ Rectangle {
 
           if (root.metadata.type === "path") {
             source = "PathInput.qml";
-            props = Object.assign(props, { allowEmpty: root.metadata.allowEmpty ?? false })
+            props = Object.assign(props, {
+              allowEmpty: root.metadata.allowEmpty ?? false,
+              metadata: root.metadata
+            })
           } else if (root.metadata.type.match(/^list<[A-z]*>$/g)) {
             source = "ListInput.qml";
             props = Object.assign(props, { options: root.metadata.options });

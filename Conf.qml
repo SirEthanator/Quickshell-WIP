@@ -163,6 +163,20 @@ Singleton {
           "title": "Wallpaper",
           "description": "Defines the path to the wallpaper to show. Set to an empty string to use the default.",
           "type": "path",
+          "getFileTypes": (getVal) => {
+            let result;
+
+            switch (getVal("desktop", "wallpaperType")) {
+              case "video":
+                result = ["Video files (*.mp4)"];
+              break;
+              default:
+                result = ["Image files (*.png *.jpg *.jpeg *.svg)"];
+              break;
+            }
+
+            return result;
+          },
           "allowEmpty": true,
           "callback": (val, getVal) => {
             if (getVal("global", "colourScheme") === "material") {
@@ -170,10 +184,11 @@ Singleton {
             }
           }
         },
-        "videoWallpaper": {
-          "title": "Video Wallpaper",
-          "description": "Defines whether the wallpaper specified in the 'wallpaper' option is a video.",
-          "type": "bool"
+        "wallpaperType": {
+          "title": "Wallpaper Type",
+          "description": "Defines what type of wallpaper should be used.",
+          "type": "string",
+          "options": Globals.vars.wallpaperTypes
         },
         "fadeSpeed": {
           "title": "Fade Duration",
@@ -186,11 +201,6 @@ Singleton {
           "title": "Shader",
           "description": "Defines the path to the shader to show. This is displayed on top of the wallpaper. Set to an empty string to disable.",
           "type": "string"
-        },
-        "hideWallpaper": {
-          "title": "Hide Wallpaper",
-          "description": "Defines whether the wallpaper should be hidden.",
-          "type": "bool"
         },
         "bgColour": {
           "title": "Background Colour",
@@ -368,10 +378,9 @@ Singleton {
     category: "Desktop";
 
     property string wallpaper: "";
-    property bool videoWallpaper: false;
+    property string wallpaperType: "static";
     property int fadeSpeed: 2000;
     property string shader: "";
-    property bool hideWallpaper: false;
     property color bgColour: "black";
   }
 
@@ -443,9 +452,8 @@ Singleton {
   }
 
   function switchTheme(scheme: string): string {
-    const validationResult = Validate.validateObjKey(scheme, Globals.schemes, "Failed to set colour scheme");
-    if (validationResult) return validationResult;
-    setColours(scheme);
+    const validationResult = setColours(scheme);
+    if (!!validationResult) return validationResult
     setTheme.scheme = scheme;
     setTheme.startDetached();
     return "";

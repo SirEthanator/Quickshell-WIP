@@ -20,7 +20,6 @@ Item {
   readonly property url wallSource: Conf.desktop.wallpaper !== ""
     ? Conf.desktop.wallpaper
     : `${Quickshell.env("HOME")}/Hyprland-Dots/Wallpapers/${defaultWall}/Accent.png`;
-  readonly property bool showWall: !Conf.desktop.hideWallpaper;
 
   layer.enabled: true;
 
@@ -31,7 +30,7 @@ Item {
   }
 
   Loader {
-    active: Conf.desktop.videoWallpaper && root.showWall;
+    active: Conf.desktop.wallpaperType === "video";
     sourceComponent: MediaPlayer {
       id: videoPlayer;
       source: root.wallSource;
@@ -43,7 +42,7 @@ Item {
   }
 
   Loader {
-    active: !Conf.desktop.videoWallpaper && root.showWall;
+    active: Conf.desktop.wallpaperType === "static";
     anchors.fill: parent;
     sourceComponent: Image {
       id: img;
