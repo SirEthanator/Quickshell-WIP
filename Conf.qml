@@ -186,7 +186,7 @@ Singleton {
         },
         "backdropWallpaper": {
           "title": "Backdrop Wallpaper",
-          "description": "Defines whether a second wallpaper component with blur should be shown. This is intended for placing in niri's workspace overview. If it is not, it may show on top of the normal wallpaper. It is recommended to disable this if you are not using it. It may have a negative performance impact, especially with video wallpapers.",
+          "description": "Defines whether a second wallpaper component with blur should be shown. This is intended for placing in niri's workspace overview. If it is not, it may show on top of the normal wallpaper. It is recommended to disable this if you are not using it. It may have a negative performance impact, especially with video wallpapers. It has the namespace 'backdrop-wallpaper'",
           "type": "bool"
         },
         "wallpaperType": {

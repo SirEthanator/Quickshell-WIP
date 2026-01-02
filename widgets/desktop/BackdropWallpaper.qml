@@ -13,7 +13,7 @@ LazyLoader {
 
   PanelWindow {
     WlrLayershell.layer: WlrLayer.Background;
-    WlrLayershell.namespace: "blurred-wallpaper";
+    WlrLayershell.namespace: "backdrop-wallpaper";
     exclusionMode: ExclusionMode.Ignore;
     color: Conf.desktop.bgColour;
 

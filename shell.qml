@@ -58,7 +58,7 @@ ShellRoot {
       required property var modelData;
 
       Bar.Index { screen: scope.modelData }
-      Desktop.BlurredWallpaper { screen: scope.modelData }
+      Desktop.BackdropWallpaper { screen: scope.modelData }
       Desktop.Index { screen: scope.modelData }
       // Due to some issues with binding to Globals from screensaver and theme overlay, some properties are passed in here.
       Lock.Index {}
