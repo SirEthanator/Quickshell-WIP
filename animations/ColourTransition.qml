@@ -1,9 +1,9 @@
-import qs
+import qs.singletons
 import QtQuick;
 
 Behavior {
   id: root;
-  property int duration: Globals.vars.transitionLen;
+  property int duration: Consts.transitionLen;
   ColorAnimation { duration: root.duration; easing.type: Easing.OutCubic }
 }
 

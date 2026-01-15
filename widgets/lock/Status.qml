@@ -1,5 +1,4 @@
-import qs
-import qs.utils as Utils;  // Not unused, ignore qmlls
+import qs.singletons
 import QtQuick;
 import QtQuick.Layouts;
 
@@ -9,7 +8,7 @@ ColumnLayout {
   anchors.bottom: parent.bottom;
   anchors.horizontalCenter: parent.horizontalCenter;
 
-  spacing: Globals.vars.marginCard;
+  spacing: Consts.marginCard;
 
   Text {
     Layout.alignment: Qt.AlignHCenter;
@@ -17,8 +16,8 @@ ColumnLayout {
     text: root.pam.message;
     visible: !!text && text !== "Password: ";
     font {
-      family: Globals.vars.fontFamily;
-      pixelSize: Globals.vars.mainFontSize;
+      family: Consts.fontFamily;
+      pixelSize: Consts.mainFontSize;
     }
     color: Globals.colours.grey;
     maximumLineCount: 1;
@@ -34,12 +33,12 @@ ColumnLayout {
         case "failed": return "Incorrect password.";
         case "error": return "Error authenticating.";
         case "maxTries": return "Maximum attempts reached."
-        default: return `Logged in as: ${Utils.SysInfo.username}`
+        default: return `Logged in as: ${SysInfo.username}`
       }
     }
     font {
-      family: Globals.vars.fontFamily;
-      pixelSize: Globals.vars.mainFontSize;
+      family: Consts.fontFamily;
+      pixelSize: Consts.mainFontSize;
     }
     color: root.pam.state === "failed" || root.pam.state === "error"
       ? Globals.colours.warning

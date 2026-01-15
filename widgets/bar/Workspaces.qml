@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import qs
+import qs.singletons
 import qs.utils as Utils;
 import qs.animations as Anims;
 import QtQuick;
@@ -57,16 +57,16 @@ BarModule {
             : "inactive";
 
         radius: wsButtonRect.implicitHeight / 2;  // Round caps
-        implicitWidth: Globals.vars.wsSize;
-        implicitHeight: Globals.vars.wsSize;
+        implicitWidth: Consts.wsSize;
+        implicitHeight: Consts.wsSize;
 
         states: [
           State {
             name: "focused";
             PropertyChanges { wsButtonRect {
               color: Globals.colours.accent;
-              implicitWidth: Globals.vars.wsSize * 5;
-              implicitHeight: Globals.vars.wsSize + 3;
+              implicitWidth: Consts.wsSize * 5;
+              implicitHeight: Consts.wsSize + 3;
           }}},
 
           State {

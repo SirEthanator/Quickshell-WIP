@@ -1,6 +1,4 @@
-import qs
-import qs.utils
-import qs.components
+import qs.singletons
 import "..";
 import QtQuick;
 import QtQuick.Layouts;
@@ -12,7 +10,7 @@ DashItem {
   ColumnLayout {
     id: column;
 
-    spacing: Globals.vars.paddingCard;
+    spacing: Consts.paddingCard;
 
     SysStatMonitor {
       percentage: SysInfo.cpuUsage;

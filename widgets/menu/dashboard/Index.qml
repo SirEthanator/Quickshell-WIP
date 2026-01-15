@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import QtQuick;
 import QtQuick.Layouts;
 
@@ -10,11 +10,11 @@ import "userinfo";
 
 ColumnLayout {
   id: root;
-  spacing: Globals.vars.paddingWindow;
+  spacing: Consts.paddingWindow;
 
   Component.onCompleted: () => {
     const modules = Conf.menu.dashModules;
-    const allModules = Globals.vars.dashModules;
+    const allModules = Consts.dashModules;
 
     for (let i=0; i < modules.length; i++) {
       const url = Qt.resolvedUrl(`./${allModules[modules[i]].url}`);

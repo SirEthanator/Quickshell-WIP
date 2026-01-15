@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import qs
+import qs.singletons
 import QtQuick;
 import QtQuick.Layouts;
 
@@ -19,13 +19,13 @@ Item {
     anchors {
       top: parent.top;
       bottom: parent.bottom;
-      margins: Globals.vars.paddingWindow;
+      margins: Consts.paddingWindow;
       horizontalCenter: parent.horizontalCenter;
     }
 
-    width: Math.min(root.maxWidth, root.width - Globals.vars.paddingWindow * 2);
+    width: Math.min(root.maxWidth, root.width - Consts.paddingWindow * 2);
 
-    spacing: Globals.vars.paddingWindow;
+    spacing: Consts.paddingWindow;
     clip: true;
 
     boundsBehavior: dragging ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds;
@@ -35,15 +35,15 @@ Item {
       id: sectionColumn;
       required property string modelData;
 
-      spacing: Globals.vars.spacingButtonGroup;
+      spacing: Consts.spacingButtonGroup;
 
       width: parent.width;
 
       Text {
         text: sectionColumn.modelData;
         font {
-          family: Globals.vars.fontFamily;
-          pixelSize: Globals.vars.mediumHeadingFontSize;
+          family: Consts.fontFamily;
+          pixelSize: Consts.mediumHeadingFontSize;
           variableAxes: {
             "wght": 550
           }
@@ -51,7 +51,7 @@ Item {
         color: Globals.colours.fg;
       }
 
-      Item { implicitHeight: Globals.vars.marginCardSmall - sectionColumn.spacing }
+      Item { implicitHeight: Consts.marginCardSmall - sectionColumn.spacing }
 
       Repeater {
         id: sectionItems;

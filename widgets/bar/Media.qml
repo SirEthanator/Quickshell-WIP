@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import qs
+import qs.singletons
 import qs.utils as Utils
 import QtQuick;
 import Quickshell;
@@ -19,8 +19,8 @@ BarModule {
   Text {
     color: Globals.colours.fg;
     font {
-      family: Globals.vars.fontFamily;
-      pixelSize: Globals.vars.mainFontSize;
+      family: Consts.fontFamily;
+      pixelSize: Consts.mainFontSize;
     }
 
     readonly property alias player: root.activePlayer;

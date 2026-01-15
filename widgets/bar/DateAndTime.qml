@@ -1,5 +1,4 @@
-import qs
-import qs.utils as Utils;
+import qs.singletons
 import QtQuick;
 
 BarModule {
@@ -10,10 +9,10 @@ BarModule {
     id: clockText
     color: Globals.colours.fg;
     font {
-      family: Globals.vars.fontFamily;
-      pixelSize: Globals.vars.mainFontSize;
+      family: Consts.fontFamily;
+      pixelSize: Consts.mainFontSize;
     }
 
-    text: Utils.SysInfo.dateAndTime;
+    text: SysInfo.dateAndTime;
   }
 }

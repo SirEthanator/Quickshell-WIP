@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import qs
+import qs.singletons
 import QtQuick;
 import QtQuick.Layouts;
 
@@ -8,14 +8,14 @@ RowLayout {
   id: root
   required property var window;
   required property var screen;
-  readonly property var allModules: Globals.vars.barModules;
+  readonly property var allModules: Consts.barModules;
   required property var modules;
 
   anchors {
     bottom: parent.bottom
     top: parent.top
   }
-  spacing: Globals.vars.marginModule;
+  spacing: Consts.marginModule;
 
   Repeater {
     model: root.modules;

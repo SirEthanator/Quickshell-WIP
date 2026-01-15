@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import qs.components
 import qs.animations as Anims;
 import QtQuick;
@@ -14,7 +14,7 @@ OutlinedRectangle {
   property color iconColour: background;
   property color iconbgColour: Globals.colours.accent;
   property bool forceIconbgColour: false;
-  property int padding: Globals.vars.paddingModule;
+  property int padding: Consts.paddingModule;
   property bool outline: Conf.bar.moduleOutlines;
 
   property alias mouseArea: mouseArea;
@@ -31,10 +31,10 @@ OutlinedRectangle {
   topOutline: !(Conf.bar.docked && Conf.bar.floatingModules);
 
   // If the bar is docked but with floating modules, the top corners' border radius is removed
-  topRightRadius: Conf.bar.docked && Conf.bar.floatingModules ? 0 : Globals.vars.br;
-  topLeftRadius: Conf.bar.docked && Conf.bar.floatingModules ? 0 : Globals.vars.br;
-  bottomLeftRadius: Globals.vars.br;
-  bottomRightRadius: Globals.vars.br;
+  topRightRadius: Conf.bar.docked && Conf.bar.floatingModules ? 0 : Consts.br;
+  topLeftRadius: Conf.bar.docked && Conf.bar.floatingModules ? 0 : Consts.br;
+  bottomLeftRadius: Consts.br;
+  bottomRightRadius: Consts.br;
 
   // Fills the height of the RowLayout which it's inside of. The RowLayout has a margin so this won't stretch to the bar's full height.
   Layout.fillHeight: true;
@@ -69,7 +69,7 @@ OutlinedRectangle {
         id: iconbg;
         visible: !!root.icon || !!root.customIcon;  // Visible if icon is a non-empty string.
         color: Conf.bar.multiColourModules || root.forceIconbgColour ? root.iconbgColour : Globals.colours.accent;
-        implicitWidth: Globals.vars.moduleIconSize + root.padding*2;  // This will add padding to both sides of the icon's background.
+        implicitWidth: Consts.moduleIconSize + root.padding*2;  // This will add padding to both sides of the icon's background.
         Layout.fillHeight: true;
         topLeftRadius: root.content.topLeftRadius;
         bottomLeftRadius: root.content.bottomLeftRadius;
@@ -79,7 +79,7 @@ OutlinedRectangle {
           sourceComponent: root.customIcon;
           active: root.customIcon;
           anchors.centerIn: parent;
-          width: Globals.vars.moduleIconSize;
+          width: Consts.moduleIconSize;
           height: width;
         }
 
@@ -90,7 +90,7 @@ OutlinedRectangle {
 
           icon: root.icon;
           color: root.iconColour;
-          size: Globals.vars.moduleIconSize;
+          size: Consts.moduleIconSize;
         }
       }
     }

@@ -1,16 +1,16 @@
-import qs
+import qs.singletons
 import QtQuick;
 
 Rectangle {
   id: root;
 
-  topLeftRadius: Globals.vars.br;
-  topRightRadius: Globals.vars.br;
-  bottomLeftRadius: Globals.vars.br;
-  bottomRightRadius: Globals.vars.br;
+  topLeftRadius: Consts.br;
+  topRightRadius: Consts.br;
+  bottomLeftRadius: Consts.br;
+  bottomRightRadius: Consts.br;
   property bool setParentRadius: false;
 
-  property int borderWidth: Globals.vars.outlineSize;
+  property int borderWidth: Consts.outlineSize;
   property bool leftBorder: true;
   property bool rightBorder: true;
   property bool topBorder: true;

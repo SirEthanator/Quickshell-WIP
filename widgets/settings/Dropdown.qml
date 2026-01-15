@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import qs
+import qs.singletons
 import qs.components
 import qs.animations as Anims;
 import QtQuick;
@@ -15,7 +15,7 @@ Rectangle {
   property int currentIndex: Object.keys(options).indexOf(controller.getVal(page, propName));
   property string displayText: model[currentIndex].title;
 
-  property int padding: Globals.vars.paddingButton;
+  property int padding: Consts.paddingButton;
 
   readonly property bool popupOpen: popup.visible;
 
@@ -36,7 +36,7 @@ Rectangle {
 
   Border {
     bottomBorder: !popup.visible;
-    bottomLeftRadius: !popup.visible ? Globals.vars.br : 0; bottomRightRadius: bottomLeftRadius;
+    bottomLeftRadius: !popup.visible ? Consts.br : 0; bottomRightRadius: bottomLeftRadius;
     setParentRadius: true;
   }
 
@@ -51,8 +51,8 @@ Rectangle {
     id: text;
     text: root.displayText;
     font {
-      family: Globals.vars.fontFamily;
-      pixelSize: Globals.vars.mainFontSize;
+      family: Consts.fontFamily;
+      pixelSize: Consts.mainFontSize;
     }
     color: Globals.colours.fg;
     anchors.verticalCenter: parent.verticalCenter;

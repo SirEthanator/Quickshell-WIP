@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import QtQuick;
 import QtQuick.Layouts;
 
@@ -14,12 +14,12 @@ Rectangle {
 
   readonly property var metadata: Conf.metadata[page][section][propName];
 
-  implicitHeight: content.height + Globals.vars.paddingCard*2;
+  implicitHeight: content.height + Consts.paddingCard*2;
   Layout.fillWidth: true;
 
   color: Globals.colours.bgLight;
-  topLeftRadius: index === 0 ? Globals.vars.br : 0; topRightRadius: topLeftRadius;
-  bottomLeftRadius: index === modelLen-1 ? Globals.vars.br : 0; bottomRightRadius: bottomLeftRadius;
+  topLeftRadius: index === 0 ? Consts.br : 0; topRightRadius: topLeftRadius;
+  bottomLeftRadius: index === modelLen-1 ? Consts.br : 0; bottomRightRadius: bottomLeftRadius;
 
   // If this option is displaying a popup, we want to make sure that popup is fully visible
   // To do this, we set this option's z index to one higher than the rest of the options,
@@ -33,21 +33,21 @@ Rectangle {
     anchors.top: parent.top;
     anchors.left: parent.left;
     anchors.right: parent.right;
-    anchors.margins: Globals.vars.paddingCard;
+    anchors.margins: Consts.paddingCard;
 
-    spacing: longValueLoader.active ? 0 : Globals.vars.paddingCard;
+    spacing: longValueLoader.active ? 0 : Consts.paddingCard;
 
     ColumnLayout {
       Layout.maximumWidth: content.width - valueLoader.width - content.spacing;
-      spacing: Globals.vars.marginCard;
+      spacing: Consts.marginCard;
 
       ColumnLayout {
-        spacing: Globals.vars.marginCardSmall;
+        spacing: Consts.marginCardSmall;
         Text {
           text: root.metadata.title;
           font {
-            family: Globals.vars.fontFamily;
-            pixelSize: Globals.vars.smallHeadingFontSize;
+            family: Consts.fontFamily;
+            pixelSize: Consts.smallHeadingFontSize;
           }
           color: Globals.colours.fg;
 
@@ -58,8 +58,8 @@ Rectangle {
         Text {
           text: root.metadata.description;
           font {
-            family: Globals.vars.fontFamily;
-            pixelSize: Globals.vars.mainFontSize;
+            family: Consts.fontFamily;
+            pixelSize: Consts.mainFontSize;
           }
           color: Globals.colours.grey;
 

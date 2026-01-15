@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import qs
+import qs.singletons
 import qs.animations as Anims;
 import qs.components
 import qs.utils as Utils;
@@ -14,9 +14,9 @@ LazyLoader {
   activeAsync: false;
   property bool open: false;
 
-  readonly property int  volume:     Utils.SysInfo.volume;
-  readonly property bool mute:       Utils.SysInfo.audioNode.audio.muted;
-  readonly property int  brightness: Utils.SysInfo.brightness;
+  readonly property int  volume:     SysInfo.volume;
+  readonly property bool mute:       SysInfo.audioNode.audio.muted;
+  readonly property int  brightness: SysInfo.brightness;
 
   property var autocloseTimer;
   function show(value, icon) {
@@ -30,15 +30,15 @@ LazyLoader {
     }
   }
 
-  onVolumeChanged: show(volume, Utils.SysInfo.volumeIcon);
-  onMuteChanged: show(volume, Utils.SysInfo.volumeIcon);
-  onBrightnessChanged: show(brightness, Utils.SysInfo.brightnessIcon);
+  onVolumeChanged: show(volume, SysInfo.volumeIcon);
+  onMuteChanged: show(volume, SysInfo.volumeIcon);
+  onBrightnessChanged: show(brightness, SysInfo.brightnessIcon);
 
   property var unloadTimer;
   readonly property bool unloading: !!unloadTimer;
   onOpenChanged: {
     if (!open) {
-      unloadTimer = Utils.Timeout.setTimeout(() => activeAsync = false, Globals.vars.animLen);
+      unloadTimer = Utils.Timeout.setTimeout(() => activeAsync = false, Consts.animLen);
     } else {
       loader.activeAsync = true;
     }
@@ -58,7 +58,7 @@ LazyLoader {
       right: true;
     }
 
-    implicitWidth: content.width + Globals.vars.gapLarge;
+    implicitWidth: content.width + Consts.gapLarge;
     implicitHeight: content.height;
 
     Anims.Slide {
@@ -80,7 +80,7 @@ LazyLoader {
 
     ColumnLayout {
       id: content;
-      spacing: Globals.vars.gap;
+      spacing: Consts.gap;
 
       OutlinedRectangle {
         id: progressWrapper;
@@ -104,8 +104,8 @@ LazyLoader {
       OutlinedRectangle {
         color: Globals.colours.bg;
         Layout.fillWidth: true;
-        implicitHeight: percentageText.height + Globals.vars.paddingButton * 2 + outlineSize * 2;
-        radius: Globals.vars.br;
+        implicitHeight: percentageText.height + Consts.paddingButton * 2 + outlineSize * 2;
+        radius: Consts.br;
 
         Text {
           id: percentageText;
@@ -113,8 +113,8 @@ LazyLoader {
           text: `${loader.currentValue}%`;
           color: Globals.colours.fg;
           font {
-            family: Globals.vars.fontFamily;
-            pixelSize: Globals.vars.mainFontSize
+            family: Consts.fontFamily;
+            pixelSize: Consts.mainFontSize
           }
         }
       }

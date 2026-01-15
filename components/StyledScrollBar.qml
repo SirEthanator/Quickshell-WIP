@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import qs.animations as Anims;
 import QtQuick;
 import QtQuick.Controls;

@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import QtQuick;
 import QtQuick.Layouts;
 
@@ -7,19 +7,19 @@ Rectangle {
   default property alias data: content.data;
   property bool fullContentWidth: false;
   property bool padding: true;
-  property int spacing: Globals.vars.paddingCard;
+  property int spacing: Consts.paddingCard;
 
   color: Globals.colours.bgLight;
-  radius: Globals.vars.br;
+  radius: Consts.br;
 
   border {
     color: Conf.menu.moduleOutlines ? Globals.colours.outline : "transparent";
-    width: Conf.menu.moduleOutlines ? Globals.vars.outlineSize : 0;
+    width: Conf.menu.moduleOutlines ? Consts.outlineSize : 0;
     pixelAligned: false;
   }
 
   Layout.fillWidth: true;
-  implicitHeight: content.implicitHeight + (padding ? Globals.vars.paddingCard*2 : 0);
+  implicitHeight: content.implicitHeight + (padding ? Consts.paddingCard*2 : 0);
 
   signal clicked(event: MouseEvent);
   property alias mouseArea: mouseArea;
@@ -41,7 +41,7 @@ Rectangle {
         bottom: parent.bottom;
         left: parent.left;
         right: root.fullContentWidth ? parent.right : undefined;
-        margins: root.padding ? Globals.vars.paddingCard : 0;
+        margins: root.padding ? Consts.paddingCard : 0;
       }
       spacing: root.spacing;
     }

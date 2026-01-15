@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import qs.components
 import QtQuick;
 import QtQuick.Layouts;
@@ -8,7 +8,7 @@ RowLayout {
   required property real percentage;
   required property string title;
   property string extraInfo;
-  spacing: Globals.vars.paddingCard;
+  spacing: Consts.paddingCard;
 
   CircularProgress {
     implicitHeight: 80;
@@ -18,13 +18,13 @@ RowLayout {
   }
 
   ColumnLayout {
-    spacing: Globals.vars.marginCardSmall;
+    spacing: Consts.marginCardSmall;
 
     Text {
       text: root.title;
       font {
-        family: Globals.vars.fontFamily;
-        pixelSize: Globals.vars.mediumHeadingFontSize;
+        family: Consts.fontFamily;
+        pixelSize: Consts.mediumHeadingFontSize;
         variableAxes: {
           "wght": 600
         }
@@ -36,8 +36,8 @@ RowLayout {
       text: root.extraInfo;
       visible: !!root.extraInfo;
       font {
-        family: Globals.vars.fontFamily;
-        pixelSize: Globals.vars.mainFontSize;
+        family: Consts.fontFamily;
+        pixelSize: Consts.mainFontSize;
       }
       color: Globals.colours.grey;
     }

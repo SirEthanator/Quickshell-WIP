@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import qs.animations as Anims;
 import QtQuick;
 import QtQuick.Layouts;
@@ -20,7 +20,7 @@ MouseArea {
   property color bgPress: Globals.colours.accent;
   property bool invertTextOnPress: true;
 
-  property int radiusValue: Globals.vars.br;
+  property int radiusValue: Consts.br;
   property bool allRadius: false;
   property bool tlRadius: false;
   property bool trRadius: false;
@@ -32,7 +32,7 @@ MouseArea {
   property bool changeBlRadiusHover: true;
   property bool changeBrRadiusHover: true;
 
-  property int padding: Globals.vars.paddingButton;
+  property int padding: Consts.paddingButton;
 
   property bool disabled: false;
 
@@ -57,7 +57,7 @@ MouseArea {
     bottomLeftRadius: root.blRadius || root.allRadius || root.containsMouse && root.changeBlRadiusHover ? root.radiusValue : 0;
     bottomRightRadius: root.brRadius || root.allRadius || root.containsMouse && root.changeBrRadiusHover ? root.radiusValue : 0;
 
-    opacity: root.disabled ? Globals.vars.disabledOpacity : 1;
+    opacity: root.disabled ? Consts.disabledOpacity : 1;
 
     Anims.NumberTransition on topLeftRadius {}
     Anims.NumberTransition on topRightRadius {}
@@ -99,8 +99,8 @@ MouseArea {
         color: (root.containsPress || root.active) && root.invertTextOnPress ? root.bg : root.labelColour;
         Anims.ColourTransition on color {}
         font {
-          family: Globals.vars.fontFamily;
-          pixelSize: !!root.fontSize ? root.fontSize : Globals.vars.mainFontSize;
+          family: Consts.fontFamily;
+          pixelSize: !!root.fontSize ? root.fontSize : Consts.mainFontSize;
         }
       }
     }

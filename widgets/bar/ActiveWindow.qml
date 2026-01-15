@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import qs.animations as Anims;
 import Quickshell.Wayland;
 import QtQuick;
@@ -14,8 +14,8 @@ BarModule {
   Text {
     color: Globals.colours.fg;
     font {
-      family: Globals.vars.fontFamily;
-      pixelSize: Globals.vars.mainFontSize;
+      family: Consts.fontFamily;
+      pixelSize: Consts.mainFontSize;
     }
 
     text: {

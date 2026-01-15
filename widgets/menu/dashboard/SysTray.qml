@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import qs.components
 import Quickshell.Services.SystemTray;
 import QtQuick;
@@ -11,8 +11,8 @@ DashItem {
 
   GridLayout {
     id: trayButtons;
-    rowSpacing: Globals.vars.marginCard;
-    columnSpacing: Globals.vars.marginCard;
+    rowSpacing: Consts.marginCard;
+    columnSpacing: Consts.marginCard;
 
     TrayItems {
       onActivated: Globals.states.menuOpen = false;

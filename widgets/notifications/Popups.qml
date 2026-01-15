@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import qs
+import qs.singletons
 import qs.animations as Anims;
 import qs.utils as Utils;
 import Quickshell;
@@ -30,15 +30,15 @@ PanelWindow {
   }
 
   margins {
-    top: Globals.vars.gapLarge;
-    right: Globals.vars.gapLarge;
-    bottom: Globals.vars.gapLarge;
+    top: Consts.gapLarge;
+    right: Consts.gapLarge;
+    bottom: Consts.gapLarge;
   }
 
   ListView {
     id: popups
     anchors.fill: parent;
-    spacing: Globals.vars.notifPopupSpacing;
+    spacing: Consts.notifPopupSpacing;
 
     interactive: false;
 
@@ -67,13 +67,13 @@ PanelWindow {
     }
 
     displaced: Transition {
-      Anims.NumberAnim { property: "y"; duration: Globals.vars.animLen }
+      Anims.NumberAnim { property: "y"; duration: Consts.animLen }
     }
     add: Transition {
       Anims.NumberAnim {
         property: "x";
         from: popups.width;
-        duration: Globals.vars.animLen;
+        duration: Consts.animLen;
         easing.type: Easing.OutExpo;
       }
     }
@@ -81,7 +81,7 @@ PanelWindow {
       Anims.NumberAnim {
         property: "x";
         to: popups.width;
-        duration: Globals.vars.animLen;
+        duration: Consts.animLen;
         easing.type: Easing.InExpo;
       }
     }

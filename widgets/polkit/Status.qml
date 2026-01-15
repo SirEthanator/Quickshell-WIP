@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import QtQuick;
 import QtQuick.Layouts;
 
@@ -7,7 +7,7 @@ ColumnLayout {
   anchors.bottom: parent.bottom;
   anchors.horizontalCenter: parent.horizontalCenter;
 
-  spacing: Globals.vars.marginCard;
+  spacing: Consts.marginCard;
 
   Text {
     Layout.alignment: Qt.AlignHCenter;
@@ -17,8 +17,8 @@ ColumnLayout {
     visible: !!text;
 
     font {
-      family: Globals.vars.fontFamily;
-      pixelSize: Globals.vars.mainFontSize;
+      family: Consts.fontFamily;
+      pixelSize: Consts.mainFontSize;
     }
 
     color: Polkit.flow.supplementaryIsError ? Globals.colours.red : Globals.colours.grey;
@@ -43,8 +43,8 @@ ColumnLayout {
     }
 
     font {
-      family: Globals.vars.fontFamily;
-      pixelSize: Globals.vars.mainFontSize;
+      family: Consts.fontFamily;
+      pixelSize: Consts.mainFontSize;
     }
 
     color: Polkit.flow.failed ? Globals.colours.red : Globals.colours.grey;

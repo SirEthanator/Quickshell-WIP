@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import qs
+import qs.singletons
 import qs.utils as Utils
 import qs.animations as Anims
 import Quickshell.Services.UPower;
@@ -159,8 +159,8 @@ BarModule {
     text: `${root.percentage}%`;
     color: Globals.colours.fg;
     font {
-      family: Globals.vars.fontFamily;
-      pixelSize: Globals.vars.mainFontSize;
+      family: Consts.fontFamily;
+      pixelSize: Consts.mainFontSize;
     }
   }
 }

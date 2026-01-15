@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import qs
+import qs.singletons
 import Quickshell;  // Despite what qmlls says, this is not unused. Do not remove.
 import QtQuick;
 import QtMultimedia;
@@ -42,7 +42,7 @@ Item {
   }
 
   Loader {
-    active: Conf.desktop.wallpaperType === "static";
+    active: Conf.desktop.wallpaperType === "regular";
     anchors.fill: parent;
     sourceComponent: Image {
       id: img;

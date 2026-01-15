@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import qs.animations as Anims;
 import Quickshell.Widgets;
 import QtQuick;

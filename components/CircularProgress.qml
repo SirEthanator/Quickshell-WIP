@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import qs.animations as Anims;
 import QtQuick;
 
@@ -17,7 +17,7 @@ Item {
   onFgChanged: canvas.requestPaint();
   onThicknessChanged: canvas.requestPaint();
 
-  property int fontSize: Globals.vars.mainFontSize;
+  property int fontSize: Consts.mainFontSize;
   property color fontColour: Globals.colours.fg;
 
   Anims.NumberTransition on value {}
@@ -61,7 +61,7 @@ Item {
     anchors.centerIn: parent;
     text: `${Math.round(root.value * 100)}%`;
     font {
-      family: Globals.vars.fontFamily;
+      family: Consts.fontFamily;
       pixelSize: root.fontSize;
     }
     color: root.fontColour;

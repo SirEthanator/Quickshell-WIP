@@ -1,6 +1,5 @@
-import qs
+import qs.singletons
 import QtCore;
-import QtQuick;
 
 Settings {
   id: root;
@@ -8,4 +7,3 @@ Settings {
   required category;
   location: Conf.confPath;
 }
-

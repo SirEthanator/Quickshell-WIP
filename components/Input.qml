@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import QtQuick;
 import QtQuick.Layouts;
 
@@ -7,7 +7,7 @@ OutlinedRectangle {
 
   outlineColor: borderColor;
   color: bg;
-  radius: Globals.vars.br;
+  radius: Consts.br;
 
   default property list<QtObject> data;
 
@@ -24,7 +24,7 @@ OutlinedRectangle {
 
   disableAllOutlines: !showBorder;
 
-  implicitHeight: row.implicitHeight + Globals.vars.paddingButton * (topPadding && bottomPadding ? 2 : topPadding || bottomPadding ? 1 : 0) + Globals.vars.outlineSize * 2;
+  implicitHeight: row.implicitHeight + Consts.paddingButton * (topPadding && bottomPadding ? 2 : topPadding || bottomPadding ? 1 : 0) + Consts.outlineSize * 2;
 
   onFocusChanged: {
     if (focus) {
@@ -35,7 +35,7 @@ OutlinedRectangle {
 
     RowLayout {
       id: row;
-      spacing: Globals.vars.paddingButton;
+      spacing: Consts.paddingButton;
 
       anchors {
         fill: parent.content;

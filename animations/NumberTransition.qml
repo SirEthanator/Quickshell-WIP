@@ -1,7 +1,7 @@
-import qs
+import qs.singletons
 import QtQuick;
 
 Behavior {
-  NumberAnimation { duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
+  NumberAnimation { duration: Consts.transitionLen; easing.type: Easing.OutCubic }
 }
 

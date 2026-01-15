@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import qs.components
 import qs.animations as Anims;
 import qs.widgets.notifications as Notifs;
@@ -18,7 +18,7 @@ DashItem {
     id: column;
     Layout.fillWidth: true;
     Layout.fillHeight: true;
-    spacing: Globals.vars.notifPopupSpacing;
+    spacing: Consts.notifPopupSpacing;
     visible: root.notifications.length > 0;
 
     RowLayout {
@@ -45,7 +45,7 @@ DashItem {
       ListView {
         id: list;
         anchors.fill: parent;
-        spacing: Globals.vars.notifPopupSpacing;
+        spacing: Consts.notifPopupSpacing;
         boundsBehavior: Flickable.StopAtBounds;
         cacheBuffer: 0;
 
@@ -64,7 +64,7 @@ DashItem {
     visible: !column.visible;
     Layout.fillHeight: true;
     Layout.fillWidth: true;
-    spacing: Globals.vars.paddingCard;
+    spacing: Consts.paddingCard;
 
     Anims.NumberAnim {
       id: emptyFadeInAnim;
@@ -77,15 +77,15 @@ DashItem {
     Icon {
       icon: "no-notifications-symbolic";
       color: Globals.colours.grey;
-      size: Globals.vars.extraLargeIconSize;
+      size: Consts.extraLargeIconSize;
       Layout.alignment: Qt.AlignHCenter;
     }
 
     Text {
       text: "No Notifications";
       font {
-        family: Globals.vars.fontFamily;
-        pixelSize: Globals.vars.smallHeadingFontSize;
+        family: Consts.fontFamily;
+        pixelSize: Consts.smallHeadingFontSize;
       }
       color: Globals.colours.grey;
       Layout.fillWidth: true;

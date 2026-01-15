@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import qs
+import qs.singletons
 import qs.animations as Anims;
 import QtQuick;
 import QtQuick.Layouts;
@@ -17,7 +17,7 @@ RowLayout {
       stack.currentIndex = currentIndex
   }
   Layout.fillWidth: fullWidth;
-  implicitHeight: Globals.vars.wsSize;
+  implicitHeight: Consts.wsSize;
 
   Repeater {
     model: root.count;
@@ -26,7 +26,7 @@ RowLayout {
       id: item;
       required property int index;
       readonly property bool selected: index === root.currentIndex;
-      implicitHeight: Globals.vars.wsSize;
+      implicitHeight: Consts.wsSize;
       Layout.preferredWidth: root.fullWidth ? item.selected ? 3 : 2 : implicitHeight;
       Layout.fillWidth: root.fullWidth;
 

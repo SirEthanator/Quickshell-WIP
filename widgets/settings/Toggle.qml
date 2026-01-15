@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import qs.animations as Anims;
 import QtQuick;
 
@@ -38,7 +38,7 @@ MouseArea {
 
     border {
       color: root.checked ? root.checkedColour : root.containsMouse ? root.bg : Globals.colours.outline;
-      width: Globals.vars.outlineSize;
+      width: Consts.outlineSize;
       pixelAligned: false;
     }
     radius: height / 2;

@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import qs
+import qs.singletons
 import qs.utils as Utils;
 import qs.components
 import qs.animations as Anims;
@@ -31,13 +31,13 @@ Scope {
         loader.activeAsync = true;
       } else {
         // We need a timer so the component will not be unloaded until the animation finishes
-        loader.timer = Utils.Timeout.setTimeout(() => loader.activeAsync = false, Globals.vars.animLen);
+        loader.timer = Utils.Timeout.setTimeout(() => loader.activeAsync = false, Consts.animLen);
       }
     }
 
     PanelWindow {
       id: root;
-      color: Conf.menu.dimBackground ? Globals.vars.bgDimmedColour : "transparent";
+      color: Conf.menu.dimBackground ? Consts.bgDimmedColour : "transparent";
 
       anchors {
         top: true;
@@ -52,14 +52,14 @@ Scope {
 
       Anims.ColourAnim on color {
         running: Conf.menu.dimBackground;
-        from: "#00000000"; to: Globals.vars.bgDimmedColour;
-        duration: Globals.vars.animLen;
+        from: "#00000000"; to: Consts.bgDimmedColour;
+        duration: Consts.animLen;
       }
 
       Anims.ColourAnim on color {
         running: !loader.open && Conf.menu.dimBackground;
         to: "#00000000";
-        duration: Globals.vars.animLen;
+        duration: Consts.animLen;
       }
 
       Anims.Slide {
@@ -77,7 +77,7 @@ Scope {
 
       Item {
         id: wrapper;
-        width: Conf.menu.width + Globals.vars.gapLarge * 2;
+        width: Conf.menu.width + Consts.gapLarge * 2;
         height: parent.height;
         focus: true;
 
@@ -111,22 +111,22 @@ Scope {
 
           anchors {
             fill: parent;
-            margins: Globals.vars.gapLarge;
+            margins: Consts.gapLarge;
           }
 
           color: Globals.colours.bg;
-          radius: Globals.vars.br;
+          radius: Consts.br;
 
           disableAllOutlines: !Conf.menu.backgroundOutline;
 
           ColumnLayout {
             id: content;
-            spacing: Globals.vars.paddingWindow;
+            spacing: Consts.paddingWindow;
             clip: true;
 
             anchors {
               fill: parent;
-              margins: Globals.vars.paddingWindow;
+              margins: Consts.paddingWindow;
             }
 
             Input {

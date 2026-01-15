@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import QtQuick;
 
 Item {
@@ -18,7 +18,7 @@ Item {
   property bool topOutline: true;
   property bool bottomOutline: true;
 
-  property real outlineSize: Globals.vars.outlineSize;
+  property real outlineSize: Consts.outlineSize;
 
   readonly property alias content: content;
 
@@ -29,7 +29,7 @@ Item {
     anchors.fill: parent;
 
     color: Globals.colours.outline;
-    radius: Globals.vars.br;
+    radius: Consts.br;
 
     visible: !root.disableAllOutlines && (root.leftOutline || root.rightOutline || root.topOutline || root.bottomOutline);
   }

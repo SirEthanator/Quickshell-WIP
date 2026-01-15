@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import qs
+import qs.singletons
 import qs.components
 import QtQuick;
 import QtQuick.Layouts;
@@ -24,7 +24,7 @@ Input {
     onTextChanged: root.change(text);
 
     readOnly: root.disabled;
-    opacity: root.disabled ? Globals.vars.disabledOpacity : 1;
+    opacity: root.disabled ? Consts.disabledOpacity : 1;
 
     focus: true;
     onFocusChanged: { if (root.forceFocus && !focus) focus = true }
@@ -38,11 +38,11 @@ Input {
   Button {
     id: confirmBtn;
     icon: "checkmark-symbolic";
-    iconSize: Globals.vars.moduleIconSize;
+    iconSize: Consts.moduleIconSize;
 
     Layout.fillHeight: true;
 
-    radiusValue: root.radius - Globals.vars.outlineSize;
+    radiusValue: root.radius - Consts.outlineSize;
     trRadius: true; brRadius: true;
     bg: Globals.colours.bgLight;
 

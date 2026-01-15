@@ -32,7 +32,7 @@ Flickable {
         property: root.vertical ? "y" : "x";
         from: (root.vertical ? stack.height : stack.width) * (root.contentX >= 0 ? 1 : -1);
         to: 0;
-        duration: Globals.vars.longAnimLen;
+        duration: Consts.longAnimLen;
         easing.type: Easing.OutCubic;
       }
     }
@@ -42,7 +42,7 @@ Flickable {
         property: root.vertical ? "y" : "x";
         from: 0;
         to: (root.vertical ? -stack.height : -stack.width) * (root.contentX >= 0 ? 1 : -1);
-        duration: Globals.vars.longAnimLen;
+        duration: Consts.longAnimLen;
         easing.type: Easing.OutCubic;
       }
     }

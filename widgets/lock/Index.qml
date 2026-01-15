@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import qs
+import qs.singletons
 import Quickshell;
 import Quickshell.Io;
 import Quickshell.Wayland;

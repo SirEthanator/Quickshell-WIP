@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import QtQuick;
 import QtQuick.Layouts;
 
@@ -35,7 +35,7 @@ Item {
 
   ColumnLayout {
     id: content;
-    spacing: Globals.vars.marginCardSmall;
+    spacing: Consts.marginCardSmall;
     anchors.fill: parent;
 
     Text {
@@ -43,8 +43,8 @@ Item {
       text: `${root.title}?`;
       color: Globals.colours.fg;
       font {
-        family: Globals.vars.fontFamily;
-        pixelSize: Globals.vars.smallHeadingFontSize;
+        family: Consts.fontFamily;
+        pixelSize: Consts.smallHeadingFontSize;
       }
     }
 
@@ -53,8 +53,8 @@ Item {
       text: `${root.titleFuture} in ${root.countdown} seconds...`;
       color: Globals.colours.fg;
       font {
-        family: Globals.vars.fontFamily;
-        pixelSize: Globals.vars.mainFontSize;
+        family: Consts.fontFamily;
+        pixelSize: Consts.mainFontSize;
       }
     }
 
@@ -63,7 +63,7 @@ Item {
       Layout.fillWidth: true;
 
       uniformCellSizes: true;
-      spacing: Globals.vars.spacingButtonGroup;
+      spacing: Consts.spacingButtonGroup;
 
       ConfirmationButton {
         id: confirmButton;

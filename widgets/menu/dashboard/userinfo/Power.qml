@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import qs
+import qs.singletons
 import qs.components
 import qs.utils as Utils;
 import Quickshell.Io;
@@ -13,8 +13,8 @@ GridLayout {
   anchors.right: parent.right;
   columns: 3;
   rows: 2;
-  columnSpacing: Globals.vars.spacingButtonGroup;
-  rowSpacing: Globals.vars.spacingButtonGroup;
+  columnSpacing: Consts.spacingButtonGroup;
+  rowSpacing: Consts.spacingButtonGroup;
   uniformCellWidths: true;
   uniformCellHeights: true;
 
@@ -47,7 +47,7 @@ GridLayout {
       blRadius: index === 3;
       brRadius: index === 5;
 
-      padding: Globals.vars.paddingButtonIcon;
+      padding: Consts.paddingButtonIcon;
 
       Process { id: powerCmd }
       onClicked: {

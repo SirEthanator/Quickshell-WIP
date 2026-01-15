@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import Quickshell.Services.Pam;
 import Quickshell.Wayland;
 

@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import qs.animations as Anims;
 import Quickshell;
 import Quickshell.Widgets;
@@ -9,7 +9,7 @@ Item {
   id: root;
   required property string icon;
   property color color: Globals.colours.fg;
-  property real size: Globals.vars.moduleIconSize;
+  property real size: Consts.moduleIconSize;
   property int rotation;
 
   property string fallback: "warning-outline-symbolic";

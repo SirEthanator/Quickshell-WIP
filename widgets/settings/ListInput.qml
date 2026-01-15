@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import qs
+import qs.singletons
 import qs.components
 import qs.animations as Anims;
 import Quickshell;
@@ -9,7 +9,7 @@ import QtQuick.Layouts;
 
 ColumnLayout {
   id: root;
-  spacing: Globals.vars.marginCard;
+  spacing: Consts.marginCard;
 
   required property var controller;
   required property string page;
@@ -42,7 +42,7 @@ ColumnLayout {
 
   RowLayout {
     id: buttons;
-    spacing: Globals.vars.marginCardSmall;
+    spacing: Consts.marginCardSmall;
 
     z: 1000;  // For the add popup to show on top of options
 
@@ -58,7 +58,7 @@ ColumnLayout {
         id: addPopup;
 
         anchors.top: parent.bottom;
-        anchors.margins: Globals.vars.marginCard;
+        anchors.margins: Consts.marginCard;
 
         height: addPopupItems.contentHeight;
         width: 200;
@@ -113,21 +113,21 @@ ColumnLayout {
     interactive: false;
     clip: true;
 
-    spacing: Globals.vars.marginCard;
+    spacing: Consts.marginCard;
 
     add: Transition {
-      NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Globals.vars.shortTransitionLen }
+      NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Consts.shortTransitionLen }
     }
     displaced: Transition {
-      NumberAnimation { property: "y"; duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
+      NumberAnimation { property: "y"; duration: Consts.transitionLen; easing.type: Easing.OutCubic }
       PropertyAction { property: "opacity"; value: 1 }
     }
     move: Transition {
-      NumberAnimation { property: "y"; duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
+      NumberAnimation { property: "y"; duration: Consts.transitionLen; easing.type: Easing.OutCubic }
       PropertyAction { property: "opacity"; value: 1 }
     }
     remove: Transition {
-      NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Globals.vars.shortTransitionLen }
+      NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Consts.shortTransitionLen }
     }
 
     delegate: MouseArea {
@@ -179,21 +179,21 @@ ColumnLayout {
 
       Rectangle {
         id: delegateBg;
-        height: delegateRow.height + Globals.vars.paddingCard * 2;
+        height: delegateRow.height + Consts.paddingCard * 2;
         width: parent.width;
 
         color: Globals.colours.bg;
-        radius: Globals.vars.br;
+        radius: Consts.br;
 
         RowLayout {
           id: delegateRow;
-          spacing: Globals.vars.paddingCard;
+          spacing: Consts.paddingCard;
 
           anchors {
             left: parent.left;
             right: parent.right;
             top: parent.top;
-            margins: Globals.vars.paddingCard;
+            margins: Consts.paddingCard;
           }
 
           // Drag indicator
@@ -208,8 +208,8 @@ ColumnLayout {
             Layout.fillWidth: true;
             color: Globals.colours.fg;
             font {
-              family: Globals.vars.fontFamily;
-              pixelSize: Globals.vars.smallHeadingFontSize;
+              family: Consts.fontFamily;
+              pixelSize: Consts.smallHeadingFontSize;
             }
             maximumLineCount: 1;
             elide: Text.ElideRight;
@@ -221,7 +221,7 @@ ColumnLayout {
             id: removeBtn;
 
             icon: "delete-symbolic";
-            iconSize: Globals.vars.moduleIconSize;
+            iconSize: Consts.moduleIconSize;
             labelColour: Globals.colours.red;
             bgPress: Globals.colours.red;
 

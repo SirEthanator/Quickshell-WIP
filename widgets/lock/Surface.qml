@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import qs.components
 import qs.animations as Anims;
 import qs.utils as Utils;
@@ -16,7 +16,7 @@ WlSessionLockSurface {
 
   function beginUnlock() {
     outAnim.start();
-    Utils.Timeout.setTimeout(lock.unlock, Globals.vars.animLen);
+    Utils.Timeout.setTimeout(lock.unlock, Consts.animLen);
   }
 
   Pam {
@@ -33,7 +33,7 @@ WlSessionLockSurface {
   Rectangle {
     anchors.fill: parent;
     visible: Conf.lock.dimBackground;
-    color: Globals.vars.bgDimmedColour;
+    color: Consts.bgDimmedColour;
   }
 
   ParallelAnimation {
@@ -43,7 +43,7 @@ WlSessionLockSurface {
       property: "opacity";
       from: Conf.lock.noFade ? 1 : 0;
       to: 1;
-      duration: Globals.vars.animLen;
+      duration: Consts.animLen;
     }
     Anims.Slide {
       target: contentWrapper;
@@ -64,7 +64,7 @@ WlSessionLockSurface {
       property: "opacity";
       from: 1;
       to: Conf.lock.noFade ? 1 : 0;
-      duration: Globals.vars.animLen;
+      duration: Consts.animLen;
     }
     Anims.Slide {
       target: contentWrapper;
@@ -89,27 +89,27 @@ WlSessionLockSurface {
     Rectangle {
       id: contentBg;
       anchors.fill: parent;
-      anchors.margins: Globals.vars.gapLarge;
+      anchors.margins: Consts.gapLarge;
 
       border {
         color: Globals.colours.outline;
-        width: Conf.lock.contentOutline ? Globals.vars.outlineSize : 0;
+        width: Conf.lock.contentOutline ? Consts.outlineSize : 0;
         pixelAligned: false;
       }
 
       color: Globals.colours.bg;
-      radius: Globals.vars.br;
+      radius: Consts.br;
     }
 
     Item {
       id: content;
       anchors.fill: contentBg;
-      anchors.margins: Globals.vars.paddingWindow;
+      anchors.margins: Consts.paddingWindow;
 
       ColumnLayout {
         anchors.centerIn: parent;
         width: parent.width;
-        spacing: Globals.vars.paddingWindow * 2;
+        spacing: Consts.paddingWindow * 2;
 
         Clock {}
         PassInput { id: input; pam: pam }
@@ -125,8 +125,8 @@ WlSessionLockSurface {
     height: 200;
     width: 500;
 
-    readonly property real xPos: parent.width - width - Globals.vars.gapLarge;
-    readonly property real yPos: parent.height - height - Globals.vars.gapLarge;
+    readonly property real xPos: parent.width - width - Consts.gapLarge;
+    readonly property real yPos: parent.height - height - Consts.gapLarge;
     x: xPos;
     y: yPos;
 

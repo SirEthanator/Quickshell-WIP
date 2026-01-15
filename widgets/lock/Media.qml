@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import qs.components
 import qs.utils as Utils
 import QtQuick;
@@ -8,27 +8,27 @@ import Quickshell.Widgets;
 OutlinedRectangle {
   id: root;
 
-  radius: Globals.vars.br;
+  radius: Consts.br;
   color: Globals.colours.bg;
 
   anchors.fill: parent;
 
   ColumnLayout {
-    spacing: Globals.vars.paddingCard;
+    spacing: Consts.paddingCard;
 
     anchors {
       fill: root.content;
-      margins: Globals.vars.paddingCard;
+      margins: Consts.paddingCard;
     }
 
     RowLayout {
-      spacing: Globals.vars.paddingCard;
+      spacing: Consts.paddingCard;
 
       Layout.fillWidth: true;
       Layout.fillHeight: true;
 
       ClippingRectangle {
-        radius: Globals.vars.br;
+        radius: Consts.br;
         color: "transparent";
         Layout.fillHeight: true;
         Layout.preferredWidth: height;
@@ -48,7 +48,7 @@ OutlinedRectangle {
 
           Icon {
             icon: "music-note-symbolic";
-            size: parent.height - Globals.vars.paddingCard * 2;
+            size: parent.height - Consts.paddingCard * 2;
             anchors.centerIn: parent;
           }
         }
@@ -62,8 +62,8 @@ OutlinedRectangle {
         Text {
           text: Utils.Mpris.activePlayer.trackTitle || "Unknown Track";
           font {
-            family: Globals.vars.fontFamily;
-            pixelSize: Globals.vars.headingFontSize;
+            family: Consts.fontFamily;
+            pixelSize: Consts.headingFontSize;
             bold: true;
           }
           color: Globals.colours.fg;
@@ -76,8 +76,8 @@ OutlinedRectangle {
         Text {
           text: Utils.Mpris.activePlayer.trackArtist || "Unknown Artist";
           font {
-            family: Globals.vars.fontFamily;
-            pixelSize: Globals.vars.mainFontSize;
+            family: Consts.fontFamily;
+            pixelSize: Consts.mainFontSize;
           }
           color: Globals.colours.fg;
 
@@ -89,18 +89,18 @@ OutlinedRectangle {
     }
 
     RowLayout {
-      spacing: Globals.vars.paddingCard;
+      spacing: Consts.paddingCard;
       Layout.fillHeight: true;
       Layout.fillWidth: true;
 
       RowLayout {
-        spacing: Globals.vars.spacingButtonGroup;
+        spacing: Consts.spacingButtonGroup;
         Layout.fillHeight: true;
 
         Button {
           tlRadius: true; blRadius: true;
           icon: "media-seek-backward-symbolic";
-          iconSize: Globals.vars.mainIconSize;
+          iconSize: Consts.mainIconSize;
           bg: Globals.colours.bgLight;
 
           disabled: !Utils.Mpris.activePlayer.canGoPrevious;
@@ -111,7 +111,7 @@ OutlinedRectangle {
         }
         Button {
           icon: Utils.Mpris.activePlayer.isPlaying ? "media-playback-pause-symbolic" : "media-playback-start-symbolic"
-          iconSize: Globals.vars.mainIconSize;
+          iconSize: Consts.mainIconSize;
           bg: Globals.colours.bgLight;
 
           onClicked: Utils.Mpris.activePlayer.togglePlaying();
@@ -119,7 +119,7 @@ OutlinedRectangle {
         Button {
           trRadius: true; brRadius: true;
           icon: "media-seek-forward-symbolic"
-          iconSize: Globals.vars.mainIconSize;
+          iconSize: Consts.mainIconSize;
           bg: Globals.colours.bgLight;
 
           disabled: !Utils.Mpris.activePlayer.canGoNext;
@@ -146,8 +146,8 @@ OutlinedRectangle {
           Text {
             text: Utils.Mpris.posInfo.positionString;
             font {
-              family: Globals.vars.fontFamily;
-              pixelSize: Globals.vars.mainFontSize;
+              family: Consts.fontFamily;
+              pixelSize: Consts.mainFontSize;
             }
             color: Globals.colours.fg;
             anchors.left: parent.left;
@@ -155,8 +155,8 @@ OutlinedRectangle {
           Text {
             text: Utils.Mpris.posInfo.lengthString;
             font {
-              family: Globals.vars.fontFamily;
-              pixelSize: Globals.vars.mainFontSize;
+              family: Consts.fontFamily;
+              pixelSize: Consts.mainFontSize;
             }
             color: Globals.colours.fg;
             anchors.right: parent.right;

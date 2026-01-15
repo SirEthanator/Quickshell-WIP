@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import qs
+import qs.singletons
 import qs.animations as Anims;
 import qs.components
 import Quickshell;
@@ -11,7 +11,7 @@ import QtQuick.Layouts;
 BarModule {
   id: root;
   required property var window;
-  readonly property int slideOffset: Globals.vars.gapLarge + 10;
+  readonly property int slideOffset: Consts.gapLarge + 10;
 
   hoverEnabled: true;
   background: mouseArea.containsPress ? Globals.colours.accent : mouseArea.containsMouse ? Globals.colours.bgHover : Globals.colours.bgLight;
@@ -52,7 +52,7 @@ BarModule {
       color: "transparent";
 
       width: bg.width;
-      height: bg.height + Globals.vars.gapLarge;
+      height: bg.height + Consts.gapLarge;
 
       grabFocus: true;
 
@@ -65,18 +65,18 @@ BarModule {
 
       Rectangle {
         id: bg;
-        width: trayButtons.width + Globals.vars.paddingWindow * 2;
-        height: trayButtons.height + Globals.vars.paddingWindow * 2;
-        y: Globals.vars.gapLarge;
+        width: trayButtons.width + Consts.paddingWindow * 2;
+        height: trayButtons.height + Consts.paddingWindow * 2;
+        y: Consts.gapLarge;
         color: Globals.colours.bg;
-        radius: Globals.vars.br;
+        radius: Consts.br;
 
         Anims.Slide {
           running: popupLoader.open;
           target: bg;
           direction: Anims.Slide.Direction.Down;
           slideOffset: root.slideOffset;
-          originalPos: Globals.vars.gapLarge;
+          originalPos: Consts.gapLarge;
           grow: true;
         }
 
@@ -86,7 +86,7 @@ BarModule {
             target: bg;
             direction: Anims.Slide.Direction.Down;
             slideOffset: root.slideOffset;
-            originalPos: Globals.vars.gapLarge;
+            originalPos: Consts.gapLarge;
             reverse: true;
           }
           PropertyAction { property: "active"; target: popupLoader; value: false }
@@ -94,15 +94,15 @@ BarModule {
 
         border {
           color: Globals.colours.outline;
-          width: Globals.vars.outlineSize;
+          width: Consts.outlineSize;
           pixelAligned: false;
         }
 
         GridLayout {
           id: trayButtons;
           columns: 5;
-          rowSpacing: Globals.vars.marginCard;
-          columnSpacing: Globals.vars.marginCard;
+          rowSpacing: Consts.marginCard;
+          columnSpacing: Consts.marginCard;
           anchors.centerIn: parent;
 
           TrayItems {

@@ -1,11 +1,11 @@
-import qs
+import qs.singletons
 import QtQuick;
 import QtQuick.Layouts;
 
 Rectangle {
   id: root;
   anchors.fill: parent;
-  color: Globals.vars.bgDimmedColour;
+  color: Consts.bgDimmedColour;
 
   required property string title;
   property string description;
@@ -20,23 +20,23 @@ Rectangle {
     anchors.centerIn: parent;
 
     color: Globals.colours.bg;
-    width: content.width + Globals.vars.paddingWindow*2;
-    height: content.height + Globals.vars.paddingWindow*2;
+    width: content.width + Consts.paddingWindow*2;
+    height: content.height + Consts.paddingWindow*2;
 
-    radius: Globals.vars.br;
+    radius: Consts.br;
 
     ColumnLayout {
       id: content;
       anchors.centerIn: parent;
-      spacing: Globals.vars.paddingWindow;
+      spacing: Consts.paddingWindow;
 
       ColumnLayout {
-        spacing: Globals.vars.marginCardSmall;
+        spacing: Consts.marginCardSmall;
         Text {
           text: root.title;
           font {
-            family: Globals.vars.fontFamily;
-            pixelSize: Globals.vars.smallHeadingFontSize;
+            family: Consts.fontFamily;
+            pixelSize: Consts.smallHeadingFontSize;
           }
           color: Globals.colours.fg;
           Layout.alignment: Qt.AlignHCenter;
@@ -45,8 +45,8 @@ Rectangle {
         Text {
           text: root.description;
           font {
-            family: Globals.vars.fontFamily;
-            pixelSize: Globals.vars.mainFontSize;
+            family: Consts.fontFamily;
+            pixelSize: Consts.mainFontSize;
           }
           color: Globals.colours.grey;
           Layout.alignment: Qt.AlignHCenter;
@@ -55,7 +55,7 @@ Rectangle {
 
       RowLayout {
         id: buttons;
-        spacing: Globals.vars.spacingButtonGroup;
+        spacing: Consts.spacingButtonGroup;
         Layout.alignment: Qt.AlignHCenter;
       }
     }

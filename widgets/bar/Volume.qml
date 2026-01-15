@@ -1,22 +1,21 @@
-import qs
-import qs.utils as Utils;
+import qs.singletons
 import QtQuick;
 import Quickshell.Services.Pipewire;
 
 BarModule {
   id: root;
-  readonly property PwNode node: Utils.SysInfo.audioNode;
+  readonly property PwNode node: SysInfo.audioNode;
 
-  readonly property string volume: `${Utils.SysInfo.volume}%`;
+  readonly property string volume: `${SysInfo.volume}%`;
 
-  icon: Utils.SysInfo.volumeIcon;
+  icon: SysInfo.volumeIcon;
   iconbgColour: Globals.colours.volume;
 
   Text {
     color: Globals.colours.fg;
     font {
-      family: Globals.vars.fontFamily;
-      pixelSize: Globals.vars.mainFontSize;
+      family: Consts.fontFamily;
+      pixelSize: Consts.mainFontSize;
     }
     text: root.volume;
   }

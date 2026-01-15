@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import QtQuick;
 import QtQuick.Controls;
 
@@ -15,7 +15,7 @@ StackView {
       property: "opacity";
       from: 0;
       to: 1;
-      duration: Globals.vars.animLen;
+      duration: Consts.animLen;
       easing.type: Easing.OutCubic;
     }
 
@@ -23,7 +23,7 @@ StackView {
       property: root.vertical ? "y" : "x";
       from: 200;
       to: 0;
-      duration: Globals.vars.animLen;
+      duration: Consts.animLen;
       easing.type: Easing.OutCubic;
     }
   }
@@ -33,7 +33,7 @@ StackView {
       property: "opacity";
       from: 1;
       to: 0;
-      duration: Globals.vars.animLen;
+      duration: Consts.animLen;
       easing.type: Easing.OutCubic;
     }
   }

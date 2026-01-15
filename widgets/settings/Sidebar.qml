@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import qs
+import qs.singletons
 import qs.components
 import QtQuick;
 import QtQuick.Layouts;
@@ -23,13 +23,13 @@ Rectangle {
     anchors {
       top: parent.top;
       left: parent.left;
-      margins: Globals.vars.paddingWindow;
-      leftMargin: Globals.vars.paddingWindow + Globals.vars.paddingButton;
+      margins: Consts.paddingWindow;
+      leftMargin: Consts.paddingWindow + Consts.paddingButton;
     }
 
     font {
-      family: Globals.vars.fontFamily;
-      pixelSize: Globals.vars.headingFontSize;
+      family: Consts.fontFamily;
+      pixelSize: Consts.headingFontSize;
       variableAxes: {
         "wght": 650
       }
@@ -45,9 +45,9 @@ Rectangle {
       left: parent.left;
       right: parent.right;
       bottom: parent.bottom;
-      margins: Globals.vars.paddingWindow;
+      margins: Consts.paddingWindow;
     }
-    spacing: Globals.vars.spacingButtonGroup;
+    spacing: Consts.spacingButtonGroup;
 
     Repeater {
       id: itemRepeater;

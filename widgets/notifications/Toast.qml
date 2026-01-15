@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import qs.components
 import qs.utils as Utils;
 import qs.animations as Anims;
@@ -66,7 +66,7 @@ MouseArea {
       x = width * (x < 0 ? -1 : 1);
       // Dismiss if popup, discard if not
       const dimissAction = popup && ! n.transient ? () => NotifServer.dismissed(n.id) : () => n.dismiss();
-      Utils.Timeout.setTimeout(dimissAction, Globals.vars.transitionLen);
+      Utils.Timeout.setTimeout(dimissAction, Consts.transitionLen);
     }
   }
   onClicked: event => {
@@ -86,10 +86,10 @@ MouseArea {
     height: content.height;
 
     color: Globals.colours.bg;
-    radius: Globals.vars.br;
+    radius: Consts.br;
     border {
       color: Globals.colours.outline;
-      width: root.popup ? Globals.vars.outlineSize : 0;
+      width: root.popup ? Consts.outlineSize : 0;
       pixelAligned: false;
     }
 
@@ -108,10 +108,10 @@ MouseArea {
       Button {
         id: closeButton;
         icon: "close-symbolic";
-        iconSize: Globals.vars.moduleIconSize;
+        iconSize: Consts.moduleIconSize;
 
         Layout.fillHeight: true;
-        implicitWidth: root.containsMouse ? Globals.vars.moduleIconSize + padding * 2 : 0;
+        implicitWidth: root.containsMouse ? Consts.moduleIconSize + padding * 2 : 0;
         visible: implicitWidth > 0;
         Anims.NumberTransition on implicitWidth {}
 
@@ -129,20 +129,20 @@ MouseArea {
 
 
       ColumnLayout {
-        spacing: Globals.vars.paddingNotif;
+        spacing: Consts.paddingNotif;
 
         Item {}  // Padding
 
         RowLayout {
-          spacing: Globals.vars.paddingNotif;
+          spacing: Consts.paddingNotif;
 
           Item {}  // Padding
 
           ColumnLayout {
-            spacing: Globals.vars.notifInnerSpacing;
+            spacing: Consts.notifInnerSpacing;
 
             RowLayout {
-              spacing: Globals.vars.notifInnerSpacing;
+              spacing: Consts.notifInnerSpacing;
 
               IconImage {
                 visible: !!root.n.appIcon;
@@ -155,8 +155,8 @@ MouseArea {
                 text: root.n.appName;
                 color: Globals.colours.fg;
                 font {
-                  family: Globals.vars.fontFamily;
-                  pixelSize: Globals.vars.mainFontSize;
+                  family: Consts.fontFamily;
+                  pixelSize: Consts.mainFontSize;
                   italic: true;
                 }
                 elide: Text.ElideRight
@@ -186,8 +186,8 @@ MouseArea {
               text: root.n.summary;
               color: Globals.colours.fg;
               font {
-                family: Globals.vars.fontFamily;
-                pixelSize: Globals.vars.smallHeadingFontSize;
+                family: Consts.fontFamily;
+                pixelSize: Consts.smallHeadingFontSize;
               }
               wrapMode: Text.Wrap;
               maximumLineCount: root.expanded ? 5 : 1;
@@ -203,8 +203,8 @@ MouseArea {
               text: root.n.body
               color: Globals.colours.fg;
               font {
-                family: Globals.vars.fontFamily;
-                pixelSize: Globals.vars.mainFontSize;
+                family: Consts.fontFamily;
+                pixelSize: Consts.mainFontSize;
               }
               wrapMode: Text.Wrap;
               maximumLineCount: root.expanded ? 8 : 1;
@@ -218,7 +218,7 @@ MouseArea {
               id: actions;
               visible: root.n.actions.length > 0;
               Layout.fillWidth: true;
-              spacing: Globals.vars.spacingButtonGroup;
+              spacing: Consts.spacingButtonGroup;
 
               Repeater {
                 model: root.n?.actions;
@@ -259,10 +259,10 @@ MouseArea {
           fg: root.n.urgency === NotificationUrgency.Critical ? Globals.colours.red : Globals.colours.accent;
           smoothing: false;
 
-          radius: Globals.vars.br;
+          radius: Consts.br;
           topRightRadius: 0;
           topLeftRadius: 0;
-          bottomLeftRadius: root.containsMouse ? 0 : Globals.vars.br;
+          bottomLeftRadius: root.containsMouse ? 0 : Consts.br;
           roundedFg: false;
         }
       }

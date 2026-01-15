@@ -1,6 +1,5 @@
-import qs
+import qs.singletons
 import qs.components
-import qs.utils as Utils;
 import Quickshell;
 import QtQuick;
 import QtQuick.Effects;
@@ -10,7 +9,7 @@ RowLayout {
   id: root;
   anchors.left: parent.left;
   anchors.right: parent.right;
-  spacing: Globals.vars.paddingCard;
+  spacing: Consts.paddingCard;
   signal clicked(event: MouseEvent);
 
   Item {
@@ -66,14 +65,14 @@ RowLayout {
   }
 
   ColumnLayout {
-    spacing: Globals.vars.marginCardSmall;
+    spacing: Consts.marginCardSmall;
 
     Text {
-      text: Utils.SysInfo.username;
+      text: SysInfo.username;
       color: Globals.colours.fg;
       font {
-        family: Globals.vars.fontFamily;
-        pixelSize: Globals.vars.headingFontSize;
+        family: Consts.fontFamily;
+        pixelSize: Consts.headingFontSize;
         variableAxes: {
           "wght": 700,
           "wdth": 130
@@ -82,11 +81,11 @@ RowLayout {
     }
 
     Text {
-      text: Utils.SysInfo.hostname;
+      text: SysInfo.hostname;
       color: Globals.colours.fg;
       font {
-        family: Globals.vars.fontFamily;
-        pixelSize: Globals.vars.mainFontSize;
+        family: Consts.fontFamily;
+        pixelSize: Consts.mainFontSize;
       }
     }
   }
@@ -95,7 +94,7 @@ RowLayout {
 
   Button {
     icon: "settings-symbolic";
-    iconSize: Globals.vars.largeIconSize;
+    iconSize: Consts.largeIconSize;
     allRadius: true;
 
     onClicked: {
@@ -106,7 +105,7 @@ RowLayout {
 
   Button {
     icon: "system-shutdown-symbolic";
-    iconSize: Globals.vars.largeIconSize;
+    iconSize: Consts.largeIconSize;
     labelColour: Globals.colours.red;
     allRadius: true;
     bgPress: Globals.colours.red;

@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import qs.components
 import Quickshell;
 import QtQuick;

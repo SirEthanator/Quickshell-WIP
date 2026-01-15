@@ -1,6 +1,7 @@
 pragma Singleton
 
-import qs
+import qs.singletons
+import qs.utils
 import Quickshell;
 import Quickshell.Io;
 import Quickshell.Services.Pipewire;

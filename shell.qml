@@ -1,7 +1,7 @@
 //@ pragma UseQApplication
 //@ pragma Env QS_NO_RELOAD_POPUP=1
 
-import qs
+import qs.singletons
 import Quickshell;
 import "widgets/bar" as Bar;
 import "widgets/menu" as Menu;

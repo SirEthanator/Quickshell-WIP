@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import QtQuick;
 
 ParallelAnimation {
@@ -8,7 +8,7 @@ ParallelAnimation {
   property int direction: Slide.Direction.Right;
   property int slideOffset: 100;
   property real scaleOffset: 0.9;
-  property int duration: Globals.vars.animLen;
+  property int duration: Consts.animLen;
   property int originalPos: 0;
 
   property bool fade: true;

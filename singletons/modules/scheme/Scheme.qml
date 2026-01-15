@@ -32,4 +32,3 @@ QtObject {
   required property color batteryMed;
   required property color batteryLow;
 }
-

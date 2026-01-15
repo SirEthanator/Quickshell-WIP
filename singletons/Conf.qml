@@ -1,13 +1,14 @@
 pragma Singleton
 
-import "utils";
+import qs.utils
+import qs.singletons.modules.config
 import Quickshell;
 import Quickshell.Io;
 import QtQuick;
 
 Singleton {
   id: root;
-  readonly property url confPath: Qt.resolvedUrl("./config.conf");
+  readonly property url confPath: Qt.resolvedUrl(Quickshell.shellPath("config.conf"));
 
   function getCategoryKeys() {
     return Object.keys(metadata);
@@ -21,6 +22,14 @@ Singleton {
   //     }
   //   }
   // }
+
+  QtObject {
+    id: stripped;
+
+    readonly property var barModules: Consts.barModules.toStripped();
+    readonly property var dashModules: Consts.dashModules.toStripped();
+    readonly property var wallpaperTypes: Consts.wallpaperTypes.toStripped();
+  }
 
   readonly property var metadata: ({
     "global": {
@@ -41,19 +50,19 @@ Singleton {
           "title": "Left Modules",
           "description": "Defines what modules to show on the left of the bar (LTR).",
           "type": "list<string>",
-          "options": Globals.vars.barModules
+          "options": stripped.barModules
         },
         "centre": {
           "title": "Centre Modules",
           "description": "Defines what modules to show in the middle of the bar (LTR).",
           "type": "list<string>",
-          "options": Globals.vars.barModules
+          "options": stripped.barModules
         },
         "right": {
           "title": "Right Modules",
           "description": "Defines what modules to show on the right of the bar (LTR).",
           "type": "list<string>",
-          "options": Globals.vars.barModules
+          "options": stripped.barModules
         }
       },
       "Behaviour": {
@@ -112,7 +121,7 @@ Singleton {
           "title": "Dashboard Modules",
           "description": "Defines which modules should be shown on the dashboard.",
           "type": "list<string>",
-          "options": Globals.vars.dashModules
+          "options": stripped.dashModules
         },
         "width": {
           "title": "Width",
@@ -193,7 +202,7 @@ Singleton {
           "title": "Wallpaper Type",
           "description": "Defines what type of wallpaper should be used.",
           "type": "string",
-          "options": Globals.vars.wallpaperTypes
+          "options": stripped.wallpaperTypes
         },
         "fadeSpeed": {
           "title": "Fade Duration",
@@ -330,101 +339,14 @@ Singleton {
     }
   })
 
-  property ConfigCategory global: ConfigCategory {
-    category: "Global";
-
-    property string colourScheme: "everforest";
-  }
-
-  property ConfigCategory bar: ConfigCategory {
-    category: "Bar";
-
-    property list<string> left: [
-      "menu",
-      "workspaces",
-      "activeWindow"
-    ];
-    property list<string> centre: ["dateAndTime"];
-    property list<string> right: [
-      "tray",
-      "network",
-      "battery",
-      "media",
-      "volume"
-    ];
-    property bool autohide: false;
-    property bool docked: false;
-    property bool floatingModules: false;
-    property bool multiColourModules: false;
-    property bool moduleOutlines: false;
-    property bool backgroundOutline: true;
-    property int workspaceCount: 10;
-    property int truncationLength: 60;
-  }
-
-  property ConfigCategory menu: ConfigCategory {
-    category: "Menu";
-
-    property list<string> dashModules: [
-      "userInfo",
-      "sysStats",
-      "notifCentre"
-    ];
-    property string profilePicture: "";
-    property bool capitaliseUsername: false;
-    property bool capitaliseHostname: false;
-    property bool dimBackground: true;
-    property bool backgroundOutline: true;
-    property bool moduleOutlines: false;
-    property int width: 600;
-  }
-
-  property ConfigCategory desktop: ConfigCategory {
-    category: "Desktop";
-
-    property string wallpaper: "";
-    property bool backdropWallpaper: false;
-    property string wallpaperType: "static";
-    property int fadeSpeed: 2000;
-    property string shader: "";
-    property color bgColour: "black";
-  }
-
-  property ConfigCategory notifications: ConfigCategory {
-    category: "Notifications";
-
-    property int width: 500;
-    property int defaultTimeout: 5000;
-    property int defaultCriticalTimeout: 8000;
-    property int minimumTimeout: 2000;
-    property int minimumCriticalTimeout: 4000;
-    property bool sounds: true;
-    property string normalSound: "/usr/share/sounds/ocean/stereo/message-new-instant.oga";
-    property string criticalSound: "/usr/share/sounds/ocean/stereo/dialog-error-critical.oga";
-    property int dismissThreshold: 30;
-  }
-
-  property ConfigCategory lock: ConfigCategory {
-    category: "Lock";
-
-    property bool dimBackground: false;
-    property bool contentOutline: true;
-    property bool noFade: false;
-  }
-
-  property ConfigCategory osd: ConfigCategory {
-    category: "OSD";
-
-    property string backlightName: "";
-  }
-
-  property ConfigCategory polkit: ConfigCategory {
-    category: "Polkit";
-
-    property bool dimBackground: true;
-    property bool hideApplications: false;
-    property bool backgroundOutline: true;
-  }
+  property GlobalConf global: GlobalConf {}
+  property BarConf bar: BarConf {}
+  property MenuConf menu: MenuConf {}
+  property DesktopConf desktop: DesktopConf {}
+  property NotificationConf notifications: NotificationConf {}
+  property LockConf lock: LockConf {}
+  property OSDConf osd: OSDConf {}
+  property PolkitConf polkit: PolkitConf {}
 
   // Use when section is not available. If it is, accessing metadata
   // directly is more efficient
@@ -472,4 +394,3 @@ Singleton {
     command: ["sh", "-c", `${Quickshell.env("HOME")}/Scripts/SetTheme ${scheme} --noconfirm`];
   }
 }
-

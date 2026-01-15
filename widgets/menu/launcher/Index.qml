@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import qs
+import qs.singletons
 import qs.components
 import qs.utils as Utils;
 import qs.animations as Anims;
@@ -36,7 +36,7 @@ Item {
   }
 
   ColumnLayout {
-    spacing: Globals.vars.paddingCard;
+    spacing: Consts.paddingCard;
     opacity: root.model.values.length > 0 ? 0 : 1;
     anchors.centerIn: parent;
 
@@ -45,15 +45,15 @@ Item {
     Icon {
       icon: "search-symbolic";
       color: Globals.colours.grey;
-      size: Globals.vars.extraLargeIconSize;
+      size: Consts.extraLargeIconSize;
       Layout.alignment: Qt.AlignHCenter;
     }
 
     Text {
       text: "No Results Found";
       font {
-        family: Globals.vars.fontFamily;
-        pixelSize: Globals.vars.smallHeadingFontSize;
+        family: Consts.fontFamily;
+        pixelSize: Consts.smallHeadingFontSize;
       }
       color: Globals.colours.grey;
       Layout.fillWidth: true;
@@ -70,7 +70,7 @@ Item {
       readonly property bool hovered: parent.containsMouse;
 
       anchors.fill: parent;
-      spacing: Globals.vars.marginModule;
+      spacing: Consts.marginModule;
       clip: true;
       opacity: root.model.values.length > 0 ? 1 : 0;
 
@@ -88,18 +88,18 @@ Item {
       cacheBuffer: 0;
 
       add: Transition {
-        NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Globals.vars.shortTransitionLen }
+        NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Consts.shortTransitionLen }
       }
       displaced: Transition {
-        NumberAnimation { property: "y"; duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
+        NumberAnimation { property: "y"; duration: Consts.transitionLen; easing.type: Easing.OutCubic }
         PropertyAction { property: "opacity"; value: 1 }
       }
       move: Transition {
-        NumberAnimation { property: "y"; duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
+        NumberAnimation { property: "y"; duration: Consts.transitionLen; easing.type: Easing.OutCubic }
         PropertyAction { property: "opacity"; value: 1 }
       }
       remove: Transition {
-        NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Globals.vars.shortTransitionLen }
+        NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Consts.shortTransitionLen }
       }
 
       model: root.model;
@@ -109,7 +109,7 @@ Item {
         required property int index;
 
         width: listView.width;
-        height: entryContent.implicitHeight + Globals.vars.paddingButton * 2;
+        height: entryContent.implicitHeight + Consts.paddingButton * 2;
 
         hoverEnabled: true;
 
@@ -128,11 +128,11 @@ Item {
             : selected
               ? Globals.colours.bgHover
               : Globals.colours.bgLight;
-          radius: Globals.vars.br;
+          radius: Consts.br;
 
           border {
             color: Conf.menu.moduleOutlines && !selected ? Globals.colours.outline : "transparent";
-            width: Conf.menu.moduleOutlines ? Globals.vars.outlineSize : 0;
+            width: Conf.menu.moduleOutlines ? Consts.outlineSize : 0;
             pixelAligned: false;
           }
 
@@ -144,9 +144,9 @@ Item {
               top: parent.top;
               bottom: parent.bottom;
               left: parent.left;
-              margins: Globals.vars.paddingButton;
+              margins: Consts.paddingButton;
             }
-            spacing: Globals.vars.paddingButton;
+            spacing: Consts.paddingButton;
 
             IconImage {
               Layout.alignment: Qt.AlignVCenter;
@@ -159,8 +159,8 @@ Item {
               text: entryMouseArea.modelData.name;
               color: entryMouseArea.containsPress ? Globals.colours.bgLight : Globals.colours.fg;
               font {
-                family: Globals.vars.fontFamily;
-                pixelSize: Globals.vars.smallHeadingFontSize;
+                family: Consts.fontFamily;
+                pixelSize: Consts.smallHeadingFontSize;
               }
             }
           }

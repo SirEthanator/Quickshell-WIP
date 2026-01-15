@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import QtQuick;
 import QtQuick.Layouts;
 import QtQuick.Controls;
@@ -8,8 +8,8 @@ TextField {
   Layout.fillWidth: true;
   color: Globals.colours.fg;
   font {
-    family: Globals.vars.fontFamily;
-    pixelSize: Globals.vars.mainFontSize;
+    family: Consts.fontFamily;
+    pixelSize: Consts.mainFontSize;
   }
 
   background: Rectangle { color: "transparent" }

@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import qs
+import qs.singletons
 import qs.components
 import qs.animations as Anims;
 import Quickshell;
@@ -63,7 +63,7 @@ Scope {
 
       Rectangle {
         anchors.fill: parent;
-        color: Globals.vars.bgDimmedColour;
+        color: Consts.bgDimmedColour;
         visible: Conf.polkit.dimBackground;
       }
 
@@ -74,7 +74,7 @@ Scope {
           target: wallpaperLoader.item;
           property: "opacity";
           from: 0; to: 1;
-          duration: Globals.vars.animLen;
+          duration: Consts.animLen;
         }
         Anims.Slide {
           target: wrapper;
@@ -91,7 +91,7 @@ Scope {
             target: wallpaperLoader.item;
             property: "opacity";
             from: 1; to: 0;
-            duration: Globals.vars.animLen;
+            duration: Consts.animLen;
           }
           Anims.Slide {
             target: wrapper;
@@ -108,7 +108,7 @@ Scope {
 
       Item {
         id: wrapper;
-        width: Conf.menu.width + Globals.vars.gapLarge * 2;
+        width: Conf.menu.width + Consts.gapLarge * 2;
         height: parent.height;
         focus: true;
 
@@ -129,11 +129,11 @@ Scope {
 
           anchors {
             fill: parent;
-            margins: Globals.vars.gapLarge;
+            margins: Consts.gapLarge;
           }
 
           color: Globals.colours.bg;
-          radius: Globals.vars.br;
+          radius: Consts.br;
 
           disableAllOutlines: !Conf.polkit.backgroundOutline;
         }
@@ -141,16 +141,16 @@ Scope {
         Item {
           id: content;
           anchors.fill: background;
-          anchors.margins: Globals.vars.paddingWindow;
+          anchors.margins: Consts.paddingWindow;
 
           ColumnLayout {
             id: mainColumn;
             anchors.centerIn: parent;
             width: parent.width;
-            spacing: Globals.vars.paddingWindow * 2;
+            spacing: Consts.paddingWindow * 2;
 
             RowLayout {
-              spacing: Globals.vars.paddingWindow;
+              spacing: Consts.paddingWindow;
               Layout.fillWidth: true;
 
               Icon {
@@ -161,15 +161,15 @@ Scope {
               }
 
               ColumnLayout {
-                spacing: Globals.vars.marginCard;
+                spacing: Consts.marginCard;
 
                 Text {
                   Layout.fillWidth: true;
                   text: Polkit.flow.message;
                   color: Globals.colours.fg;
                   font {
-                    family: Globals.vars.fontFamily;
-                    pixelSize: Globals.vars.smallHeadingFontSize;
+                    family: Consts.fontFamily;
+                    pixelSize: Consts.smallHeadingFontSize;
                   }
                   wrapMode: Text.Wrap;
                 }
@@ -179,8 +179,8 @@ Scope {
                   Layout.fillWidth: true;
                   color: Globals.colours.grey;
                   font {
-                    family: Globals.vars.fontFamily;
-                    pixelSize: Globals.vars.mainFontSize;
+                    family: Consts.fontFamily;
+                    pixelSize: Consts.mainFontSize;
                   }
                   wrapMode: Text.Wrap;
                 }
@@ -195,7 +195,7 @@ Scope {
             anchors {
               right: parent.right;
               top: mainColumn.bottom;
-              topMargin: Globals.vars.marginCard;
+              topMargin: Consts.marginCard;
             }
 
             label: "Cancel";

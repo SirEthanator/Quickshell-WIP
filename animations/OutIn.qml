@@ -1,4 +1,4 @@
-import qs
+import qs.singletons
 import QtQuick;
 
 Behavior {
@@ -6,7 +6,7 @@ Behavior {
 
   property QtObject fadeTarget: targetProperty.object;
   property string fadeProperty: "opacity";
-  property int fadeDuration: Globals.vars.transitionLen;
+  property int fadeDuration: Consts.transitionLen;
   property int fadeOutDuration: fadeDuration;
   property int fadeInDuration: fadeDuration;
   property var fadeValue: 0;

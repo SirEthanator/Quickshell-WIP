@@ -1,5 +1,5 @@
-import qs
+import qs.singletons
 import QtQuick;
 
-ColorAnimation { id: anim; duration: Globals.vars.transitionLen; easing.type: Easing.OutCubic }
+ColorAnimation { id: anim; duration: Consts.transitionLen; easing.type: Easing.OutCubic }
 
