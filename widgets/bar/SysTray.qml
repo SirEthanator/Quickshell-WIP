@@ -54,6 +54,15 @@ BarModule {
       width: bg.width;
       height: bg.height + Globals.vars.gapLarge;
 
+      grabFocus: true;
+
+      onVisibleChanged: {
+        if (!visible) {
+          popupLoader.open = false;
+          popupLoader.active = false;
+        }
+      }
+
       Rectangle {
         id: bg;
         width: trayButtons.width + Globals.vars.paddingWindow * 2;
@@ -72,7 +81,7 @@ BarModule {
         }
 
         SequentialAnimation {
-          running: !popupLoader.open;
+          running: !popupLoader.open && popup.visible;
           Anims.Slide {
             target: bg;
             direction: Anims.Slide.Direction.Down;
