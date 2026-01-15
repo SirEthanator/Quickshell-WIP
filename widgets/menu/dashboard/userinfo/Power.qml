@@ -27,11 +27,11 @@ GridLayout {
     id: repeater;
     model: [
       { icon: 'back-symbolic', action: root.goBack },
-      { title: 'Shut Down', titleFuture: 'Shutting Down', icon: 'system-shutdown-symbolic', command: 'systemctl poweroff' },
+      { title: 'Shut down', titleFuture: 'Shutting down', icon: 'system-shutdown-symbolic', command: 'systemctl poweroff' },
       { title: 'Reboot', titleFuture: 'Rebooting', icon: 'system-reboot-symbolic', command: 'systemctl reboot' },
-      { title: 'Log Out', titleFuture: 'Logging Out', icon: 'logout-symbolic', action: Utils.Session.logOut },
+      { title: 'Log out', titleFuture: 'Logging out', icon: 'logout-symbolic', action: Utils.Session.logOut },
       { title: 'Suspend', titleFuture: 'Suspending', icon: 'system-hibernate-symbolic', command: 'loginctl lock-session & sleep 1; systemctl suspend' },
-      { title: 'Reboot to FW Settings', titleFuture: 'Rebooting to FW Settings', icon: 'preferences-advanced-symbolic', command: 'systemctl reboot --firmware-setup' }
+      { title: 'Reboot to FW settings', titleFuture: 'Rebooting to FW settings', icon: 'preferences-advanced-symbolic', command: 'systemctl reboot --firmware-setup' }
     ]
 
     Button {
