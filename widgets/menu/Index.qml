@@ -47,7 +47,7 @@ Scope {
       }
 
       exclusionMode: ExclusionMode.Normal;
-      WlrLayershell.layer: WlrLayer.Top;
+      WlrLayershell.layer: WlrLayer.Overlay;
       WlrLayershell.keyboardFocus: loader.open ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None;
 
       Anims.ColourAnim on color {
