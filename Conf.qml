@@ -62,11 +62,6 @@ Singleton {
           "description": "Defines whether the bar should automatically hide until the top edge of the screen is hovered.",
           "type": "bool"
         },
-        "docked": {
-          "title": "Docked",
-          "description": "Defines whether the bar should touch the screen edges.",
-          "type": "bool"
-        },
         "workspaceCount": {
           "title": "Workspace Count",
           "description": "Defines how many workspaces should be shown on the workspace module.",
@@ -86,6 +81,11 @@ Singleton {
         "floatingModules": {
           "title": "Floating Modules",
           "description": "Defines whether the bar's background should be shown.",
+          "type": "bool"
+        },
+        "docked": {
+          "title": "Docked",
+          "description": "Defines whether the bar should touch the screen edges.",
           "type": "bool"
         },
         "multiColourModules": {
@@ -356,7 +356,7 @@ Singleton {
     property bool docked: false;
     property bool floatingModules: false;
     property bool multiColourModules: false;
-    property bool moduleOutlines: true;
+    property bool moduleOutlines: false;
     property bool backgroundOutline: true;
     property int workspaceCount: 10;
     property int truncationLength: 60;
@@ -375,7 +375,7 @@ Singleton {
     property bool capitaliseHostname: false;
     property bool dimBackground: true;
     property bool backgroundOutline: true;
-    property bool moduleOutlines: true;
+    property bool moduleOutlines: false;
     property int width: 600;
   }
 
