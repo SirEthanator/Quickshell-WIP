@@ -1,4 +1,5 @@
 import qs.singletons
+import qs.widgets.sidebar as Sidebar;
 import qs.components
 import Quickshell;
 import QtQuick;
@@ -99,7 +100,7 @@ RowLayout {
 
     onClicked: {
       Globals.launchConfMenu();
-      Globals.states.menuOpen = false;
+      Sidebar.Controller.deactivate("menu");
     }
   }
 

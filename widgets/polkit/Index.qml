@@ -1,217 +1,119 @@
 pragma ComponentBehavior: Bound
 
 import qs.singletons
+import qs.widgets.polkit  // For LSP
+import qs.widgets.sidebar as Sidebar;
 import qs.components
-import qs.animations as Anims;
 import Quickshell;
-import Quickshell.Wayland;
 import QtQuick;
 import QtQuick.Layouts;
 
-Scope {
-  Connections {
-    target: Polkit.agent;
+Item {
+  id: root;
 
-    function onIsActiveChanged() {
-      if (Polkit.agent.isActive) loader.open = true;
+  function deactivate() {
+    Sidebar.Controller.deactivate("polkit");
+  }
+
+  required property Polkit polkit;
+  readonly property bool isCurrent: Sidebar.Controller.current === "polkit";
+
+  anchors.fill: parent;
+
+  Keys.onPressed: (event) => {
+    if (!Sidebar.Controller.sidebarOpen || !root.isCurrent) return;
+    const key = event.key;
+
+    if (key === Qt.Key_Escape) {
+      root.polkit.flow.cancelAuthenticationRequest();
+      root.deactivate();
     }
   }
 
-  LazyLoader {
-    id: loader;
-    activeAsync: false;
+  Connections {
+    target: root.polkit.flow;
 
-    property bool open: false;
-
-    onOpenChanged: {
-      if (open) activeAsync = true;
+    function onIsCompletedChanged() {
+      if (target.isCompleted) root.deactivate();
     }
 
-    PanelWindow {
-      id: root;
-      color: "transparent";
+    function onIsCancelledChanged() {
+      if (target.isCancelled) root.deactivate();
+    }
+  }
 
+  Item {
+    id: content;
+    anchors.fill: parent;
+
+    ColumnLayout {
+      id: mainColumn;
+      anchors.centerIn: parent;
+      width: parent.width;
+      spacing: Consts.paddingWindow * 2;
+
+      RowLayout {
+        spacing: Consts.paddingWindow;
+        Layout.fillWidth: true;
+
+        Icon {
+          size: 64;
+          icon: root.polkit.flow.iconName;
+          fallback: "gtk-dialog-authentication";
+          isMask: false;
+        }
+
+        ColumnLayout {
+          spacing: Consts.marginCard;
+
+          Text {
+            Layout.fillWidth: true;
+            text: root.polkit.flow.message;
+            color: Globals.colours.fg;
+            font {
+              family: Consts.fontFamily;
+              pixelSize: Consts.smallHeadingFontSize;
+            }
+            wrapMode: Text.Wrap;
+          }
+
+          Text {
+            text: "An application is attempting to perform an action requiring elevated permissions. Authentication is required.";
+            Layout.fillWidth: true;
+            color: Globals.colours.grey;
+            font {
+              family: Consts.fontFamily;
+              pixelSize: Consts.mainFontSize;
+            }
+            wrapMode: Text.Wrap;
+          }
+
+        }
+      }
+
+      PassInput {
+        polkit: root.polkit;
+      }
+    }
+
+    Button {
       anchors {
-        top: true;
-        bottom: true;
-        left: true;
-        right: true;
+        right: parent.right;
+        top: mainColumn.bottom;
+        topMargin: Consts.marginCard;
       }
 
-      exclusionMode: Conf.polkit.hideApplications ? ExclusionMode.Ignore : ExclusionMode.Normal;
-      WlrLayershell.layer: WlrLayer.Overlay;
-      WlrLayershell.keyboardFocus: loader.open ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None;
+      label: "Cancel";
 
-      Connections {
-        target: Polkit.flow;
+      allRadius: true;
+      bg: Globals.colours.bgLight;
 
-        function onIsCompletedChanged() {
-          if (target.isCompleted) loader.open = false;
-        }
-
-        function onIsCancelledChanged() {
-          if (target.isCancelled) loader.open = false;
-        }
-      }
-
-      Loader {
-        id: wallpaperLoader;
-        anchors.fill: parent;
-        active: Conf.polkit.hideApplications;
-        source: Quickshell.shellPath("widgets/desktop/Wallpaper.qml");
-      }
-
-      Rectangle {
-        anchors.fill: parent;
-        color: Consts.bgDimmedColour;
-        visible: Conf.polkit.dimBackground;
-      }
-
-      ParallelAnimation {
-        running: loader.open;
-
-        Anims.NumberAnim {
-          target: wallpaperLoader.item;
-          property: "opacity";
-          from: 0; to: 1;
-          duration: Consts.animLen;
-        }
-        Anims.Slide {
-          target: wrapper;
-          grow: true;
-          slideOffset: 200;
-        }
-      }
-
-      SequentialAnimation {
-        running: !loader.open;
-
-        ParallelAnimation {
-          Anims.NumberAnim {
-            target: wallpaperLoader.item;
-            property: "opacity";
-            from: 1; to: 0;
-            duration: Consts.animLen;
-          }
-          Anims.Slide {
-            target: wrapper;
-            reverse: true;
-          }
-        }
-
-        PropertyAction {
-          target: loader;
-          property: "activeAsync";
-          value: false;
-        }
-      }
-
-      Item {
-        id: wrapper;
-        width: Conf.menu.width + Consts.gapLarge * 2;
-        height: parent.height;
-        focus: true;
-
-        Keys.onPressed: (event) => {
-          if (!loader.open) return;
-          const key = event.key;
-
-          if (key === Qt.Key_Escape) {
-            Polkit.flow.cancelAuthenticationRequest();
-            loader.open = false;
-          }
-        }
-
-        Shadow { target: background }
-
-        OutlinedRectangle {
-          id: background;
-
-          anchors {
-            fill: parent;
-            margins: Consts.gapLarge;
-          }
-
-          color: Globals.colours.bg;
-          radius: Consts.br;
-
-          disableAllOutlines: !Conf.polkit.backgroundOutline;
-        }
-
-        Item {
-          id: content;
-          anchors.fill: background;
-          anchors.margins: Consts.paddingWindow;
-
-          ColumnLayout {
-            id: mainColumn;
-            anchors.centerIn: parent;
-            width: parent.width;
-            spacing: Consts.paddingWindow * 2;
-
-            RowLayout {
-              spacing: Consts.paddingWindow;
-              Layout.fillWidth: true;
-
-              Icon {
-                size: 64;
-                icon: Polkit.flow.iconName;
-                fallback: "gtk-dialog-authentication";
-                isMask: false;
-              }
-
-              ColumnLayout {
-                spacing: Consts.marginCard;
-
-                Text {
-                  Layout.fillWidth: true;
-                  text: Polkit.flow.message;
-                  color: Globals.colours.fg;
-                  font {
-                    family: Consts.fontFamily;
-                    pixelSize: Consts.smallHeadingFontSize;
-                  }
-                  wrapMode: Text.Wrap;
-                }
-
-                Text {
-                  text: "An application is attempting to perform an action requiring elevated permissions. Authentication is required.";
-                  Layout.fillWidth: true;
-                  color: Globals.colours.grey;
-                  font {
-                    family: Consts.fontFamily;
-                    pixelSize: Consts.mainFontSize;
-                  }
-                  wrapMode: Text.Wrap;
-                }
-
-              }
-            }
-
-            PassInput {}
-          }
-
-          Button {
-            anchors {
-              right: parent.right;
-              top: mainColumn.bottom;
-              topMargin: Consts.marginCard;
-            }
-
-            label: "Cancel";
-
-            allRadius: true;
-            bg: Globals.colours.bgLight;
-
-            onClicked: {
-              Polkit.flow.cancelAuthenticationRequest();
-              loader.open = false;
-            }
-          }
-
-          Status {}
-        }
+      onClicked: {
+        root.polkit.flow.cancelAuthenticationRequest();
+        root.deactivate();
       }
     }
+
+    Status { polkit: root.polkit }
   }
 }

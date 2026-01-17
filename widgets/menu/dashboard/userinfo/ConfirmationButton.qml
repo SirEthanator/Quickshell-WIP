@@ -1,4 +1,4 @@
-import qs.singletons
+import qs.widgets.sidebar as Sidebar;
 import qs.components
 import Quickshell;
 import QtQuick;
@@ -26,7 +26,7 @@ Button {
     if (!!command) {
       Quickshell.execDetached(["sh", "-c", command]);
     }
-    Globals.states.menuOpen = false;
+    Sidebar.Controller.deactivate("menu");
   }
 
   onClicked: {

@@ -1,24 +1,33 @@
-pragma Singleton
-
-import Quickshell
-import Quickshell.Services.Polkit;
+import qs.widgets.sidebar as Sidebar
+import Quickshell.Services.Polkit
 import QtQuick;
 
-Singleton {
+Item {
   id: root;
 
   property bool isAuthenticating: false;
 
-  readonly property PolkitAgent agent: PolkitAgent { id: agent }
-  readonly property alias flow: agent.flow;
+  PolkitAgent {
+    id: polkitAgent;
+
+    onIsActiveChanged: {
+      if (isActive) {
+        Sidebar.Controller.activate("polkit");
+      }
+    }
+  }
+
+  readonly property PolkitAgent agent: polkitAgent;
+
+  readonly property alias flow: polkitAgent.flow;
 
   function submit(text: string) {
     isAuthenticating = true;
-    agent.flow.submit(text);
+    polkitAgent.flow.submit(text);
   }
 
   Connections {
-    target: root.agent.flow;
+    target: polkitAgent.flow;
 
     function onFailedChanged() {
       root.isAuthenticating = false;
@@ -28,4 +37,3 @@ Singleton {
     }
   }
 }
-

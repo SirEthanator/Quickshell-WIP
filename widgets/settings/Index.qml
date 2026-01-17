@@ -11,7 +11,7 @@ Scope {
   id: root;
 
   IpcHandler {
-    target: "confMenu";
+    target: "settings";
     function open(): void { loader.activeAsync = true }
     function close(): void { loader.activeAsync = false }
   }

@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import qs.singletons
+import qs.widgets.sidebar as Sidebar;
 import qs.components
 import qs.utils as Utils;
 import qs.animations as Anims;
@@ -18,7 +19,7 @@ Item {
   function execSelected() {
     if (model.values.length > 0) {
       model.values[currentIndex].execute();
-      Globals.states.menuOpen = false;
+      Sidebar.Controller.deactivate("menu");
     }
   }
 
@@ -115,7 +116,7 @@ Item {
 
         onClicked: {
           modelData.execute();
-          Globals.states.menuOpen = false;
+          Sidebar.Controller.deactivate("menu");
         }
 
         Rectangle {
@@ -131,8 +132,8 @@ Item {
           radius: Consts.br;
 
           border {
-            color: Conf.menu.moduleOutlines && !selected ? Globals.colours.outline : "transparent";
-            width: Conf.menu.moduleOutlines ? Consts.outlineSize : 0;
+            color: Conf.sidebar.moduleOutlines && !selected ? Globals.colours.outline : "transparent";
+            width: Conf.sidebar.moduleOutlines ? Consts.outlineSize : 0;
             pixelAligned: false;
           }
 

@@ -13,8 +13,8 @@ Rectangle {
   radius: Consts.br;
 
   border {
-    color: Conf.menu.moduleOutlines ? Globals.colours.outline : "transparent";
-    width: Conf.menu.moduleOutlines ? Consts.outlineSize : 0;
+    color: Conf.sidebar.moduleOutlines ? Globals.colours.outline : "transparent";
+    width: Conf.sidebar.moduleOutlines ? Consts.outlineSize : 0;
     pixelAligned: false;
   }
 

@@ -115,6 +115,33 @@ Singleton {
       }
     },
 
+    "sidebar": {
+      "Appearance": {
+        "dimBackground": {
+          "title": "Dim Background",
+          "description": "Defines whether the background behind the sidebar should be dimmed.",
+          "type": "bool"
+        },
+        "backgroundOutline": {
+          "title": "Background Outline",
+          "description": "Defines whether the sidebar's background should have an outline around it.",
+          "type": "bool"
+        },
+        "moduleOutlines": {
+          "title": "Module Outlines",
+          "description": "Defines whether items should have outlines around them.",
+          "type": "bool"
+        },
+        "width": {
+          "title": "Width",
+          "description": "Defines how wide the menu should be (px).",
+          "type": "int",
+          "max": 5000,
+          "min": 400
+        }
+      }
+    },
+
     "menu": {
       "Behaviour": {
         "dashModules": {
@@ -122,13 +149,6 @@ Singleton {
           "description": "Defines which modules should be shown on the dashboard.",
           "type": "list<string>",
           "options": stripped.dashModules
-        },
-        "width": {
-          "title": "Width",
-          "description": "Defines how wide the menu should be (px).",
-          "type": "int",
-          "max": 5000,
-          "min": 450
         }
       },
       "Appearance": {
@@ -146,21 +166,6 @@ Singleton {
         "capitaliseHostname": {
           "title": "Capitalise Hostname",
           "description": "Defines whether the system's hostname should be capitalised.",
-          "type": "bool"
-        },
-        "dimBackground": {
-          "title": "Dim Background",
-          "description": "Defines whether the background behind the menu should be dimmed.",
-          "type": "bool"
-        },
-        "backgroundOutline": {
-          "title": "Background Outline",
-          "description": "Defines whether the menu's background should have an outline around it.",
-          "type": "bool"
-        },
-        "moduleOutlines": {
-          "title": "Module Outlines",
-          "description": "Defines whether dashboard modules and launcher items should have outlines around them.",
           "type": "bool"
         }
       }
@@ -310,46 +315,29 @@ Singleton {
       "Behaviour": {
         "backlightName": {
           "title": "Backlight Name",
-          "description": `Defines the name of the display's backlight. This is used to get the path of the backlight: \`/sys/class/backlight/<backlightName>\`
+          "description": `Defines the name of the display's backlight. This is used to get the path of the backlight: /sys/class/backlight/<backlightName>
 
-  Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the correct one for your display by running ls /sys/class/backlight`,
+Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the correct one for your display by running: ls /sys/class/backlight`,
           "type": "string"
         }
       }
     },
 
-    "polkit": {
-      "Appearance": {
-        "dimBackground": {
-          "title": "Dim Background",
-          "description": "Defines whether the background should be dimmed.",
-          "type": "bool"
-        },
-        "hideApplications": {
-          "title": "Hide Applications",
-          "description": "Defines whether applications should be hidden when a prompt is shown.",
-          "type": "bool"
-        },
-        "backgroundOutline": {
-          "title": "Outline",
-          "description": "Defines whether the content's background should have an outline around it.",
-          "type": "bool"
-        }
-      }
-    }
+    // "polkit": {}
   })
 
   property GlobalConf global: GlobalConf {}
   property BarConf bar: BarConf {}
+  property SidebarConf sidebar: SidebarConf {}
   property MenuConf menu: MenuConf {}
   property DesktopConf desktop: DesktopConf {}
   property NotificationConf notifications: NotificationConf {}
   property LockConf lock: LockConf {}
   property OSDConf osd: OSDConf {}
-  property PolkitConf polkit: PolkitConf {}
+  // property PolkitConf polkit: PolkitConf {}
 
-  // Use when section is not available. If it is, accessing metadata
-  // directly is more efficient
+  // Use when section is not accessible. If it is, accessing metadata
+  // directly is more efficient.
   function getMetadata(category: string, option: string): var {
     for (const sectionName in metadata[category]) {
       const section = metadata[category][sectionName];

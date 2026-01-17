@@ -2,7 +2,7 @@ pragma ComponentBehavior: Bound
 
 import qs.singletons
 import qs.components
-import qs.widgets.polkit as Polkit;
+import qs.widgets.sidebar as Sidebar;
 import qs.animations as Anims;
 import Quickshell;
 import Quickshell.Wayland;
@@ -13,9 +13,7 @@ PanelWindow {
   readonly property bool bgIsDimmed:
     // If the menu's background is configured to be dimmed and the menu is open, we want to dim behind the bar too
     // However, if autohide is enabled, we don't need to do this
-       (Conf.menu.dimBackground && Globals.states.menuOpen && !Conf.bar.autohide)
-    || (Conf.polkit.dimBackground && Polkit.Polkit.agent.isActive)
-  ;
+    (Conf.menu.dimBackground && Sidebar.Controller.sidebarOpen && !Conf.bar.autohide);
 
   color: bgIsDimmed ? Consts.bgDimmedColour : "transparent";
 
@@ -48,7 +46,7 @@ PanelWindow {
   exclusionMode: Conf.bar.autohide ? ExclusionMode.Ignore : ExclusionMode.Auto;
 
   // Shows bar over fullscreen applications if the menu is open. This has no effect with autohide.
-  WlrLayershell.layer: Globals.states.menuOpen ? WlrLayer.Overlay : WlrLayer.Top;
+  WlrLayershell.layer: Sidebar.Controller.sidebarOpen ? WlrLayer.Overlay : WlrLayer.Top;
 
   Behavior on margins.top {
     NumberAnimation {

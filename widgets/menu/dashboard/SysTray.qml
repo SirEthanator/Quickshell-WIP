@@ -1,4 +1,5 @@
 import qs.singletons
+import qs.widgets.sidebar as Sidebar;
 import qs.components
 import Quickshell.Services.SystemTray;
 import QtQuick;
@@ -15,7 +16,7 @@ DashItem {
     columnSpacing: Consts.marginCard;
 
     TrayItems {
-      onActivated: Globals.states.menuOpen = false;
+      onActivated: Sidebar.Controller.deactivate("menu");
     }
   }
 }

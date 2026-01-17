@@ -1,17 +1,19 @@
 import qs.components
+import qs.widgets.polkit  // For LSP
 import QtQuick;
 import QtQuick.Layouts;
 
 PasswordInput {
   id: root;
 
+  required property Polkit polkit;
+
   Layout.fillWidth: true;
 
-  forceFocus: true;
-  disabled: Polkit.isAuthenticating;
+  disabled: polkit.isAuthenticating;
 
   onSubmit: (text) => {
-    Polkit.submit(text);
+    polkit.submit(text);
   }
 }
 

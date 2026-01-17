@@ -1,3 +1,4 @@
+import qs.singletons
 import QtQuick;
 
 Flickable {
@@ -32,7 +33,7 @@ Flickable {
         property: root.vertical ? "y" : "x";
         from: (root.vertical ? stack.height : stack.width) * (root.contentX >= 0 ? 1 : -1);
         to: 0;
-        duration: Consts.longAnimLen;
+        duration: Consts.transitionLen;
         easing.type: Easing.OutCubic;
       }
     }
@@ -42,7 +43,7 @@ Flickable {
         property: root.vertical ? "y" : "x";
         from: 0;
         to: (root.vertical ? -stack.height : -stack.width) * (root.contentX >= 0 ? 1 : -1);
-        duration: Consts.longAnimLen;
+        duration: Consts.transitionLen;
         easing.type: Easing.OutCubic;
       }
     }

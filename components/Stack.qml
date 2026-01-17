@@ -49,7 +49,7 @@ StackView {
     const item = items[currentIndex];
     if (item !== undefined) {
       root.replace(item);
-      items[currentIndex].visible = true;
+      item.visible = true;
     }
   }
 

@@ -82,7 +82,7 @@ WlSessionLockSurface {
     id: contentWrapper;
 
     height: parent.height;
-    width: 600;
+    width: Conf.sidebar.width;
 
     Shadow { target: contentBg }
 

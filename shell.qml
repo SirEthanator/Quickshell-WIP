@@ -3,15 +3,14 @@
 
 import qs.singletons
 import Quickshell;
-import "widgets/bar" as Bar;
-import "widgets/menu" as Menu;
-import "widgets/notifications" as Notifications;
-import "widgets/lock" as Lock;
-import "widgets/polkit" as Polkit;
-import "widgets/desktop" as Desktop;
-import "widgets/osd" as OSD;
-import "widgets/screensaver" as Screensaver;
-import "widgets/settings" as Settings;
+import qs.widgets.bar as Bar;
+import qs.widgets.sidebar as Sidebar;
+import qs.widgets.notifications as Notifications;
+import qs.widgets.lock as Lock;
+import qs.widgets.desktop as Desktop;
+import qs.widgets.osd as OSD;
+import qs.widgets.screensaver as Screensaver;
+import qs.widgets.settings as Settings;
 import Quickshell.Io;
 import QtQuick;
 
@@ -72,15 +71,14 @@ ShellRoot {
 
   // This needs to be created after the bar in order to
   // ensure exclusivity is handled correctly.
-  // When created before the bar, it does not
+  // If created before the bar, it does not
   // respect the bar's exclusive zone when in niri.
   Notifications.Popups {}
 
   // These can be created in any order as they use
   // lazy loaders - they are created after other windows
   Settings.Index {}
-  Menu.Index {}
+  Sidebar.Index {}
   OSD.Index {}
-  Polkit.Index {}
 }
 
