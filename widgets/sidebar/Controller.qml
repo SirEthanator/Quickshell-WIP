@@ -4,27 +4,41 @@ import Quickshell;
 import QtQuick;
 
 Singleton {
-  property list<string> active;
+  readonly property list<string> active: internal.active;
+  readonly property string finalActive: internal.finalActive;
   readonly property string current: active[active.length-1];
   readonly property bool sidebarOpen: active.length > 0;
 
+  QtObject {
+    id: internal;
+
+    property list<string> active;
+    property string finalActive;
+  }
+
+  onCurrentChanged: {
+    if (!!current) {
+      internal.finalActive = current;
+    }
+  }
+
   function activate(id: string) {
-    active.push(id);
+    internal.active.push(id);
   }
 
   function deactivate(id: string) {
-    const idx = active.indexOf(id);
+    const idx = internal.active.indexOf(id);
     if (idx !== -1) {
-      active.splice(active.indexOf(id), 1);
+      internal.active.splice(active.indexOf(id), 1);
     }
   }
 
   function toggle(id: string) {
-    const idx = active.indexOf(id);
+    const idx = internal.active.indexOf(id);
     if (idx === -1) {
-      active.push(id);
+      internal.active.push(id);
     } else {
-      active.splice(active.indexOf(id), 1);
+      internal.active.splice(active.indexOf(id), 1);
     }
   }
 

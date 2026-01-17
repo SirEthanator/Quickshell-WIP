@@ -116,19 +116,18 @@ Scope {
 
             currentIndex: Controller.idIdxMap[Controller.current];
 
-            // FIXME: Loader unloads before close animation finishes,
-            // causing content to disappear during the animation.
+            // FIXME: Open polkit -> Open menu -> Close menu = polkit disappears
 
             Loader {
               id: menuLoader;
               sourceComponent: Menu.Index {}
-              active: Controller.active.includes("menu");
+              active: Controller.active.includes("menu") || Controller.finalActive === "menu";
             }
 
             Loader {
               id: polkitLoader;
               sourceComponent: Polkit.Index { polkit: polkit }
-              active: Controller.active.includes("polkit");
+              active: Controller.active.includes("polkit") || Controller.finalActive === "polkit";
             }
           }
         }
