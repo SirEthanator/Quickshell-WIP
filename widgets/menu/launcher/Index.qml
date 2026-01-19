@@ -82,7 +82,6 @@ Item {
       highlightMoveVelocity: 0.8;
 
       flickableDirection: Flickable.VerticalFlick;
-      flickDeceleration: 2000;
       boundsBehavior: Flickable.StopAtBounds;
       ScrollBar.vertical: StyledScrollBar { scrollView: listView }
 

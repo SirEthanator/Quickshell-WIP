@@ -10,9 +10,9 @@ DashItem {
 
   Stack {
     id: stack;
-    vertical: true;
-    implicitHeight: info.height;
     Layout.fillWidth: true;
+
+    // directionOverride: Anims.Slide.Direction.Up;
 
     Info {
       id: info

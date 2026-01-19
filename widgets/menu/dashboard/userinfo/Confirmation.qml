@@ -11,9 +11,6 @@ Item {
 
   signal goBack;
 
-  anchors.left: parent.left;
-  anchors.right: parent.right;
-
   property int countdown;
 
   function startTimer() {

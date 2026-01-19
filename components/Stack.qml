@@ -1,63 +1,103 @@
 import qs.singletons
+import qs.animations as Anims;
 import QtQuick;
-import QtQuick.Controls;
 
-StackView {
+Item {
   id: root;
-  readonly property var items: children;
+  default property alias data: container.data;
+
   property int currentIndex: 0;
   property bool vertical: false;
-  property bool loopOutOfRange: false;
-  initialItem: items[currentIndex];
+  property bool wrapAround: false;
+  property bool changeFocus: false;
 
-  readonly property Transition defaultEnterTransition: Transition {
-    NumberAnimation {
-      property: "opacity";
-      from: 0;
-      to: 1;
-      duration: Consts.animLen;
-      easing.type: Easing.OutCubic;
-    }
+  property var directionOverride: null;
 
-    NumberAnimation {
-      property: root.vertical ? "y" : "x";
-      from: 200;
-      to: 0;
-      duration: Consts.animLen;
-      easing.type: Easing.OutCubic;
-    }
+  QtObject {
+    id: internal;
+
+    property int previousIndex: { previousIndex = root.currentIndex; }
+    property var currentItem: container.children[root.wrapAround ? root.currentIndex % container.children.length : root.currentIndex];
+    property bool ready: false;
   }
 
-  readonly property Transition defaultExitTransition: Transition {
-    NumberAnimation {
-      property: "opacity";
-      from: 1;
-      to: 0;
-      duration: Consts.animLen;
-      easing.type: Easing.OutCubic;
+  Component.onCompleted: internal.ready = true;
+
+  implicitHeight: internal.currentItem.implicitHeight;
+
+  Item {
+    id: container;
+    anchors.fill: parent;
+
+    onChildrenChanged: {
+      for (let i=0; i < children.length; i++) {
+        const item = children[i];
+        const isCurrent = (i === root.currentIndex);
+
+        item.visible = isCurrent;
+        item.focus = isCurrent;
+        item.width = Qt.binding(() => container.width)
+        item.height = Qt.binding(() => container.height)
+      }
     }
   }
-
-  replaceEnter: defaultEnterTransition;
-  replaceExit: defaultExitTransition;
 
   onCurrentIndexChanged: {
-    if (root.loopOutOfRange) {
-      if (currentIndex >= items.length) root.currentIndex = 0;
-      if (currentIndex < 0) root.currentIndex = items.length-1;
+    if (!internal.ready) return;
+
+    const itemCount = container.children.length;
+
+    if (wrapAround) {
+      // These need to return because they change currentIndex,
+      // so onCurrentIndexChanged will fire again.
+      if (currentIndex >= itemCount) {
+        currentIndex = currentIndex % itemCount;
+        return;
+      } else if (currentIndex < 0) {
+        currentIndex = (currentIndex * -1) % itemCount;
+        return;
+      }
+    } else if (currentIndex >= itemCount || currentIndex < 0) {
+      console.warn(`Stack: currentIndex out of range: ${currentIndex}`);
+      return;
     }
-    const item = items[currentIndex];
-    if (item !== undefined) {
-      root.replace(item);
-      item.visible = true;
-    }
+
+    const animDirection = typeof root.directionOverride === "number"
+      ? root.directionOverride
+      : root.vertical
+        ? (currentIndex > internal.previousIndex ? Anims.Slide.Direction.Up : Anims.Slide.Direction.Down)
+        : (currentIndex > internal.previousIndex ? Anims.Slide.Direction.Left : Anims.Slide.Direction.Right);
+
+    const exitTarget = container.children[internal.previousIndex];
+    exitAnim.target = exitTarget;
+    exitAnim.restart();
+
+    const target = container.children[currentIndex];
+    target.visible = true;
+    if (root.changeFocus) target.focus = true;
+
+    enterAnim.target = target;
+    enterAnim.direction = animDirection;
+    enterAnim.restart();
+
+    internal.previousIndex = currentIndex;
   }
 
-  Component.onCompleted: {
-    for (let i = 0; i<items.length; i++) {
-      if (i !== currentIndex) {
-        items[i].visible = false;
-      }
+  Anims.Slide {
+    id: enterAnim;
+    target: null;
+  }
+
+  NumberAnimation {
+    id: exitAnim;
+    property: "opacity";
+    easing.type: Easing.OutCubic;
+    duration: Consts.transitionLen;
+    from: 1;
+    to: 0;
+
+    onStopped: {
+      target.visible = false;
     }
   }
 }

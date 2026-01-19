@@ -9,8 +9,6 @@ import QtQuick.Layouts;
 
 GridLayout {
   id: root;
-  anchors.left: parent.left;
-  anchors.right: parent.right;
   columns: 3;
   rows: 2;
   columnSpacing: Consts.spacingButtonGroup;

@@ -27,8 +27,8 @@ Item {
       Sidebar.Controller.deactivate("menu");
 
     } else if ((key >= 48 && key <= 90) || (key >= 97 && key <= 122) || (key >= 186 && key <= 223)) {
-      appSearch.focus = true;
       appSearch.field.insert(0, event.text);
+      appSearch.focus = true;
 
     } else if (stack.currentIndex === 1) {
       if (key === Qt.Key_Return || key === Qt.Key_Enter) launcher.execSelected();
@@ -64,11 +64,11 @@ Item {
       }
     }
 
-    FlickableStack {
+    Stack {
       id: stack;
       Layout.fillHeight: true;
       Layout.fillWidth: true;
-      loopOutOfRange: true;
+      wrapAround: true;
 
       Dashboard.Index {}
       Launcher.Index { id: launcher; searchText: appSearch.field.text }

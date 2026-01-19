@@ -112,20 +112,14 @@ Scope {
               margins: Consts.paddingWindow;
             }
 
-            focus: true;
-
             currentIndex: Controller.idIdxMap[Controller.current];
 
-            // FIXME: Open polkit -> Open menu -> Close menu = polkit disappears
-
             Loader {
-              id: menuLoader;
               sourceComponent: Menu.Index {}
               active: Controller.active.includes("menu") || Controller.finalActive === "menu";
             }
 
             Loader {
-              id: polkitLoader;
               sourceComponent: Polkit.Index { polkit: polkit }
               active: Controller.active.includes("polkit") || Controller.finalActive === "polkit";
             }

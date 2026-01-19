@@ -30,6 +30,12 @@ Item {
     }
   }
 
+  onIsCurrentChanged: {
+    if (isCurrent) {
+      passInput.forceActiveFocus();
+    }
+  }
+
   Connections {
     target: root.polkit.flow;
 
@@ -92,6 +98,7 @@ Item {
       }
 
       PassInput {
+        id: passInput;
         polkit: root.polkit;
       }
     }

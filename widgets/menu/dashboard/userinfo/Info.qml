@@ -8,8 +8,6 @@ import QtQuick.Layouts;
 
 RowLayout {
   id: root;
-  anchors.left: parent.left;
-  anchors.right: parent.right;
   spacing: Consts.paddingCard;
   signal clicked(event: MouseEvent);
 
