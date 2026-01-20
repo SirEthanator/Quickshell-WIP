@@ -112,6 +112,8 @@ Scope {
               margins: Consts.paddingWindow;
             }
 
+            changeFocus: true;
+
             currentIndex: Controller.idIdxMap[Controller.current];
 
             Loader {

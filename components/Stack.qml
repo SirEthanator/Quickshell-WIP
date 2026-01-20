@@ -74,7 +74,7 @@ Item {
 
     const target = container.children[currentIndex];
     target.visible = true;
-    if (root.changeFocus) target.focus = true;
+    if (root.changeFocus) target.forceActiveFocus();
 
     enterAnim.target = target;
     enterAnim.direction = animDirection;
