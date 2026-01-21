@@ -62,6 +62,8 @@ Item {
       // These are passed into the shader:
       property vector2d resolution: Qt.vector2d(width, height);
       property real time: 0;
+      property vector4d mouse: Qt.vector4d(0, 0, 0, 0);
+
       FrameAnimation {
         running: true;
         onTriggered: {
@@ -69,8 +71,31 @@ Item {
         }
       }
 
-      vertexShader: Qt.resolvedUrl("shaders/default.vert.qsb");
       fragmentShader: Qt.resolvedUrl("shaders/"+Conf.desktop.shader+".frag.qsb");
+
+      MouseArea {
+        id: shaderMouseArea;
+        anchors.fill: parent;
+        hoverEnabled: true;
+
+        onPositionChanged: {
+          shader.mouse.x = mouseX;
+          shader.mouse.y = shader.height - mouseY;
+
+          if (pressed) {
+            shader.mouse.z = mouseX;
+            shader.mouse.w = shader.height - mouseY;
+          }
+        }
+        onPressed: {
+          shader.mouse.z = mouseX;
+          shader.mouse.w = mouseY;
+        }
+        onReleased: {
+          shader.mouse.z = -Math.abs(shader.mouse.z);
+          shader.mouse.w = -Math.abs(shader.mouse.w);
+        }
+      }
     }
   }
 }
