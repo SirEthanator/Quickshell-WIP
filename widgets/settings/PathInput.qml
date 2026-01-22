@@ -2,6 +2,8 @@ import qs.components
 import QtQuick;
 import QtQuick.Dialogs;
 
+// TODO: Path validation
+
 OptionInput {
   id: root;
 
@@ -12,12 +14,17 @@ OptionInput {
 
   function showDialog() {
     if (typeof root.metadata.getFileTypes !== "function") {
-      root.dialogNameFilters = ["All files (*)"];
-      return
+      dialogNameFilters = ["All files (*)"];
+      dialog.open();
+      return;
     }
 
     dialogNameFilters = root.metadata.getFileTypes(root.controller.getVal);
-    dialog.open();
+    if (dialogNameFilters === "Directories") {
+      folderDialog.open();
+    } else {
+      dialog.open();
+    }
   }
 
   Button {
@@ -34,8 +41,6 @@ OptionInput {
 
   FileDialog {
     id: dialog;
-    acceptLabel: "Select";
-    rejectLabel: "Cancel";
     fileMode: FileDialog.OpenFile;
 
     options: FileDialog.ReadOnly;
@@ -44,6 +49,15 @@ OptionInput {
     nameFilters: root.dialogNameFilters;
 
     onAccepted: root.field.text = selectedFile;
+  }
+
+  FolderDialog {
+    id: folderDialog;
+
+    options: FolderDialog.ReadOnly;
+    modality: Qt.ApplicationModal;
+
+    onAccepted: root.field.text = selectedFolder;
   }
 }
 

@@ -4,8 +4,9 @@ import qs.singletons
 import Quickshell;  // Despite what qmlls says, this is not unused. Do not remove.
 import QtQuick;
 import QtMultimedia;
+import Qt.labs.folderlistmodel;
 
-Item {
+Rectangle {
   id: root;
   anchors.fill: parent;
   // The default wallpaper must be set here instead of defaultConf.json because it uses an environment variable
@@ -23,6 +24,8 @@ Item {
 
   layer.enabled: true;
 
+  color: Conf.desktop.bgColour;
+
   VideoOutput {
     id: videoOut;
     anchors.fill: parent;
@@ -31,6 +34,8 @@ Item {
 
   Loader {
     active: Conf.desktop.wallpaperType === "video";
+    asynchronous: true;
+
     sourceComponent: MediaPlayer {
       id: videoPlayer;
       source: root.wallSource;
@@ -42,14 +47,54 @@ Item {
   }
 
   Loader {
-    active: Conf.desktop.wallpaperType === "regular";
+    active: Conf.desktop.wallpaperType === "regular" || Conf.desktop.wallpaperType === "slideshow";
+    asynchronous: true;
     anchors.fill: parent;
+
     sourceComponent: Image {
       id: img;
       anchors.fill: parent;
+
       asynchronous: true;
+      retainWhileLoading: true;
+
+      smooth: true;
+      antialiasing: true;
       fillMode: Image.PreserveAspectCrop;
-      source: root.wallSource;
+
+      // FIXME: Doesn't change when switching from slideshow to regular
+      source: Conf.desktop.wallpaperType === "regular" ? root.wallSource : undefined;
+
+      Loader {
+        // TODO: Use a singleton to manage wallpaper state, allows below comments to be done
+        // TODO: Sync slideshow across lock, desktop, and backdrop
+        // TODO: SetTheme on change for material
+
+        active: Conf.desktop.wallpaperType === "slideshow";
+        asynchronous: true;
+
+        Timer {
+          running: wallpaperModel.status === FolderListModel.Ready && parent.active;
+          interval: Conf.desktop.slideshowInterval * 1000;
+          triggeredOnStart: true;
+          repeat: true;
+
+          property int currentIndex: 0;
+
+          onTriggered: {
+            img.source = wallpaperModel.get(currentIndex % wallpaperModel.count, "fileUrl");
+            currentIndex++;
+          }
+        }
+
+        FolderListModel {
+          id: wallpaperModel;
+          folder: Qt.resolvedUrl(Conf.desktop.wallpaper);
+          nameFilters: ["*.png", "*.jpg", "*.jpeg", "*.svg"];
+          showDirs: false;
+          showOnlyReadable: true;
+        }
+      }
     }
   }
 

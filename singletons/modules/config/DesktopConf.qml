@@ -9,4 +9,6 @@ ConfigCategory {
   property int fadeSpeed: 2000;
   property string shader: "";
   property color bgColour: "black";
+
+  property int slideshowInterval: 30;
 }

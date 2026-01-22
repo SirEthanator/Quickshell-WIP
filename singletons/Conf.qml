@@ -174,7 +174,7 @@ Singleton {
     "desktop": {
       "General": {
         "wallpaper": {
-          "title": "Wallpaper",
+          "title": "Wallpaper Path",
           "description": "Defines the path to the wallpaper to show. Set to an empty string to use the default.",
           "type": "path",
           "getFileTypes": (getVal) => {
@@ -182,18 +182,16 @@ Singleton {
 
             switch (getVal("desktop", "wallpaperType")) {
               case "video":
-                result = ["Video files (*.mp4)"];
-              break;
+                return ["Video files (*.mp4)"];
+              case "slideshow":
+                return "Directories";
               default:
-                result = ["Image files (*.png *.jpg *.jpeg *.svg)"];
-              break;
+                return ["Image files (*.png *.jpg *.jpeg *.svg)"];
             }
-
-            return result;
           },
           "allowEmpty": true,
           "callback": (val, getVal) => {
-            if (getVal("global", "colourScheme") === "material") {
+            if (getVal("global", "colourScheme") === "material" && getVal("desktop", "wallpaperType") !== "slideshow") {
               Quickshell.execDetached(['bash', '-c', `${Quickshell.env("HOME")}/Scripts/SetTheme material --noconfirm --wallpaper '${val.replace('file://', '')}'`])
             }
           }
@@ -218,13 +216,24 @@ Singleton {
         },
         "shader": {
           "title": "Shader",
-          "description": "Defines the path to the shader to show. This is displayed on top of the wallpaper. Set to an empty string to disable.",
+          "description": "Defines the name of the shader to show. This is displayed on top of the wallpaper. Set to an empty string to disable. Additional shaders may be placed in <shellRoot>/widgets/desktop/shaders.",
           "type": "string"
         },
         "bgColour": {
           "title": "Background Colour",
           "description": "Defines the colour that should be shown behind everything. If 'hideWallpaper' is true, this colour will be displayed. It is also useful for shaders which look better with a solid colour behind them.",
           "type": "string"
+        }
+      },
+      "Slideshow": {
+        "_getIsVisible": (getVal) => {
+          return getVal("desktop", "wallpaperType") === "slideshow";
+        },
+        "slideshowInterval": {
+          "title": "Slideshow Interval",
+          "description": "Defines how long to show each wallpaper for in seconds.",
+          "type": "int",
+          "min": 1
         }
       }
     },

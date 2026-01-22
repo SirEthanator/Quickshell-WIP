@@ -35,9 +35,25 @@ Item {
       id: sectionColumn;
       required property string modelData;
 
+      readonly property var sectionMeta: Conf.metadata[root.controller.currentPage][sectionColumn.modelData];
+
       spacing: Consts.spacingButtonGroup;
 
       width: parent.width;
+
+      function getIsVisible() {
+        return typeof sectionMeta._getIsVisible === "function" ? sectionMeta._getIsVisible(root.controller.getVal) : true;
+      }
+
+      visible: getIsVisible();
+
+      Connections {
+        target: root.controller;
+
+        function onDataVersionChanged() {
+          sectionColumn.visible = sectionColumn.getIsVisible();
+        }
+      }
 
       Text {
         text: sectionColumn.modelData;
@@ -55,7 +71,7 @@ Item {
 
       Repeater {
         id: sectionItems;
-        model: Object.keys(Conf.metadata[root.controller.currentPage][sectionColumn.modelData]);
+        model: Object.keys(sectionColumn.sectionMeta).filter((key) => !key.startsWith("_"));
         delegate: Option {
           required property string modelData;
           modelLen: sectionItems.model.length;

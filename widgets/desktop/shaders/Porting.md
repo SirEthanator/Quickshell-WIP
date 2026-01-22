@@ -44,7 +44,7 @@ Shadertoy's x coordinates match with Qt's, but the y coordinates are opposite. I
 
 ### The Uniform Buffer
 
-Now, the uniform buffer must be defined. This is like a bridge between the QML code and the shader. The order is important here. The GPU processes data in blocks of 16 bytes, so if consecutive values cannot fit into a block, padding will be automatically added to compensate. It is best to avoid this when possible, as it can reduce efficiency. You should always begin with `qt_Matrix` and `qt_Opacity` as these are always sent by Qt.
+Now, the uniform buffer must be defined. This is like a bridge between the QML code and the shader. The order is important here. The GPU processes data in blocks of 16 bytes, so if consecutive values cannot fit into a block, padding will be automatically added to compensate. It is best to avoid this when possible, as it can reduce efficiency. You must always begin with `qt_Matrix` and `qt_Opacity` in this order, as these are expected by Qt.
 
 Macros are used so that the rest of the shader can continue to use iTime, iResolution, etc. but it will use to the values from ubuf, sort of like aliases.
 

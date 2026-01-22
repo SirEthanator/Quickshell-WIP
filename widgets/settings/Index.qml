@@ -21,9 +21,13 @@ Scope {
     function onLaunchConfMenu() { loader.activeAsync = true }
   }
 
+  // TODO: Controller singleton
+
   property string currentPage: "global";
   property var changedProperties: ({});
   property int changeCount: 0;
+  // Incremented on every change - for listening for changes
+  property int dataVersion: 0;
 
   function getVal(category: string, opt: string): var {
     if (
@@ -44,6 +48,7 @@ Scope {
       delete changedProperties[category][prop];
     }
     changeCount = getChangeCount();
+    dataVersion++;
   }
 
   function getChangeCount() {
@@ -87,7 +92,7 @@ Scope {
       id: window;
       color: Globals.colours.bg;
 
-      minimumWidth: 800;
+      minimumWidth: 750;
       minimumHeight: 200;
 
       visible: true;
