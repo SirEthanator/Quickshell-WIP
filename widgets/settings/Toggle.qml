@@ -1,15 +1,15 @@
 import qs.singletons
+import qs.widgets.settings // For LSP
 import qs.animations as Anims;
 import QtQuick;
 
 MouseArea {
   id: root;
 
-  required property var controller;
   required property string page;
   required property string propName;
 
-  property bool checked: controller.getVal(page, propName)
+  property bool checked: Controller.getVal(page, propName)
 
   property color fg: Globals.colours.fg;
   property color bg: containsMouse ? Globals.colours.bgHover : Globals.colours.bg;
@@ -28,8 +28,9 @@ MouseArea {
   }
 
   onCheckedChanged: {
-    if (completed)
-      controller.changeVal(page, propName, checked);
+    if (completed) {
+      Controller.changeVal(page, propName, checked);
+    }
   }
 
   Rectangle {

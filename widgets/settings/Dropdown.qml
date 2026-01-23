@@ -2,17 +2,17 @@ pragma ComponentBehavior: Bound
 
 import qs.singletons
 import qs.components
+import qs.widgets.settings // For LSP
 import qs.animations as Anims;
 import QtQuick;
 
 Rectangle {
   id: root;
-  required property var controller;
   required property var options;
   required property string page;
   required property string propName;
 
-  property int currentIndex: Object.keys(options).indexOf(controller.getVal(page, propName));
+  property int currentIndex: Object.keys(options).indexOf(Controller.getVal(page, propName));
   property string displayText: model[currentIndex].title;
 
   property int padding: Consts.paddingButton;
@@ -80,7 +80,7 @@ Rectangle {
 
   onCurrentIndexChanged: {
     if (completed) {
-      controller.changeVal(page, propName, model[currentIndex].key);
+      Controller.changeVal(page, propName, model[currentIndex].key);
     }
   }
 

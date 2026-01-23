@@ -1,4 +1,5 @@
 import qs.components
+import qs.widgets.settings // For LSP
 import QtQuick;
 import QtQuick.Dialogs;
 
@@ -19,7 +20,7 @@ OptionInput {
       return;
     }
 
-    dialogNameFilters = root.metadata.getFileTypes(root.controller.getVal);
+    dialogNameFilters = root.metadata.getFileTypes();
     if (dialogNameFilters === "Directories") {
       folderDialog.open();
     } else {

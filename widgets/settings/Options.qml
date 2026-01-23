@@ -1,13 +1,13 @@
 pragma ComponentBehavior: Bound
 
 import qs.singletons
+import qs.widgets.settings // For LSP
 import QtQuick;
 import QtQuick.Layouts;
 
 Item {
   id: root;
 
-  required property var controller;
   Layout.fillWidth: true;
   Layout.fillHeight: true;
 
@@ -29,26 +29,26 @@ Item {
     clip: true;
 
     boundsBehavior: dragging ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds;
-    model: Object.keys(Conf.metadata[root.controller.currentPage]);
+    model: Object.keys(Conf.metadata[Controller.currentPage]);
 
     delegate: ColumnLayout {
       id: sectionColumn;
       required property string modelData;
 
-      readonly property var sectionMeta: Conf.metadata[root.controller.currentPage][sectionColumn.modelData];
+      readonly property var sectionMeta: Conf.metadata[Controller.currentPage][sectionColumn.modelData];
 
       spacing: Consts.spacingButtonGroup;
 
       width: parent.width;
 
       function getIsVisible() {
-        return typeof sectionMeta._getIsVisible === "function" ? sectionMeta._getIsVisible(root.controller.getVal) : true;
+        return typeof sectionMeta._getIsVisible === "function" ? sectionMeta._getIsVisible() : true;
       }
 
       visible: getIsVisible();
 
       Connections {
-        target: root.controller;
+        target: Controller;
 
         function onDataVersionChanged() {
           sectionColumn.visible = sectionColumn.getIsVisible();
@@ -75,10 +75,9 @@ Item {
         delegate: Option {
           required property string modelData;
           modelLen: sectionItems.model.length;
-          controller: root.controller;
           propName: modelData;
           section: sectionColumn.modelData;
-          page: root.controller.currentPage;
+          page: Controller.currentPage;
         }
       }
     }

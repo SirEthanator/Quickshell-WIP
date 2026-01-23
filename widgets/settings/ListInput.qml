@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import qs.singletons
 import qs.components
+import qs.widgets.settings // For LSP
 import qs.animations as Anims;
 import Quickshell;
 import QtQuick;
@@ -11,7 +12,6 @@ ColumnLayout {
   id: root;
   spacing: Consts.marginCard;
 
-  required property var controller;
   required property string page;
   required property string propName;
   required property var options;
@@ -28,17 +28,17 @@ ColumnLayout {
   width: parent.width;
 
   property ScriptModel currentVal: ScriptModel {
-    values: root.controller.getVal(root.page, root.propName)
+    values: Controller.getVal(root.page, root.propName)
 
     onValuesChanged: {
       if (root.completed)
-        root.controller.changeVal(root.page, root.propName, values);
+        Controller.changeVal(root.page, root.propName, values);
     }
   }
 
   onImplicitHeightChanged: height = implicitHeight;
 
-  Anims.NumberTransition on height { enabled: completed }
+  Anims.NumberTransition on height { enabled: root.completed }
 
   RowLayout {
     id: buttons;

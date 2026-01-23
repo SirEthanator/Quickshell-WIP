@@ -2,8 +2,8 @@ pragma Singleton
 
 import qs.utils as Utils;
 import qs.singletons.modules.config
+import qs.widgets.settings as Settings;
 import Quickshell;
-import Quickshell.Io;
 import QtQuick;
 
 Singleton {
@@ -177,10 +177,10 @@ Singleton {
           "title": "Wallpaper Path",
           "description": "Defines the path to the wallpaper to show. Set to an empty string to use the default.",
           "type": "path",
-          "getFileTypes": (getVal) => {
+          "getFileTypes": () => {
             let result;
 
-            switch (getVal("desktop", "wallpaperType")) {
+            switch (Settings.Controller.getVal("desktop", "wallpaperType")) {
               case "video":
                 return ["Video files (*.mp4)"];
               case "slideshow":
@@ -190,8 +190,11 @@ Singleton {
             }
           },
           "allowEmpty": true,
-          "callback": (val, getVal) => {
-            if (getVal("global", "colourScheme") === "material" && getVal("desktop", "wallpaperType") !== "slideshow") {
+          "callback": (val) => {
+            if (
+              Settings.Controller.getVal("global", "colourScheme") === "material"
+              && Settings.Controller.getVal("desktop", "wallpaperType") !== "slideshow"
+            ) {
               Utils.SetTheme.setTheme("material", `--wallpaper '${val.replace('file://', '')}'`);
             }
           }
@@ -226,8 +229,8 @@ Singleton {
         }
       },
       "Slideshow": {
-        "_getIsVisible": (getVal) => {
-          return getVal("desktop", "wallpaperType") === "slideshow";
+        "_getIsVisible": () => {
+          return Settings.Controller.getVal("desktop", "wallpaperType") === "slideshow";
         },
         "slideshowInterval": {
           "title": "Interval",

@@ -2,13 +2,12 @@ pragma ComponentBehavior: Bound
 
 import qs.singletons
 import qs.components
+import qs.widgets.settings // For LSP
 import QtQuick;
 import QtQuick.Layouts;
 
 Rectangle {
   id: root;
-
-  required property var controller;
 
   Layout.fillHeight: true;
   implicitWidth: 250;
@@ -57,7 +56,7 @@ Rectangle {
         required property int index;
         label: Conf[modelData].category;
 
-        active: modelData === root.controller.currentPage;
+        active: modelData === Controller.currentPage;
 
         Layout.fillWidth: true;
 
@@ -65,7 +64,7 @@ Rectangle {
         blRadius: index === itemRepeater.model.length - 1; brRadius: blRadius;
         bg: Globals.colours.bg;
 
-        onClicked: root.controller.currentPage = modelData;
+        onClicked: Controller.currentPage = modelData;
 
         centreLabel: false;
       }
@@ -76,7 +75,7 @@ Rectangle {
     Button {
       Layout.fillWidth: true;
 
-      property int changeCount: root.controller.changeCount;
+      property int changeCount: Controller.changeCount;
       visible: changeCount > 0;
 
       icon: "filesave-symbolic";
@@ -88,7 +87,7 @@ Rectangle {
       invertTextOnPress: false;
       allRadius: true;
 
-      onClicked: root.controller.apply();
+      onClicked: Controller.apply();
     }
   }
 }

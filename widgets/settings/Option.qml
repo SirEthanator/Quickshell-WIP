@@ -5,7 +5,6 @@ import QtQuick.Layouts;
 Rectangle {
   id: root;
 
-  required property var controller;
   required property string page;
   required property string section;
   required property var propName;
@@ -81,7 +80,6 @@ Rectangle {
           let props = {
             page: root.page,
             propName: root.propName,
-            controller: root.controller
           }
 
           if (root.metadata.type === "path") {
@@ -117,7 +115,6 @@ Rectangle {
         let props = {
           page: root.page,
           propName: root.propName,
-          controller: root.controller
         }
         let show = true;
 
