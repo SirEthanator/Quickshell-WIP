@@ -27,7 +27,9 @@ Singleton {
       ? defaultWallBasePath
       : `${defaultWallBasePath}/Accent.png`;
 
-  property url wallSource: Conf.desktop.wallpaperType !== "slideshow" ? wallPath : undefined;
+  property url wallSource: Conf.desktop.wallpaperType === "slideshow" ? slideshowCurrentPath : wallPath;
+
+  property url slideshowCurrentPath: undefined;
 
   Timer {
     running: Conf.desktop.wallpaperType === "slideshow" && wallpaperModel.status === FolderListModel.Ready;
@@ -37,22 +39,14 @@ Singleton {
 
     property int currentIndex: 0;
 
-    // FIXME: Wallpaper doesn't change when changed from slideshow -> regular
-
     onTriggered: {
-      root.wallSource = wallpaperModel.get(currentIndex % wallpaperModel.count, "fileUrl");
+      root.slideshowCurrentPath = wallpaperModel.get(currentIndex % wallpaperModel.count, "fileUrl");
       currentIndex++;
 
       if (Conf.global.colourScheme === "material" && Conf.desktop.slideshowRegenMaterial) {
         Utils.SetTheme.setTheme("material", `--nonotify --wallpaper '${root.wallSource.toString().replace('file://', '')}'`);
       }
     }
-
-    // onRunningChanged: {
-    //   if (!running && Conf.desktop.wallpaperType !== "slideshow") {
-    //     root.wallSource = Qt.binding(() => root.wallPath);
-    //   }
-    // }
   }
 
   FolderListModel {
