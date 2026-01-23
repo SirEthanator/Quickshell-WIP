@@ -1,6 +1,6 @@
 pragma Singleton
 
-import qs.utils
+import qs.utils as Utils;
 import qs.singletons.modules.config
 import Quickshell;
 import Quickshell.Io;
@@ -192,13 +192,13 @@ Singleton {
           "allowEmpty": true,
           "callback": (val, getVal) => {
             if (getVal("global", "colourScheme") === "material" && getVal("desktop", "wallpaperType") !== "slideshow") {
-              Quickshell.execDetached(['bash', '-c', `${Quickshell.env("HOME")}/Scripts/SetTheme material --noconfirm --wallpaper '${val.replace('file://', '')}'`])
+              Utils.SetTheme.setTheme("material", `--wallpaper '${val.replace('file://', '')}'`);
             }
           }
         },
         "backdropWallpaper": {
           "title": "Backdrop Wallpaper",
-          "description": "Defines whether a second wallpaper component with blur should be shown. This is intended for placing in niri's workspace overview. If it is not, it may show on top of the normal wallpaper. It is recommended to disable this if you are not using it. It may have a negative performance impact, especially with video wallpapers. It has the namespace 'backdrop-wallpaper'",
+          "description": "Defines whether a second wallpaper component with blur should be shown. This is intended for placing in niri's workspace overview. If it is not, it may show on top of the normal wallpaper. It is recommended to disable this if you are not using it. It may have a negative performance impact, especially with shaders and video wallpapers. It has the namespace 'backdrop-wallpaper'",
           "type": "bool"
         },
         "wallpaperType": {
@@ -230,10 +230,15 @@ Singleton {
           return getVal("desktop", "wallpaperType") === "slideshow";
         },
         "slideshowInterval": {
-          "title": "Slideshow Interval",
+          "title": "Interval",
           "description": "Defines how long to show each wallpaper for in seconds.",
           "type": "int",
           "min": 1
+        },
+        "slideshowRegenMaterial": {
+          "title": "Regenerate Material Colours",
+          "description": "Defines whether material colours should be regenerated when the wallpaper changes. Not recommended for short intervals.",
+          "type": "bool"
         }
       }
     },
@@ -368,7 +373,7 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
   }
 
   function setColours(scheme: string): string {
-    const validate = () => Validate.validateObjKey(scheme, Globals.schemes, "Failed to set colour scheme");
+    const validate = () => Utils.Validate.validateObjKey(scheme, Globals.schemes, "Failed to set colour scheme");
     return setConf("global", "colourScheme", scheme, validate);
   }
 
@@ -379,15 +384,7 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
   function switchTheme(scheme: string): string {
     const validationResult = setColours(scheme);
     if (!!validationResult) return validationResult
-    setTheme.scheme = scheme;
-    setTheme.startDetached();
+    Utils.SetTheme.setTheme(scheme, "");
     return "";
-  }
-
-  Process {
-    id: setTheme;
-
-    property string scheme: "";
-    command: ["sh", "-c", `${Quickshell.env("HOME")}/Scripts/SetTheme ${scheme} --noconfirm`];
   }
 }

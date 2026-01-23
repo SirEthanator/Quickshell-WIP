@@ -10,5 +10,6 @@ ConfigCategory {
   property string shader: "";
   property color bgColour: "black";
 
-  property int slideshowInterval: 30;
+  property int slideshowInterval: 300;
+  property bool slideshowRegenMaterial: false;
 }
