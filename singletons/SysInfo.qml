@@ -30,11 +30,9 @@ Singleton {
     ? "brightness-high-symbolic"
     : "brightness-low-symbolic";
 
-  // TODO: Cleanup date and time stuff
-  property alias clock: clock;
-  property string time: Qt.formatDateTime(clock.date, 'hh:mm:ss ap');
-  property string date: Qt.formatDateTime(clock.date, 'ddd dd/MM/yy');
-  property string dateAndTime: `${date} | ${time}`;
+  function dateTime(formatStr: string): string {
+    return Qt.formatDateTime(clock.date, formatStr);
+  }
 
   property string username: "";
   property string hostname: "";

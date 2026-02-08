@@ -48,14 +48,10 @@ Item {
       return Math.max(0, radius - root.outlineSize);
     }
 
-    topLeftRadius: (root.leftOutline && root.topOutline) ? getRadius(root.topLeftRadius) :
-                   (!root.leftOutline && !root.topOutline) ? outline.radius : 0;
-    topRightRadius: (root.rightOutline && root.topOutline) ? getRadius(root.topRightRadius) :
-                    (!root.rightOutline && !root.topOutline) ? outline.radius : 0;
-    bottomLeftRadius: (root.leftOutline && root.bottomOutline) ? getRadius(root.bottomLeftRadius) :
-                      (!root.leftOutline && !root.bottomOutline) ? outline.radius : 0;
-    bottomRightRadius: (root.rightOutline && root.bottomOutline) ? getRadius(root.bottomRightRadius) :
-                       (!root.rightOutline && !root.bottomOutline) ? outline.radius : 0;
+    topLeftRadius: (root.leftOutline && root.topOutline) ? getRadius(root.topLeftRadius) : (!root.leftOutline && !root.topOutline) ? outline.radius : 0
+    topRightRadius: (root.rightOutline && root.topOutline) ? getRadius(root.topRightRadius) : (!root.rightOutline && !root.topOutline) ? outline.radius : 0
+    bottomLeftRadius: (root.leftOutline && root.bottomOutline) ? getRadius(root.bottomLeftRadius) : (!root.leftOutline && !root.bottomOutline) ? outline.radius : 0
+    bottomRightRadius: (root.rightOutline && root.bottomOutline) ? getRadius(root.bottomRightRadius) : (!root.rightOutline && !root.bottomOutline) ? outline.radius : 0
   }
 }
 

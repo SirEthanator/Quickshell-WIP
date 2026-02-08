@@ -84,6 +84,20 @@ Singleton {
           "type": "int",
           "max": 1000,
           "min": 0
+        },
+        "tooltipShowDelay": {
+          "title": "Tooltip Show Delay",
+          "description": "Defines how long modules must be hovered before tooltips show in milliseconds.",
+          "type": "int",
+          "max": 60000,
+          "min": 0
+        },
+        "tooltipHideDelay": {
+          "title": "Tooltip Hide Delay",
+          "description": "Defines how long tooltips/modules must not be hovered for before tooltips are hidden.",
+          "type": "int",
+          "max": 60000,
+          "min": 0
         }
       },
       "Appearance": {

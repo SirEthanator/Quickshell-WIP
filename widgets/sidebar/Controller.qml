@@ -1,5 +1,6 @@
 pragma Singleton
 
+import qs.widgets.bar as Bar;
 import Quickshell;
 import QtQuick;
 
@@ -14,6 +15,13 @@ Singleton {
 
     property list<string> active;
     property string finalActive;
+  }
+
+  onSidebarOpenChanged: {
+    // Close bar tooltips & menus when the sidebar is opened
+    if (sidebarOpen) {
+      Bar.TooltipController.clearTooltip();
+    }
   }
 
   onCurrentChanged: {
@@ -31,6 +39,10 @@ Singleton {
     if (idx !== -1) {
       internal.active.splice(active.indexOf(id), 1);
     }
+  }
+
+  function deactivateAll() {
+    internal.active = [];
   }
 
   function toggle(id: string) {

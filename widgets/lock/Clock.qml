@@ -6,7 +6,7 @@ ColumnLayout {
   Layout.alignment: Qt.AlignHCenter;
 
   Text {
-    text: Qt.formatDateTime(SysInfo.clock.date, "hh:mm AP");
+    text: SysInfo.dateTime("hh:mm AP");
     Layout.alignment: Qt.AlignHCenter;
 
     color: Globals.colours.fg;
@@ -21,7 +21,7 @@ ColumnLayout {
   }
 
   Text {
-    text: Qt.formatDateTime(SysInfo.clock.date, "dddd MMM yy");
+    text: SysInfo.dateTime("dddd MMM yy");
     Layout.alignment: Qt.AlignHCenter;
 
     color: Globals.colours.fg;

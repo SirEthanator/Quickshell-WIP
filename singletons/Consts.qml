@@ -11,6 +11,7 @@ Singleton {
 
   readonly property WallpaperTypes wallpaperTypes: WallpaperTypes {}
 
+  readonly property int gapSmall: gap / 2;
   readonly property int gap: Utils.Session.gap;  // Size of Hyprland/niri gap
   readonly property int gapLarge: gap + 8;
 

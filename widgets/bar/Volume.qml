@@ -8,6 +8,17 @@ BarModule {
 
   readonly property string volume: `${SysInfo.volume}%`;
 
+  tooltip: Tooltip {
+    Text {
+      text: `Volume - ${root.volume}`;
+      color: Globals.colours.fg;
+      font {
+        family: Consts.fontFamily;
+        pixelSize: Consts.mainFontSize;
+      }
+    }
+  }
+
   icon: SysInfo.volumeIcon;
   iconbgColour: Globals.colours.volume;
 

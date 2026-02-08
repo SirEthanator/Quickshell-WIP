@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import qs.singletons
 import qs.components
+import qs.widgets.bar
 import qs.widgets.sidebar as Sidebar;
 import qs.animations as Anims;
 import Quickshell;
@@ -139,6 +140,20 @@ PanelWindow {
           anchors.right: parent.right;
         }
       }
+    }
+  }
+
+  TooltipProvider {
+    window: root;
+  }
+
+  readonly property bool captureKeyboard: !!TooltipController?.activeTooltip?.isMenu;
+  WlrLayershell.keyboardFocus: captureKeyboard ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None;
+
+  Item {
+    focus: root.captureKeyboard;
+    Keys.onEscapePressed: {
+      TooltipController.clearTooltip();
     }
   }
 }

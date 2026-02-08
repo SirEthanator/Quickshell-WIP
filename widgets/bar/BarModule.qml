@@ -1,5 +1,6 @@
 import qs.singletons
 import qs.components
+import qs.widgets.bar
 import qs.animations as Anims;
 import QtQuick;
 import QtQuick.Layouts;
@@ -8,14 +9,16 @@ OutlinedRectangle {
   id: root
   default property alias data: content.data;  // Place children in the RowLayout
 
-  property color background: Globals.colours.bgLight;
+  property color background: menu !== null && mouseArea.containsMouse ? Globals.colours.bgHover : Globals.colours.bgLight;
   property string icon;  // If this is an empty string the icon will not be displayed
   property Component customIcon;
   property color iconColour: background;
   property color iconbgColour: Globals.colours.accent;
   property bool forceIconbgColour: false;
-  property int padding: Consts.paddingModule;
+  property int padding: Consts.paddingModule; // NOTE: L+R padding only. T+B is based on bar height.
   property bool outline: Conf.bar.moduleOutlines;
+  property Tooltip tooltip: null;
+  property Tooltip menu: null;
 
   property alias mouseArea: mouseArea;
   property alias hoverEnabled: mouseArea.hoverEnabled;
@@ -42,8 +45,6 @@ OutlinedRectangle {
   implicitWidth: (root.icon || root.customIcon ? content.implicitWidth + root.padding : content.implicitWidth + root.padding*2) + (root.outline ? outlineSize*2 : 0);
   // WARN: Don't remove 'root.' from the above property, it causes issues
 
-  // NOTE: paddingModule doesn't affect top and bottom padding. That is controlled by the bar's height.
-
   signal clicked(event: MouseEvent);
   signal wheel(event: WheelEvent);
 
@@ -51,9 +52,66 @@ OutlinedRectangle {
   Anims.NumberTransition on implicitWidth {}
   clip: true;
 
+  property bool showTooltip: root.tooltip !== null
+    && TooltipController?.activeTooltip?.isMenu !== true
+    && (mouseArea.containsMouse || (tooltipIsActive && TooltipController.tooltipHovered));
+
+  readonly property bool tooltipIsActive: TooltipController.activeTooltip === root.tooltip;
+  readonly property bool menuIsActive: TooltipController.activeTooltip === root.menu;
+
+  Timer {
+    id: tooltipShowTimer;
+    interval: Conf.bar.tooltipShowDelay;
+    repeat: false;
+    onTriggered: {
+      TooltipController.activeTooltip = root.tooltip;
+      TooltipController.activeModule = root;
+    }
+  }
+
+  Timer {
+    id: tooltipHideTimer;
+    interval: Conf.bar.tooltipHideDelay;
+    repeat: false;
+    onTriggered: {
+      if (root.tooltipIsActive) {
+        TooltipController.clearTooltip();
+      }
+    }
+  }
+
+  onShowTooltipChanged: {
+    if (showTooltip) {
+      tooltipHideTimer.stop();
+      tooltipShowTimer.restart();
+    } else {
+      tooltipShowTimer.stop();
+      tooltipHideTimer.restart();
+    }
+  }
+
   MouseArea {
     id: mouseArea;
     anchors.fill: parent.content;
+
+    // Needed when there is a menu for hover colour
+    hoverEnabled: root.tooltip !== null || root.menu !== null;
+
+    onClicked: (event) => {
+      root.clicked(event);
+
+      if (root.menu === null) return;
+      if (root.menuIsActive) {
+        TooltipController.clearTooltip();
+      } else {
+        root.menu.isMenu = true;
+        TooltipController.activeTooltip = root.menu;
+        TooltipController.activeModule = root;
+      }
+    }
+
+    onWheel: event => root.wheel(event);
+
     RowLayout {
       id: content;
 
@@ -94,10 +152,5 @@ OutlinedRectangle {
         }
       }
     }
-
-    onClicked: event => root.clicked(event);
-    onWheel: event => root.wheel(event);
   }
-
 }
-
