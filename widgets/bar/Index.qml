@@ -47,8 +47,10 @@ PanelWindow {
   exclusionMode: Conf.bar.autohide ? ExclusionMode.Ignore : ExclusionMode.Auto;
 
   // Shows bar over fullscreen applications if the sidebar or a menu is open.
-  readonly property bool isOverlaying: Sidebar.Controller.sidebarOpen || TooltipController?.activeTooltip?.isMenu;
-  WlrLayershell.layer: isOverlaying ? WlrLayer.Overlay : WlrLayer.Top;
+  // WARN: Do not move this condition into a separate property, it causes strange, unwanted behaviour.
+  WlrLayershell.layer: Sidebar.Controller.sidebarOpen || TooltipController?.activeTooltip?.isMenu
+    ? WlrLayer.Overlay
+    : WlrLayer.Top;
 
   Behavior on margins.top {
     NumberAnimation {
