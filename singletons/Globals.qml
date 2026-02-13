@@ -67,7 +67,6 @@ Singleton {
   PersistentProperties {
     id: persist
 
-    property bool barHidden: false;
     property bool screensaverActive: false;
   }
 

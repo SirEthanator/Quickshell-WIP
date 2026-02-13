@@ -40,14 +40,15 @@ PanelWindow {
   // If the bar is autohiding and the always-on-screen part is hovered, the top margin will be 0. The top gap is handled by height and the Rectangle's margins.
   // If autohiding, the gap is subtracted from height to keep a transparent part of the bar on screen so it can be hovered.
   // We then add 1 just to move it a little bit higher to prevent a one pixel tall sliver of the bar showing when it shouldn't.
-  margins.top: - ((Conf.bar.autohide && !hoverArea.containsMouse) || Globals.states.barHidden
-    ? root.height - (Conf.bar.autohide ? Consts.gap : 0) + 1
-    : 0);
+  margins.top: (Conf.bar.autohide && !hoverArea.containsMouse && !TooltipController?.activeTooltip?.isMenu)
+    ? -1 * (root.height - Consts.gap)
+    : 0;
 
   exclusionMode: Conf.bar.autohide ? ExclusionMode.Ignore : ExclusionMode.Auto;
 
-  // Shows bar over fullscreen applications if the menu is open. This has no effect with autohide.
-  WlrLayershell.layer: Sidebar.Controller.sidebarOpen ? WlrLayer.Overlay : WlrLayer.Top;
+  // Shows bar over fullscreen applications if the sidebar or a menu is open.
+  readonly property bool isOverlaying: Sidebar.Controller.sidebarOpen || TooltipController?.activeTooltip?.isMenu;
+  WlrLayershell.layer: isOverlaying ? WlrLayer.Overlay : WlrLayer.Top;
 
   Behavior on margins.top {
     NumberAnimation {

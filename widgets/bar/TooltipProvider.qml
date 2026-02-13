@@ -13,7 +13,8 @@ PopupWindow {
 
   anchor {
     window: root.window;
-    rect.y: root.window.height;
+    // Subtract gap if autohiding to remove extra space for hover area
+    rect.y: root.window.height - (Conf.bar.autohide ? Consts.gap : 0);
     edges: Edges.Top;
     gravity: Edges.Bottom;
   }
