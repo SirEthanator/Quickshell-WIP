@@ -8,7 +8,6 @@ import QtQuick;
 Repeater {
   id: root;
   model: SystemTray.items;
-  property var window;
 
   signal activated;
 
@@ -49,12 +48,12 @@ Repeater {
       id: menuAnchor;
       menu: trayItem.modelData.menu;
 
-      anchor.window: root.window ?? trayItem.QsWindow.window;
+      anchor.window: trayItem.QsWindow.window;
       anchor.adjustment: PopupAdjustment.Flip;
 
       anchor.onAnchoring: {
-        const win = root.window ?? trayItem.QsWindow.window;
-        const widgetRect = win.contentItem.mapFromItem(trayItem, 0, trayItem.height, trayItem.width, trayItem.height);
+        const win = anchor.window;
+        const widgetRect = win.mapFromItem(trayItem, 0, trayItem.height / 2);
 
         menuAnchor.anchor.rect = widgetRect;
       }
