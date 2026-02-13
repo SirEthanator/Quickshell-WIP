@@ -104,11 +104,16 @@ PopupWindow {
     }
 
     function getXPos() {
-      return root.window.contentItem.mapFromItem(
+      const targetPos = root.window.contentItem.mapFromItem(
         TooltipController.activeModule,
         TooltipController.activeModule.width / 2,
         0
-      ).x - width / 2;
+      ).x - tooltipMouse.width / 2;
+
+      const min = Consts.gap;
+      const max = root.window.width - Consts.gap - tooltipMouse.width;
+
+      return Math.min(Math.max(targetPos, min), max);
     }
 
     x: getXPos();
