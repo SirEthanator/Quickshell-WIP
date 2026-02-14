@@ -83,10 +83,13 @@ BarModule {
 
       RowLayout {
         Repeater {
-          model: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+          id: dayRepeater;
+          readonly property list<string> days: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+          model: days.length;
+
           delegate: Text {
-            required property string modelData;
-            text: modelData;
+            required property int index;
+            text: dayRepeater.days[(index + Qt.locale().firstDayOfWeek) % 7];
             color: Globals.colours.fg;
 
             font {
