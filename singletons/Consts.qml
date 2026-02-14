@@ -22,11 +22,11 @@ Singleton {
 
   readonly property string fontFamily: "Roboto Flex";
   readonly property int mainFontSize: 16;
-  readonly property int largeFontSize: 64;
-  readonly property int xlFontSize: 150;
-  readonly property int headingFontSize: 34;
+  readonly property int mediumFontSize: 18;
   readonly property int smallHeadingFontSize: 22;
   readonly property int mediumHeadingFontSize: 28;
+  readonly property int headingFontSize: 34;
+  readonly property int largeFontSize: 64;
 
   // This results in the modules' top and bottom padding matching paddingModule / 2 - relies on icons being the tallest items
   // Changes due to configuration are handled in Bar/Index
@@ -35,7 +35,7 @@ Singleton {
   // Note that paddingModule will not directly affect the top and bottom padding. The top and bottom padding is based on the bar's height.
   readonly property int paddingModule: 8;
   readonly property int marginModule: 8;
-  readonly property int moduleIconSize: 22;
+  readonly property int moduleIconSize: smallIconSize;
   readonly property int wsSize: 7;
 
   readonly property int paddingWindow: 24;
@@ -57,6 +57,7 @@ Singleton {
   readonly property int paddingNotif: paddingCard;
   readonly property int notifInnerSpacing: 10;
 
+  readonly property int smallIconSize: 22;
   readonly property int mainIconSize: 28;
   readonly property int largeIconSize: 34;
   readonly property int extraLargeIconSize: 90;

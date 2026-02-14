@@ -12,6 +12,7 @@ Scheme {
   bgRed: "#7A4654";
   outline: bgAccent;
   grey: "#6C7086";
+  greyDim: "#585B70";
   wsInactive: bgHover;
   red: "#F38BA8";
   warning: "#F9E2AF";

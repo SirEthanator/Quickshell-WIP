@@ -10,6 +10,7 @@ MouseArea {
   property int fontSize;
   property int iconSize;
   property int iconRotation: 0;
+  property bool boldFont: false;
   property bool centreLabel: true;
 
   property bool active: false;
@@ -101,6 +102,7 @@ MouseArea {
         font {
           family: Consts.fontFamily;
           pixelSize: !!root.fontSize ? root.fontSize : Consts.mainFontSize;
+          bold: root.boldFont;
         }
       }
     }
