@@ -1,4 +1,5 @@
 import qs.singletons
+import qs.widgets.bar
 import qs.widgets.sidebar as Sidebar;
 import qs.components
 import QtQuick;

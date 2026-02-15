@@ -22,7 +22,7 @@ RowLayout {
     delegate: Loader {
       id: loader
       required property string modelData;
-      readonly property string url: `${root.allModules[modelData].url}`;
+      readonly property string url: `./modules/${root.allModules[modelData].moduleName}.qml`;
       readonly property list<string> passedProps: root.allModules[modelData].props;
       readonly property var props: {
         let result = {};

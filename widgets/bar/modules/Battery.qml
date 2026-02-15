@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import qs.singletons
+import qs.widgets.bar
 import qs.animations as Anims
 import Quickshell.Services.UPower;
 import QtQuick;

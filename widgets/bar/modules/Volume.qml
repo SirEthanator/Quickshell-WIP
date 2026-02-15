@@ -1,4 +1,5 @@
 import qs.singletons
+import qs.widgets.bar
 import QtQuick;
 import Quickshell.Services.Pipewire;
 

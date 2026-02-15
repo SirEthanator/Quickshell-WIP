@@ -1,4 +1,5 @@
 import qs.singletons
+import qs.widgets.bar
 import qs.animations as Anims;
 import Quickshell.Wayland;
 import QtQuick;

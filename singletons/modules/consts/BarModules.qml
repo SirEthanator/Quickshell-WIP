@@ -6,41 +6,41 @@ QtObject {
 
   readonly property BarModule workspaces: BarModule {
     title: "Workspaces";
-    url: "Workspaces.qml";
+    moduleName: "Workspaces";
     props: ["screen"];
   }
   readonly property BarModule tray: BarModule {
     title: "System Tray";
-    url: "SysTray.qml";
+    moduleName: "SysTray";
     props: ["window"];
   }
   readonly property BarModule menu: BarModule {
     title: "Menu Button";
-    url: "MenuBtn.qml";
+    moduleName: "MenuBtn";
   }
   readonly property BarModule activeWindow: BarModule {
     title: "Active Window";
-    url: "ActiveWindow.qml";
+    moduleName: "ActiveWindow";
   }
   readonly property BarModule dateAndTime: BarModule {
     title: "Date & Time";
-    url: "DateAndTime.qml";
+    moduleName: "DateAndTime";
   }
   readonly property BarModule network: BarModule {
     title: "Network";
-    url: "Network.qml";
+    moduleName: "Network";
   }
   readonly property BarModule battery: BarModule {
     title: "Battery";
-    url: "Battery.qml";
+    moduleName: "Battery";
   }
   readonly property BarModule media: BarModule {
     title: "Media";
-    url: "Media.qml";
+    moduleName: "Media";
   }
   readonly property BarModule volume: BarModule {
     title: "Volume";
-    url: "Volume.qml";
+    moduleName: "Volume";
   }
 
   function toStripped(): var {

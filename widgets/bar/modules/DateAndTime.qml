@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import qs.singletons
 import qs.components
+import qs.widgets.bar
 import QtQuick;
 import QtQuick.Layouts;
 import QtQuick.Controls as Ctrls;

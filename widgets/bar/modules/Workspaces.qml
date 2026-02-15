@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import qs.singletons
+import qs.widgets.bar
 import qs.utils as Utils;
 import qs.animations as Anims;
 import QtQuick;
