@@ -27,5 +27,15 @@ BarModule {
 
     Anims.OutIn on text { originalValue: 1; fadeDuration: 100 }
   }
-}
 
+  tooltip: Tooltip {
+    Text {
+      text: `Active window - ${root.title}`;
+      color: Globals.colours.fg;
+      font {
+        family: Consts.fontFamily;
+        pixelSize: Consts.mainFontSize;
+      }
+    }
+  }
+}

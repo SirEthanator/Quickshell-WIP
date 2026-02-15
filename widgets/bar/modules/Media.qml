@@ -32,5 +32,15 @@ BarModule {
       return `${truncate ? player.trackTitle.substring(0,Conf.bar.truncationLength)+'...' : player.trackTitle}${player.positionSupported ? ' - ' + posInfo.posString : ''}`
     }
   }
-}
 
+  tooltip: Tooltip {
+    Text {
+      text: `Now playing "${root.activePlayer.trackTitle}" by ${root.activePlayer.trackArtist || "unknown artist"}`;
+      color: Globals.colours.fg;
+      font {
+        family: Consts.fontFamily;
+        pixelSize: Consts.mainFontSize;
+      }
+    }
+  }
+}

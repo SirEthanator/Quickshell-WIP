@@ -23,7 +23,7 @@ BarModule {
 
   tooltip: Tooltip {
     Text {
-      text: `Date & Time - ${SysInfo.dateTime("ddd dd/MM/yy | hh:mm:ss ap")}`;
+      text: `Date & time - ${SysInfo.dateTime("ddd dd/MM/yy | hh:mm:ss ap")}`;
       color: Globals.colours.fg;
       font {
         family: Consts.fontFamily;

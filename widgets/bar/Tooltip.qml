@@ -4,7 +4,7 @@ Item {
   id: root;
   parent: null;
 
-  default property QtObject data;
+  required default property QtObject data;
   property bool isMenu: false;
 
   width: data.width;

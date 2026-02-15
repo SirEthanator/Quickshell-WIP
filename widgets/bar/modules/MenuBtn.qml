@@ -16,5 +16,15 @@ BarModule {
     icon: "archlinux-logo";
     color: Globals.colours.bg;
   }
-}
 
+  tooltip: Tooltip {
+    Text {
+      text: "Toggle menu";
+      color: Globals.colours.fg;
+      font {
+        family: Consts.fontFamily;
+        pixelSize: Consts.mainFontSize;
+      }
+    }
+  }
+}

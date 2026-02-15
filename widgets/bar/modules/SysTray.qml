@@ -22,6 +22,17 @@ BarModule {
 
   visible: SystemTray.items.values.length > 0;
 
+  tooltip: Tooltip {
+    Text {
+      text: "Show system tray";
+      color: Globals.colours.fg;
+      font {
+        family: Consts.fontFamily;
+        pixelSize: Consts.mainFontSize;
+      }
+    }
+  }
+
   menu: Tooltip {
     GridLayout {
       id: trayButtons;
