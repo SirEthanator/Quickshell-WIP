@@ -59,6 +59,12 @@ OutlinedRectangle {
   readonly property bool tooltipIsActive: TooltipController.activeTooltip === root.tooltip;
   readonly property bool menuIsActive: TooltipController.activeTooltip === root.menu;
 
+  // When a module changes width or visibility, other modules will shift too.
+  // The tooltip's position is not reactive, so to correct its position we must
+  // manually recalculate it.
+  onImplicitWidthChanged: TooltipController.requestReposition();
+  onShowChanged: TooltipController.requestReposition();
+
   Timer {
     id: tooltipShowTimer;
     interval: Conf.bar.tooltipShowDelay;

@@ -62,7 +62,11 @@ PopupWindow {
     }
 
     function onActiveModuleChanged() {
-      tooltipMouse.x = tooltipMouse.getXPos();
+      tooltipMouse.setXPos();
+    }
+
+    function onRequestReposition() {
+      tooltipMouse.setXPos();
     }
   }
 
@@ -114,6 +118,10 @@ PopupWindow {
       const max = root.window.width - Consts.gapSmall - tooltipMouse.width;
 
       return Math.min(Math.max(targetPos, min), max);
+    }
+
+    function setXPos() {
+      x = getXPos()
     }
 
     x: getXPos();

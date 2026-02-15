@@ -48,4 +48,6 @@ Singleton {
 
     internal.previousTooltip = activeTooltip;
   }
+
+  signal requestReposition;
 }
