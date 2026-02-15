@@ -110,8 +110,8 @@ PopupWindow {
         0
       ).x - tooltipMouse.width / 2;
 
-      const min = Consts.gap;
-      const max = root.window.width - Consts.gap - tooltipMouse.width;
+      const min = Consts.gapSmall;
+      const max = root.window.width - Consts.gapSmall - tooltipMouse.width;
 
       return Math.min(Math.max(targetPos, min), max);
     }
