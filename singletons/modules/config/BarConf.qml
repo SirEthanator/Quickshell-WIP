@@ -22,6 +22,6 @@ ConfigCategory {
   property bool backgroundOutline: true;
   property int workspaceCount: 10;
   property int truncationLength: 60;
-  property int tooltipShowDelay: 125;
+  property int tooltipShowDelay: 200;
   property int tooltipHideDelay: 700;
 }
