@@ -99,8 +99,11 @@ PopupWindow {
 
   MouseArea {
     id: tooltipMouse;
-    height: content.height + Consts.paddingModule*2 + tooltipBg.outlineSize*2 + Consts.gapSmall;
-    width: content.width + Consts.paddingModule*2 + tooltipBg.outlineSize*2;
+
+    readonly property int whCommon: TooltipController?.activeTooltip.padding*2 + (TooltipController?.activeTooltip.disableOutline ? 0 : tooltipBg.outlineSize*2)
+
+    height: whCommon + content.height + Consts.gapSmall;
+    width: whCommon + content.width;
 
     hoverEnabled: true;
     onContainsMouseChanged: {
@@ -144,6 +147,8 @@ PopupWindow {
 
       Anims.NumberTransition on width { enabled: root.visible }
       Anims.NumberTransition on height { enabled: root.visible }
+
+      disableAllOutlines: TooltipController?.activeTooltip.disableOutline;
 
       Item {
         id: content;

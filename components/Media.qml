@@ -1,8 +1,9 @@
 import qs.singletons
 import qs.components
-import qs.utils as Utils
+import qs.utils as Utils;
 import QtQuick;
 import QtQuick.Layouts;
+import QtQuick.Effects;
 import Quickshell.Widgets;
 
 OutlinedRectangle {
@@ -11,7 +12,69 @@ OutlinedRectangle {
   radius: Consts.br;
   color: Globals.colours.bg;
 
-  anchors.fill: parent;
+  Image {
+    id: backgroundArt;
+    source: Utils.Mpris.activePlayer.trackArtUrl;
+    asynchronous: true;
+
+    // Find diagonal distance between corners and double it to ensure
+    // full coverage at all times with minimal overflow.
+    readonly property int imgSize: Math.ceil(
+      Math.hypot(
+        root.content.width,
+        root.content.height
+      ) * 2
+    )
+
+    width: imgSize;
+    height: imgSize;
+
+    visible: false;
+  }
+
+  ClippingRectangle {
+    anchors.fill: root.content;
+    // Could be any corner's radius, they are all the same
+    radius: root.content.topLeftRadius;
+    visible: backgroundArt.source.toString() !== "";
+
+    color: "transparent";
+
+    Item {
+      id: blurredBackgroundWrapper;
+      width: backgroundArt.width;
+      height: backgroundArt.height;
+
+      anchors {
+        verticalCenter: parent.top;
+        horizontalCenter: parent.left;
+      }
+
+      MultiEffect {
+        source: backgroundArt;
+        anchors.fill: parent;
+
+        blurEnabled: true;
+        blur: 1;
+        blurMax: 128;
+        blurMultiplier: 1;
+      }
+
+      NumberAnimation on rotation {
+        running: true;
+        paused: !Utils.Mpris.activePlayer.isPlaying;
+        loops: NumberAnimation.Infinite;
+        from: 0;
+        to: 360;
+        duration: 100_000;
+      }
+    }
+
+    Rectangle {
+      anchors.fill: parent;
+      color: Qt.rgba(0, 0, 0, 0.3);
+    }
+  }
 
   ColumnLayout {
     spacing: Consts.paddingCard;
@@ -36,7 +99,7 @@ OutlinedRectangle {
         Image {
           id: albumCover;
           source: Utils.Mpris.activePlayer.trackArtUrl;
-          visible: source.toString() != '';
+          visible: source.toString() !== "";
           anchors.fill: parent;
           asynchronous: true;
         }

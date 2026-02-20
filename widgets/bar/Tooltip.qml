@@ -1,3 +1,4 @@
+import qs.singletons
 import QtQuick;
 
 Item {
@@ -6,6 +7,9 @@ Item {
 
   required default property QtObject data;
   property bool isMenu: false;
+
+  property bool disableOutline: false;
+  property int padding: Consts.paddingModule;
 
   width: data.width;
   height: data.height;

@@ -27,6 +27,8 @@ Singleton {
     activeModule = null;
   }
 
+  // TODO: Find a way to unload tooltips when not showing
+
   onActiveTooltipChanged: {
     if (activeTooltip === null) return;
 

@@ -133,7 +133,10 @@ WlSessionLockSurface {
     visible: Utils.Mpris.activePlayer !== null;
 
     Shadow { target: media }
-    Media { id: media }
+    Media {
+      id: media;
+      anchors.fill: parent;
+    }
   }
 
   // Unlock button for debugging
@@ -142,4 +145,3 @@ WlSessionLockSurface {
   //   label: "Unlock"
   // }
 }
-

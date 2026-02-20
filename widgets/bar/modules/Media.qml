@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import qs.singletons
+import qs.components
 import qs.widgets.bar
 import qs.utils as Utils
 import QtQuick;
@@ -35,12 +36,22 @@ BarModule {
 
   tooltip: Tooltip {
     Text {
-      text: `Now playing "${root.activePlayer.trackTitle}" by ${root.activePlayer.trackArtist || "unknown artist"}`;
+      text: `${root.activePlayer.isPlaying ? "" : "[Paused] - "}Now playing "${root.activePlayer.trackTitle}" by ${root.activePlayer.trackArtist || "unknown artist"}`;
       color: Globals.colours.fg;
       font {
         family: Consts.fontFamily;
         pixelSize: Consts.mainFontSize;
       }
+    }
+  }
+
+  menu: Tooltip {
+    padding: 0;
+    disableOutline: true;
+
+    Media {
+      implicitWidth: 500;
+      implicitHeight: 200;
     }
   }
 }
