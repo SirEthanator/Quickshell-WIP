@@ -73,7 +73,7 @@ Singleton {
   }
 
   Process {
-    command: ["hostname"]
+    command: ["hostnamectl", "hostname"];
     running: true;
     stdout: SplitParser {
       onRead: data => root.hostname = root.capitalise(data, Conf.menu.capitaliseHostname)
