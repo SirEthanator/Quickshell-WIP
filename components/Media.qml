@@ -66,7 +66,7 @@ OutlinedRectangle {
         loops: NumberAnimation.Infinite;
         from: 0;
         to: 360;
-        duration: 100_000;
+        duration: 60_000;
       }
     }
 
