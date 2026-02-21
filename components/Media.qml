@@ -197,11 +197,18 @@ OutlinedRectangle {
         spacing: 3;
         Layout.alignment: Qt.AlignVCenter;
 
-        ProgressBar {
+        InteractiveProgressBar {
           Layout.fillWidth: true;
           implicitHeight: 7;
           bg: Globals.colours.bgLight;
-          value: Utils.Mpris.posInfo.position / Utils.Mpris.posInfo.length;
+          value: Utils.Mpris.posInfo.positionPercent;
+
+          enableInteractivity: Utils.Mpris.activePlayer.canSeek && Utils.Mpris.activePlayer.positionSupported;
+
+          onUserChange: {
+            Utils.Mpris.activePlayer.position = Utils.Mpris.posInfo.length * value;
+            value = Qt.binding(() => Utils.Mpris.posInfo.positionPercent);
+          }
         }
 
         Item {

@@ -38,6 +38,7 @@ Singleton {
     id: posInfo;
     property int position: Math.floor(root.activePlayer.position);
     property int length: Math.floor(root.activePlayer.length);
+    property real positionPercent: position / length;
 
     Timer {
       id: posTracker;

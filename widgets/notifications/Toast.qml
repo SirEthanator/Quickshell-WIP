@@ -1,5 +1,8 @@
+pragma ComponentBehavior: Bound
+
 import qs.singletons
 import qs.components
+import qs.widgets.notifications
 import qs.utils as Utils;
 import qs.animations as Anims;
 import Quickshell;
@@ -270,4 +273,3 @@ MouseArea {
 
   }
 }
-
