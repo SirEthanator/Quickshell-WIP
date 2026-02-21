@@ -53,6 +53,7 @@ DashItem {
 
         delegate: Notifs.Toast {
           required property Notification modelData;
+          showOutline: Conf.sidebar.moduleOutlines;
           n: modelData;
         }
       }

@@ -21,7 +21,10 @@ MouseArea {
     return n.expireTimeout > 0 ? Math.max(n.expireTimeout, min) : def;
   }
   property real timeRemaining: timeout;
+
   property bool popup: false;
+  property bool showOutline: true;
+
   width: parent.width;
   height: bg.height;
 
@@ -56,7 +59,7 @@ MouseArea {
 
   drag.target: root;
   drag.axis: Drag.XAxis;
-  drag.minimumX: root.popup ? 0 : undefined;  // Only allow dragging right if popup
+  drag.minimumX: root.popup ? 0 : undefined;  // If popup, only allow dragging right
 
   onPressed: event => {
     if (event.button === Qt.MiddleButton) n.dismiss();
@@ -79,33 +82,30 @@ MouseArea {
 
   Anims.NumberTransition on x {}
 
-  Rectangle {
+  OutlinedRectangle {
     id: bg;
     anchors {
       left: parent.left;
       right: parent.right;
     }
 
-    height: content.height;
+    height: content.height + outlineSize * 2;
 
     color: Globals.colours.bg;
     radius: Consts.br;
-    border {
-      color: Globals.colours.outline;
-      width: root.popup ? Consts.outlineSize : 0;
-      pixelAligned: false;
-    }
 
     Anims.NumberTransition on height {}
     clip: true;
+
+    disableAllOutlines: !root.showOutline;
 
     RowLayout {
       id: content;
       spacing: 0;
       anchors {
-        top: parent.top;
-        left: parent.left;
-        right: parent.right;
+        top: parent.content.top;
+        left: parent.content.left;
+        right: parent.content.right;
       }
 
       Button {
@@ -117,6 +117,8 @@ MouseArea {
         implicitWidth: root.containsMouse ? Consts.moduleIconSize + padding * 2 : 0;
         visible: implicitWidth > 0;
         Anims.NumberTransition on implicitWidth {}
+
+        radiusValue: bg.content.topLeftRadius;
 
         tlRadius: true; blRadius: true;
         changeBrRadiusHover: !root.popup;
@@ -262,7 +264,7 @@ MouseArea {
           fg: root.n.urgency === NotificationUrgency.Critical ? Globals.colours.red : Globals.colours.accent;
           smoothing: false;
 
-          radius: Consts.br;
+          radius: bg.content.bottomLeftRadius;
           topRightRadius: 0;
           topLeftRadius: 0;
           bottomLeftRadius: root.containsMouse ? 0 : Consts.br;
