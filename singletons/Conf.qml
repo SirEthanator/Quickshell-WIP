@@ -89,14 +89,14 @@ Singleton {
           "title": "Tooltip Show Delay",
           "description": "Defines how long modules must be hovered before tooltips show in milliseconds.",
           "type": "int",
-          "max": 60000,
+          "max": 60_000,
           "min": 0
         },
         "tooltipHideDelay": {
           "title": "Tooltip Hide Delay",
           "description": "Defines how long tooltips/modules must not be hovered for before tooltips are hidden.",
           "type": "int",
-          "max": 60000,
+          "max": 60_000,
           "min": 0
         }
       },
@@ -228,7 +228,7 @@ Singleton {
           "title": "Fade Duration",
           "description": "Defines how long the wallpaper should fade in for when the shell is launched (ms). Set to 0 to disable.",
           "type": "int",
-          "max": 60000,
+          "max": 60_000,
           "min": 0
         },
         "shader": {
@@ -273,28 +273,28 @@ Singleton {
           "title": "Default Timeout",
           "description": "Defines the default timeout for notifications when the sender does not specify one (ms).",
           "type": "int",
-          "max": 60000,
+          "max": 60_000,
           "min": 100
         },
         "defaultCriticalTimeout": {
           "title": "Default Critical Timeout",
           "description": "Defines the default timeout for critical notifications when the sender does not specify one (ms).",
           "type": "int",
-          "max": 60000,
+          "max": 60_000,
           "min": 100
         },
         "minimumTimeout": {
           "title": "Minimum Timeout",
           "description": "Defines the minimum timeout for all notifications.",
           "type": "int",
-          "max": 60000,
+          "max": 60_000,
           "min": 100
         },
         "minimumCriticalTimeout": {
           "title": "Minimum Critical Timeout",
           "description": "Defines the minimum timeout for all critical notifications.",
           "type": "int",
-          "max": 60000,
+          "max": 60_000,
           "min": 100
         },
         "sounds": {
@@ -350,6 +350,13 @@ Singleton {
 
 Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the correct one for your display by running: ls /sys/class/backlight`,
           "type": "string"
+        },
+        "hideTimeout": {
+          "title": "Hide Timeout",
+          "description": "Defines how long the OSD should remain open for before hiding in milliseconds.",
+          "type": "int",
+          "min": 100,
+          "max": 60_000
         }
       }
     },

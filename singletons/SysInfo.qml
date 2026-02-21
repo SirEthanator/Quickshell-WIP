@@ -18,6 +18,7 @@ Singleton {
   readonly property PwNode audioNode: Pipewire.defaultAudioSink;
   PwObjectTracker { objects: [ root.audioNode ] }
   readonly property int volume: Math.round(audioNode?.audio.volume * 100);
+
   readonly property string volumeIcon: {
     if (root.audioNode?.audio.muted) { return "audio-volume-muted-panel-symbolic"  } else
     if (root?.volume >= 90         ) { return "audio-volume-high-danger-symbolic"  } else
@@ -26,6 +27,7 @@ Singleton {
     if (root?.volume >= 1          ) { return "audio-volume-low-panel-symbolic"    }
     else "audio-volume-muted-panel-symbolic";
   }
+
   readonly property string brightnessIcon: root.brightness >= 50
     ? "brightness-high-symbolic"
     : "brightness-low-symbolic";

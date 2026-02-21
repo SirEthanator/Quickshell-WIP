@@ -3,52 +3,75 @@ pragma ComponentBehavior: Bound
 import qs.singletons
 import qs.animations as Anims;
 import qs.components
-import qs.utils as Utils;
 import Quickshell;
 import Quickshell.Wayland;
 import QtQuick;
 import QtQuick.Layouts;
 
 LazyLoader {
-  id: loader;
+  id: root;
   activeAsync: false;
   property bool open: false;
 
-  readonly property int  volume:     SysInfo.volume;
-  readonly property bool mute:       SysInfo.audioNode.audio.muted;
+  onOpenChanged: {
+    if (open) {
+      activeAsync = true;
+    }
+  }
+
+  readonly property int  volume: SysInfo.volume;
+  readonly property bool mute: SysInfo.audioNode.audio.muted;
   readonly property int  brightness: SysInfo.brightness;
 
-  property var autocloseTimer;
-  function show(value, icon) {
-    currentValue = value;
-    currentIcon = icon;
+  onVolumeChanged: show("volume");
+  onMuteChanged: show("volume");
+  onBrightnessChanged: show("brightness");
 
-    if (!unloading) {
-      open = true;
-      if (!!loader.autocloseTimer) loader.autocloseTimer.destroy();
-      loader.autocloseTimer = Utils.Timeout.setTimeout(() => open = false, 3000);
-    }
-  }
+  property bool inhibitHide: false;
 
-  onVolumeChanged: show(volume, SysInfo.volumeIcon);
-  onMuteChanged: show(volume, SysInfo.volumeIcon);
-  onBrightnessChanged: show(brightness, SysInfo.brightnessIcon);
-
-  property var unloadTimer;
-  readonly property bool unloading: !!unloadTimer;
-  onOpenChanged: {
-    if (!open) {
-      unloadTimer = Utils.Timeout.setTimeout(() => activeAsync = false, Consts.animLen);
+  onInhibitHideChanged: {
+    if (inhibitHide) {
+      hideTimer.stop();
     } else {
-      loader.activeAsync = true;
+      hideTimer.restart();
     }
   }
 
-  property string currentIcon;
-  property string currentValue;
+  function show(mode) {
+    if (!inhibitHide) hideTimer.restart();
+    currentMode = mode;
+    root.open = true;
+  }
+
+  function getIcon(mode: string): string {
+    switch (mode) {
+      case "volume": return SysInfo.volumeIcon;
+      case "brightness": return SysInfo.brightnessIcon;
+      default: return "";
+    }
+  }
+
+  function getValue(mode: string): real {
+    switch (mode) {
+      case "volume": return root.volume / 100;
+      case "brightness": return root.brightness / 100;
+      default: return 0.0;
+    }
+  }
+
+  property string currentMode;
+  property real currentValue: getValue(currentMode);
+  property string currentIcon: getIcon(currentMode);
+
+  readonly property Timer hideTimer: Timer {
+    interval: Conf.osd.hideTimeout;
+
+    onTriggered: {
+      root.open = false;
+    }
+  }
 
   PanelWindow {
-    id: root;
     color: "transparent";
 
     exclusionMode: ExclusionMode.Ignore;
@@ -62,7 +85,7 @@ LazyLoader {
     implicitHeight: content.height;
 
     Anims.Slide {
-      running: true;
+      running: root.open;
       target: content;
       direction: Anims.Slide.Left;
       slideOffset: 60;
@@ -70,12 +93,16 @@ LazyLoader {
       grow: true;
     }
 
-    Anims.Slide {
-      running: !loader.open;
-      target: content;
-      direction: Anims.Slide.Left;
-      reverse: true;
-      slideOffset: 30;
+    SequentialAnimation {
+      running: !root.open;
+
+      Anims.Slide {
+        target: content;
+        direction: Anims.Slide.Left;
+        reverse: true;
+        slideOffset: 30;
+      }
+      PropertyAction { target: root; property: "activeAsync"; value: false }
     }
 
     ColumnLayout {
@@ -88,16 +115,67 @@ LazyLoader {
         implicitHeight: 350 + outlineSize * 2;
         implicitWidth: 50 + outlineSize * 2;
 
-        ProgressBar {
+        InteractiveProgressBar {
           id: progress;
-          anchors.fill: progressWrapper.content;
-          radius: progressWrapper.content.topLeftRadius;  // All radii are the same
+
+          radius: 0;
+          topLeftRadius: progressWrapper.content.topLeftRadius;
+          topRightRadius: progressWrapper.content.topRightRadius;
+
+          anchors {
+            left: parent.content.left;
+            right: parent.content.right;
+            top: parent.content.top;
+            bottom: iconWrapper.top;
+            bottomMargin: -1; // Prevents tiny gap
+          }
 
           vertical: true;
-          value: loader.currentValue / 100;
+          value: root.currentValue;
+
           bg: Globals.colours.bg;
-          fg: loader.currentValue >= 90 ? Globals.colours.red : loader.currentValue >= 75 ? Globals.colours.warning : Globals.colours.accent;
-          icon: loader.currentIcon;
+          fg: value >= 0.9 ? Globals.colours.red : value >= 0.75 ? Globals.colours.warning : Globals.colours.accent;
+
+          enableInteractivity: root.currentMode === "volume";
+
+          showScrubber: false;
+
+          onUserChange: {
+            if (root.currentMode === "volume") {
+              // Extra safeguard to prevent setting very high volume on accident
+              SysInfo.audioNode.audio.volume = Math.round(value * 100) / 100;
+            }
+            value = Qt.binding(() => root.currentValue);
+          }
+
+          onDraggingChanged: {
+            if (dragging) {
+              root.inhibitHide = true;
+            } else {
+              root.inhibitHide = false;
+            }
+          }
+        }
+
+        Rectangle {
+          id: iconWrapper;
+
+          anchors {
+            left: parent.content.left;
+            right: parent.content.right;
+            bottom: parent.content.bottom;
+          }
+
+          height: width;
+          color: progress.fg;
+          bottomLeftRadius: progressWrapper.content.bottomLeftRadius;
+          bottomRightRadius: progressWrapper.content.bottomRightRadius;
+
+          Icon {
+            anchors.fill: parent;
+            color: progress.bg;
+            icon: root.currentIcon;
+          }
         }
       }
 
@@ -109,9 +187,10 @@ LazyLoader {
 
         Text {
           id: percentageText;
-          anchors.centerIn: parent.content;
-          text: `${loader.currentValue}%`;
+          text: `${Math.round(progress.clampedValue * 100)}%`;
           color: Globals.colours.fg;
+          anchors.centerIn: parent.content;
+
           font {
             family: Consts.fontFamily;
             pixelSize: Consts.mainFontSize

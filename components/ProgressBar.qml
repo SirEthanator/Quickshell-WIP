@@ -11,7 +11,6 @@ Rectangle {
   property color bg: "transparent";
   property color fg: Globals.colours.accent;
 
-  property string icon: "";  // Only supported if bar is vertical
   property bool vertical: false;
   property bool smoothing: true;
   property bool roundedFg: true;
@@ -19,8 +18,8 @@ Rectangle {
   radius: 0.5 * height;
   color: bg;
 
-  readonly property real barPosY: vertical ? bar.height : bar.height / 2;
-  readonly property real barPosX: vertical ? bar.width / 2 : bar.width;
+  readonly property real barPosY: vertical ? height - bar.height : height / 2;
+  readonly property real barPosX: vertical ? width / 2 : bar.width;
 
   Rectangle {
     id: bar;
@@ -30,11 +29,7 @@ Rectangle {
     anchors.left: parent.left;
 
     width: !root.vertical ? length : parent.width;
-    height: icon.visible
-      ? (root.height - icon.size) * root.clampedValue + icon.size
-      : root.vertical
-        ? length
-        : parent.height;
+    height: root.vertical ? length : parent.height;
 
     color: root.fg;
 
@@ -65,18 +60,5 @@ Rectangle {
     Anims.NumberTransition on width { enabled: root.smoothing }
     Anims.NumberTransition on height { enabled: root.smoothing }
     Anims.ColourTransition on color {}
-
-    Icon {
-      id: icon;
-      visible: root.icon !== "" && root.vertical;
-      anchors {
-        left: parent.left;
-        right: parent.right;
-        bottom: parent.bottom;
-      }
-      icon: root.icon;
-      color: root.bg;
-      size: parent.width;
-    }
   }
 }

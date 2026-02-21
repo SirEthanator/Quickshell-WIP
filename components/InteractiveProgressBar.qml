@@ -31,7 +31,11 @@ ProgressBar {
     enabled: root.enableInteractivity && root.enableClickToScrub;
 
     onPressed: (e) => {
-      root.value = (root.vertical ? e.y : e.x) / width;
+      if (root.vertical) {
+        root.value = 1 - (e.y / root.height);
+      } else {
+        root.value = e.x / root.width;
+      }
     }
 
     // Will not fire if a drag starts
@@ -47,7 +51,11 @@ ProgressBar {
     interval: 12;
     repeat: false;
     onTriggered: {
-      root.value += delta / root.width;
+      if (root.vertical) {
+        root.value -= (delta / root.height);
+      } else {
+        root.value += delta / root.width;
+      }
       delta = 0;
     }
   }
