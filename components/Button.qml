@@ -28,10 +28,10 @@ MouseArea {
   property bool blRadius: false;
   property bool brRadius: false;
   property bool changeRadiusHover: true;
-  property bool changeTlRadiusHover: true;
-  property bool changeTrRadiusHover: true;
-  property bool changeBlRadiusHover: true;
-  property bool changeBrRadiusHover: true;
+  property bool changeTlRadiusHover: !disabled;
+  property bool changeTrRadiusHover: !disabled;
+  property bool changeBlRadiusHover: !disabled;
+  property bool changeBrRadiusHover: !disabled;
 
   property int padding: Consts.paddingButton;
 
@@ -77,12 +77,14 @@ MouseArea {
 
       width: Math.min(implicitWidth, root.width-root.padding*2)
 
+      readonly property bool changeLabelColour: (root.containsPress || root.active) && root.invertTextOnPress && !root.disabled;
+
       Icon {
         id: iconLabel;
         visible: !!root.icon;
 
         icon: root.icon;
-        color: (root.containsPress || root.active) && root.invertTextOnPress ? root.bg : root.labelColour;
+        color: parent.changeLabelColour ? root.bg : root.labelColour;
         Anims.ColourTransition on color {}
         size: !!root.iconSize ? root.iconSize : root.height - root.padding * 2;
         rotation: root.iconRotation;
@@ -97,7 +99,7 @@ MouseArea {
         elide: Text.ElideRight;
 
         text: root.label;
-        color: (root.containsPress || root.active) && root.invertTextOnPress ? root.bg : root.labelColour;
+        color: parent.changeLabelColour ? root.bg : root.labelColour;
         Anims.ColourTransition on color {}
         font {
           family: Consts.fontFamily;
