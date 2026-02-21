@@ -122,8 +122,8 @@ WlSessionLockSurface {
   Item {
     id: mediaWrapper;
 
-    height: 200;
-    width: 500;
+    height: media.implicitHeight;
+    width: media.implicitWidth;
 
     readonly property real xPos: parent.width - width - Consts.gapLarge;
     readonly property real yPos: parent.height - height - Consts.gapLarge;
@@ -133,10 +133,7 @@ WlSessionLockSurface {
     visible: Utils.Mpris.activePlayer !== null;
 
     Shadow { target: media }
-    Media {
-      id: media;
-      anchors.fill: parent;
-    }
+    Media { id: media }
   }
 
   // Unlock button for debugging

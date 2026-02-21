@@ -21,6 +21,7 @@ Singleton {
   readonly property real outlineSize: 1.5;
 
   readonly property string fontFamily: "Roboto Flex";
+  readonly property string fontMono: "Roboto Mono";
   readonly property int mainFontSize: 16;
   readonly property int mediumFontSize: 18;
   readonly property int smallHeadingFontSize: 22;

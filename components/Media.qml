@@ -12,6 +12,9 @@ OutlinedRectangle {
   radius: Consts.br;
   color: Globals.colours.bg;
 
+  implicitHeight: content.implicitHeight + Consts.paddingCard * 2;
+  implicitWidth: 550;
+
   Image {
     id: backgroundArt;
     source: Utils.Mpris.activePlayer.trackArtUrl;
@@ -76,51 +79,51 @@ OutlinedRectangle {
     }
   }
 
-  ColumnLayout {
+  RowLayout {
+    id: content;
     spacing: Consts.paddingCard;
 
     anchors {
-      fill: root.content;
+      top: root.content.top;
+      left: root.content.left;
+      right: root.content.right;
       margins: Consts.paddingCard;
     }
 
-    RowLayout {
-      spacing: Consts.paddingCard;
-
-      Layout.fillWidth: true;
+    ClippingRectangle {
+      radius: Consts.br;
+      color: "transparent";
       Layout.fillHeight: true;
+      implicitWidth: height;
 
-      ClippingRectangle {
-        radius: Consts.br;
-        color: "transparent";
-        Layout.fillHeight: true;
-        Layout.preferredWidth: height;
+      Image {
+        id: albumCover;
+        source: Utils.Mpris.activePlayer.trackArtUrl;
+        visible: source.toString() !== "";
+        anchors.fill: parent;
+        asynchronous: true;
+      }
 
-        Image {
-          id: albumCover;
-          source: Utils.Mpris.activePlayer.trackArtUrl;
-          visible: source.toString() !== "";
-          anchors.fill: parent;
-          asynchronous: true;
-        }
+      Rectangle {
+        color: Globals.colours.bgLight;
+        anchors.fill: parent;
+        visible: !albumCover.visible;
 
-        Rectangle {
-          color: Globals.colours.bgLight;
-          anchors.fill: parent;
-          visible: !albumCover.visible;
-
-          Icon {
-            icon: "music-note-symbolic";
-            size: parent.height - Consts.paddingCard * 2;
-            anchors.centerIn: parent;
-          }
+        Icon {
+          icon: "music-note-symbolic";
+          size: parent.height - Consts.paddingCard * 2;
+          anchors.centerIn: parent;
         }
       }
+    }
+
+    ColumnLayout {
+      spacing: Consts.paddingCard;
+      Layout.fillWidth: true;
 
       ColumnLayout {
         spacing: 3;
         Layout.fillWidth: true;
-        Layout.alignment: Qt.AlignVCenter;
 
         Text {
           text: Utils.Mpris.activePlayer.trackTitle || "Unknown Track";
@@ -149,12 +152,6 @@ OutlinedRectangle {
           elide: Text.ElideRight;
         }
       }
-    }
-
-    RowLayout {
-      spacing: Consts.paddingCard;
-      Layout.fillHeight: true;
-      Layout.fillWidth: true;
 
       RowLayout {
         spacing: Consts.spacingButtonGroup;
@@ -195,11 +192,11 @@ OutlinedRectangle {
 
       ColumnLayout {
         spacing: 3;
-        Layout.alignment: Qt.AlignVCenter;
 
         InteractiveProgressBar {
           Layout.fillWidth: true;
           implicitHeight: 7;
+
           bg: Globals.colours.bgLight;
           value: Utils.Mpris.posInfo.positionPercent;
 
@@ -213,19 +210,24 @@ OutlinedRectangle {
 
         Item {
           Layout.fillWidth: true;
+          implicitHeight: Math.max(posText.height, lenText.height);
+
           Text {
+            id: posText;
+
             text: Utils.Mpris.posInfo.positionString;
             font {
-              family: Consts.fontFamily;
+              family: Consts.fontMono;
               pixelSize: Consts.mainFontSize;
             }
             color: Globals.colours.fg;
             anchors.left: parent.left;
           }
           Text {
+            id: lenText;
             text: Utils.Mpris.posInfo.lengthString;
             font {
-              family: Consts.fontFamily;
+              family: Consts.fontMono;
               pixelSize: Consts.mainFontSize;
             }
             color: Globals.colours.fg;
@@ -236,4 +238,3 @@ OutlinedRectangle {
     }
   }
 }
-

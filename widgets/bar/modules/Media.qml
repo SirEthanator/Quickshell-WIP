@@ -49,9 +49,6 @@ BarModule {
     padding: 0;
     disableOutline: true;
 
-    Media {
-      implicitWidth: 500;
-      implicitHeight: 200;
-    }
+    Media {}
   }
 }
