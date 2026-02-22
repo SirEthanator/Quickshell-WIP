@@ -14,7 +14,7 @@ PanelWindow {
   readonly property bool bgIsDimmed:
     // If the menu's background is configured to be dimmed and the menu is open, we want to dim behind the bar too
     // However, if autohide is enabled, we don't need to do this
-    (Conf.menu.dimBackground && Sidebar.Controller.sidebarOpen && !Conf.bar.autohide);
+    (Conf.sidebar.dimBackground && Sidebar.Controller.sidebarOpen && !Conf.bar.autohide);
 
   color: bgIsDimmed ? Consts.bgDimmedColour : "transparent";
 
