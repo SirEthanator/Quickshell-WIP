@@ -6,7 +6,7 @@ BarModule {
   id: root;
 
   icon: {
-    const strength = SysInfo.networkStrength;
+    const strength = NetworkInfo.connectedNetwork.signalStrength * 100;
     if (strength > 75) { return "nm-signal-100" } else
     if (strength > 50) { return "nm-signal-75"  } else
     if (strength > 25) { return "nm-signal-50"  }
@@ -14,10 +14,10 @@ BarModule {
   }
   iconbgColour: Globals.colours.network;
 
-  show: SysInfo.networkStrength > 0;
+  show: NetworkInfo.connectedNetwork !== null;
 
   Text {
-    text: SysInfo.network;
+    text: NetworkInfo.connectedNetwork.name;
     color: Globals.colours.fg;
     font {
       family: Consts.fontFamily;
@@ -27,7 +27,7 @@ BarModule {
 
   tooltip: Tooltip {
     Text {
-      text: `Connected to "${SysInfo.network}" with strength ${SysInfo.networkStrength}`;
+      text: `Connected to "${NetworkInfo.connectedNetwork.name}" with strength ${NetworkInfo.connectedNetwork.signalStrength * 100}%`;
       color: Globals.colours.fg;
       font {
         family: Consts.fontFamily;

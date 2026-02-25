@@ -39,9 +39,6 @@ Singleton {
   property string username: "";
   property string hostname: "";
 
-  property string network: "";
-  property int networkStrength ;
-
   property int brightness;
   property int maxBrightness: 0;
 
@@ -128,22 +125,4 @@ Singleton {
       onStreamFinished: root.cpuTemp = parseFloat(text).toFixed(1);
     }
   }
-
-  RepeatingProcess {
-    command: ["sh", "-c", "nmcli -t -f NAME c show --active | head -1"]
-    interval: 10000;
-    parseOut: SplitParser {
-      onRead: data => root.network = data
-    }
-  }
-
-
-  RepeatingProcess {
-    command: ["sh", "-c", "nmcli -f IN-USE,SIGNAL,SSID device wifi | awk '/^\*/{if (NR!=1) {print $2}}'"];
-    interval: 10000;
-    parseOut: SplitParser {
-      onRead: data => root.networkStrength = parseInt(data);
-    }
-  }
 }
-
