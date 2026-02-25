@@ -30,7 +30,12 @@ Singleton {
   // TODO: Find a way to unload tooltips when not showing
 
   onActiveTooltipChanged: {
-    if (activeTooltip === null) return;
+    if (activeTooltip === null) {
+      // Unbind
+      internal.currentHeight = internal.currentHeight;
+      internal.currentWidth = internal.currentWidth;
+      return;
+    }
 
     // Close the sidebar when a menu is opened
     if (activeTooltip?.isMenu) {

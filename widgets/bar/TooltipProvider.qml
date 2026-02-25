@@ -58,6 +58,7 @@ PopupWindow {
     target: TooltipController;
 
     function onActiveTooltipChanged() {
+      if (TooltipController.activeTooltip === null) return;
       TooltipController.activeTooltip.parent = content;
     }
 
@@ -100,7 +101,9 @@ PopupWindow {
   MouseArea {
     id: tooltipMouse;
 
-    readonly property int whCommon: TooltipController?.activeTooltip.padding*2 + (TooltipController?.activeTooltip.disableOutline ? 0 : tooltipBg.outlineSize*2)
+    readonly property int whCommon:
+      (TooltipController?.activeTooltip.padding ?? NaN)*2
+      + (TooltipController?.activeTooltip.disableOutline ? 0 : tooltipBg.outlineSize*2)
 
     height: whCommon + content.height + Consts.gapSmall;
     width: whCommon + content.width;
@@ -113,7 +116,7 @@ PopupWindow {
     function getXPos() {
       const targetPos = root.window.contentItem.mapFromItem(
         TooltipController.activeModule,
-        TooltipController.activeModule.width / 2,
+        (TooltipController?.activeModule?.width ?? NaN) / 2,
         0
       ).x - tooltipMouse.width / 2;
 
