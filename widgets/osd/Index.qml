@@ -171,6 +171,8 @@ LazyLoader {
           bottomLeftRadius: progressWrapper.content.bottomLeftRadius;
           bottomRightRadius: progressWrapper.content.bottomRightRadius;
 
+          Anims.ColourTransition on color {}
+
           Icon {
             anchors.fill: parent;
             color: progress.bg;
