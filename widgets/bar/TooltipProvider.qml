@@ -114,9 +114,11 @@ PopupWindow {
     }
 
     function getXPos() {
+      if (TooltipController.activeModule === null) return NaN;
+
       const targetPos = root.window.contentItem.mapFromItem(
         TooltipController.activeModule,
-        (TooltipController?.activeModule?.width ?? NaN) / 2,
+        TooltipController.activeModule.width / 2,
         0
       ).x - tooltipMouse.width / 2;
 
