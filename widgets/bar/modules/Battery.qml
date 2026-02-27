@@ -163,4 +163,15 @@ BarModule {
       pixelSize: Consts.mainFontSize;
     }
   }
+
+  tooltip: Tooltip {
+    Text {
+      text: `Battery - ${root.percentage}%`;
+      color: Globals.colours.fg;
+      font {
+        family: Consts.fontFamily;
+        pixelSize: Consts.mainFontSize;
+      }
+    }
+  }
 }
