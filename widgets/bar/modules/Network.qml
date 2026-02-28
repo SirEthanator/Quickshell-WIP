@@ -27,7 +27,7 @@ BarModule {
 
   tooltip: Tooltip {
     Text {
-      text: `Connected to "${NetworkInfo.connectedNetwork.name}" with strength ${NetworkInfo.connectedNetwork.signalStrength * 100}%`;
+      text: `Connected to "${NetworkInfo.connectedNetwork.name}" with strength ${Math.round(NetworkInfo.connectedNetwork.signalStrength * 100)}%`;
       color: Globals.colours.fg;
       font {
         family: Consts.fontFamily;
