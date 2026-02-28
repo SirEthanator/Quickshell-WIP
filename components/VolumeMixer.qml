@@ -29,6 +29,8 @@ Item {
       color: Globals.colours.outline;
       implicitHeight: 1;
       Layout.fillWidth: true;
+
+      visible: root.appStreams.length > 0;
     }
 
     Repeater {
