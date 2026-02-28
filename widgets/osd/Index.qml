@@ -137,12 +137,12 @@ LazyLoader {
           fg: value >= 0.9 ? Globals.colours.red : value >= 0.75 ? Globals.colours.warning : Globals.colours.accent;
 
           enableInteractivity: root.currentMode === "volume";
+          enableScrolling: true;
 
           showScrubber: false;
 
           onUserChange: {
             if (root.currentMode === "volume") {
-              // Extra safeguard to prevent setting very high volume on accident
               SysInfo.audioNode.audio.volume = Math.round(value * 100) / 100;
             }
             value = Qt.binding(() => root.currentValue);

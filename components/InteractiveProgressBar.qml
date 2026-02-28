@@ -18,20 +18,37 @@ ProgressBar {
   property bool enableClickToScrub: true;
   property bool enableDragging: true;
 
+  property bool enableScrolling: false;
+  property real scrollStep: 0.02;
+
   readonly property bool dragging: barDragLogic.active || scrubberDragLogic.active;
+
+  function handleWheel(event) {
+    if (!root.enableScrolling) return;
+    internal.scrollAccum += event.angleDelta.y;
+
+    if (internal.scrollAccum >= Conf.global.scrollStepSize || internal.scrollAccum <= -Conf.global.scrollStepSize) {
+      root.value += root.scrollStep * Math.sign(internal.scrollAccum);
+      root.userChange();
+      internal.scrollAccum = 0;
+    }
+  }
 
   QtObject {
     id: internal;
 
     property bool smoothingOriginalVal;
+    property real scrollAccum: 0;
   }
 
   MouseArea {
     anchors.fill: parent;
 
-    enabled: root.enableInteractivity && root.enableClickToScrub;
+    enabled: root.enableInteractivity && (root.enableClickToScrub || root.enableScrolling);
 
     onPressed: (e) => {
+      if (!root.enableClickToScrub) return;
+
       if (root.vertical) {
         root.value = 1 - (e.y / root.height);
       } else {
@@ -41,7 +58,12 @@ ProgressBar {
 
     // Will not fire if a drag starts
     onReleased: {
+      if (!root.enableClickToScrub) return;
       root.userChange();
+    }
+
+    onWheel: (event) => {
+      root.handleWheel(event);
     }
   }
 
@@ -126,6 +148,10 @@ ProgressBar {
       id: scrubberMouse;
       anchors.fill: parent;
       hoverEnabled: true;
+
+      onWheel: (event) => {
+        root.handleWheel(event);
+      }
     }
 
     DragLogic {

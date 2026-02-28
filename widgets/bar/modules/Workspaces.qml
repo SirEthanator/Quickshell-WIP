@@ -12,12 +12,19 @@ BarModule {
   icon: "node-symbolic";
   iconbgColour: Globals.colours.workspaces;
 
+  property real scrollAccum: 0;
+
   onWheel: event => {
-    const step = -Math.sign(event.angleDelta.y);
-    const activeIdx = workspaces.find(ws => ws.active === true).idx;
-    const target = step + activeIdx;
-    if (target >= 1 && target <= Conf.bar.workspaceCount) {
-      Utils.Session.setActiveWorkspace(target)
+    scrollAccum += event.angleDelta.y;
+
+    if (scrollAccum >= Conf.global.scrollStepSize || scrollAccum <= -Conf.global.scrollStepSize) {
+      const activeIdx = workspaces.find(ws => ws.active === true).idx;
+      const step = -Math.sign(scrollAccum);
+      const target = step + activeIdx;
+      if (target >= 1 && target <= Conf.bar.workspaceCount) {
+        Utils.Session.setActiveWorkspace(target);
+      }
+      scrollAccum = 0;
     }
   }
 

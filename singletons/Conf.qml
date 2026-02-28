@@ -41,6 +41,14 @@ Singleton {
           "options": Globals.schemes,
           "callback": root.switchTheme
         }
+      },
+      "Behaviour": {
+        "scrollStepSize": {
+          "title": "Scroll Step Size",
+          "description": "Defines the step size for scrolling. This is used in places such as the workspaces bar module, where scrolling switches workspaces. Most mice have a step size of 120.",
+          "type": "int",
+          "min": "1"
+        }
       }
     },
 

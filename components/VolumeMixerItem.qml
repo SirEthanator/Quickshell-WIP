@@ -77,6 +77,8 @@ RowLayout {
         bg: Globals.colours.bgLight;
         value: root.node.audio.volume;
 
+        enableScrolling: true;
+
         onUserChange: {
           root.node.audio.volume = Math.round(value * 100) / 100;
           value = Qt.binding(() => root.node.audio.volume);
