@@ -21,7 +21,7 @@ ColumnLayout {
   }
 
   Text {
-    text: SysInfo.dateTime("dddd MMM yy");
+    text: SysInfo.dateTime("dddd MMM dd");
     Layout.alignment: Qt.AlignHCenter;
 
     color: Globals.colours.fg;
