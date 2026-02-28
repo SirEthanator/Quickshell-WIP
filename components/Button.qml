@@ -19,6 +19,8 @@ MouseArea {
   property color bg: Globals.colours.bg;
   property color bgHover: Globals.colours.bgHover;
   property color bgPress: Globals.colours.accent;
+  property color bgActive: Globals.colours.accent;
+  property color bgActiveHover: Globals.colours.accentLight;
   property bool invertTextOnPress: true;
 
   property int radiusValue: Consts.br;
@@ -45,13 +47,12 @@ MouseArea {
   Rectangle {
     id: background;
     anchors.fill: parent;
-    color: root.disabled
-      ? root.bg
-      : root.containsPress || root.active
-        ? root.bgPress
-        : root.containsMouse
-          ? root.bgHover
-          : root.bg;
+    color:
+      root.disabled ? root.bg
+      : root.containsPress ? root.bgPress
+        : root.active ? (root.containsMouse ? root.bgActiveHover : root.bgActive)
+          : root.containsMouse ? root.bgHover
+            : root.bg;
 
     topLeftRadius: root.tlRadius || root.allRadius || root.containsMouse && root.changeTlRadiusHover ? root.radiusValue : 0;
     topRightRadius: root.trRadius || root.allRadius || root.containsMouse && root.changeTrRadiusHover ? root.radiusValue : 0;

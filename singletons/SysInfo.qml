@@ -17,16 +17,25 @@ Singleton {
 
   readonly property PwNode audioNode: Pipewire.defaultAudioSink;
   PwObjectTracker { objects: [ root.audioNode ] }
-  readonly property int volume: Math.round(audioNode?.audio.volume * 100);
 
-  readonly property string volumeIcon: {
-    if (root.audioNode?.audio.muted) { return "audio-volume-muted-panel-symbolic"  } else
-    if (root?.volume >= 90         ) { return "audio-volume-high-danger-symbolic"  } else
-    if (root?.volume >= 60         ) { return "audio-volume-high-panel-symbolic"   } else
-    if (root?.volume >= 30         ) { return "audio-volume-medium-panel-symbolic" } else
-    if (root?.volume >= 1          ) { return "audio-volume-low-panel-symbolic"    }
-    else "audio-volume-muted-panel-symbolic";
+  function volumeInt(volume: real): int {
+    return Math.round(volume * 100);
   }
+
+  readonly property int volume: volumeInt(audioNode?.audio.volume);
+
+  function getVolumeIcon(node: PwNode): string {
+    if (node?.audio.muted) return "audio-volume-muted-panel-symbolic";
+    const volume = node?.audio.volume;
+
+    if (volume >= .90) return "audio-volume-high-danger-symbolic";
+    if (volume >= .60) return "audio-volume-high-panel-symbolic";
+    if (volume >= .30) return "audio-volume-medium-panel-symbolic";
+    if (volume >= .01) return "audio-volume-low-panel-symbolic";
+    return "audio-volume-muted-panel-symbolic";
+  }
+
+  readonly property string volumeIcon: getVolumeIcon(audioNode);
 
   readonly property string brightnessIcon: root.brightness >= 50
     ? "brightness-high-symbolic"

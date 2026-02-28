@@ -12,6 +12,7 @@ ProgressBar {
   property color scrubberColor: Qt.darker(Globals.colours.fg, 1.2);
   property color scrubberColorHover: Globals.colours.fg;
   property color scrubberColorPress: Globals.colours.accent;
+  property real scrubberSize: (root.vertical ? root.width : root.height) * 2 + scrubber.outlineSize + 2;
 
   property bool enableInteractivity: true;
   property bool enableClickToScrub: true;
@@ -103,8 +104,8 @@ ProgressBar {
 
   OutlinedRectangle {
     id: scrubber;
-    width: (root.vertical ? root.width : root.height) * 2 + outlineSize;
-    height: width;
+    width: root.scrubberSize;
+    height: root.scrubberSize;
 
     outlineSize: 1;
 

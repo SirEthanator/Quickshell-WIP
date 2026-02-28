@@ -195,7 +195,7 @@ OutlinedRectangle {
 
         InteractiveProgressBar {
           Layout.fillWidth: true;
-          implicitHeight: 7;
+          implicitHeight: Consts.progressBarHeight;
 
           bg: Globals.colours.bgLight;
           value: Utils.Mpris.posInfo.positionPercent;

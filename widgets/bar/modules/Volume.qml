@@ -1,7 +1,7 @@
 import qs.singletons
 import qs.widgets.bar
+import qs.components
 import QtQuick;
-import QtQuick.Layouts;
 import Quickshell.Services.Pipewire;
 
 BarModule {
@@ -33,9 +33,7 @@ BarModule {
     }
   }
 
-  // menu: Tooltip {
-  //   ColumnLayout {
-  //     // Volume mixer
-  //   }
-  // }
+  menu: Tooltip {
+    VolumeMixer {}
+  }
 }
