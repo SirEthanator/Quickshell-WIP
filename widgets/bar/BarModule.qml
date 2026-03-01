@@ -9,7 +9,7 @@ OutlinedRectangle {
   id: root
   default property alias data: content.data;  // Place children in the RowLayout
 
-  property color background: menu !== null && mouseArea.containsMouse ? Globals.colours.bgHover : Globals.colours.bgLight;
+  property color background: clickable && mouseArea.containsMouse ? Globals.colours.bgHover : Globals.colours.bgLight;
   property string icon;  // If this is an empty string the icon will not be displayed
   property Component customIcon;
   property color iconColour: background;
@@ -17,8 +17,11 @@ OutlinedRectangle {
   property bool forceIconbgColour: false;
   property int padding: Consts.paddingModule; // NOTE: L+R padding only. T+B is based on bar height.
   property bool outline: Conf.bar.moduleOutlines;
+
   property Tooltip tooltip: null;
   property Tooltip menu: null;
+
+  property bool clickable: menu !== null;
 
   property alias mouseArea: mouseArea;
   property alias hoverEnabled: mouseArea.hoverEnabled;
@@ -101,7 +104,7 @@ OutlinedRectangle {
     anchors.fill: parent.content;
 
     // Needed when there is a menu for hover colour
-    hoverEnabled: root.tooltip !== null || root.menu !== null;
+    hoverEnabled: root.tooltip !== null || root.clickable;
 
     onClicked: (event) => {
       root.clicked(event);

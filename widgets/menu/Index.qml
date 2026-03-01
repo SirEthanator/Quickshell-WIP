@@ -23,9 +23,6 @@ Item {
       appSearch.focus = false;
       focus = true;
 
-    } else if (key === Qt.Key_Escape) {
-      Sidebar.Controller.deactivate("menu");
-
     } else if ((key >= 48 && key <= 90) || (key >= 97 && key <= 122) || (key >= 186 && key <= 223)) {
       appSearch.field.insert(0, event.text);
       appSearch.focus = true;

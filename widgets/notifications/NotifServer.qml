@@ -12,6 +12,13 @@ Singleton {
 
   readonly property alias notifList: notifServer.trackedNotifications;
 
+  property list<int> unreadIds: [];
+  readonly property int unreadCount: unreadIds.length;
+
+  function read(id: int) {
+    root.unreadIds = root.unreadIds.filter((i) => i !== id);
+  }
+
   NotificationServer {
     id: notifServer
 
@@ -23,9 +30,11 @@ Singleton {
       n.tracked = true;
 
       root.incoming(n);
+      root.unreadIds.push(n.id);
 
       n.closed.connect(() => {
-        root.dismissed(n.id)
+        root.dismissed(n.id);
+        root.read(n.id);
       })
 
     }
@@ -33,4 +42,3 @@ Singleton {
 
   readonly property alias server: notifServer;
 }
-

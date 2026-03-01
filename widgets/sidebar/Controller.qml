@@ -56,6 +56,7 @@ Singleton {
 
   readonly property var idIdxMap: ({
     "menu": 0,
-    "polkit": 1
+    "polkit": 1,
+    "notifications": 2
   })
 }

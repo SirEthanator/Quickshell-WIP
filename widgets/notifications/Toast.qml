@@ -25,6 +25,12 @@ MouseArea {
   property bool popup: false;
   property bool showOutline: true;
 
+  Component.onCompleted: {
+    if (!popup) {
+      NotifServer.read(n.id);
+    }
+  }
+
   width: parent.width;
   height: bg.height;
 

@@ -3,6 +3,7 @@ pragma ComponentBehavior: Bound
 import qs.singletons
 import qs.widgets.sidebar  // For LSP
 import qs.components
+import qs.widgets.menu.dashboard as NotifCentre;
 import qs.animations as Anims;
 import qs.widgets.polkit as Polkit;
 import qs.widgets.menu as Menu;
@@ -92,6 +93,10 @@ Scope {
 
         Shadow { target: background }
 
+        Keys.onEscapePressed: {
+          Controller.deactivate(Controller.current);
+        }
+
         OutlinedRectangle {
           id: background;
 
@@ -124,6 +129,11 @@ Scope {
             Loader {
               sourceComponent: Polkit.Index { polkit: polkit }
               active: Controller.active.includes("polkit") || Controller.finalActive === "polkit";
+            }
+
+            Loader {
+              sourceComponent: NotifCentre.NotifCentre {}
+              active: Controller.active.includes("notifications") || Controller.finalActive === "notifications";
             }
           }
         }

@@ -42,6 +42,10 @@ QtObject {
     title: "Volume";
     moduleName: "Volume";
   }
+  readonly property BarModule notifications: BarModule {
+    title: "Notifications";
+    moduleName: "Notifications";
+  }
 
   function toStripped(): var {
     return Utils.StripMeta.stripMeta(root);

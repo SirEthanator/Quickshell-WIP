@@ -26,7 +26,6 @@ Item {
 
     if (key === Qt.Key_Escape) {
       root.polkit.flow.cancelAuthenticationRequest();
-      root.deactivate();
     }
   }
 
