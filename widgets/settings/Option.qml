@@ -22,10 +22,9 @@ Rectangle {
 
   // If this option is displaying a popup, we want to make sure that popup is fully visible
   // To do this, we set this option's z index to one higher than the rest of the options,
-  // so that it and, more importantly, its children display on top.
-  z: (!!valueLoader.item && !!valueLoader.item.popupOpen) ? 1000
-    : (!!longValueLoader.item && !!longValueLoader.item.popupOpen) ? 1000
-    : 0;
+  // so that it and, more importantly, its children display on top. Then the section listens
+  // for changes of this value to change its z order.
+  z: (!!valueLoader.item && !!valueLoader.item.popupOpen) || (!!longValueLoader.item && !!longValueLoader.item.popupOpen) ? 1 : 0;
 
   RowLayout {
     id: content;

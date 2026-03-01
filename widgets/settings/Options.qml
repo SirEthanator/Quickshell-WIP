@@ -26,7 +26,6 @@ Item {
     width: Math.min(root.maxWidth, root.width - Consts.paddingWindow * 2);
 
     spacing: Consts.paddingWindow;
-    clip: true;
 
     boundsBehavior: dragging ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds;
     model: Object.keys(Conf.metadata[Controller.currentPage]);
@@ -55,6 +54,8 @@ Item {
         }
       }
 
+      z: 0;
+
       Text {
         text: sectionColumn.modelData;
         font {
@@ -78,6 +79,14 @@ Item {
           propName: modelData;
           section: sectionColumn.modelData;
           page: Controller.currentPage;
+
+          onZChanged: {
+            if (z >= 1) {
+              sectionColumn.z++;
+            } else {
+              sectionColumn.z--;
+            }
+          }
         }
       }
     }
