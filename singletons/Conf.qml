@@ -34,9 +34,9 @@ Singleton {
   readonly property var metadata: ({
     "global": {
       "Appearance": {
-        "colourScheme": {
-          "title": "Colour Scheme",
-          "description": "Defines what colour scheme should be used throughout the system.",
+        "colorScheme": {
+          "title": "Color Scheme",
+          "description": "Defines what color scheme should be used throughout the system.",
           "type": "string",
           "options": Globals.schemes,
           "callback": root.switchTheme
@@ -119,9 +119,9 @@ Singleton {
           "description": "Defines whether the bar should touch the screen edges.",
           "type": "bool"
         },
-        "multiColourModules": {
-          "title": "Multi-colour Modules",
-          "description": "Defines whether the icons should have different coloured backgrounds.",
+        "multiColorModules": {
+          "title": "Multi-color Modules",
+          "description": "Defines whether the icons should have different colored backgrounds.",
           "type": "bool"
         },
         "moduleOutlines": {
@@ -214,7 +214,7 @@ Singleton {
           "allowEmpty": true,
           "callback": (val) => {
             if (
-              Settings.Controller.getVal("global", "colourScheme") === "material"
+              Settings.Controller.getVal("global", "colorScheme") === "material"
               && Settings.Controller.getVal("desktop", "wallpaperType") !== "slideshow"
             ) {
               Utils.SetTheme.setTheme("material", `--wallpaper '${val.replace('file://', '')}'`);
@@ -244,9 +244,9 @@ Singleton {
           "description": "Defines the name of the shader to show. This is displayed on top of the wallpaper. Set to an empty string to disable. Additional shaders may be placed in <shellRoot>/widgets/desktop/shaders.",
           "type": "string"
         },
-        "bgColour": {
-          "title": "Background Colour",
-          "description": "Defines the colour that should be shown behind everything. If 'hideWallpaper' is true, this colour will be displayed. It is also useful for shaders which look better with a solid colour behind them.",
+        "bgColor": {
+          "title": "Background Color",
+          "description": "Defines the color that should be shown behind everything. If 'hideWallpaper' is true, this color will be displayed. It is also useful for shaders which look better with a solid color behind them.",
           "type": "string"
         }
       },
@@ -261,8 +261,8 @@ Singleton {
           "min": 1
         },
         "slideshowRegenMaterial": {
-          "title": "Regenerate Material Colours",
-          "description": "Defines whether material colours should be regenerated when the wallpaper changes. Not recommended for short intervals.",
+          "title": "Regenerate Material Colors",
+          "description": "Defines whether material colors should be regenerated when the wallpaper changes. Not recommended for short intervals.",
           "type": "bool"
         }
       }
@@ -404,9 +404,9 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
     return ""
   }
 
-  function setColours(scheme: string): string {
-    const validate = () => Utils.Validate.validateObjKey(scheme, Globals.schemes, "Failed to set colour scheme");
-    return setConf("global", "colourScheme", scheme, validate);
+  function setColors(scheme: string): string {
+    const validate = () => Utils.Validate.validateObjKey(scheme, Globals.schemes, "Failed to set color scheme");
+    return setConf("global", "colorScheme", scheme, validate);
   }
 
   function setWallpaper(path: string): void {
@@ -414,7 +414,7 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
   }
 
   function switchTheme(scheme: string): string {
-    const validationResult = setColours(scheme);
+    const validationResult = setColors(scheme);
     if (!!validationResult) return validationResult
     Utils.SetTheme.setTheme(scheme, "");
     return "";

@@ -17,9 +17,9 @@ PanelWindow {
     (Conf.sidebar.dimBackground && Sidebar.Controller.sidebarOpen)
       || (TooltipController.activeTooltip && TooltipController?.activeTooltip.isMenu);
 
-  color: bgIsDimmed ? Consts.bgDimmedColour : "transparent";
+  color: bgIsDimmed ? Consts.bgDimmedColor : "transparent";
 
-  Anims.ColourTransition on color {
+  Anims.ColorTransition on color {
     duration: Consts.animLen;
   }
 
@@ -80,7 +80,7 @@ PanelWindow {
         bottomMargin: Conf.bar.autohide ? Consts.gap : 0;
       }
 
-      color: Conf.bar.floatingModules ? "transparent" : Globals.colours.bg;
+      color: Conf.bar.floatingModules ? "transparent" : Globals.colors.bg;
       radius: Conf.bar.docked ? 0 : Consts.br;
 
       readonly property bool outlines: Conf.bar.backgroundOutline && !Conf.bar.floatingModules;

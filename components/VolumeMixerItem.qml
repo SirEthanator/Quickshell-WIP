@@ -39,7 +39,7 @@ RowLayout {
       Text {
         id: title;
         text: root.useNickname ? root.node.nickname : root.node.name;
-        color: Globals.colours.fg;
+        color: Globals.colors.fg;
         font {
           family: Consts.fontFamily;
           pixelSize: Consts.mediumFontSize;
@@ -56,7 +56,7 @@ RowLayout {
         active: root.node.audio.muted;
         iconSize: Consts.smallIconSize;
         padding: 6;
-        bg: Globals.colours.bgLight;
+        bg: Globals.colors.bgLight;
         allRadius: true;
         onClicked: root.node.audio.muted = !root.node.audio.muted;
       }
@@ -74,7 +74,7 @@ RowLayout {
         Layout.fillWidth: true;
         implicitHeight: Consts.progressBarHeight;
 
-        bg: Globals.colours.bgLight;
+        bg: Globals.colors.bgLight;
         value: root.node.audio.volume;
 
         enableScrolling: true;
@@ -88,7 +88,7 @@ RowLayout {
       Text {
         id: valueText;
         text: `${Math.round(slider.clampedValue * 100)}%`;
-        color: Globals.colours.fg;
+        color: Globals.colors.fg;
 
         TextMetrics {
           id: valueTextMetrics;

@@ -35,11 +35,11 @@ RowLayout {
       Anims.NumberTransition on Layout.preferredWidth {}
 
       Rectangle {
-        color: item.selected ? Globals.colours.accent : item.containsMouse ? Globals.colours.bgHover : Globals.colours.bgLight;
+        color: item.selected ? Globals.colors.accent : item.containsMouse ? Globals.colors.bgHover : Globals.colors.bgLight;
         radius: height / 2;
         anchors.fill: parent;
 
-        Anims.ColourTransition on color {}
+        Anims.ColorTransition on color {}
       }
     }
   }

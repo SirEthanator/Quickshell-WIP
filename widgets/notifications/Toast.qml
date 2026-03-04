@@ -97,7 +97,7 @@ MouseArea {
 
     height: content.height + outlineSize * 2;
 
-    color: Globals.colours.bg;
+    color: Globals.colors.bg;
     radius: Consts.br;
 
     Anims.NumberTransition on height {}
@@ -129,11 +129,11 @@ MouseArea {
         tlRadius: true; blRadius: true;
         changeBrRadiusHover: !root.popup;
 
-        bg: Globals.colours.red;
-        bgHover: Globals.colours.redHover;
-        bgPress: Globals.colours.redPress;
+        bg: Globals.colors.red;
+        bgHover: Globals.colors.redHover;
+        bgPress: Globals.colors.redPress;
         invertTextOnPress: false;
-        labelColour: Globals.colours.bg;
+        labelColor: Globals.colors.bg;
 
         onClicked: root.n.dismiss();
       }
@@ -164,7 +164,7 @@ MouseArea {
               Text {
                 id: appName;
                 text: root.n.appName;
-                color: Globals.colours.fg;
+                color: Globals.colors.fg;
                 font {
                   family: Consts.fontFamily;
                   pixelSize: Consts.mainFontSize;
@@ -195,7 +195,7 @@ MouseArea {
               id: summary;
               readonly property bool multiline: implicitWidth > width;
               text: root.n.summary;
-              color: Globals.colours.fg;
+              color: Globals.colors.fg;
               font {
                 family: Consts.fontFamily;
                 pixelSize: Consts.smallHeadingFontSize;
@@ -212,7 +212,7 @@ MouseArea {
               id: body;
               readonly property bool multiline: implicitWidth > width;
               text: root.n.body
-              color: Globals.colours.fg;
+              color: Globals.colors.fg;
               font {
                 family: Consts.fontFamily;
                 pixelSize: Consts.mainFontSize;
@@ -247,7 +247,7 @@ MouseArea {
                   blRadius: index === 0;
                   trRadius: index === root.n.actions.length - 1;
                   brRadius: index === root.n.actions.length - 1;
-                  bg: Globals.colours.bgLight;
+                  bg: Globals.colors.bgLight;
                 }
               }
             }
@@ -266,8 +266,8 @@ MouseArea {
           value: root.timeRemaining / root.timeout;
           Layout.fillWidth: true;
           implicitHeight: 5;
-          bg: root.n.urgency === NotificationUrgency.Critical ? Globals.colours.bgRed : Globals.colours.bgAccent;
-          fg: root.n.urgency === NotificationUrgency.Critical ? Globals.colours.red : Globals.colours.accent;
+          bg: root.n.urgency === NotificationUrgency.Critical ? Globals.colors.bgRed : Globals.colors.bgAccent;
+          fg: root.n.urgency === NotificationUrgency.Critical ? Globals.colors.red : Globals.colors.accent;
           smoothing: false;
 
           radius: bg.content.bottomLeftRadius;

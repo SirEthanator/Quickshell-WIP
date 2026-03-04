@@ -33,7 +33,7 @@ BarModule {
       radius: 3;
 
       border {
-        color: root.iconColour;
+        color: root.iconColor;
         width: 1.5;
       }
 
@@ -52,7 +52,7 @@ BarModule {
             bottom: parent.bottom
           }
 
-          color: root.iconColour;
+          color: root.iconColor;
           radius: batteryBorder.radius - 0.8;
 
           readonly property real widthValue: parent.width * (root.percentage / 100);
@@ -136,28 +136,28 @@ BarModule {
       anchors.right: parent.right;
       anchors.verticalCenter: parent.verticalCenter;
 
-      color: root.iconColour;
+      color: root.iconColor;
       radius: width / 2;
     }
   }
 
 
-  forceIconbgColour: true;
-  iconbgColour: {
+  forceIconbgColor: true;
+  iconbgColor: {
     if (root.charging) {
-      return Globals.colours.batteryCharging
+      return Globals.colors.batteryCharging
     } else if (root.percentage <= 15) {
-      return Globals.colours.batteryLow
+      return Globals.colors.batteryLow
     } else if (root.percentage <= 50) {
-      return Globals.colours.batteryMed
+      return Globals.colors.batteryMed
     } else {
-      return Globals.colours.battery
+      return Globals.colors.battery
     }
   }
 
   Text {
     text: `${root.percentage}%`;
-    color: Globals.colours.fg;
+    color: Globals.colors.fg;
     font {
       family: Consts.fontFamily;
       pixelSize: Consts.mainFontSize;
@@ -167,7 +167,7 @@ BarModule {
   tooltip: Tooltip {
     Text {
       text: `Battery - ${root.percentage}%`;
-      color: Globals.colours.fg;
+      color: Globals.colors.fg;
       font {
         family: Consts.fontFamily;
         pixelSize: Consts.mainFontSize;

@@ -44,7 +44,7 @@ Input {
 
     radiusValue: root.radius - Consts.outlineSize;
     trRadius: true; brRadius: true;
-    bg: Globals.colours.bgLight;
+    bg: Globals.colors.bgLight;
 
     disabled: root.disabled;
 

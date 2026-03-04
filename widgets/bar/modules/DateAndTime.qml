@@ -9,10 +9,10 @@ import QtQuick.Controls as Ctrls;
 
 BarModule {
   icon: "calendar-month-symbolic";
-  iconbgColour: Globals.colours.dateAndTime;
+  iconbgColor: Globals.colors.dateAndTime;
 
   Text {
-    color: Globals.colours.fg;
+    color: Globals.colors.fg;
     font {
       family: Consts.fontFamily;
       pixelSize: Consts.mainFontSize;
@@ -24,7 +24,7 @@ BarModule {
   tooltip: Tooltip {
     Text {
       text: `Date & time - ${SysInfo.dateTime("ddd dd/MM/yy | hh:mm:ss ap")}`;
-      color: Globals.colours.fg;
+      color: Globals.colors.fg;
       font {
         family: Consts.fontFamily;
         pixelSize: Consts.mainFontSize;
@@ -42,7 +42,7 @@ BarModule {
           icon: "previous-symbolic";
           iconSize: Consts.smallIconSize;
           padding: Consts.paddingButtonIcon;
-          bg: Globals.colours.bgLight;
+          bg: Globals.colors.bgLight;
           tlRadius: true;
           blRadius: true;
           onClicked: monthGrid.incrementMonth(-1);
@@ -52,7 +52,7 @@ BarModule {
           Layout.fillWidth: true;
           Layout.fillHeight: true;
 
-          bg: Globals.colours.bgLight;
+          bg: Globals.colors.bgLight;
 
           padding: 0;
 
@@ -71,7 +71,7 @@ BarModule {
           icon: "next-symbolic";
           iconSize: Consts.smallIconSize;
           padding: Consts.paddingButtonIcon;
-          bg: Globals.colours.bgLight;
+          bg: Globals.colors.bgLight;
           trRadius: true;
           brRadius: true;
           onClicked: monthGrid.incrementMonth(1);
@@ -91,7 +91,7 @@ BarModule {
           delegate: Text {
             required property int index;
             text: dayRepeater.days[(index + Qt.locale().firstDayOfWeek) % 7];
-            color: Globals.colours.fg;
+            color: Globals.colors.fg;
 
             font {
               family: Consts.fontFamily;
@@ -112,10 +112,10 @@ BarModule {
           required property var modelData;
           text: modelData.day;
           color: modelData.today
-            ? Globals.colours.accent
+            ? Globals.colors.accent
             : modelData.month === monthGrid.month
-              ? Globals.colours.fg
-              : Globals.colours.greyDim;
+              ? Globals.colors.fg
+              : Globals.colors.greyDim;
 
           font {
             family: Consts.fontFamily;

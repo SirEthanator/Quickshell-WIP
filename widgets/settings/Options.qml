@@ -65,7 +65,7 @@ Item {
             "wght": 550
           }
         }
-        color: Globals.colours.fg;
+        color: Globals.colors.fg;
       }
 
       Item { implicitHeight: Consts.marginCardSmall - sectionColumn.spacing }

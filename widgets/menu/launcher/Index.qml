@@ -45,7 +45,7 @@ Item {
 
     Icon {
       icon: "search-symbolic";
-      color: Globals.colours.grey;
+      color: Globals.colors.grey;
       size: Consts.extraLargeIconSize;
       Layout.alignment: Qt.AlignHCenter;
     }
@@ -56,7 +56,7 @@ Item {
         family: Consts.fontFamily;
         pixelSize: Consts.smallHeadingFontSize;
       }
-      color: Globals.colours.grey;
+      color: Globals.colors.grey;
       Layout.fillWidth: true;
       horizontalAlignment: Text.AlignHCenter;
     }
@@ -124,19 +124,19 @@ Item {
           readonly property bool containsPress: entryMouseArea.containsPress;
 
           color: containsPress
-            ? Globals.colours.accent
+            ? Globals.colors.accent
             : selected
-              ? Globals.colours.bgHover
-              : Globals.colours.bgLight;
+              ? Globals.colors.bgHover
+              : Globals.colors.bgLight;
           radius: Consts.br;
 
           border {
-            color: Conf.sidebar.moduleOutlines && !selected ? Globals.colours.outline : "transparent";
+            color: Conf.sidebar.moduleOutlines && !selected ? Globals.colors.outline : "transparent";
             width: Conf.sidebar.moduleOutlines ? Consts.outlineSize : 0;
             pixelAligned: false;
           }
 
-          Anims.ColourTransition on color {}
+          Anims.ColorTransition on color {}
 
           RowLayout {
             id: entryContent;
@@ -157,7 +157,7 @@ Item {
 
             Text {
               text: entryMouseArea.modelData.name;
-              color: entryMouseArea.containsPress ? Globals.colours.bgLight : Globals.colours.fg;
+              color: entryMouseArea.containsPress ? Globals.colors.bgLight : Globals.colors.fg;
               font {
                 family: Consts.fontFamily;
                 pixelSize: Consts.smallHeadingFontSize;

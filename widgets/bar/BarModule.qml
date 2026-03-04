@@ -9,12 +9,12 @@ OutlinedRectangle {
   id: root
   default property alias data: content.data;  // Place children in the RowLayout
 
-  property color background: clickable && mouseArea.containsMouse ? Globals.colours.bgHover : Globals.colours.bgLight;
+  property color background: clickable && mouseArea.containsMouse ? Globals.colors.bgHover : Globals.colors.bgLight;
   property string icon;  // If this is an empty string the icon will not be displayed
   property Component customIcon;
-  property color iconColour: background;
-  property color iconbgColour: Globals.colours.accent;
-  property bool forceIconbgColour: false;
+  property color iconColor: background;
+  property color iconbgColor: Globals.colors.accent;
+  property bool forceIconbgColor: false;
   property int padding: Consts.paddingModule; // NOTE: L+R padding only. T+B is based on bar height.
   property bool outline: Conf.bar.moduleOutlines;
 
@@ -51,7 +51,7 @@ OutlinedRectangle {
   signal clicked(event: MouseEvent);
   signal wheel(event: WheelEvent);
 
-  Anims.ColourTransition on background {}
+  Anims.ColorTransition on background {}
   Anims.NumberTransition on implicitWidth {}
   clip: true;
 
@@ -103,7 +103,7 @@ OutlinedRectangle {
     id: mouseArea;
     anchors.fill: parent.content;
 
-    // Needed when there is a menu for hover colour
+    // Needed when there is a menu for hover color
     hoverEnabled: root.tooltip !== null || root.clickable;
 
     onClicked: (event) => {
@@ -135,7 +135,7 @@ OutlinedRectangle {
       Rectangle {
         id: iconbg;
         visible: !!root.icon || !!root.customIcon;  // Visible if icon is a non-empty string.
-        color: Conf.bar.multiColourModules || root.forceIconbgColour ? root.iconbgColour : Globals.colours.accent;
+        color: Conf.bar.multiColorModules || root.forceIconbgColor ? root.iconbgColor : Globals.colors.accent;
         implicitWidth: Consts.moduleIconSize + root.padding*2;  // This will add padding to both sides of the icon's background.
         Layout.fillHeight: true;
         topLeftRadius: root.content.topLeftRadius;
@@ -156,7 +156,7 @@ OutlinedRectangle {
           visible: !root.customIcon;
 
           icon: root.icon;
-          color: root.iconColour;
+          color: root.iconColor;
           size: Consts.moduleIconSize;
         }
       }

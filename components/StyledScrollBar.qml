@@ -15,11 +15,11 @@ ScrollBar {
 
   contentItem: Rectangle {
     implicitWidth: 6;
-    color: root.pressed ? Globals.colours.accent : Globals.colours.fg;
+    color: root.pressed ? Globals.colors.accent : Globals.colors.fg;
     opacity: scrollBarMouse.containsMouse || root.pressed ? 1 : !root.scrollView.hovered ? 0 : 0.3;
     radius: implicitWidth / 2;
 
-    Anims.ColourTransition on color {}
+    Anims.ColorTransition on color {}
     Anims.NumberTransition on opacity {}
 
     MouseArea {

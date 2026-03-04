@@ -17,7 +17,7 @@ ConfigCategory {
   property bool autohide: false;
   property bool docked: false;
   property bool floatingModules: false;
-  property bool multiColourModules: false;
+  property bool multiColorModules: false;
   property bool moduleOutlines: false;
   property bool backgroundOutline: true;
   property int workspaceCount: 10;

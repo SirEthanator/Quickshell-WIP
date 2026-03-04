@@ -19,7 +19,7 @@ ColumnLayout {
       family: Consts.fontFamily;
       pixelSize: Consts.mainFontSize;
     }
-    color: Globals.colours.grey;
+    color: Globals.colors.grey;
     maximumLineCount: 1;
     elide: Text.ElideRight;
   }
@@ -41,10 +41,10 @@ ColumnLayout {
       pixelSize: Consts.mainFontSize;
     }
     color: root.pam.state === "failed" || root.pam.state === "error"
-      ? Globals.colours.warning
+      ? Globals.colors.warning
       : root.pam.state === "maxTries"
-        ? Globals.colours.red
-        : Globals.colours.grey;
+        ? Globals.colors.red
+        : Globals.colors.grey;
 
     maximumLineCount: 1;
     elide: Text.ElideRight;

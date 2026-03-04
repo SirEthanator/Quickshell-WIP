@@ -111,7 +111,7 @@ LazyLoader {
 
       OutlinedRectangle {
         id: progressWrapper;
-        color: Globals.colours.bg;
+        color: Globals.colors.bg;
         implicitHeight: 350 + outlineSize * 2;
         implicitWidth: 50 + outlineSize * 2;
 
@@ -133,8 +133,8 @@ LazyLoader {
           vertical: true;
           value: root.currentValue;
 
-          bg: Globals.colours.bg;
-          fg: value >= 0.9 ? Globals.colours.red : value >= 0.75 ? Globals.colours.warning : Globals.colours.accent;
+          bg: Globals.colors.bg;
+          fg: value >= 0.9 ? Globals.colors.red : value >= 0.75 ? Globals.colors.warning : Globals.colors.accent;
 
           enableInteractivity: root.currentMode === "volume";
           enableScrolling: true;
@@ -171,7 +171,7 @@ LazyLoader {
           bottomLeftRadius: progressWrapper.content.bottomLeftRadius;
           bottomRightRadius: progressWrapper.content.bottomRightRadius;
 
-          Anims.ColourTransition on color {}
+          Anims.ColorTransition on color {}
 
           Icon {
             anchors.fill: parent;
@@ -182,7 +182,7 @@ LazyLoader {
       }
 
       OutlinedRectangle {
-        color: Globals.colours.bg;
+        color: Globals.colors.bg;
         Layout.fillWidth: true;
         implicitHeight: percentageText.height + Consts.paddingButton * 2 + outlineSize * 2;
         radius: Consts.br;
@@ -190,7 +190,7 @@ LazyLoader {
         Text {
           id: percentageText;
           text: `${Math.round(progress.clampedValue * 100)}%`;
-          color: Globals.colours.fg;
+          color: Globals.colors.fg;
           anchors.centerIn: parent.content;
 
           font {

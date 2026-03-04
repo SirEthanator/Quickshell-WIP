@@ -31,8 +31,8 @@ ShellRoot {
     function theme(scheme: string): string {
       return Conf.switchTheme(scheme);
     }
-    function colours(scheme: string): string {
-      return Conf.setColours(scheme);
+    function colors(scheme: string): string {
+      return Conf.setColors(scheme);
     }
     function wallpaper(path: string): void {
       Conf.setWallpaper(path)

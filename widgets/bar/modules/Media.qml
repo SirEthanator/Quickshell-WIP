@@ -11,7 +11,7 @@ import Quickshell.Services.Mpris;
 BarModule {
   id: root;
   icon: activePlayer.isPlaying ? "music-note-16th" : "media-playback-paused-symbolic";
-  iconbgColour: Globals.colours.media;
+  iconbgColor: Globals.colors.media;
 
   readonly property list<MprisPlayer> players: Utils.Mpris.players;
   readonly property MprisPlayer activePlayer: Utils.Mpris.activePlayer;
@@ -19,7 +19,7 @@ BarModule {
   show: !!activePlayer;
 
   Text {
-    color: Globals.colours.fg;
+    color: Globals.colors.fg;
     font {
       family: Consts.fontFamily;
       pixelSize: Consts.mainFontSize;
@@ -37,7 +37,7 @@ BarModule {
   tooltip: Tooltip {
     Text {
       text: `${root.activePlayer.isPlaying ? "" : "[Paused] - "}Now playing "${root.activePlayer.trackTitle}" by ${root.activePlayer.trackArtist || "unknown artist"}`;
-      color: Globals.colours.fg;
+      color: Globals.colors.fg;
       font {
         family: Consts.fontFamily;
         pixelSize: Consts.mainFontSize;

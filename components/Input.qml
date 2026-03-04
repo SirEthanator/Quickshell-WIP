@@ -13,13 +13,13 @@ OutlinedRectangle {
 
   required property InputField field;
 
-  property color bg: Globals.colours.bgLight;
+  property color bg: Globals.colors.bgLight;
   property bool leftPadding: true;
   property bool rightPadding: true;
   property bool topPadding: true;
   property bool bottomPadding: true;
   property bool showBorder: true;
-  property color borderColor: Globals.colours.outline;
+  property color borderColor: Globals.colors.outline;
   property string icon: "";
 
   disableAllOutlines: !showBorder;
@@ -48,7 +48,7 @@ OutlinedRectangle {
       Icon {
         visible: !!root.icon;
         icon: root.icon;
-        color: Globals.colours.fg;
+        color: Globals.colors.fg;
         Layout.alignment: Qt.AlignVCenter;
       }
 

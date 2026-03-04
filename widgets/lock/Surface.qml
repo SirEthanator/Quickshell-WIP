@@ -33,7 +33,7 @@ WlSessionLockSurface {
   Rectangle {
     anchors.fill: parent;
     visible: Conf.lock.dimBackground;
-    color: Consts.bgDimmedColour;
+    color: Consts.bgDimmedColor;
   }
 
   ParallelAnimation {
@@ -92,12 +92,12 @@ WlSessionLockSurface {
       anchors.margins: Consts.gapLarge;
 
       border {
-        color: Globals.colours.outline;
+        color: Globals.colors.outline;
         width: Conf.lock.contentOutline ? Consts.outlineSize : 0;
         pixelAligned: false;
       }
 
-      color: Globals.colours.bg;
+      color: Globals.colors.bg;
       radius: Consts.br;
     }
 

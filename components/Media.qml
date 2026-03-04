@@ -10,7 +10,7 @@ OutlinedRectangle {
   id: root;
 
   radius: Consts.br;
-  color: Globals.colours.bg;
+  color: Globals.colors.bg;
 
   implicitHeight: content.implicitHeight + Consts.paddingCard * 2;
   implicitWidth: 550;
@@ -105,7 +105,7 @@ OutlinedRectangle {
       }
 
       Rectangle {
-        color: Globals.colours.bgLight;
+        color: Globals.colors.bgLight;
         anchors.fill: parent;
         visible: !albumCover.visible;
 
@@ -132,7 +132,7 @@ OutlinedRectangle {
             pixelSize: Consts.headingFontSize;
             bold: true;
           }
-          color: Globals.colours.fg;
+          color: Globals.colors.fg;
 
           Layout.fillWidth: true;
           maximumLineCount: 1;
@@ -145,7 +145,7 @@ OutlinedRectangle {
             family: Consts.fontFamily;
             pixelSize: Consts.mainFontSize;
           }
-          color: Globals.colours.fg;
+          color: Globals.colors.fg;
 
           Layout.fillWidth: true;
           maximumLineCount: 1;
@@ -161,7 +161,7 @@ OutlinedRectangle {
           tlRadius: true; blRadius: true;
           icon: "media-seek-backward-symbolic";
           iconSize: Consts.mainIconSize;
-          bg: Globals.colours.bgLight;
+          bg: Globals.colors.bgLight;
 
           disabled: !Utils.Mpris.activePlayer.canGoPrevious;
           onClicked: {
@@ -172,7 +172,7 @@ OutlinedRectangle {
         Button {
           icon: Utils.Mpris.activePlayer.isPlaying ? "media-playback-pause-symbolic" : "media-playback-start-symbolic"
           iconSize: Consts.mainIconSize;
-          bg: Globals.colours.bgLight;
+          bg: Globals.colors.bgLight;
 
           onClicked: Utils.Mpris.activePlayer.togglePlaying();
         }
@@ -180,7 +180,7 @@ OutlinedRectangle {
           trRadius: true; brRadius: true;
           icon: "media-seek-forward-symbolic"
           iconSize: Consts.mainIconSize;
-          bg: Globals.colours.bgLight;
+          bg: Globals.colors.bgLight;
 
           disabled: !Utils.Mpris.activePlayer.canGoNext;
           onClicked: {
@@ -197,7 +197,7 @@ OutlinedRectangle {
           Layout.fillWidth: true;
           implicitHeight: Consts.progressBarHeight;
 
-          bg: Globals.colours.bgLight;
+          bg: Globals.colors.bgLight;
           value: Utils.Mpris.posInfo.positionPercent;
 
           enableInteractivity: Utils.Mpris.activePlayer.canSeek && Utils.Mpris.activePlayer.positionSupported;
@@ -220,7 +220,7 @@ OutlinedRectangle {
               family: Consts.fontMono;
               pixelSize: Consts.mainFontSize;
             }
-            color: Globals.colours.fg;
+            color: Globals.colors.fg;
             anchors.left: parent.left;
           }
           Text {
@@ -230,7 +230,7 @@ OutlinedRectangle {
               family: Consts.fontMono;
               pixelSize: Consts.mainFontSize;
             }
-            color: Globals.colours.fg;
+            color: Globals.colors.fg;
             anchors.right: parent.right;
           }
         }

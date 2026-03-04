@@ -7,20 +7,20 @@ import QtQuick;
 BarModule {
   id: root;
   hoverEnabled: true;
-  background: root.mouseArea.containsMouse ? Globals.colours.accentLight : Globals.colours.accent;
+  background: root.mouseArea.containsMouse ? Globals.colors.accentLight : Globals.colors.accent;
   outline: false;
   onClicked: Sidebar.Controller.toggle("menu");
   padding: Consts.paddingModule*2;
 
   Icon {
     icon: "archlinux-logo";
-    color: Globals.colours.bg;
+    color: Globals.colors.bg;
   }
 
   tooltip: Tooltip {
     Text {
       text: "Toggle menu";
-      color: Globals.colours.fg;
+      color: Globals.colors.fg;
       font {
         family: Consts.fontFamily;
         pixelSize: Consts.mainFontSize;

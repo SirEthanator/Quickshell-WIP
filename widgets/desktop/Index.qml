@@ -15,7 +15,7 @@ LazyLoader {
     WlrLayershell.layer: WlrLayer.Background;
     WlrLayershell.namespace: "wallpaper";
     exclusionMode: ExclusionMode.Ignore;
-    color: Conf.desktop.bgColour;
+    color: Conf.desktop.bgColor;
 
     screen: root.screen;
 
@@ -31,7 +31,7 @@ LazyLoader {
     Rectangle {
       id: fadeOverlay;
       anchors.fill: parent;
-      color: Conf.desktop.bgColour;
+      color: Conf.desktop.bgColor;
       SequentialAnimation on opacity {
         NumberAnimation {
           from: 1; to: 0;

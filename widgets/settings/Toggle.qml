@@ -11,9 +11,9 @@ MouseArea {
 
   property bool checked: Controller.getVal(page, propName)
 
-  property color fg: Globals.colours.fg;
-  property color bg: containsMouse ? Globals.colours.bgHover : Globals.colours.bg;
-  property color checkedColour: containsMouse ? Globals.colours.accentLight : Globals.colours.accent;
+  property color fg: Globals.colors.fg;
+  property color bg: containsMouse ? Globals.colors.bgHover : Globals.colors.bg;
+  property color checkedColor: containsMouse ? Globals.colors.accentLight : Globals.colors.accent;
 
   property bool completed: false;
   Component.onCompleted: completed = true;
@@ -38,15 +38,15 @@ MouseArea {
     anchors.fill: parent;
 
     border {
-      color: root.checked ? root.checkedColour : root.containsMouse ? root.bg : Globals.colours.outline;
+      color: root.checked ? root.checkedColor : root.containsMouse ? root.bg : Globals.colors.outline;
       width: Consts.outlineSize;
       pixelAligned: false;
     }
     radius: height / 2;
-    color: root.checked ? root.checkedColour : root.bg;
+    color: root.checked ? root.checkedColor : root.bg;
 
-    Anims.ColourTransition on color {}
-    Anims.ColourTransition on border.color {}
+    Anims.ColorTransition on color {}
+    Anims.ColorTransition on border.color {}
 
     Rectangle {
       id: knob;
@@ -62,7 +62,7 @@ MouseArea {
 
       x: root.checked ? bg.width - width - anchors.margins : anchors.margins;
 
-      Anims.ColourTransition on color {}
+      Anims.ColorTransition on color {}
       Anims.NumberTransition on x {}
     }
   }

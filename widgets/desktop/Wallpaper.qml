@@ -11,7 +11,7 @@ Rectangle {
 
   layer.enabled: true;
 
-  color: Conf.desktop.bgColour;
+  color: Conf.desktop.bgColor;
 
   Loader {
     active: Conf.desktop.wallpaperType === "video";

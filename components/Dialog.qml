@@ -5,7 +5,7 @@ import QtQuick.Layouts;
 Rectangle {
   id: root;
   anchors.fill: parent;
-  color: Consts.bgDimmedColour;
+  color: Consts.bgDimmedColor;
 
   required property string title;
   property string description;
@@ -19,7 +19,7 @@ Rectangle {
   Rectangle {
     anchors.centerIn: parent;
 
-    color: Globals.colours.bg;
+    color: Globals.colors.bg;
     width: content.width + Consts.paddingWindow*2;
     height: content.height + Consts.paddingWindow*2;
 
@@ -38,7 +38,7 @@ Rectangle {
             family: Consts.fontFamily;
             pixelSize: Consts.smallHeadingFontSize;
           }
-          color: Globals.colours.fg;
+          color: Globals.colors.fg;
           Layout.alignment: Qt.AlignHCenter;
         }
 
@@ -48,7 +48,7 @@ Rectangle {
             family: Consts.fontFamily;
             pixelSize: Consts.mainFontSize;
           }
-          color: Globals.colours.grey;
+          color: Globals.colors.grey;
           Layout.alignment: Qt.AlignHCenter;
         }
       }

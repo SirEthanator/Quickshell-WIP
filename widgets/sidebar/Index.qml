@@ -48,7 +48,7 @@ Scope {
     }
 
     PanelWindow {
-      color: Conf.sidebar.dimBackground ? Consts.bgDimmedColour : "transparent";
+      color: Conf.sidebar.dimBackground ? Consts.bgDimmedColor : "transparent";
 
       anchors {
         top: true;
@@ -61,13 +61,13 @@ Scope {
       WlrLayershell.layer: WlrLayer.Overlay;
       WlrLayershell.keyboardFocus: loader.open ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None;
 
-      Anims.ColourAnim on color {
+      Anims.ColorAnim on color {
         running: Conf.sidebar.dimBackground && loader.open;
-        from: "#00000000"; to: Consts.bgDimmedColour;
+        from: "#00000000"; to: Consts.bgDimmedColor;
         duration: Consts.animLen;
       }
 
-      Anims.ColourAnim on color {
+      Anims.ColorAnim on color {
         running: !loader.open && Conf.sidebar.dimBackground;
         to: "#00000000";
         duration: Consts.animLen;
@@ -112,7 +112,7 @@ Scope {
             margins: Consts.gapLarge;
           }
 
-          color: Globals.colours.bg;
+          color: Globals.colors.bg;
           radius: Consts.br;
 
           disableAllOutlines: !Conf.sidebar.backgroundOutline;

@@ -15,7 +15,7 @@ LazyLoader {
     WlrLayershell.layer: WlrLayer.Background;
     WlrLayershell.namespace: "backdrop-wallpaper";
     exclusionMode: ExclusionMode.Ignore;
-    color: Conf.desktop.bgColour;
+    color: Conf.desktop.bgColor;
 
     screen: root.screen;
 

@@ -88,7 +88,7 @@ Item {
           Text {
             Layout.fillWidth: true;
             text: root.polkit.flow.message;
-            color: Globals.colours.fg;
+            color: Globals.colors.fg;
             font {
               family: Consts.fontFamily;
               pixelSize: Consts.smallHeadingFontSize;
@@ -99,7 +99,7 @@ Item {
           Text {
             text: "An application is attempting to perform an action requiring elevated permissions. Authentication is required.";
             Layout.fillWidth: true;
-            color: Globals.colours.grey;
+            color: Globals.colors.grey;
             font {
               family: Consts.fontFamily;
               pixelSize: Consts.mainFontSize;
@@ -126,7 +126,7 @@ Item {
       label: "Cancel";
 
       allRadius: true;
-      bg: Globals.colours.bgLight;
+      bg: Globals.colors.bgLight;
 
       onClicked: {
         root.polkit.flow.cancelAuthenticationRequest();

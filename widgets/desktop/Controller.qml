@@ -11,7 +11,7 @@ Singleton {
 
   // The default wallpaper must be set here instead of defaultConf.json because it uses an environment variable
   readonly property string defaultWall: {
-    switch (Conf.global.colourScheme) {
+    switch (Conf.global.colorScheme) {
       case "everforest": return "Everforest"
       case "catMocha": return "Catppuccin"
       case "rosePine": return "Rose-Pine"
@@ -43,7 +43,7 @@ Singleton {
       root.slideshowCurrentPath = wallpaperModel.get(currentIndex % wallpaperModel.count, "fileUrl");
       currentIndex++;
 
-      if (Conf.global.colourScheme === "material" && Conf.desktop.slideshowRegenMaterial) {
+      if (Conf.global.colorScheme === "material" && Conf.desktop.slideshowRegenMaterial) {
         Utils.SetTheme.setTheme("material", `--nonotify --wallpaper '${root.wallSource.toString().replace('file://', '')}'`);
       }
     }

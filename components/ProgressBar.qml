@@ -9,7 +9,7 @@ Rectangle {
   readonly property real clampedValue: Math.min(Math.max(value, 0), 1);
 
   property color bg: "transparent";
-  property color fg: Globals.colours.accent;
+  property color fg: Globals.colors.accent;
 
   property bool vertical: false;
   property bool smoothing: true;
@@ -59,6 +59,6 @@ Rectangle {
 
     Anims.NumberTransition on width { enabled: root.smoothing }
     Anims.NumberTransition on height { enabled: root.smoothing }
-    Anims.ColourTransition on color {}
+    Anims.ColorTransition on color {}
   }
 }

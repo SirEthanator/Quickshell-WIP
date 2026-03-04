@@ -50,7 +50,7 @@ LazyLoader {
 
           ColorOverlay {
             id: logo;
-            readonly property list<color> colours: [
+            readonly property list<color> colors: [
               "#FFFFFF", "#1793D1", "#DAF6F0",
               "#C6EC60", "#999498", "#BDF5C4",
               "#64AF9B", "#6C68A3", "#F1E39B",
@@ -58,8 +58,8 @@ LazyLoader {
               "#E2C1C0", "#D8DB9D", "#91F2FE",
               "#B993D5", "#748DA7", "#7079E8"
             ];
-            function changeColour() {
-              color = colours[Math.floor(Math.random() * colours.length)];
+            function changeColor() {
+              color = colors[Math.floor(Math.random() * colors.length)];
             }
 
             anchors.fill: logosrc;
@@ -77,17 +77,17 @@ LazyLoader {
               // We could just reverse xSpeed if either condition is true, but we don't in case the image goes slightly too far off screen
               // If it does, it would jitter and stay at the edge, since it keeps reversing because the condition is still true on the next frame
               if (logo.anchors.leftMargin >= background.width - logo.width) {
-                xSpeed = -initialXSpeed; logo.changeColour();
+                xSpeed = -initialXSpeed; logo.changeColor();
               } else if (logo.anchors.leftMargin <= 0) {
-                xSpeed = initialXSpeed; logo.changeColour();
+                xSpeed = initialXSpeed; logo.changeColor();
               }
               logo.anchors.leftMargin += xSpeed * frameTime;
               logo.anchors.rightMargin -= xSpeed * frameTime;
 
               if (logo.anchors.topMargin >= background.height - logo.height) {
-                ySpeed = -initialYSpeed; logo.changeColour();
+                ySpeed = -initialYSpeed; logo.changeColor();
               } else if (logo.anchors.topMargin <= 0) {
-                ySpeed = initialYSpeed; logo.changeColour();
+                ySpeed = initialYSpeed; logo.changeColor();
               }
               logo.anchors.topMargin += ySpeed * frameTime;
               logo.anchors.bottomMargin -= ySpeed * frameTime;

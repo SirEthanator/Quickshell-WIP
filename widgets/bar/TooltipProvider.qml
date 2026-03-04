@@ -71,9 +71,9 @@ PopupWindow {
     }
   }
 
-  color: TooltipController?.activeTooltip?.isMenu ? Consts.bgDimmedColour : "transparent";
+  color: TooltipController?.activeTooltip?.isMenu ? Consts.bgDimmedColor : "transparent";
 
-  Anims.ColourTransition on color { duration: Consts.animLen }
+  Anims.ColorTransition on color { duration: Consts.animLen }
 
   implicitWidth: window.width;
   implicitHeight: window.screen.height - anchor.rect.y;
@@ -143,7 +143,7 @@ PopupWindow {
 
     OutlinedRectangle {
       id: tooltipBg;
-      color: Globals.colours.bg;
+      color: Globals.colors.bg;
       radius: Consts.br;
 
       height: parent.height - Consts.gapSmall;

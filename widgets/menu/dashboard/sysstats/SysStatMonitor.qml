@@ -14,7 +14,7 @@ RowLayout {
     implicitHeight: 80;
     implicitWidth: 80;
     value: root.percentage / 100;
-    fg: value >= 0.9 ? Globals.colours.red : value >= 0.75 ? Globals.colours.warning : Globals.colours.accent;
+    fg: value >= 0.9 ? Globals.colors.red : value >= 0.75 ? Globals.colors.warning : Globals.colors.accent;
   }
 
   ColumnLayout {
@@ -29,7 +29,7 @@ RowLayout {
           "wght": 600
         }
       }
-      color: Globals.colours.fg;
+      color: Globals.colors.fg;
     }
 
     Text {
@@ -39,7 +39,7 @@ RowLayout {
         family: Consts.fontFamily;
         pixelSize: Consts.mainFontSize;
       }
-      color: Globals.colours.grey;
+      color: Globals.colors.grey;
     }
   }
 }

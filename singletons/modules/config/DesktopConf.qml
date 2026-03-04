@@ -8,7 +8,7 @@ ConfigCategory {
   property string wallpaperType: "regular";
   property int fadeSpeed: 2000;
   property string shader: "";
-  property color bgColour: "black";
+  property color bgColor: "black";
 
   property int slideshowInterval: 300;
   property bool slideshowRegenMaterial: false;

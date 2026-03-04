@@ -7,8 +7,8 @@ Item {
 
   property real value: 0;
   property real thickness: 7;
-  property color bg: Globals.colours.bg;
-  property color fg: Globals.colours.accent;
+  property color bg: Globals.colors.bg;
+  property color fg: Globals.colors.accent;
   property real startAngle: 135;
   property real maxAngle: 270;
 
@@ -18,10 +18,10 @@ Item {
   onThicknessChanged: canvas.requestPaint();
 
   property int fontSize: Consts.mainFontSize;
-  property color fontColour: Globals.colours.fg;
+  property color fontColor: Globals.colors.fg;
 
   Anims.NumberTransition on value {}
-  Anims.ColourTransition on fg {}
+  Anims.ColorTransition on fg {}
 
   Canvas {
     id: canvas;
@@ -64,6 +64,6 @@ Item {
       family: Consts.fontFamily;
       pixelSize: root.fontSize;
     }
-    color: root.fontColour;
+    color: root.fontColor;
   }
 }

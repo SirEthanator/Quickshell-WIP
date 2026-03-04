@@ -9,7 +9,7 @@ ColumnLayout {
     text: SysInfo.dateTime("hh:mm AP");
     Layout.alignment: Qt.AlignHCenter;
 
-    color: Globals.colours.fg;
+    color: Globals.colors.fg;
     font {
       family: Consts.fontFamily;
       pixelSize: Consts.largeFontSize;
@@ -24,7 +24,7 @@ ColumnLayout {
     text: SysInfo.dateTime("dddd MMM dd");
     Layout.alignment: Qt.AlignHCenter;
 
-    color: Globals.colours.fg;
+    color: Globals.colors.fg;
     font {
       family: Consts.fontFamily;
       pixelSize: Consts.headingFontSize;

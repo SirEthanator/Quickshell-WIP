@@ -29,10 +29,10 @@ Input {
   property var currentVal: Controller.getVal(page, propName);
 
   width: 200;
-  bg: Globals.colours.bg;
-  borderColor: field.acceptableInput ? Globals.colours.outline : Globals.colours.red;
+  bg: Globals.colors.bg;
+  borderColor: field.acceptableInput ? Globals.colors.outline : Globals.colors.red;
 
-  Anims.ColourTransition on borderColor {}
+  Anims.ColorTransition on borderColor {}
 
   field: InputField {
     text: root.currentVal;

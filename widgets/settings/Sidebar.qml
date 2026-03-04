@@ -12,7 +12,7 @@ Rectangle {
   Layout.fillHeight: true;
   implicitWidth: 250;
 
-  color: Globals.colours.bgLight;
+  color: Globals.colors.bgLight;
 
   Text {
     id: title;
@@ -33,7 +33,7 @@ Rectangle {
         "wght": 650
       }
     }
-    color: Globals.colours.fg;
+    color: Globals.colors.fg;
   }
 
   ColumnLayout {
@@ -62,7 +62,7 @@ Rectangle {
 
         tlRadius: index === 0; trRadius: tlRadius;
         blRadius: index === itemRepeater.model.length - 1; brRadius: blRadius;
-        bg: Globals.colours.bg;
+        bg: Globals.colors.bg;
 
         onClicked: Controller.currentPage = modelData;
 
@@ -81,9 +81,9 @@ Rectangle {
       icon: "filesave-symbolic";
       label: `Apply ${changeCount}`;
 
-      bg: Globals.colours.accent;
-      bgHover: Globals.colours.accentLight;
-      labelColour: Globals.colours.bgLight;
+      bg: Globals.colors.accent;
+      bgHover: Globals.colors.accentLight;
+      labelColor: Globals.colors.bgLight;
       invertTextOnPress: false;
       allRadius: true;
 

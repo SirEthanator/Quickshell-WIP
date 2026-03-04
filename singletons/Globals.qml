@@ -13,7 +13,7 @@ Singleton {
   // ==== Schemes ====
   // =================
 
-  readonly property Scheme colours: schemes[Conf.global.colourScheme];
+  readonly property Scheme colors: schemes[Conf.global.colorScheme];
 
   readonly property var schemes: ({ everforest: everforest, catMocha: catMocha, rosePine: rosePine, material: material });
 

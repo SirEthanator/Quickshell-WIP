@@ -15,12 +15,12 @@ MouseArea {
 
   property bool active: false;
 
-  property color labelColour: Globals.colours.fg;
-  property color bg: Globals.colours.bg;
-  property color bgHover: Globals.colours.bgHover;
-  property color bgPress: Globals.colours.accent;
-  property color bgActive: Globals.colours.accent;
-  property color bgActiveHover: Globals.colours.accentLight;
+  property color labelColor: Globals.colors.fg;
+  property color bg: Globals.colors.bg;
+  property color bgHover: Globals.colors.bgHover;
+  property color bgPress: Globals.colors.accent;
+  property color bgActive: Globals.colors.accent;
+  property color bgActiveHover: Globals.colors.accentLight;
   property bool invertTextOnPress: true;
 
   property int radiusValue: Consts.br;
@@ -66,7 +66,7 @@ MouseArea {
     Anims.NumberTransition on bottomLeftRadius {}
     Anims.NumberTransition on bottomRightRadius {}
 
-    Anims.ColourTransition on color {}
+    Anims.ColorTransition on color {}
 
     RowLayout {
       id: label;
@@ -78,15 +78,15 @@ MouseArea {
 
       width: Math.min(implicitWidth, root.width-root.padding*2)
 
-      readonly property bool changeLabelColour: (root.containsPress || root.active) && root.invertTextOnPress && !root.disabled;
+      readonly property bool changeLabelColor: (root.containsPress || root.active) && root.invertTextOnPress && !root.disabled;
 
       Icon {
         id: iconLabel;
         visible: !!root.icon;
 
         icon: root.icon;
-        color: parent.changeLabelColour ? root.bg : root.labelColour;
-        Anims.ColourTransition on color {}
+        color: parent.changeLabelColor ? root.bg : root.labelColor;
+        Anims.ColorTransition on color {}
         size: !!root.iconSize ? root.iconSize : root.height - root.padding * 2;
         rotation: root.iconRotation;
       }
@@ -100,8 +100,8 @@ MouseArea {
         elide: Text.ElideRight;
 
         text: root.label;
-        color: parent.changeLabelColour ? root.bg : root.labelColour;
-        Anims.ColourTransition on color {}
+        color: parent.changeLabelColor ? root.bg : root.labelColor;
+        Anims.ColorTransition on color {}
         font {
           family: Consts.fontFamily;
           pixelSize: !!root.fontSize ? root.fontSize : Consts.mainFontSize;
