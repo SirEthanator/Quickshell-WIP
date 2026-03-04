@@ -11,7 +11,7 @@ RowLayout {
   spacing: Consts.paddingCard;
   signal clicked(event: MouseEvent);
 
-  Item {
+  Rectangle {
     id: pfp;
 
     visible: false;
@@ -19,38 +19,33 @@ RowLayout {
     implicitHeight: 100;
     readonly property alias status: pfpImg.status;
 
+    color: Globals.colours.bg;
+
+    readonly property bool useDefault: !Conf.menu.profilePicture || status === Image.Error || status === Image.Null;
+
     Image {
       id: pfpImg;
-      readonly property url defaultPfpPath: Quickshell.shellPath("assets/profile.png");
 
-      source: Conf.menu.profilePicture || defaultPfpPath;
+      source: pfp.useDefault ? Quickshell.shellPath("assets/arch-icon.svg") : Conf.menu.profilePicture;
+
       anchors.fill: parent;
-      fillMode: Image.PreserveAspectCrop;
+      anchors.margins: pfp.useDefault ? 20 : 0;
 
-      onStatusChanged: {
-        if (status === Image.Error || status === Image.Null) {
-          source = defaultPfpPath;
-        }
-      }
+      fillMode: Image.PreserveAspectCrop;
 
       asynchronous: true
     }
   }
 
-  Rectangle {
-    id: loading;
-    implicitHeight: 100;
-    implicitWidth: 100;
-    color: Globals.colours.bg;
-    visible: false;
-  }
-
   MultiEffect {
-    source: pfp.status === Image.Ready ? pfp : loading;
+    source: pfp;
     implicitHeight: pfp.height;
     implicitWidth: pfp.width;
     maskEnabled: true;
     maskSource: pfpMask;
+
+    colorization: pfp.useDefault ? 1 : 0;
+    colorizationColor: Globals.colours.accent;
   }
 
   Rectangle {
