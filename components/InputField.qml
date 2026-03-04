@@ -5,12 +5,15 @@ import QtQuick.Controls;
 
 TextField {
   Layout.fillWidth: true;
-  color: Globals.colours.fg;
   font {
     family: Consts.fontFamily;
     pixelSize: Consts.mainFontSize;
   }
 
-  background: Rectangle { color: "transparent" }
+  background: Item {}
+
+  color: Globals.colours.fg;
   placeholderTextColor: Globals.colours.grey;
+  selectedTextColor: Globals.colours.bg;
+  selectionColor: Globals.colours.accent;
 }
