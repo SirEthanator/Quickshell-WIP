@@ -38,6 +38,7 @@ Singleton {
     const idx = internal.active.indexOf(id);
     if (idx !== -1) {
       internal.active.splice(active.indexOf(id), 1);
+      deactivated(id);
     }
   }
 
@@ -59,4 +60,6 @@ Singleton {
     "polkit": 1,
     "notifications": 2
   })
+
+  signal deactivated(id: string);
 }

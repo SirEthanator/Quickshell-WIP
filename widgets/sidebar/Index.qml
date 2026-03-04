@@ -80,6 +80,13 @@ Scope {
         slideOffset: 200;
       }
 
+      MouseArea {
+        anchors.fill: parent;
+        onClicked: {
+          Controller.deactivate(Controller.current);
+        }
+      }
+
       Anims.Slide {
         running: !loader.open;
         target: wrapper;
@@ -110,6 +117,11 @@ Scope {
 
           disableAllOutlines: !Conf.sidebar.backgroundOutline;
 
+          MouseArea {
+            // Prevent menu being closed when the content background is clicked
+            anchors.fill: parent.content;
+          }
+
           Stack {
             id: itemStack;
             anchors {
@@ -121,19 +133,19 @@ Scope {
 
             currentIndex: Controller.idIdxMap[Controller.current];
 
-            Loader {
+            SidebarItem {
               sourceComponent: Menu.Index {}
-              active: Controller.active.includes("menu") || Controller.finalActive === "menu";
+              identifier: "menu";
             }
 
-            Loader {
+            SidebarItem {
               sourceComponent: Polkit.Index { polkit: polkit }
-              active: Controller.active.includes("polkit") || Controller.finalActive === "polkit";
+              identifier: "polkit";
             }
 
-            Loader {
+            SidebarItem {
               sourceComponent: NotifCentre.NotifCentre {}
-              active: Controller.active.includes("notifications") || Controller.finalActive === "notifications";
+              identifier: "notifications";
             }
           }
         }

@@ -15,6 +15,10 @@ Item {
     Sidebar.Controller.deactivate("polkit");
   }
 
+  function cancel() {
+    polkit.flow.cancelAuthenticationRequest();
+  }
+
   required property Polkit polkit;
   readonly property bool isCurrent: Sidebar.Controller.current === "polkit";
 
@@ -25,7 +29,7 @@ Item {
     const key = event.key;
 
     if (key === Qt.Key_Escape) {
-      root.polkit.flow.cancelAuthenticationRequest();
+      root.cancel();
     }
   }
 
@@ -44,6 +48,16 @@ Item {
 
     function onIsCancelledChanged() {
       if (target.isCancelled) root.deactivate();
+    }
+  }
+
+  Connections {
+    target: Sidebar.Controller;
+
+    function onDeactivated(id: string) {
+      if (id === "polkit") {
+        root.cancel();
+      }
     }
   }
 
