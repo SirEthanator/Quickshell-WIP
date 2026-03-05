@@ -27,7 +27,7 @@ ProgressBar {
     if (!root.enableScrolling) return;
     internal.scrollAccum += event.angleDelta.y;
 
-    if (internal.scrollAccum >= Conf.global.scrollStepSize || internal.scrollAccum <= -Conf.global.scrollStepSize) {
+    if (Math.abs(internal.scrollAccum) >= Conf.global.scrollStepSize) {
       root.value += root.scrollStep * Math.sign(internal.scrollAccum);
       root.userChange();
       internal.scrollAccum = 0;
