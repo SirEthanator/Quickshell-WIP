@@ -1,5 +1,6 @@
 pragma Singleton
 
+import qs.widgets.bar as Bar;
 import Quickshell;
 import Quickshell.Io;
 
@@ -11,5 +12,11 @@ Singleton {
     target: "screensaver";
     function open():  void { root.open = true }
     function close(): void { root.open = false }
+  }
+
+  onOpenChanged: {
+    if (open) {
+      Bar.TooltipController.clearTooltip();
+    }
   }
 }
