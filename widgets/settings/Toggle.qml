@@ -11,9 +11,9 @@ MouseArea {
 
   property bool checked: Controller.getVal(page, propName)
 
-  property color fg: Globals.colors.fg;
-  property color bg: containsMouse ? Globals.colors.bgHover : Globals.colors.bg;
-  property color checkedColor: containsMouse ? Globals.colors.accentLight : Globals.colors.accent;
+  property color fg: Colors.c.fg;
+  property color bg: containsMouse ? Colors.c.bgHover : Colors.c.bg;
+  property color checkedColor: containsMouse ? Colors.c.accentLight : Colors.c.accent;
 
   property bool completed: false;
   Component.onCompleted: completed = true;
@@ -38,7 +38,7 @@ MouseArea {
     anchors.fill: parent;
 
     border {
-      color: root.checked ? root.checkedColor : root.containsMouse ? root.bg : Globals.colors.outline;
+      color: root.checked ? root.checkedColor : root.containsMouse ? root.bg : Colors.c.outline;
       width: Consts.outlineSize;
       pixelAligned: false;
     }

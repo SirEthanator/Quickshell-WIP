@@ -26,19 +26,19 @@ BarModule {
   forceIconbgColor: true;
   iconbgColor: {
     if (root.charging) {
-      return Globals.colors.batteryCharging
+      return Colors.c.batteryCharging
     } else if (root.percentage <= .15) {
-      return Globals.colors.batteryLow
+      return Colors.c.batteryLow
     } else if (root.percentage <= .50) {
-      return Globals.colors.batteryMed
+      return Colors.c.batteryMed
     } else {
-      return Globals.colors.battery
+      return Colors.c.battery
     }
   }
 
   Text {
     text: `${root.percentage * 100}%`;
-    color: Globals.colors.fg;
+    color: Colors.c.fg;
     font {
       family: Consts.fontFamily;
       pixelSize: Consts.mainFontSize;
@@ -48,7 +48,7 @@ BarModule {
   tooltip: Tooltip {
     Text {
       text: `Battery - ${root.percentage * 100}%`;
-      color: Globals.colors.fg;
+      color: Colors.c.fg;
       font {
         family: Consts.fontFamily;
         pixelSize: Consts.mainFontSize;
@@ -69,14 +69,14 @@ BarModule {
 
           BatteryIcon {
             percentage: root.percentage;
-            color: Globals.colors.fg;
+            color: Colors.c.fg;
             charging: root.charging;
           }
         }
 
         Text {
           text: `${root.percentage * 100}%`;
-          color: Globals.colors.fg;
+          color: Colors.c.fg;
           font {
             family: Consts.fontFamily;
             pixelSize: Consts.smallHeadingFontSize;
@@ -95,7 +95,7 @@ BarModule {
             : root.charging
               ? `Charging - ${timeString} until full`
               : `Discharging - ${timeString} remaining`;
-          color: Globals.colors.grey;
+          color: Colors.c.grey;
           font {
             family: Consts.fontFamily;
             pixelSize: Consts.mainFontSize;
@@ -105,7 +105,7 @@ BarModule {
 
       Text {
         text: `Remaining capacity: ${Math.round(root.battery.energy)}Wh/${Math.round(root.battery.energyCapacity)}Wh`;
-        color: Globals.colors.fg;
+        color: Colors.c.fg;
         font {
           family: Consts.fontFamily;
           pixelSize: Consts.mainFontSize;
@@ -115,7 +115,7 @@ BarModule {
       Text {
         readonly property real changeRate: root.battery.changeRate;
         text: `${root.charging ? "Charge rate" : "Discharge rate"}: ${Math.round(changeRate)}W`;
-        color: Globals.colors.fg;
+        color: Colors.c.fg;
 
         visible: Math.abs(changeRate) > 0;
 
@@ -127,7 +127,7 @@ BarModule {
 
       Text {
         text: `Battery health: ${root.battery.healthPercentage * 100}%`;
-        color: Globals.colors.fg;
+        color: Colors.c.fg;
         visible: root.battery.healthSupported && root.battery.healthPercentage > 0;
         font {
           family: Consts.fontFamily;

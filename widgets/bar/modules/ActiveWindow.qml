@@ -6,14 +6,14 @@ import QtQuick;
 
 BarModule {
   icon: "display-symbolic";
-  iconbgColor: Globals.colors.activeWindow;
+  iconbgColor: Colors.c.activeWindow;
   id: root;
 
   readonly property string title: (!!ToplevelManager.activeToplevel && !!ToplevelManager.activeToplevel.title) ? ToplevelManager.activeToplevel.title : "";
   show: title.length > 0;
 
   Text {
-    color: Globals.colors.fg;
+    color: Colors.c.fg;
     font {
       family: Consts.fontFamily;
       pixelSize: Consts.mainFontSize;
@@ -31,7 +31,7 @@ BarModule {
   tooltip: Tooltip {
     Text {
       text: `Active window - ${root.title}`;
-      color: Globals.colors.fg;
+      color: Colors.c.fg;
       font {
         family: Consts.fontFamily;
         pixelSize: Consts.mainFontSize;

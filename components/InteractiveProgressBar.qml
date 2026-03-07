@@ -10,8 +10,8 @@ ProgressBar {
   signal userChange();
 
   property bool showScrubber: enableInteractivity;
-  property color scrubberColor: Qt.darker(Globals.colors.fg, 1.2);
-  property color scrubberColorHover: Globals.colors.fg;
+  property color scrubberColor: Qt.darker(Colors.c.fg, 1.2);
+  property color scrubberColorHover: Colors.c.fg;
   property color scrubberColorPress: displayedFg;
   property real scrubberSize: (root.vertical ? root.width : root.height) * 2 + scrubber.outlineSize + 2;
 

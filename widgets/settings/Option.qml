@@ -16,7 +16,7 @@ Rectangle {
   implicitHeight: content.height + Consts.paddingCard*2;
   Layout.fillWidth: true;
 
-  color: Globals.colors.bgLight;
+  color: Colors.c.bgLight;
   topLeftRadius: index === 0 ? Consts.br : 0; topRightRadius: topLeftRadius;
   bottomLeftRadius: index === modelLen-1 ? Consts.br : 0; bottomRightRadius: bottomLeftRadius;
 
@@ -47,7 +47,7 @@ Rectangle {
             family: Consts.fontFamily;
             pixelSize: Consts.smallHeadingFontSize;
           }
-          color: Globals.colors.fg;
+          color: Colors.c.fg;
 
           Layout.fillWidth: true;
           maximumLineCount: 1;
@@ -59,7 +59,7 @@ Rectangle {
             family: Consts.fontFamily;
             pixelSize: Consts.mainFontSize;
           }
-          color: Globals.colors.grey;
+          color: Colors.c.grey;
 
           Layout.fillWidth: true;
           wrapMode: Text.WrapAtWordBoundaryOrAnywhere;

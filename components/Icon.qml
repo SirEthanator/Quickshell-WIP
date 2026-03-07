@@ -8,7 +8,7 @@ import QtQuick.Effects;
 Item {
   id: root;
   required property string icon;
-  property color color: Globals.colors.fg;
+  property color color: Colors.c.fg;
   property real size: Consts.moduleIconSize;
   property int rotation;
 

@@ -8,7 +8,7 @@ Item {
   id: root;
   anchors.fill: parent;
 
-  property color color: Globals.colors.fg;
+  property color color: Colors.c.fg;
   required property real percentage;
   required property bool charging;
 

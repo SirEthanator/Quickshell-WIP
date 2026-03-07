@@ -92,12 +92,12 @@ WlSessionLockSurface {
       anchors.margins: Consts.gapLarge;
 
       border {
-        color: Globals.colors.outline;
+        color: Colors.c.outline;
         width: Conf.lock.contentOutline ? Consts.outlineSize : 0;
         pixelAligned: false;
       }
 
-      color: Globals.colors.bg;
+      color: Colors.c.bg;
       radius: Consts.br;
     }
 

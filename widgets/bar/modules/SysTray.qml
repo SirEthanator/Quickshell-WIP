@@ -12,11 +12,11 @@ BarModule {
   required property var window;
 
   hoverEnabled: true;
-  background: mouseArea.containsPress ? Globals.colors.accent : mouseArea.containsMouse ? Globals.colors.bgHover : Globals.colors.bgLight;
+  background: mouseArea.containsPress ? Colors.c.accent : mouseArea.containsMouse ? Colors.c.bgHover : Colors.c.bgLight;
 
   Icon {
     icon: "expand-symbolic";
-    color: root.mouseArea.containsPress ? Globals.colors.bgLight : Globals.colors.fg;
+    color: root.mouseArea.containsPress ? Colors.c.bgLight : Colors.c.fg;
     rotation: root.menuIsActive ? 180 : 0;
   }
 
@@ -25,7 +25,7 @@ BarModule {
   tooltip: Tooltip {
     Text {
       text: "Show system tray";
-      color: Globals.colors.fg;
+      color: Colors.c.fg;
       font {
         family: Consts.fontFamily;
         pixelSize: Consts.mainFontSize;

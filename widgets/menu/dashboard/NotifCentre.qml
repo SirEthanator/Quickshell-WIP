@@ -77,7 +77,7 @@ DashItem {
 
     Icon {
       icon: "no-notifications-symbolic";
-      color: Globals.colors.grey;
+      color: Colors.c.grey;
       size: Consts.extraLargeIconSize;
       Layout.alignment: Qt.AlignHCenter;
     }
@@ -88,7 +88,7 @@ DashItem {
         family: Consts.fontFamily;
         pixelSize: Consts.smallHeadingFontSize;
       }
-      color: Globals.colors.grey;
+      color: Colors.c.grey;
       Layout.fillWidth: true;
       horizontalAlignment: Text.AlignHCenter;
     }

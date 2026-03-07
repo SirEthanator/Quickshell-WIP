@@ -19,7 +19,7 @@ Rectangle {
   Rectangle {
     anchors.centerIn: parent;
 
-    color: Globals.colors.bg;
+    color: Colors.c.bg;
     width: content.width + Consts.paddingWindow*2;
     height: content.height + Consts.paddingWindow*2;
 
@@ -38,7 +38,7 @@ Rectangle {
             family: Consts.fontFamily;
             pixelSize: Consts.smallHeadingFontSize;
           }
-          color: Globals.colors.fg;
+          color: Colors.c.fg;
           Layout.alignment: Qt.AlignHCenter;
         }
 
@@ -48,7 +48,7 @@ Rectangle {
             family: Consts.fontFamily;
             pixelSize: Consts.mainFontSize;
           }
-          color: Globals.colors.grey;
+          color: Colors.c.grey;
           Layout.alignment: Qt.AlignHCenter;
         }
       }

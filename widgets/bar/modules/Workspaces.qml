@@ -10,7 +10,7 @@ import QtQuick.Layouts;
 BarModule {
   id: root;
   icon: "node-symbolic";
-  iconbgColor: Globals.colors.workspaces;
+  iconbgColor: Colors.c.workspaces;
 
   property real scrollAccum: 0;
 
@@ -72,19 +72,19 @@ BarModule {
           State {
             name: "focused";
             PropertyChanges { wsButtonRect {
-              color: Globals.colors.accent;
+              color: Colors.c.accent;
               implicitWidth: Consts.wsSize * 5;
               implicitHeight: Consts.wsSize + 3;
           }}},
 
           State {
             name: "occupied";
-            PropertyChanges { wsButtonRect.color: Globals.colors.grey }
+            PropertyChanges { wsButtonRect.color: Colors.c.grey }
           },
 
           State {
             name: "inactive";
-            PropertyChanges { wsButtonRect.color: Globals.colors.wsInactive }
+            PropertyChanges { wsButtonRect.color: Colors.c.wsInactive }
           }
         ]
 

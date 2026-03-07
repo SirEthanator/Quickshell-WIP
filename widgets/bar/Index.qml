@@ -80,7 +80,7 @@ PanelWindow {
         bottomMargin: Conf.bar.autohide ? Consts.gap : 0;
       }
 
-      color: Conf.bar.floatingModules ? "transparent" : Globals.colors.bg;
+      color: Conf.bar.floatingModules ? "transparent" : Colors.c.bg;
       radius: Conf.bar.docked ? 0 : Consts.br;
 
       readonly property bool outlines: Conf.bar.backgroundOutline && !Conf.bar.floatingModules;

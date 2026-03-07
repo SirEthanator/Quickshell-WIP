@@ -35,7 +35,7 @@ Scope {
 
     Window {
       id: window;
-      color: Globals.colors.bg;
+      color: Colors.c.bg;
 
       minimumWidth: 750;
       minimumHeight: 200;
@@ -69,20 +69,20 @@ Scope {
           label: "Discard";
           Layout.fillWidth: true;
           tlRadius: true; blRadius: true;
-          bg: Globals.colors.bgLight;
+          bg: Colors.c.bgLight;
           onClicked: root.quit();
         }
         Button {
           label: "Cancel";
           Layout.fillWidth: true;
-          bg: Globals.colors.bgLight;
+          bg: Colors.c.bgLight;
           onClicked: changesDialog.close();
         }
         Button {
           label: "Save";
           Layout.fillWidth: true;
           trRadius: true; brRadius: true;
-          bg: Globals.colors.bgLight;
+          bg: Colors.c.bgLight;
           onClicked: {
             Controller.apply();
             root.quit();

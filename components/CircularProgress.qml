@@ -7,8 +7,8 @@ Item {
 
   property real value: 0;
   property real thickness: 7;
-  property color bg: Globals.colors.bg;
-  property color fg: Globals.colors.accent;
+  property color bg: Colors.c.bg;
+  property color fg: Colors.c.accent;
   property real startAngle: 135;
   property real maxAngle: 270;
 
@@ -18,7 +18,7 @@ Item {
   onThicknessChanged: canvas.requestPaint();
 
   property int fontSize: Consts.mainFontSize;
-  property color fontColor: Globals.colors.fg;
+  property color fontColor: Colors.c.fg;
 
   Anims.NumberTransition on value {}
   Anims.ColorTransition on fg {}

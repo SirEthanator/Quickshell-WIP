@@ -12,8 +12,8 @@ TextField {
 
   background: Item {}
 
-  color: Globals.colors.fg;
-  placeholderTextColor: Globals.colors.grey;
-  selectedTextColor: Globals.colors.bg;
-  selectionColor: Globals.colors.accent;
+  color: Colors.c.fg;
+  placeholderTextColor: Colors.c.grey;
+  selectedTextColor: Colors.c.bg;
+  selectionColor: Colors.c.accent;
 }

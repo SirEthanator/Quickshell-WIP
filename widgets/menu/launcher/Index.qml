@@ -45,7 +45,7 @@ Item {
 
     Icon {
       icon: "search-symbolic";
-      color: Globals.colors.grey;
+      color: Colors.c.grey;
       size: Consts.extraLargeIconSize;
       Layout.alignment: Qt.AlignHCenter;
     }
@@ -56,7 +56,7 @@ Item {
         family: Consts.fontFamily;
         pixelSize: Consts.smallHeadingFontSize;
       }
-      color: Globals.colors.grey;
+      color: Colors.c.grey;
       Layout.fillWidth: true;
       horizontalAlignment: Text.AlignHCenter;
     }
@@ -124,14 +124,14 @@ Item {
           readonly property bool containsPress: entryMouseArea.containsPress;
 
           color: containsPress
-            ? Globals.colors.accent
+            ? Colors.c.accent
             : selected
-              ? Globals.colors.bgHover
-              : Globals.colors.bgLight;
+              ? Colors.c.bgHover
+              : Colors.c.bgLight;
           radius: Consts.br;
 
           border {
-            color: Conf.sidebar.moduleOutlines && !selected ? Globals.colors.outline : "transparent";
+            color: Conf.sidebar.moduleOutlines && !selected ? Colors.c.outline : "transparent";
             width: Conf.sidebar.moduleOutlines ? Consts.outlineSize : 0;
             pixelAligned: false;
           }
@@ -157,7 +157,7 @@ Item {
 
             Text {
               text: entryMouseArea.modelData.name;
-              color: entryMouseArea.containsPress ? Globals.colors.bgLight : Globals.colors.fg;
+              color: entryMouseArea.containsPress ? Colors.c.bgLight : Colors.c.fg;
               font {
                 family: Consts.fontFamily;
                 pixelSize: Consts.smallHeadingFontSize;

@@ -16,7 +16,7 @@ BarModule {
   Text {
     text: Notifs.NotifServer.notifList.values.length;
 
-    color: Globals.colors.fg;
+    color: Colors.c.fg;
     font {
       family: Consts.fontFamily;
       pixelSize: Consts.mainFontSize;
@@ -30,7 +30,7 @@ BarModule {
   tooltip: Tooltip {
     Text {
       text: `${Notifs.NotifServer.notifList.values.length} notifications, ${Notifs.NotifServer.unreadCount} unread`;
-      color: Globals.colors.fg;
+      color: Colors.c.fg;
       font {
         family: Consts.fontFamily;
         pixelSize: Consts.mainFontSize;

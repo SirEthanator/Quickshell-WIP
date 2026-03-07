@@ -26,7 +26,7 @@ Item {
     }
 
     Rectangle {
-      color: Globals.colors.outline;
+      color: Colors.c.outline;
       implicitHeight: 1;
       Layout.fillWidth: true;
 

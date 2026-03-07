@@ -111,7 +111,7 @@ LazyLoader {
 
       OutlinedRectangle {
         id: progressWrapper;
-        color: Globals.colors.bg;
+        color: Colors.c.bg;
         implicitHeight: 360 + outlineSize * 2;
         implicitWidth: 50 + outlineSize * 2;
 
@@ -135,7 +135,7 @@ LazyLoader {
           vertical: true;
           value: root.currentValue;
 
-          bg: Globals.colors.bg;
+          bg: Colors.c.bg;
 
           dangerThreshold: 1.0;
           warningThreshold: root.currentMode === "volume" ? 0.7 : 1.0;
@@ -171,7 +171,7 @@ LazyLoader {
             y: parent.dangerPosY;
 
             height: Consts.outlineSize;
-            color: Globals.colors.outline;
+            color: Colors.c.outline;
 
             visible: root.currentMode === "volume";
           }
@@ -202,7 +202,7 @@ LazyLoader {
       }
 
       OutlinedRectangle {
-        color: Globals.colors.bg;
+        color: Colors.c.bg;
         Layout.fillWidth: true;
         implicitHeight: percentageText.height + Consts.paddingButton * 2 + outlineSize * 2;
         radius: Consts.br;
@@ -210,7 +210,7 @@ LazyLoader {
         Text {
           id: percentageText;
           text: `${Math.round(progress.clampedValue * 100)}%`;
-          color: Globals.colors.fg;
+          color: Colors.c.fg;
           anchors.centerIn: parent.content;
 
           font {

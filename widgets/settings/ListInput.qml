@@ -63,7 +63,7 @@ ColumnLayout {
         height: addPopupItems.contentHeight;
         width: 200;
 
-        color: Globals.colors.bg;
+        color: Colors.c.bg;
 
         visible: false;
         function toggle() { visible=!visible; if (visible) forceActiveFocus() }
@@ -182,7 +182,7 @@ ColumnLayout {
         height: delegateRow.height + Consts.paddingCard * 2;
         width: parent.width;
 
-        color: Globals.colors.bg;
+        color: Colors.c.bg;
         radius: Consts.br;
 
         RowLayout {
@@ -199,14 +199,14 @@ ColumnLayout {
           // Drag indicator
           RowLayout {
             spacing: 4;
-            Rectangle { implicitWidth: 2; implicitHeight: 30; color: Globals.colors.outline }
-            Rectangle { implicitWidth: 2; implicitHeight: 30; color: Globals.colors.outline }
+            Rectangle { implicitWidth: 2; implicitHeight: 30; color: Colors.c.outline }
+            Rectangle { implicitWidth: 2; implicitHeight: 30; color: Colors.c.outline }
           }
 
           Text {
             text: root.options[delegate.modelData].title;
             Layout.fillWidth: true;
-            color: Globals.colors.fg;
+            color: Colors.c.fg;
             font {
               family: Consts.fontFamily;
               pixelSize: Consts.smallHeadingFontSize;
@@ -222,8 +222,8 @@ ColumnLayout {
 
             icon: "delete-symbolic";
             iconSize: Consts.moduleIconSize;
-            labelColor: Globals.colors.red;
-            bgPress: Globals.colors.red;
+            labelColor: Colors.c.red;
+            bgPress: Colors.c.red;
 
             onClicked: root.currentVal.values.splice(delegate.index, 1);
           }

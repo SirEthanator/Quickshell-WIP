@@ -9,11 +9,11 @@ Rectangle {
   property bool padding: true;
   property int spacing: Consts.paddingCard;
 
-  color: Globals.colors.bgLight;
+  color: Colors.c.bgLight;
   radius: Consts.br;
 
   border {
-    color: Conf.sidebar.moduleOutlines ? Globals.colors.outline : "transparent";
+    color: Conf.sidebar.moduleOutlines ? Colors.c.outline : "transparent";
     width: Conf.sidebar.moduleOutlines ? Consts.outlineSize : 0;
     pixelAligned: false;
   }

@@ -28,7 +28,7 @@ Item {
     id: outline;
     anchors.fill: parent;
 
-    color: Globals.colors.outline;
+    color: Colors.c.outline;
     radius: Consts.br;
 
     visible: !root.disableAllOutlines && (root.leftOutline || root.rightOutline || root.topOutline || root.bottomOutline);

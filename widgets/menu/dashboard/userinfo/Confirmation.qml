@@ -38,7 +38,7 @@ Item {
     Text {
       Layout.alignment: Qt.AlignHCenter;
       text: `${root.title}?`;
-      color: Globals.colors.fg;
+      color: Colors.c.fg;
       font {
         family: Consts.fontFamily;
         pixelSize: Consts.smallHeadingFontSize;
@@ -48,7 +48,7 @@ Item {
     Text {
       Layout.alignment: Qt.AlignHCenter;
       text: `${root.titleFuture} in ${root.countdown} seconds...`;
-      color: Globals.colors.fg;
+      color: Colors.c.fg;
       font {
         family: Consts.fontFamily;
         pixelSize: Consts.mainFontSize;

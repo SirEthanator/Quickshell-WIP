@@ -25,7 +25,7 @@ ColumnLayout {
       pixelSize: Consts.mainFontSize;
     }
 
-    color: root.polkit.flow.supplementaryIsError ? Globals.colors.red : Globals.colors.grey;
+    color: root.polkit.flow.supplementaryIsError ? Colors.c.red : Colors.c.grey;
 
     maximumLineCount: 3;
     elide: Text.ElideRight;
@@ -51,7 +51,7 @@ ColumnLayout {
       pixelSize: Consts.mainFontSize;
     }
 
-    color: root.polkit.flow.failed ? Globals.colors.red : Globals.colors.grey;
+    color: root.polkit.flow.failed ? Colors.c.red : Colors.c.grey;
 
     maximumLineCount: 1;
     elide: Text.ElideRight;

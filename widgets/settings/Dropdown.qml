@@ -26,7 +26,7 @@ Rectangle {
   }
   Component.onCompleted: internal.completed = true;
 
-  color: mouse.containsMouse && !popup.visible ? Globals.colors.bgHover : Globals.colors.bg;
+  color: mouse.containsMouse && !popup.visible ? Colors.c.bgHover : Colors.c.bg;
   // Radius set by border
 
   Anims.ColorTransition on color {}
@@ -54,7 +54,7 @@ Rectangle {
       family: Consts.fontFamily;
       pixelSize: Consts.mainFontSize;
     }
-    color: Globals.colors.fg;
+    color: Colors.c.fg;
     anchors.verticalCenter: parent.verticalCenter;
     anchors.left: parent.left;
     anchors.leftMargin: root.padding;
@@ -62,7 +62,7 @@ Rectangle {
 
   Icon {
     icon: "expand-symbolic";
-    color: Globals.colors.fg;
+    color: Colors.c.fg;
     rotation: popup.visible ? 180 : 0;
     size: text.height;
     anchors.verticalCenter: root.verticalCenter;
@@ -92,7 +92,7 @@ Rectangle {
 
     visible: false;
 
-    color: Globals.colors.bg;
+    color: Colors.c.bg;
     // Radius set by border
 
     Border {

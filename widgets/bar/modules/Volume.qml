@@ -11,10 +11,10 @@ BarModule {
   readonly property string volume: `${SysInfo.volume}%`;
 
   icon: SysInfo.volumeIcon;
-  iconbgColor: Globals.colors.volume;
+  iconbgColor: Colors.c.volume;
 
   Text {
-    color: Globals.colors.fg;
+    color: Colors.c.fg;
     font {
       family: Consts.fontFamily;
       pixelSize: Consts.mainFontSize;
@@ -25,7 +25,7 @@ BarModule {
   tooltip: Tooltip {
     Text {
       text: `Volume - ${root.volume}`;
-      color: Globals.colors.fg;
+      color: Colors.c.fg;
       font {
         family: Consts.fontFamily;
         pixelSize: Consts.mainFontSize;

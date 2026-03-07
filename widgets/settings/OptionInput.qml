@@ -29,8 +29,8 @@ Input {
   property var currentVal: Controller.getVal(page, propName);
 
   width: 200;
-  bg: Globals.colors.bg;
-  borderColor: field.acceptableInput ? Globals.colors.outline : Globals.colors.red;
+  bg: Colors.c.bg;
+  borderColor: field.acceptableInput ? Colors.c.outline : Colors.c.red;
 
   Anims.ColorTransition on borderColor {}
 

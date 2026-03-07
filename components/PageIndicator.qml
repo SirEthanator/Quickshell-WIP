@@ -35,7 +35,7 @@ RowLayout {
       Anims.NumberTransition on Layout.preferredWidth {}
 
       Rectangle {
-        color: item.selected ? Globals.colors.accent : item.containsMouse ? Globals.colors.bgHover : Globals.colors.bgLight;
+        color: item.selected ? Colors.c.accent : item.containsMouse ? Colors.c.bgHover : Colors.c.bgLight;
         radius: height / 2;
         anchors.fill: parent;
 

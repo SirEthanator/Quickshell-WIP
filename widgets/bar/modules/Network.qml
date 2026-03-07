@@ -12,13 +12,13 @@ BarModule {
     if (strength > 25) { return "nm-signal-50"  }
     else { return "nm-signal-25" }
   }
-  iconbgColor: Globals.colors.network;
+  iconbgColor: Colors.c.network;
 
   show: NetworkInfo.connectedNetwork !== null;
 
   Text {
     text: NetworkInfo.connectedNetwork.name;
-    color: Globals.colors.fg;
+    color: Colors.c.fg;
     font {
       family: Consts.fontFamily;
       pixelSize: Consts.mainFontSize;
@@ -28,7 +28,7 @@ BarModule {
   tooltip: Tooltip {
     Text {
       text: `Connected to "${NetworkInfo.connectedNetwork.name}" with strength ${Math.round(NetworkInfo.connectedNetwork.signalStrength * 100)}%`;
-      color: Globals.colors.fg;
+      color: Colors.c.fg;
       font {
         family: Consts.fontFamily;
         pixelSize: Consts.mainFontSize;

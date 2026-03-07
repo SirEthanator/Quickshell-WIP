@@ -19,7 +19,7 @@ RowLayout {
     implicitHeight: 100;
     readonly property alias status: pfpImg.status;
 
-    color: Globals.colors.bg;
+    color: Colors.c.bg;
 
     readonly property bool useDefault: !Conf.menu.profilePicture || status === Image.Error || status === Image.Null;
 
@@ -45,7 +45,7 @@ RowLayout {
     maskSource: pfpMask;
 
     colorization: pfp.useDefault ? 1 : 0;
-    colorizationColor: Globals.colors.accent;
+    colorizationColor: Colors.c.accent;
   }
 
   Rectangle {
@@ -63,7 +63,7 @@ RowLayout {
 
     Text {
       text: SysInfo.username;
-      color: Globals.colors.fg;
+      color: Colors.c.fg;
       font {
         family: Consts.fontFamily;
         pixelSize: Consts.headingFontSize;
@@ -76,7 +76,7 @@ RowLayout {
 
     Text {
       text: SysInfo.hostname;
-      color: Globals.colors.fg;
+      color: Colors.c.fg;
       font {
         family: Consts.fontFamily;
         pixelSize: Consts.mainFontSize;
@@ -100,9 +100,9 @@ RowLayout {
   Button {
     icon: "system-shutdown-symbolic";
     iconSize: Consts.largeIconSize;
-    labelColor: Globals.colors.red;
+    labelColor: Colors.c.red;
     allRadius: true;
-    bgPress: Globals.colors.red;
+    bgPress: Colors.c.red;
 
     onClicked: event => root.clicked(event);
   }

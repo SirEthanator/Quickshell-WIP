@@ -13,10 +13,10 @@ Rectangle {
   readonly property real clampedValue: Math.min(Math.max(value, 0), maxValue);
 
   property color bg: "transparent";
-  property color fg: Globals.colors.accent;
-  property color fgDanger: Globals.colors.red;
-  property color fgWarning: Globals.colors.warning;
-  property color warningBg: Globals.colors.bgWarning;
+  property color fg: Colors.c.accent;
+  property color fgDanger: Colors.c.red;
+  property color fgWarning: Colors.c.warning;
+  property color warningBg: Colors.c.bgWarning;
 
   property bool vertical: false;
   property bool smoothing: true;

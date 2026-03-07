@@ -112,7 +112,7 @@ Scope {
             margins: Consts.gapLarge;
           }
 
-          color: Globals.colors.bg;
+          color: Colors.c.bg;
           radius: Consts.br;
 
           disableAllOutlines: !Conf.sidebar.backgroundOutline;

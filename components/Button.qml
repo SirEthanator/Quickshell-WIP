@@ -15,12 +15,12 @@ MouseArea {
 
   property bool active: false;
 
-  property color labelColor: Globals.colors.fg;
-  property color bg: Globals.colors.bg;
-  property color bgHover: Globals.colors.bgHover;
-  property color bgPress: Globals.colors.accent;
-  property color bgActive: Globals.colors.accent;
-  property color bgActiveHover: Globals.colors.accentLight;
+  property color labelColor: Colors.c.fg;
+  property color bg: Colors.c.bg;
+  property color bgHover: Colors.c.bgHover;
+  property color bgPress: Colors.c.accent;
+  property color bgActive: Colors.c.accent;
+  property color bgActiveHover: Colors.c.accentLight;
   property bool invertTextOnPress: true;
 
   property int radiusValue: Consts.br;

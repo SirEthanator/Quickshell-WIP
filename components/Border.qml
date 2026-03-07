@@ -15,7 +15,7 @@ Rectangle {
   property bool rightBorder: true;
   property bool topBorder: true;
   property bool bottomBorder: true;
-  color: Globals.colors.outline;
+  color: Colors.c.outline;
 
   z: -1;
 

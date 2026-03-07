@@ -143,7 +143,7 @@ PopupWindow {
 
     OutlinedRectangle {
       id: tooltipBg;
-      color: Globals.colors.bg;
+      color: Colors.c.bg;
       radius: Consts.br;
 
       height: parent.height - Consts.gapSmall;

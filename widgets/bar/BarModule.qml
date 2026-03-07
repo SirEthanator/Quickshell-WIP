@@ -9,11 +9,11 @@ OutlinedRectangle {
   id: root
   default property alias data: content.data;  // Place children in the RowLayout
 
-  property color background: clickable && mouseArea.containsMouse ? Globals.colors.bgHover : Globals.colors.bgLight;
+  property color background: clickable && mouseArea.containsMouse ? Colors.c.bgHover : Colors.c.bgLight;
   property string icon;  // If this is an empty string the icon will not be displayed
   property Component customIcon;
   property color iconColor: background;
-  property color iconbgColor: Globals.colors.accent;
+  property color iconbgColor: Colors.c.accent;
   property bool forceIconbgColor: false;
   property int padding: Consts.paddingModule; // NOTE: L+R padding only. T+B is based on bar height.
   property bool outline: Conf.bar.moduleOutlines;
@@ -135,7 +135,7 @@ OutlinedRectangle {
       Rectangle {
         id: iconbg;
         visible: !!root.icon || !!root.customIcon;  // Visible if icon is a non-empty string.
-        color: Conf.bar.multiColorModules || root.forceIconbgColor ? root.iconbgColor : Globals.colors.accent;
+        color: Conf.bar.multiColorModules || root.forceIconbgColor ? root.iconbgColor : Colors.c.accent;
         implicitWidth: Consts.moduleIconSize + root.padding*2;  // This will add padding to both sides of the icon's background.
         Layout.fillHeight: true;
         topLeftRadius: root.content.topLeftRadius;

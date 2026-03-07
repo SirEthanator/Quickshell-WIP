@@ -38,7 +38,7 @@ Singleton {
           "title": "Color Scheme",
           "description": "Defines what color scheme should be used throughout the system.",
           "type": "string",
-          "options": Globals.schemes,
+          "options": Colors.schemes,
           "callback": root.switchTheme
         }
       },
@@ -405,7 +405,7 @@ Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the c
   }
 
   function setColors(scheme: string): string {
-    const validate = () => Utils.Validate.validateObjKey(scheme, Globals.schemes, "Failed to set color scheme");
+    const validate = () => Utils.Validate.validateObjKey(scheme, Colors.schemes, "Failed to set color scheme");
     return setConf("global", "colorScheme", scheme, validate);
   }
 
