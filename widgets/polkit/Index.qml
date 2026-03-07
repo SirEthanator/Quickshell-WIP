@@ -55,7 +55,7 @@ Item {
     target: Sidebar.Controller;
 
     function onDeactivated(id: string) {
-      if (id === "polkit") {
+      if (id === "polkit" && !root.polkit.isAuthenticating) {
         root.cancel();
       }
     }
@@ -129,7 +129,7 @@ Item {
       bg: Globals.colors.bgLight;
 
       onClicked: {
-        root.polkit.flow.cancelAuthenticationRequest();
+        root.cancel();
         root.deactivate();
       }
     }
