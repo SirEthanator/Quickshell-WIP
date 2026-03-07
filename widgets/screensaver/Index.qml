@@ -1,21 +1,21 @@
 pragma ComponentBehavior: Bound
 
+import qs.widgets.screensaver
 import Quickshell;
 import Quickshell.Wayland;
 import QtQuick;
 import Qt5Compat.GraphicalEffects;
 
 LazyLoader {
-  id: loader;
-  activeAsync: show;
+  id: root;
+  activeAsync: Controller.open;
+
   required property var screen;
-  required property bool show;
-  signal hide;
 
   PanelWindow {
-    id: root;
-    screen: loader.screen;
-    color: "transparent";
+    id: win;
+    screen: root.screen;
+    color: "black";
 
     exclusionMode: ExclusionMode.Ignore;
     WlrLayershell.layer: WlrLayer.Overlay;
@@ -28,74 +28,79 @@ LazyLoader {
       right: true
     }
 
-    Item {
+    MouseArea {
       anchors.fill: parent;
+      cursorShape: Qt.BlankCursor;
+
       focus: true;
-      Keys.onEscapePressed: loader.hide();
+      Keys.onEscapePressed: Controller.open = false;
+    }
 
-      Rectangle {
-        id: background;
-        anchors.fill: parent;
-        color: "black";
+    Image {
+      id: logosrc;
+      source: Quickshell.shellPath("assets/arch-full.svg");
+      visible: false;
+    }
 
-        MouseArea {
-          anchors.fill: parent;
-          cursorShape: Qt.BlankCursor;
+    ColorOverlay {
+      id: logo;
+      readonly property list<color> colors: [
+        "#FFFFFF", "#1793D1", "#DAF6F0",
+        "#C6EC60", "#999498", "#BDF5C4",
+        "#64AF9B", "#6C68A3", "#F1E39B",
+        "#76EA8D", "#AEC3E6", "#76906F",
+        "#E2C1C0", "#D8DB9D", "#91F2FE",
+        "#B993D5", "#748DA7", "#7079E8"
+      ];
 
-          Image {
-            id: logosrc;
-            source: Quickshell.shellPath("assets/arch-full.svg");
-            visible: false;
-          }
+      function getRandomColor() {
+        return colors[Math.floor(Math.random() * colors.length)];
+      }
 
-          ColorOverlay {
-            id: logo;
-            readonly property list<color> colors: [
-              "#FFFFFF", "#1793D1", "#DAF6F0",
-              "#C6EC60", "#999498", "#BDF5C4",
-              "#64AF9B", "#6C68A3", "#F1E39B",
-              "#76EA8D", "#AEC3E6", "#76906F",
-              "#E2C1C0", "#D8DB9D", "#91F2FE",
-              "#B993D5", "#748DA7", "#7079E8"
-            ];
-            function changeColor() {
-              color = colors[Math.floor(Math.random() * colors.length)];
-            }
+      function changeColor() {
+        let newColor;
+        do {
+          newColor = getRandomColor();
+        } while (newColor === color);
+        color = newColor;
+      }
 
-            anchors.fill: logosrc;
-            source: logosrc;
-            color: "white";
-          }
+      width: logosrc.width;
+      height: logosrc.height;
 
-          FrameAnimation {
-            id: animation;
-            readonly property int initialXSpeed: 400;
-            readonly property int initialYSpeed: 350;
-            property int xSpeed: initialXSpeed;
-            property int ySpeed: initialYSpeed;
-            onTriggered: {
-              // We could just reverse xSpeed if either condition is true, but we don't in case the image goes slightly too far off screen
-              // If it does, it would jitter and stay at the edge, since it keeps reversing because the condition is still true on the next frame
-              if (logo.anchors.leftMargin >= background.width - logo.width) {
-                xSpeed = -initialXSpeed; logo.changeColor();
-              } else if (logo.anchors.leftMargin <= 0) {
-                xSpeed = initialXSpeed; logo.changeColor();
-              }
-              logo.anchors.leftMargin += xSpeed * frameTime;
-              logo.anchors.rightMargin -= xSpeed * frameTime;
+      x: 1;
+      y: 1;
 
-              if (logo.anchors.topMargin >= background.height - logo.height) {
-                ySpeed = -initialYSpeed; logo.changeColor();
-              } else if (logo.anchors.topMargin <= 0) {
-                ySpeed = initialYSpeed; logo.changeColor();
-              }
-              logo.anchors.topMargin += ySpeed * frameTime;
-              logo.anchors.bottomMargin -= ySpeed * frameTime;
-            }
-          }
-          Component.onCompleted: animation.start()  // Start when component is complete so that correct values are used
+      source: logosrc;
+      color: getRandomColor();
+    }
+
+    FrameAnimation {
+      id: animation;
+
+      function randint(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      property int xSpeed: randint(340, 440);
+      property int ySpeed: randint(310, 410);
+
+      onTriggered: {
+        if (logo.x <= 0 || logo.x >= win.width - logo.width) {
+          logo.x = Math.max(0, Math.min(logo.x, win.width - logo.width));
+          xSpeed *= -1;
+          logo.changeColor();
         }
+        logo.x += xSpeed * frameTime;
+
+        if (logo.y <= 0 || logo.y >= win.height - logo.height) {
+          logo.y = Math.max(0, Math.min(logo.y, win.height - logo.height));
+          ySpeed *= -1;
+          logo.changeColor();
+        }
+        logo.y += ySpeed * frameTime;
       }
     }
+    Component.onCompleted: animation.start();
   }
 }

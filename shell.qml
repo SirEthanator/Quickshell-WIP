@@ -15,15 +15,7 @@ import Quickshell.Io;
 import QtQuick;
 
 ShellRoot {
-  id: shellroot;
-
   settings.watchFiles: false;
-
-  IpcHandler {
-    target: "screensaver";
-    function open():  void { Globals.states.screensaverActive = true  }
-    function close(): void { Globals.states.screensaverActive = false }
-  }
 
   IpcHandler {
     target: "config";
@@ -59,23 +51,18 @@ ShellRoot {
       Bar.Index { screen: scope.modelData }
       Desktop.BackdropWallpaper { screen: scope.modelData }
       Desktop.Index { screen: scope.modelData }
-      // Due to some issues with binding to Globals from screensaver and theme overlay, some properties are passed in here.
       Lock.Index {}
-      Screensaver.Index {
-        screen: scope.modelData;
-        show: Globals.states.screensaverActive;
-        onHide: Globals.states.screensaverActive = false;
-      }
+      Screensaver.Index { screen: scope.modelData; }
     }
 	}
 
   // This needs to be created after the bar in order to
   // ensure exclusivity is handled correctly.
   // If created before the bar, it does not
-  // respect the bar's exclusive zone when in niri.
+  // respect the bar's exclusive zone in niri.
   Notifications.Popups {}
 
-  // These can be created in any order as they use
+  // These can be created in any order because they use
   // lazy loaders - they are created after other windows
   Settings.Index {}
   Sidebar.Index {}

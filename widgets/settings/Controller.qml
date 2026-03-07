@@ -5,6 +5,8 @@ import Quickshell;
 import QtQuick;
 
 Singleton {
+  property bool open: false;
+
   property string currentPage: "global";
   property var changedProperties: ({});
   property int changeCount: 0;

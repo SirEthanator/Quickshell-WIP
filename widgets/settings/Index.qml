@@ -13,25 +13,20 @@ Scope {
 
   IpcHandler {
     target: "settings";
-    function open(): void { loader.activeAsync = true }
-    function close(): void { loader.activeAsync = false }
-  }
-
-  Connections {
-    target: Globals;
-    function onLaunchConfMenu() { loader.activeAsync = true }
+    function open(): void { Controller.open = true }
+    function close(): void { Controller.open = false }
   }
 
   function quit() {
     Controller.resetChanges();
-    loader.activeAsync = false;
+    Controller.open = false;
   }
 
   // TODO: Improve scaling to allow smaller widths
 
   LazyLoader {
     id: loader;
-    activeAsync: false;
+    activeAsync: Controller.open;
 
     Window {
       id: window;
@@ -42,7 +37,7 @@ Scope {
 
       visible: true;
 
-      title: "Quickshell - Settings";
+      title: "Settings - Quickshell";
 
       onClosing: e => {
         if (Controller.changeCount > 0) {
@@ -72,12 +67,14 @@ Scope {
           bg: Colors.c.bgLight;
           onClicked: root.quit();
         }
+
         Button {
           label: "Cancel";
           Layout.fillWidth: true;
           bg: Colors.c.bgLight;
           onClicked: changesDialog.close();
         }
+
         Button {
           label: "Save";
           Layout.fillWidth: true;
