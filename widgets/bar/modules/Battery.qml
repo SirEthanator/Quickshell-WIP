@@ -114,7 +114,7 @@ BarModule {
 
       Text {
         readonly property real changeRate: root.battery.changeRate;
-        text: `${changeRate > 0 ? "Charge rate" : "Discharge rate"}: ${Math.round(Math.abs(changeRate))}W`;
+        text: `${root.charging ? "Charge rate" : "Discharge rate"}: ${Math.round(changeRate)}W`;
         color: Globals.colors.fg;
 
         visible: Math.abs(changeRate) > 0;
