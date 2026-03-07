@@ -19,9 +19,9 @@ LazyLoader {
     }
   }
 
-  readonly property int  volume: SysInfo.volume;
+  readonly property int volume: SysInfo.volume;
   readonly property bool mute: SysInfo.audioNode.audio.muted;
-  readonly property int  brightness: SysInfo.brightness;
+  readonly property int brightness: SysInfo.brightness;
 
   onVolumeChanged: show("volume");
   onMuteChanged: show("volume");
@@ -112,7 +112,7 @@ LazyLoader {
       OutlinedRectangle {
         id: progressWrapper;
         color: Globals.colors.bg;
-        implicitHeight: 350 + outlineSize * 2;
+        implicitHeight: 360 + outlineSize * 2;
         implicitWidth: 50 + outlineSize * 2;
 
         InteractiveProgressBar {
@@ -121,6 +121,8 @@ LazyLoader {
           radius: 0;
           topLeftRadius: progressWrapper.content.topLeftRadius;
           topRightRadius: progressWrapper.content.topRightRadius;
+
+          maxValue: root.currentMode === "volume" ? 1.5 : 1.0;
 
           anchors {
             left: parent.content.left;
@@ -134,7 +136,11 @@ LazyLoader {
           value: root.currentValue;
 
           bg: Globals.colors.bg;
-          fg: value >= 0.9 ? Globals.colors.red : value >= 0.75 ? Globals.colors.warning : Globals.colors.accent;
+
+          dangerThreshold: 1.0;
+          warningThreshold: root.currentMode === "volume" ? 0.7 : 1.0;
+
+          showWarningBackground: false;
 
           enableInteractivity: root.currentMode === "volume";
           enableScrolling: true;
@@ -155,6 +161,20 @@ LazyLoader {
               root.inhibitHide = false;
             }
           }
+
+          Rectangle {
+            anchors {
+              left: parent.left;
+              right: parent.right;
+            }
+
+            y: parent.dangerPosY;
+
+            height: Consts.outlineSize;
+            color: Globals.colors.outline;
+
+            visible: root.currentMode === "volume";
+          }
         }
 
         Rectangle {
@@ -167,7 +187,7 @@ LazyLoader {
           }
 
           height: width;
-          color: progress.fg;
+          color: progress.displayedFg;
           bottomLeftRadius: progressWrapper.content.bottomLeftRadius;
           bottomRightRadius: progressWrapper.content.bottomRightRadius;
 

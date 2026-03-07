@@ -19,6 +19,7 @@ QtObject {
   required property color bgHover;
   required property color bgAccent;
   required property color bgRed;
+  required property color bgWarning;
   required property color outline;
   required property color grey;
   required property color greyDim;

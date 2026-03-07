@@ -26,6 +26,7 @@ Scheme {
   bgHover: c.surface_container_highest;
   bgAccent: c.primary_container;
   bgRed: c.error_container;
+  bgWarning: lighten(c.yellow, -45.0)
   outline: c.outline_variant;
   grey: lighten(c.on_surface, -35.0);
   greyDim: lighten(c.on_surface, -55.0);

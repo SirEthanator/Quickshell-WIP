@@ -79,6 +79,10 @@ RowLayout {
 
         enableScrolling: true;
 
+        maxValue: 1.5;
+        warningThreshold: 1.0;
+        dangerThreshold: 1.2;
+
         onUserChange: {
           root.node.audio.volume = Math.round(value * 100) / 100;
           value = Qt.binding(() => root.node.audio.volume);
@@ -93,7 +97,7 @@ RowLayout {
         TextMetrics {
           id: valueTextMetrics;
           font: valueText.font;
-          text: "100%"; // Longest possible value
+          text: `${slider.maxValue * 100}%`; // Longest possible value
         }
 
         // Ensures no layout shifts happen when value changes

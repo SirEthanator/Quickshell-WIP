@@ -10,6 +10,7 @@ Scheme {
   bgHover: "#414B50";
   bgAccent: "#3C4841";
   bgRed: "#4C3743";
+  bgWarning: "#45443C";
   outline: bgAccent;
   grey: "#7A8478";
   greyDim: "#4F5B58";

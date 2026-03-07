@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound;
 
 import qs.singletons
+import qs.animations as Anims;
 import QtQuick;
 
 ProgressBar {
@@ -11,7 +12,7 @@ ProgressBar {
   property bool showScrubber: enableInteractivity;
   property color scrubberColor: Qt.darker(Globals.colors.fg, 1.2);
   property color scrubberColorHover: Globals.colors.fg;
-  property color scrubberColorPress: Globals.colors.accent;
+  property color scrubberColorPress: displayedFg;
   property real scrubberSize: (root.vertical ? root.width : root.height) * 2 + scrubber.outlineSize + 2;
 
   property bool enableInteractivity: true;
@@ -54,6 +55,8 @@ ProgressBar {
       } else {
         root.value = e.x / root.width;
       }
+
+      root.value *= root.maxValue;
     }
 
     // Will not fire if a drag starts
@@ -75,9 +78,9 @@ ProgressBar {
     repeat: false;
     onTriggered: {
       if (root.vertical) {
-        root.value -= (delta / root.height);
+        root.value -= (delta / root.height) * root.maxValue;
       } else {
-        root.value += delta / root.width;
+        root.value += (delta / root.width) * root.maxValue;
       }
       delta = 0;
     }
@@ -95,7 +98,7 @@ ProgressBar {
       internal.smoothingOriginalVal = root.smoothing;
       root.smoothing = false;
     } else {
-      root.value = Math.min(Math.max(root.value, 0), 1);
+      root.value = Math.min(Math.max(root.value, 0), root.maxValue);
       root.userChange();
       root.smoothing = internal.smoothingOriginalVal;
     }
@@ -139,6 +142,8 @@ ProgressBar {
       : scrubberMouse.containsMouse
         ? root.scrubberColorHover
         : root.scrubberColor;
+
+    Anims.ColorTransition on color {}
 
     radius: width / 2;
 
