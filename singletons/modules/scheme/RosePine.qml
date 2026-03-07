@@ -1,9 +1,9 @@
+import QtQuick;
 Scheme {
   title: "Rose Pine";
 
   accent: "#9CCFD8";
-  accentDark: Qt.darker(accent, 1.2);
-  accentLight: Qt.lighter(accent, 1.2);
+  accentLight: lighten(accent, 5.0);
   fg: "#E0DEF4";
   bg: "#1F1D2E";
   bgLight: "#26233A";
@@ -16,8 +16,8 @@ Scheme {
   wsInactive: bgHover;
   red: "#EB6F92";
   warning: "#F6C177";
-  redHover: Qt.lighter(red, 1.2);
-  redPress: Qt.darker(red, 1.2);
+  redHover: lighten(red, 5.0);
+  redPress: lighten(red, -5.0);
 
   workspaces: accent;
   activeWindow: "#31748F";

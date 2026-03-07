@@ -1,10 +1,17 @@
 import QtQuick;
 
 QtObject {
+  // Allow children - used in Material.qml for a FileView
+  default property list<QtObject> data;
+
+  function lighten(c: color, amount: real): color {
+    const lightness = Math.min(Math.max(c.hslLightness + (amount / 100), 0), 1);
+    return Qt.hsla(c.hslHue, c.hslSaturation, lightness, c.a);
+  }
+
   required property string title;
 
   required property color accent;
-  required property color accentDark;
   required property color accentLight;
   required property color fg;
   required property color bg;

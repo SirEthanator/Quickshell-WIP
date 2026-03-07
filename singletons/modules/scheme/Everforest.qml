@@ -1,9 +1,9 @@
+import QtQuick;
 Scheme {
   title: "Everforest";
 
   accent: "#A7C080";
-  accentDark: Qt.darker(accent, 1.2);
-  accentLight: Qt.lighter(accent, 1.2);
+  accentLight: lighten(accent, 7.0);
   fg: "#D3C6AA";
   bg: "#272E33";
   bgLight: "#2E383C";
@@ -16,8 +16,8 @@ Scheme {
   wsInactive: bgHover;
   red: "#E67E80";
   warning: "#DBBC7F";
-  redHover: Qt.lighter(red, 1.2);
-  redPress: Qt.darker(red, 1.2);
+  redHover: lighten(red, 5.0);
+  redPress: lighten(red, -5.0);
 
   workspaces: accent;
   activeWindow: "#7FBBB3";
