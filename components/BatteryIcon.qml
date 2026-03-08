@@ -126,7 +126,7 @@ Item {
     id: batteryKnob;
 
     height: batteryBorder.height / 2;
-    width: batteryBorder.width * 0.09;
+    width: root.width * 0.09;
     anchors.right: parent.right;
     anchors.verticalCenter: parent.verticalCenter;
 
