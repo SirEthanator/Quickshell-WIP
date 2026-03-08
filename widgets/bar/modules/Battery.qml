@@ -90,11 +90,9 @@ BarModule {
             true
           );
 
-          text: root.percentage === 1
-            ? "Fully Charged"
-            : root.charging
-              ? `Charging - ${timeString} until full`
-              : `Discharging - ${timeString} remaining`;
+          text: root.charging
+            ? root.percentage === 1 ? "Fully Charged" : `Charging - ${timeString} until full`
+            : `Discharging - ${timeString} remaining`;
           color: Colors.c.grey;
           font {
             family: Consts.fontFamily;
