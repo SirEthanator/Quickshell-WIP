@@ -10,6 +10,8 @@ RowLayout {
   required property PwNode node;
 
   property string iconOverride;
+  property bool colorizeIcon: false;
+  property color iconColor: Colors.c.fg;
   property bool useNickname: false;
 
   spacing: Consts.paddingModule;
@@ -19,7 +21,8 @@ RowLayout {
   Icon {
     id: icon;
     icon: root.iconOverride || root.node.properties["application.icon-name"];
-    isMask: false;
+    isMask: root.colorizeIcon;
+    color: root.iconColor;
     visible: !!icon;
 
     fallback: "multimedia-audio-player";

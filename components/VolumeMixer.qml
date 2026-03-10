@@ -23,6 +23,7 @@ Item {
       node: SysInfo.audioNode;
       useNickname: true;
       iconOverride: SysInfo.volumeIcon;
+      colorizeIcon: true;
     }
 
     Rectangle {
