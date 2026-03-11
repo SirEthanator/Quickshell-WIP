@@ -17,7 +17,7 @@ PanelWindow {
     (Conf.sidebar.dimBackground && Sidebar.Controller.sidebarOpen)
       || (TooltipController.activeTooltip && TooltipController?.activeTooltip.isMenu);
 
-  color: bgIsDimmed ? Consts.bgDimmedColor : "transparent";
+  color: bgIsDimmed ? Colors.c.backdrop : "transparent";
 
   Anims.ColorTransition on color {
     duration: Consts.animLen;

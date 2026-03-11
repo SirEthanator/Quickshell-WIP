@@ -1,11 +1,12 @@
+import qs.singletons
 import QtQuick;
 import QtQuick.Effects;
 
 RectangularShadow {
-  required property Item target;
+  required property var target;
   anchors.fill: target;
-  radius: target.radius;
-  blur: 20;
+  // Geometric mean * 0.04
+  blur: Math.sqrt(target.width * target.height) * 0.04;
   spread: 0;
-  color: Qt.darker(target.color, 1.5);
+  color: Colors.c.shadow;
 }

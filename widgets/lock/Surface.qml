@@ -33,7 +33,7 @@ WlSessionLockSurface {
   Rectangle {
     anchors.fill: parent;
     visible: Conf.lock.dimBackground;
-    color: Consts.bgDimmedColor;
+    color: Colors.c.backdrop;
   }
 
   ParallelAnimation {

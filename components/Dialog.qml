@@ -5,7 +5,7 @@ import QtQuick.Layouts;
 Rectangle {
   id: root;
   anchors.fill: parent;
-  color: Consts.bgDimmedColor;
+  color: Colors.c.backdrop;
 
   required property string title;
   property string description;

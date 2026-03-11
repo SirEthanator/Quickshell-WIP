@@ -48,7 +48,7 @@ Scope {
     }
 
     PanelWindow {
-      color: Conf.sidebar.dimBackground ? Consts.bgDimmedColor : "transparent";
+      color: Conf.sidebar.dimBackground ? Colors.c.backdrop : "transparent";
 
       anchors {
         top: true;
@@ -63,7 +63,7 @@ Scope {
 
       Anims.ColorAnim on color {
         running: Conf.sidebar.dimBackground && loader.open;
-        from: "#00000000"; to: Consts.bgDimmedColor;
+        from: "#00000000"; to: Colors.c.backdrop;
         duration: Consts.animLen;
       }
 

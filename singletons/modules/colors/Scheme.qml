@@ -40,4 +40,7 @@ QtObject {
   required property color batteryCharging;
   required property color batteryMed;
   required property color batteryLow;
+
+  property color backdrop: Qt.rgba(0, 0, 0, 0.35);
+  property color shadow: "#121417";
 }

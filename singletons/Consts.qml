@@ -65,6 +65,5 @@ Singleton {
 
   readonly property int progressBarHeight: 5;
 
-  readonly property color bgDimmedColor: "#4D000000";
   readonly property real disabledOpacity: 0.5;
 }

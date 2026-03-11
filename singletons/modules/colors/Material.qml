@@ -5,6 +5,7 @@ import Quickshell.Io;
 Scheme {
   title: "Material";
 
+  // TODO: Error handling
   FileView {
     id: materialJson;
     path: Qt.resolvedUrl(Quickshell.shellPath("generated/material.json"));

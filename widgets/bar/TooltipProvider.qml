@@ -71,7 +71,7 @@ PopupWindow {
     }
   }
 
-  color: TooltipController?.activeTooltip?.isMenu ? Consts.bgDimmedColor : "transparent";
+  color: TooltipController?.activeTooltip?.isMenu ? Colors.c.backdrop : "transparent";
 
   Anims.ColorTransition on color { duration: Consts.animLen }
 
