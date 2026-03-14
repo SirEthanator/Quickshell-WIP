@@ -22,10 +22,27 @@ sudo usermod -aG video "$(whoami)"
 ```
 4. Reboot.
 
+## IPC
+
 Available IPC commands are:
 
-- `quickshell ipc call backlight set <percentage>`
-- `quickshell ipc call backlight increment <percentage>`
-- `quickshell ipc call backlight decrement <percentage>`
-
-Replace `percentage` with an integer 0 to 100.
+- `menu`
+  - `toggle` - Toggle the menu
+- `lock`
+  - `lock` - Lock the screen
+- `config`
+  - `colors <scheme: string>` - Set the color scheme to `scheme`
+  - `reload` - Reload the config
+  - `wallpaper <path: string>` - Set the wallpaper to `path`
+  - `get <category: string> <key: string>` - Returns the value of option `key` from category `category`
+  - `theme <scheme: string>` - Same as colors but also runs the SetTheme script
+- `screensaver`
+  - `open` - Open the screensaver
+  - `close` - Close the screensaver
+- `settings`
+  - `open` - Open the settings menu
+  - `close` - Close the settings menu
+- `backlight`
+  - `set <percentage: int>` - Set brightness to `percentage` (clamped 0-100)
+  - `increment <percentage: int>` - Increment brightness by `percentage` (clamped)
+  - `decrement <percentage: int>` - Decrement brightness by `percentage` (clamped)
