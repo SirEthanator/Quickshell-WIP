@@ -13,7 +13,7 @@ ProgressBar {
   property color scrubberColor: Qt.darker(Colors.c.fg, 1.2);
   property color scrubberColorHover: Colors.c.fg;
   property color scrubberColorPress: displayedFg;
-  property real scrubberSize: (root.vertical ? root.width : root.height) * 2 + scrubber.outlineSize + 2;
+  property real scrubberSize: height;
 
   property bool enableInteractivity: true;
   property bool enableClickToScrub: true;
@@ -22,7 +22,13 @@ ProgressBar {
   property bool enableScrolling: false;
   property real scrollStep: 0.02;
 
-  readonly property bool dragging: barDragLogic.active || scrubberDragLogic.active;
+  readonly property bool dragging: dragLogic.active;
+
+  inset: 5;
+
+  // Default sizes
+  implicitHeight: vertical ? 0 : Consts.progressBarHeight + inset * 2;
+  implicitWidth: vertical ? Consts.progressBarHeight + inset * 2 : 0;
 
   function handleWheel(event) {
     if (!root.enableScrolling) return;
@@ -43,9 +49,11 @@ ProgressBar {
   }
 
   MouseArea {
+    id: mouse;
     anchors.fill: parent;
 
-    enabled: root.enableInteractivity && (root.enableClickToScrub || root.enableScrolling);
+    enabled: (root.enableInteractivity && (root.enableClickToScrub || root.enableScrolling)) || root.showScrubber;
+    hoverEnabled: root.showScrubber;
 
     onPressed: (e) => {
       if (!root.enableClickToScrub) return;
@@ -104,7 +112,8 @@ ProgressBar {
     }
   }
 
-  component DragLogic : DragHandler {
+  DragHandler {
+    id: dragLogic;
     acceptedButtons: Qt.LeftButton;
     target: null;
 
@@ -120,11 +129,7 @@ ProgressBar {
     }
 
     onActiveChanged: root.handleDragActiveChanged(active);
-  }
-
-  DragLogic {
-    id: barDragLogic;
-    dragThreshold: 6;
+    dragThreshold: 0;
   }
 
   OutlinedRectangle {
@@ -134,12 +139,12 @@ ProgressBar {
 
     outlineSize: 1;
 
-    y: root.barPosY - height / 2;
-    x: root.barPosX - width / 2;
+    y: root.fillPosY - height / 2;
+    x: root.fillPosX - width / 2;
 
-    color: scrubberMouse.containsPress || root.dragging
+    color: mouse.containsPress || root.dragging
       ? root.scrubberColorPress
-      : scrubberMouse.containsMouse
+      : mouse.containsMouse
         ? root.scrubberColorHover
         : root.scrubberColor;
 
@@ -148,20 +153,5 @@ ProgressBar {
     radius: width / 2;
 
     visible: root.showScrubber;
-
-    MouseArea {
-      id: scrubberMouse;
-      anchors.fill: parent;
-      hoverEnabled: true;
-
-      onWheel: (event) => {
-        root.handleWheel(event);
-      }
-    }
-
-    DragLogic {
-      id: scrubberDragLogic;
-      dragThreshold: 0;
-    }
   }
 }

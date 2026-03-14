@@ -194,8 +194,8 @@ OutlinedRectangle {
         spacing: 3;
 
         InteractiveProgressBar {
+          id: progress;
           Layout.fillWidth: true;
-          implicitHeight: Consts.progressBarHeight;
 
           bg: Colors.c.bgLight;
           value: Utils.Mpris.posInfo.positionPercent;
@@ -215,7 +215,7 @@ OutlinedRectangle {
           Text {
             id: posText;
 
-            text: Utils.Mpris.posInfo.positionString;
+            text: Utils.TimeString.colonSeparated(Utils.Mpris.posInfo.length * progress.clampedValue);
             font {
               family: Consts.fontMono;
               pixelSize: Consts.mainFontSize;
@@ -223,6 +223,7 @@ OutlinedRectangle {
             color: Colors.c.fg;
             anchors.left: parent.left;
           }
+
           Text {
             id: lenText;
             text: Utils.Mpris.posInfo.lengthString;

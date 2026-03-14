@@ -26,11 +26,11 @@ BarModule {
     }
 
     readonly property alias player: root.activePlayer;
-    readonly property Scope posInfo: Utils.Mpris.posInfo;
+    readonly property string posString: Utils.Mpris.posInfo.posString;
 
     text: {
       const truncate = player.trackTitle.length > Conf.bar.truncationLength;
-      return `${truncate ? player.trackTitle.substring(0,Conf.bar.truncationLength)+'...' : player.trackTitle}${player.positionSupported ? ' - ' + posInfo.posString : ''}`
+      return `${truncate ? player.trackTitle.substring(0,Conf.bar.truncationLength)+'...' : player.trackTitle}${player.positionSupported ? ' - ' + posString : ''}`
     }
   }
 

@@ -132,6 +132,8 @@ LazyLoader {
             bottomMargin: -1; // Prevents tiny gap
           }
 
+          inset: 0;
+
           vertical: true;
           value: root.currentValue;
 

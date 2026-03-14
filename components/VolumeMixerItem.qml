@@ -67,7 +67,7 @@ RowLayout {
 
     RowLayout {
       // The scrubber overflows, so it is not part of slider's width.
-      // To get the correct spacing when volume is at 100%, we add the max
+      // To get the correct spacing when volume is full, we add the max
       // amount of overflow of the scrubber.
       spacing: slider.scrubberSize / 2 + 6;
 
@@ -75,7 +75,6 @@ RowLayout {
         id: slider;
 
         Layout.fillWidth: true;
-        implicitHeight: Consts.progressBarHeight;
 
         bg: Colors.c.bgLight;
         value: root.node.audio.volume;
