@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import qs.singletons
+import qs.utils as Utils;
 import qs.animations as Anims;
 import qs.components
 import Quickshell;
@@ -21,7 +22,7 @@ LazyLoader {
 
   readonly property int volume: SysInfo.volume;
   readonly property bool mute: SysInfo.audioNode.audio.muted;
-  readonly property int brightness: SysInfo.brightness;
+  readonly property int brightness: Utils.Brightness.brightnessPercent * 100;
 
   onVolumeChanged: show("volume");
   onMuteChanged: show("volume");
@@ -46,7 +47,7 @@ LazyLoader {
   function getIcon(mode: string): string {
     switch (mode) {
       case "volume": return SysInfo.volumeIcon;
-      case "brightness": return SysInfo.brightnessIcon;
+      case "brightness": return Utils.Brightness.icon;
       default: return "";
     }
   }
@@ -144,7 +145,6 @@ LazyLoader {
 
           showWarningBackground: false;
 
-          enableInteractivity: root.currentMode === "volume";
           enableScrolling: true;
 
           showScrubber: false;
@@ -152,6 +152,8 @@ LazyLoader {
           onUserChange: {
             if (root.currentMode === "volume") {
               SysInfo.audioNode.audio.volume = Math.round(value * 100) / 100;
+            } else if (root.currentMode === "brightness") {
+              Utils.Brightness.setBrightness(Math.round(value * 100) / 100);
             }
             value = Qt.binding(() => root.currentValue);
           }

@@ -37,19 +37,12 @@ Singleton {
 
   readonly property string volumeIcon: getVolumeIcon(audioNode);
 
-  readonly property string brightnessIcon: root.brightness >= 50
-    ? "brightness-high-symbolic"
-    : "brightness-low-symbolic";
-
   function dateTime(formatStr: string): string {
     return Qt.formatDateTime(clock.date, formatStr);
   }
 
   property string username: "";
   property string hostname: "";
-
-  property int brightness;
-  property int maxBrightness: 0;
 
   // In GiB
   property real totalMemory;
@@ -59,26 +52,6 @@ Singleton {
   property real cpuTemp;
 
   SystemClock { id: clock }
-
-  FileView {
-    id: brightnessFile;
-    path: Qt.resolvedUrl(`/sys/class/backlight/${Conf.osd.backlightName}/brightness`);
-    blockLoading: true;
-    watchChanges: true;
-    onFileChanged: {
-      brightnessFile.reload();
-      brightnessFile.waitForJob();
-      root.brightness = parseInt(brightnessFile.text()) / root.maxBrightness * 100;
-    }
-  }
-
-  Process {
-    command: ["cat", `/sys/class/backlight/${Conf.osd.backlightName}/max_brightness`]
-    running: true;
-    stdout: SplitParser {
-      onRead: data => root.maxBrightness = data
-    }
-  }
 
   Process {
     command: ["hostnamectl", "hostname"];
