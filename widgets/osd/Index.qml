@@ -22,7 +22,7 @@ LazyLoader {
 
   readonly property int volume: SysInfo.volume;
   readonly property bool mute: SysInfo.audioNode.audio.muted;
-  readonly property int brightness: Utils.Brightness.brightnessPercent * 100;
+  readonly property real brightness: Utils.Brightness.brightnessPercent;
 
   onVolumeChanged: show("volume");
   onMuteChanged: show("volume");
@@ -55,7 +55,7 @@ LazyLoader {
   function getValue(mode: string): real {
     switch (mode) {
       case "volume": return root.volume / 100;
-      case "brightness": return root.brightness / 100;
+      case "brightness": return root.brightness;
       default: return 0.0;
     }
   }
@@ -153,7 +153,7 @@ LazyLoader {
             if (root.currentMode === "volume") {
               SysInfo.audioNode.audio.volume = Math.round(value * 100) / 100;
             } else if (root.currentMode === "brightness") {
-              Utils.Brightness.setBrightness(Math.round(value * 100) / 100);
+              Utils.Brightness.setBrightness(value);
             }
             value = Qt.binding(() => root.currentValue);
           }
