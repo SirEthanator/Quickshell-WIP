@@ -1,8 +1,8 @@
 pragma ComponentBehavior: Bound
 
 import qs.singletons
+import qs.widgets.notifications
 import qs.animations as Anims;
-import qs.utils as Utils;
 import Quickshell;
 import Quickshell.Services.Notifications;
 import Quickshell.Wayland;
@@ -50,9 +50,9 @@ PanelWindow {
             data.insert(0, {n: n});
             if (Conf.notifications.sounds) {
               const sound = n.urgency === NotificationUrgency.Critical
-              ? Conf.notifications.criticalSound
-              : Conf.notifications.normalSound;
-              Utils.Command.run(["sh", "-c", `play ${sound}`]);
+                ? Conf.notifications.criticalSound
+                : Conf.notifications.normalSound;
+              Quickshell.execDetached(["sh", "-c", `play ${sound}`]);
             }
           }
         });
@@ -89,4 +89,3 @@ PanelWindow {
     delegate: Toast { popup: true }
   }
 }
-
