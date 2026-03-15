@@ -4,7 +4,7 @@ import qs.widgets.screensaver
 import Quickshell;
 import Quickshell.Wayland;
 import QtQuick;
-import Qt5Compat.GraphicalEffects;
+import QtQuick.Effects;
 
 LazyLoader {
   id: root;
@@ -37,12 +37,12 @@ LazyLoader {
     }
 
     Image {
-      id: logosrc;
+      id: logoSrc;
       source: Quickshell.shellPath("assets/arch-full.svg");
       visible: false;
     }
 
-    ColorOverlay {
+    MultiEffect {
       id: logo;
       readonly property list<color> colors: [
         "#FFFFFF", "#1793D1", "#DAF6F0",
@@ -61,22 +61,26 @@ LazyLoader {
         let newColor;
         do {
           newColor = getRandomColor();
-        } while (newColor === color);
-        color = newColor;
+        } while (newColor === colorizationColor);
+        colorizationColor = newColor;
       }
 
-      width: logosrc.width;
-      height: logosrc.height;
+      width: logoSrc.width;
+      height: logoSrc.height;
 
       x: 1;
       y: 1;
 
-      source: logosrc;
-      color: getRandomColor();
+      source: logoSrc;
+      brightness: 1;
+      colorization: 1;
+      colorizationColor: getRandomColor();
     }
 
     FrameAnimation {
       id: animation;
+
+      running: true;
 
       function randint(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -101,6 +105,5 @@ LazyLoader {
         logo.y += ySpeed * frameTime;
       }
     }
-    Component.onCompleted: animation.start();
   }
 }
