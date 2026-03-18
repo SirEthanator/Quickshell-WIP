@@ -5,6 +5,8 @@ import QtQuick.Effects;
 RectangularShadow {
   required property var target;
   anchors.fill: target;
+  radius: target.radius;
+
   // Geometric mean * 0.04
   blur: Math.sqrt(target.width * target.height) * 0.04;
   spread: 0;
