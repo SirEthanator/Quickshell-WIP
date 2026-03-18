@@ -7,7 +7,7 @@ import QtQuick;
 BarModule {
   id: root;
 
-  icon: Notifs.NotifServer.unreadCount > 0 ? "notification-new-symbolic" : "notifications-symbolic";
+  icon: Notifs.NotifServer.icon;
 
   clickable: true;
 

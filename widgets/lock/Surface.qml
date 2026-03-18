@@ -50,10 +50,18 @@ WlSessionLockSurface {
       grow: true;
       slideOffset: 200;
     }
+    // FIXME: Media sometimes disappears soon after animation starts?
+    // Seems to usually happen when a notification popup is currently displaying (not consistent).
+    // Also occurs seemingly randomly.
     Anims.Slide {
       target: mediaWrapper;
-      originalPos: mediaWrapper.xPos;
-      direction: Anims.Slide.Direction.Left;
+      originalPos: mediaWrapper.yPos;
+      direction: Anims.Slide.Direction.Up;
+    }
+    Anims.Slide {
+      target: notifCount;
+      originalPos: notifCount.yPos;
+      direction: Anims.Slide.Direction.Down;
     }
   }
 
@@ -72,8 +80,14 @@ WlSessionLockSurface {
     }
     Anims.Slide {
       target: mediaWrapper;
-      originalPos: mediaWrapper.xPos;
-      direction: Anims.Slide.Direction.Left;
+      originalPos: mediaWrapper.yPos;
+      direction: Anims.Slide.Direction.Up;
+      reverse: true;
+    }
+    Anims.Slide {
+      target: notifCount;
+      originalPos: notifCount.yPos;
+      direction: Anims.Slide.Direction.Down;
       reverse: true;
     }
   }
@@ -119,6 +133,15 @@ WlSessionLockSurface {
     }
   }
 
+  NotifCount {
+    id: notifCount;
+
+    readonly property real xPos: parent.width - width - Consts.gapLarge;
+    readonly property real yPos: Consts.gapLarge;
+    x: xPos;
+    y: yPos;
+  }
+
   Item {
     id: mediaWrapper;
 
@@ -135,10 +158,4 @@ WlSessionLockSurface {
     Shadow { target: media }
     Media { id: media }
   }
-
-  // Unlock button for debugging
-  // Button {
-  //   onClicked: root.beginUnlock();
-  //   label: "Unlock"
-  // }
 }

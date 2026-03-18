@@ -15,6 +15,8 @@ Singleton {
   property list<int> unreadIds: [];
   readonly property int unreadCount: unreadIds.length;
 
+  readonly property string icon: unreadCount > 0 ? "notification-new-symbolic" : "notifications-symbolic";
+
   function read(id: int) {
     root.unreadIds = root.unreadIds.filter((i) => i !== id);
   }
