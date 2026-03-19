@@ -5,7 +5,7 @@ import QtQuick.Controls;
 
 ScrollBar {
   id: root;
-  required property QtObject scrollView;
+  required property var scrollView;
   parent: scrollView;
   anchors.top: parent.top;
   anchors.bottom: parent.bottom;

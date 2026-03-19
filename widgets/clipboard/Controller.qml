@@ -10,27 +10,44 @@ Singleton {
 
   property int currentIndex: 0;
 
+  property list<string> model: [];
+
+  Connections {
+    target: Sidebar.Controller;
+
+    function onDeactivated(id) {
+      if (id === "clipboard") {
+        root.currentIndex = 0;
+        root.model = [];
+      }
+    }
+  }
+
+  function updateModel() {
+    cliphistList.running = true;
+  }
+
+  Process {
+    id: cliphistList;
+    command: ["sh", "-c", "cliphist list"];
+    stdout: SplitParser {
+      onRead: (data) => {
+        root.model.push(data);
+      }
+    }
+  }
+
+  function down(amount=1) {
+    const len = model.length;
+    currentIndex = (((currentIndex + amount) % len) + len) % len;
+  }
+
+  function up(amount=1) {
+    down(-amount);
+  }
+
   function select(item: string): void {
     Quickshell.execDetached(["sh", "-c", `cliphist decode '${item}' | wl-copy`]);
     Sidebar.Controller.deactivate("clipboard");
   }
-
-  // function decode(item: string): void {
-  //   decoder.currentItem = item;
-  //   decoder.running = true;
-  // }
-  //
-  // property string lastDecoded: "";
-  //
-  // Process {
-  //   id: decoder;
-  //
-  //   property string currentItem: "";
-  //
-  //   command: ["sh", "-c", `cliphist decode '${currentItem}'`];
-  //
-  //   stdout: SplitParser {
-  //     onRead: (data) => root.lastDecoded = data;
-  //   }
-  // }
 }

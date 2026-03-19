@@ -3,11 +3,9 @@ pragma ComponentBehavior: Bound
 import qs.singletons
 import qs.components
 import qs.widgets.clipboard
-import qs.widgets.sidebar as Sidebar
 import qs.animations as Anims
-import Quickshell;
-import Quickshell.Io;
 import QtQuick;
+import QtQuick.Controls;
 import QtQuick.Layouts;
 
 Item {
@@ -19,42 +17,23 @@ Item {
   Keys.onPressed: (e) => {
     if (listView.model.length < 1) return;
 
-    if (e.key === Qt.Key_Up && Controller.currentIndex > 0) {
-      Controller.currentIndex--;
-    } else if (e.key === Qt.Key_Down && Controller.currentIndex < listView.model.length - 1) {
-      Controller.currentIndex++;
+    if (e.key === Qt.Key_Up) {
+      Controller.up();
+    } else if (e.key === Qt.Key_Down) {
+      Controller.down();
     } else if (e.key === Qt.Key_Enter || e.key === Qt.Key_Return) {
-      Controller.select(listView.model[Controller.currentIndex])
+      Controller.select(Controller.model[Controller.currentIndex]);
     }
   }
 
-  Connections {
-    target: Sidebar.Controller;
-
-    function onDeactivated(id) {
-      if (id === "clipboard") {
-        Controller.currentIndex = 0;
-      }
-    }
-  }
-
-  Process {
-    id: cliphistList;
-    command: ["sh", "-c", "cliphist list"];
-    running: true;
-    stdout: SplitParser {
-      onRead: (data) => {
-        listView.model.push(data);
-      }
-    }
-  }
+  Component.onCompleted: Controller.updateModel();
 
   ColumnLayout {
     id: emptyContent;
     anchors.centerIn: parent;
 
     spacing: Consts.paddingWindow;
-    visible: listView.model.length < 1;
+    visible: Controller.model.length < 1;
 
     Icon {
       icon: "clipboard-outline-symbolic";
@@ -67,7 +46,7 @@ Item {
       text: "Clipboard empty";
       color: Colors.c.grey;
       font {
-        family: Consts.fontFamilyChanged;
+        family: Consts.fontFamily;
         pixelSize: Consts.smallHeadingFontSize;
       }
       Layout.fillWidth: true;
@@ -75,63 +54,78 @@ Item {
     }
   }
 
-  ListView {
-    id: listView;
+  MouseArea {
+    id: listMouse;
+    hoverEnabled: true;
     anchors.fill: parent;
 
-    model: [];
+    ListView {
+      id: listView;
+      anchors.fill: parent;
 
-    spacing: Consts.marginModule;
+      model: Controller.model;
+      currentIndex: Controller.currentIndex;
+      highlightMoveDuration: 300;
+      highlightMoveVelocity: 0.8;
 
-    currentIndex: Controller.currentIndex;
+      spacing: Consts.marginModule;
 
-    visible: model.length > 0;
+      visible: model.length > 0;
 
-    delegate: OutlinedRectangle {
-      required property string modelData;
-      required property int index;
+      flickableDirection: Flickable.VerticalFlick;
+      ScrollBar.vertical: StyledScrollBar { scrollView: listView }
 
-      readonly property bool isCurrent: index === Controller.currentIndex;
+      // For scrollbar
+      readonly property alias hovered: listMouse.containsMouse;
 
-      color: itemMouse.containsPress ? Colors.c.accent : itemMouse.containsMouse || isCurrent ? Colors.c.bgHover : Colors.c.bgLight;
+      delegate: OutlinedRectangle {
+        required property string modelData;
+        required property int index;
 
-      radius: Consts.br;
-      anchors {
-        left: parent.left;
-        right: parent.right;
-      }
+        readonly property bool isCurrent: index === Controller.currentIndex;
 
-      height: itemText.implicitHeight + Consts.paddingCard * 2;
+        color: itemMouse.containsPress ? Colors.c.accent : itemMouse.containsMouse || isCurrent ? Colors.c.bgHover : Colors.c.bgLight;
 
-      Anims.ColorTransition on color {}
-
-      MouseArea {
-        id: itemMouse
-        anchors.fill: parent;
-        hoverEnabled: true;
-
-        onClicked: Controller.select(parent.modelData);
-      }
-
-      Text {
-        id: itemText;
-        text: parent.modelData;
-
+        radius: Consts.br;
         anchors {
-          verticalCenter: parent.verticalCenter;
           left: parent.left;
           right: parent.right;
-          margins: Consts.paddingCard;
         }
 
-        color: itemMouse.containsPress ? Colors.c.bgLight : Colors.c.fg;
-        font {
-          family: Consts.fontFamily;
-          pixelSize: Consts.mainFontSize;
+        height: itemText.implicitHeight + Consts.paddingCard * 2;
+
+        disableAllOutlines: !Conf.sidebar.moduleOutlines;
+
+        Anims.ColorTransition on color {}
+
+        MouseArea {
+          id: itemMouse
+          anchors.fill: parent;
+          hoverEnabled: true;
+
+          onClicked: Controller.select(parent.modelData);
         }
 
-        maximumLineCount: 1;
-        clip: true;
+        Text {
+          id: itemText;
+          text: parent.modelData.replace(/^\d+\s+/, "");
+
+          anchors {
+            verticalCenter: parent.verticalCenter;
+            left: parent.left;
+            right: parent.right;
+            margins: Consts.paddingCard;
+          }
+
+          color: itemMouse.containsPress ? Colors.c.bgLight : Colors.c.fg;
+          font {
+            family: Consts.fontFamily;
+            pixelSize: Consts.mainFontSize;
+          }
+
+          maximumLineCount: 1;
+          clip: true;
+        }
       }
     }
   }

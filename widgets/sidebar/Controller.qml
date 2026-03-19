@@ -32,6 +32,7 @@ Singleton {
 
   function activate(id: string) {
     internal.active.push(id);
+    activated(id);
   }
 
   function deactivate(id: string) {
@@ -47,11 +48,10 @@ Singleton {
   }
 
   function toggle(id: string) {
-    const idx = internal.active.indexOf(id);
-    if (idx === -1) {
-      internal.active.push(id);
+    if (internal.active.includes(id)) {
+      deactivate(id);
     } else {
-      internal.active.splice(active.indexOf(id), 1);
+      activate(id);
     }
   }
 
@@ -63,4 +63,5 @@ Singleton {
   })
 
   signal deactivated(id: string);
+  signal activated(id: string);
 }
