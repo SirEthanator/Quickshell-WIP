@@ -7,6 +7,7 @@ import qs.widgets.menu.dashboard as NotifCentre;
 import qs.animations as Anims;
 import qs.widgets.polkit as Polkit;
 import qs.widgets.menu as Menu;
+import qs.widgets.clipboard as Clipboard;
 import Quickshell;
 import Quickshell.Wayland;
 import Quickshell.Io;
@@ -18,6 +19,13 @@ Scope {
   IpcHandler {
     target: "menu";
     function toggle(): void { Controller.toggle("menu") }
+  }
+
+  IpcHandler {
+    target: "clipboard"
+    function toggle(): void { Controller.toggle("clipboard") }
+    function open(): void { Controller.activate("clipboard") }
+    function close(): void { Controller.deactivate("clipboard") }
   }
 
   Polkit.Polkit { id: polkit }
@@ -146,6 +154,11 @@ Scope {
             SidebarItem {
               sourceComponent: NotifCentre.NotifCentre {}
               identifier: "notifications";
+            }
+
+            SidebarItem {
+              sourceComponent: Clipboard.Index {}
+              identifier: "clipboard";
             }
           }
         }

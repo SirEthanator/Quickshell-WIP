@@ -58,7 +58,8 @@ Singleton {
   readonly property var idIdxMap: ({
     "menu": 0,
     "polkit": 1,
-    "notifications": 2
+    "notifications": 2,
+    "clipboard": 3
   })
 
   signal deactivated(id: string);
