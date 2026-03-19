@@ -11,6 +11,7 @@ Item {
   property color fg: Colors.c.accent;
   property real startAngle: 135;
   property real maxAngle: 270;
+  property bool showText: true;
 
   onValueChanged: canvas.requestPaint();
   onBgChanged: canvas.requestPaint();
@@ -65,5 +66,7 @@ Item {
       pixelSize: root.fontSize;
     }
     color: root.fontColor;
+
+    visible: root.showText;
   }
 }

@@ -67,10 +67,23 @@ BarModule {
           Layout.fillHeight: true;
           implicitWidth: height;
 
+          Layout.minimumWidth: 40;
+          Layout.minimumHeight: Layout.minimumWidth;
+
           BatteryIcon {
             percentage: root.percentage;
             color: Colors.c.fg;
             charging: root.charging;
+
+            anchors.margins: 8;
+          }
+
+          CircularProgress {
+            anchors.fill: parent;
+            value: root.percentage;
+            bg: Colors.c.bgAccent;
+            showText: false;
+            thickness: 3;
           }
         }
 
