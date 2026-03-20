@@ -35,7 +35,7 @@ Singleton {
     "global": {
       "Appearance": {
         "colorScheme": {
-          "title": "Color Scheme",
+          "title": "Color scheme",
           "description": "Defines what color scheme should be used throughout the system.",
           "type": "string",
           "options": Colors.schemes,
@@ -44,7 +44,7 @@ Singleton {
       },
       "Behaviour": {
         "scrollStepSize": {
-          "title": "Scroll Step Size",
+          "title": "Scroll step size",
           "description": "Defines the step size for scrolling. This is used in places such as the workspaces bar module, where scrolling switches workspaces. Most mice have a step size of 120.",
           "type": "int",
           "min": "1"
@@ -55,19 +55,19 @@ Singleton {
     "bar": {
       "Modules": {
         "left": {
-          "title": "Left Modules",
+          "title": "Left modules",
           "description": "Defines what modules to show on the left of the bar (LTR).",
           "type": "list<string>",
           "options": stripped.barModules
         },
         "centre": {
-          "title": "Centre Modules",
+          "title": "Centre modules",
           "description": "Defines what modules to show in the middle of the bar (LTR).",
           "type": "list<string>",
           "options": stripped.barModules
         },
         "right": {
-          "title": "Right Modules",
+          "title": "Right modules",
           "description": "Defines what modules to show on the right of the bar (LTR).",
           "type": "list<string>",
           "options": stripped.barModules
@@ -80,28 +80,28 @@ Singleton {
           "type": "bool"
         },
         "workspaceCount": {
-          "title": "Workspace Count",
+          "title": "Workspace count",
           "description": "Defines how many workspaces should be shown on the workspace module.",
           "type": "int",
           "max": 20,
           "min": 1
         },
         "truncationLength": {
-          "title": "Truncation Length",
+          "title": "Truncation length",
           "description": "Defines the maximum length for modules with long text.",
           "type": "int",
           "max": 1000,
           "min": 0
         },
         "tooltipShowDelay": {
-          "title": "Tooltip Show Delay",
+          "title": "Tooltip show delay",
           "description": "Defines how long modules must be hovered before tooltips show in milliseconds.",
           "type": "int",
           "max": 60_000,
           "min": 0
         },
         "tooltipHideDelay": {
-          "title": "Tooltip Hide Delay",
+          "title": "Tooltip hide delay",
           "description": "Defines how long tooltips/modules must not be hovered for before tooltips are hidden.",
           "type": "int",
           "max": 60_000,
@@ -110,7 +110,7 @@ Singleton {
       },
       "Appearance": {
         "floatingModules": {
-          "title": "Floating Modules",
+          "title": "Floating modules",
           "description": "Defines whether the bar's background should be shown.",
           "type": "bool"
         },
@@ -120,17 +120,17 @@ Singleton {
           "type": "bool"
         },
         "multiColorModules": {
-          "title": "Multi-color Modules",
+          "title": "Multi-color modules",
           "description": "Defines whether the icons should have different colored backgrounds.",
           "type": "bool"
         },
         "moduleOutlines": {
-          "title": "Module Outlines",
+          "title": "Module outlines",
           "description": "Defines whether modules should have an outline around them.",
           "type": "bool"
         },
         "backgroundOutline": {
-          "title": "Background Outline",
+          "title": "Background outline",
           "description": "Defines whether the bar's background should have an outline around it.",
           "type": "bool"
         }
@@ -140,17 +140,17 @@ Singleton {
     "sidebar": {
       "Appearance": {
         "dimBackground": {
-          "title": "Dim Background",
+          "title": "Dim background",
           "description": "Defines whether the background behind the sidebar should be dimmed.",
           "type": "bool"
         },
         "backgroundOutline": {
-          "title": "Background Outline",
+          "title": "Background outline",
           "description": "Defines whether the sidebar's background should have an outline around it.",
           "type": "bool"
         },
         "moduleOutlines": {
-          "title": "Module Outlines",
+          "title": "Module outlines",
           "description": "Defines whether items should have outlines around them.",
           "type": "bool"
         },
@@ -167,7 +167,7 @@ Singleton {
     "menu": {
       "Behaviour": {
         "dashModules": {
-          "title": "Dashboard Modules",
+          "title": "Dashboard modules",
           "description": "Defines which modules should be shown on the dashboard.",
           "type": "list<string>",
           "options": stripped.dashModules
@@ -175,18 +175,18 @@ Singleton {
       },
       "Appearance": {
         "profilePicture": {
-          "title": "Profile Picture",
+          "title": "Profile picture",
           "description": "Defines the path to the profile picture to use. Set to an empty string to use the default.",
           "type": "path",
           "allowEmpty": true
         },
         "capitaliseUsername": {
-          "title": "Capitalise Username",
+          "title": "Capitalise username",
           "description": "Defines whether the user's username should be capitalised.",
           "type": "bool"
         },
         "capitaliseHostname": {
-          "title": "Capitalise Hostname",
+          "title": "Capitalise hostname",
           "description": "Defines whether the system's hostname should be capitalised.",
           "type": "bool"
         }
@@ -196,7 +196,7 @@ Singleton {
     "desktop": {
       "General": {
         "wallpaper": {
-          "title": "Wallpaper Path",
+          "title": "Wallpaper path",
           "description": "Defines the path to the wallpaper to show. Set to an empty string to use the default.",
           "type": "path",
           "getFileTypes": () => {
@@ -222,18 +222,18 @@ Singleton {
           }
         },
         "backdropWallpaper": {
-          "title": "Backdrop Wallpaper",
+          "title": "Backdrop wallpaper",
           "description": "Defines whether a second wallpaper component with blur should be shown. This is intended for placing in niri's workspace overview. If it is not, it may show on top of the normal wallpaper. It is recommended to disable this if you are not using it. It may have a negative performance impact, especially with shaders and video wallpapers. It has the namespace 'backdrop-wallpaper'",
           "type": "bool"
         },
         "wallpaperType": {
-          "title": "Wallpaper Type",
+          "title": "Wallpaper type",
           "description": "Defines what type of wallpaper should be used.",
           "type": "string",
           "options": stripped.wallpaperTypes
         },
         "fadeSpeed": {
-          "title": "Fade Duration",
+          "title": "Fade duration",
           "description": "Defines how long the wallpaper should fade in for when the shell is launched (ms). Set to 0 to disable.",
           "type": "int",
           "max": 60_000,
@@ -245,7 +245,7 @@ Singleton {
           "type": "string"
         },
         "bgColor": {
-          "title": "Background Color",
+          "title": "Background color",
           "description": "Defines the color that should be shown behind everything. If 'hideWallpaper' is true, this color will be displayed. It is also useful for shaders which look better with a solid color behind them.",
           "type": "string"
         }
@@ -261,7 +261,7 @@ Singleton {
           "min": 1
         },
         "slideshowRegenMaterial": {
-          "title": "Regenerate Material Colors",
+          "title": "Regenerate material colors",
           "description": "Defines whether material colors should be regenerated when the wallpaper changes. Not recommended for short intervals.",
           "type": "bool"
         }
@@ -278,28 +278,28 @@ Singleton {
           "min": 200
         },
         "defaultTimeout": {
-          "title": "Default Timeout",
+          "title": "Default timeout",
           "description": "Defines the default timeout for notifications when the sender does not specify one (ms).",
           "type": "int",
           "max": 60_000,
           "min": 100
         },
         "defaultCriticalTimeout": {
-          "title": "Default Critical Timeout",
+          "title": "Default critical timeout",
           "description": "Defines the default timeout for critical notifications when the sender does not specify one (ms).",
           "type": "int",
           "max": 60_000,
           "min": 100
         },
         "minimumTimeout": {
-          "title": "Minimum Timeout",
+          "title": "Minimum timeout",
           "description": "Defines the minimum timeout for all notifications.",
           "type": "int",
           "max": 60_000,
           "min": 100
         },
         "minimumCriticalTimeout": {
-          "title": "Minimum Critical Timeout",
+          "title": "Minimum critical timeout",
           "description": "Defines the minimum timeout for all critical notifications.",
           "type": "int",
           "max": 60_000,
@@ -311,17 +311,17 @@ Singleton {
           "type": "bool"
         },
         "normalSound": {
-          "title": "Normal Sound",
+          "title": "Normal sound",
           "description": "Defines the path to the sound to play for non-critical notifications.",
           "type": "path"
         },
         "criticalSound": {
-          "title": "Critical Sound",
+          "title": "Critical sound",
           "description": "Defines the path to the sound to play for critical notifications.",
           "type": "path"
         },
         "dismissThreshold": {
-          "title": "Dismiss Threshold",
+          "title": "Dismiss threshold",
           "description": "Defines what percentage of 'width' notifications must be dragged to dismiss them.",
           "type": "int",
           "max": 99,
@@ -333,17 +333,17 @@ Singleton {
     "lock": {
       "Appearance": {
         "dimBackground": {
-          "title": "Dim Background",
+          "title": "Dim background",
           "description": "Defines whether the background should be dimmed.",
           "type": "bool"
         },
         "contentOutline": {
-          "title": "Content Outline",
+          "title": "Content outline",
           "description": "Defines whether the rectangle containing the clock, input, etc. should have an outline around it.",
           "type": "bool"
         },
         "noFade": {
-          "title": "Disable Fade In/Out",
+          "title": "Disable fade in/out",
           "description": "Defines whether the background should fade in and out. Useful on niri where the fade will result in a red flash.",
           "type": "bool"
         }
@@ -353,14 +353,14 @@ Singleton {
     "osd": {
       "Behaviour": {
         "backlightName": {
-          "title": "Backlight Name",
+          "title": "Backlight name",
           "description": `Defines the name of the display's backlight. This is used to get the path of the backlight: /sys/class/backlight/<backlightName>
 
 Some common options are: 'intel_backlight' and 'acpi_video0'. You can find the correct one for your display by running: ls /sys/class/backlight`,
           "type": "string"
         },
         "hideTimeout": {
-          "title": "Hide Timeout",
+          "title": "Hide timeout",
           "description": "Defines how long the OSD should remain open for before hiding in milliseconds.",
           "type": "int",
           "min": 100,

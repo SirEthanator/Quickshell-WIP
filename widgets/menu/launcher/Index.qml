@@ -51,7 +51,7 @@ Item {
     }
 
     Text {
-      text: "No Results Found";
+      text: "No results found";
       font {
         family: Consts.fontFamily;
         pixelSize: Consts.smallHeadingFontSize;
