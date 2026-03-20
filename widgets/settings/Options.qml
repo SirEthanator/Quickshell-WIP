@@ -39,20 +39,13 @@ Item {
       spacing: Consts.spacingButtonGroup;
 
       width: parent.width;
+      height: visible ? implicitHeight : 0;
 
-      function getIsVisible() {
+      function getIsVisible(dataVersion) {
         return typeof sectionMeta._getIsVisible === "function" ? sectionMeta._getIsVisible() : true;
       }
 
-      visible: getIsVisible();
-
-      Connections {
-        target: Controller;
-
-        function onDataVersionChanged() {
-          sectionColumn.visible = sectionColumn.getIsVisible();
-        }
-      }
+      visible: getIsVisible(Controller.dataVersion);
 
       z: 0;
 
