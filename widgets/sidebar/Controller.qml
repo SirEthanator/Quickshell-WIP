@@ -5,6 +5,7 @@ import Quickshell;
 import QtQuick;
 
 Singleton {
+  id: root;
   readonly property list<string> active: internal.active;
   readonly property string finalActive: internal.finalActive;
   readonly property string current: active[active.length-1];
@@ -48,10 +49,16 @@ Singleton {
   }
 
   function toggle(id: string) {
-    if (internal.active.includes(id)) {
+    if (root.current === id) {
       deactivate(id);
     } else {
-      activate(id);
+      const idx = internal.active.indexOf(id);
+
+      if (idx === -1) {
+        activate(id);
+      } else {
+        internal.active.push(internal.active.splice(idx, 1)[0]);
+      }
     }
   }
 
