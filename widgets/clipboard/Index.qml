@@ -87,12 +87,9 @@ Item {
         color: itemMouse.containsPress ? Colors.c.accent : itemMouse.containsMouse || isCurrent ? Colors.c.bgHover : Colors.c.bgLight;
 
         radius: Consts.br;
-        anchors {
-          left: parent.left;
-          right: parent.right;
-        }
 
         height: itemText.implicitHeight + Consts.paddingCard * 2;
+        width: parent.width;
 
         disableAllOutlines: !Conf.sidebar.moduleOutlines;
 

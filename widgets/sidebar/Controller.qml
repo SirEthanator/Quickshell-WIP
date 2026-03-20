@@ -8,7 +8,7 @@ Singleton {
   id: root;
   readonly property list<string> active: internal.active;
   readonly property string finalActive: internal.finalActive;
-  readonly property string current: active[active.length-1];
+  readonly property string current: active[active.length-1] ?? null;
   readonly property bool sidebarOpen: active.length > 0;
 
   QtObject {

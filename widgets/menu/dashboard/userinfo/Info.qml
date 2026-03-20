@@ -22,7 +22,7 @@ RowLayout {
 
     color: Colors.c.bg;
 
-    readonly property bool useDefault: !Conf.menu.profilePicture || status === Image.Error || status === Image.Null;
+    property bool useDefault: !Conf.menu.profilePicture;
 
     Image {
       id: pfpImg;
@@ -35,6 +35,11 @@ RowLayout {
       fillMode: Image.PreserveAspectCrop;
 
       asynchronous: true
+
+      onStatusChanged: {
+        if (status === Image.Error || status === Image.Null)
+          pfp.useDefault = true;
+      }
     }
   }
 

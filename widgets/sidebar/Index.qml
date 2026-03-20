@@ -139,7 +139,7 @@ Scope {
 
             changeFocus: true;
 
-            currentIndex: Controller.idIdxMap[Controller.current];
+            currentIndex: Controller.idIdxMap[Controller.current || Controller.finalActive];
 
             SidebarItem {
               sourceComponent: Menu.Index {}
