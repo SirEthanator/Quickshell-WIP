@@ -3,14 +3,14 @@
 
 import qs.singletons
 import Quickshell;
-import qs.widgets.bar as Bar;
-import qs.widgets.sidebar as Sidebar;
-import qs.widgets.notifications as Notifications;
-import qs.widgets.lock as Lock;
-import qs.widgets.desktop as Desktop;
-import qs.widgets.osd as OSD;
-import qs.widgets.screensaver as Screensaver;
-import qs.widgets.settings as Settings;
+import qs.panels.bar as Bar;
+import qs.panels.sidebar as Sidebar;
+import qs.panels.notifications as Notifications;
+import qs.panels.lock as Lock;
+import qs.panels.desktop as Desktop;
+import qs.panels.osd as OSD;
+import qs.panels.screensaver as Screensaver;
+import qs.panels.settings as Settings;
 import Quickshell.Io;
 import QtQuick;
 

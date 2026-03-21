@@ -1,6 +1,6 @@
 import qs.singletons
-import qs.widgets.sidebar as Sidebar;
-import qs.widgets.settings as Settings;
+import qs.panels.sidebar as Sidebar;
+import qs.panels.settings as Settings;
 import qs.components
 import Quickshell;
 import QtQuick;

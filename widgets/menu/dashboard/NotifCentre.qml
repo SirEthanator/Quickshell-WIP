@@ -1,7 +1,8 @@
 import qs.singletons
 import qs.components
 import qs.animations as Anims;
-import qs.widgets.notifications as Notifs;
+import qs.panels.notifications as Notifs;
+import qs.widgets.notifications as NotifWidgets;
 import Quickshell.Services.Notifications;
 import QtQuick;
 import QtQuick.Controls;
@@ -51,7 +52,7 @@ DashItem {
 
         model: root.notifications;
 
-        delegate: Notifs.Toast {
+        delegate: NotifWidgets.Toast {
           required property Notification modelData;
           showOutline: Conf.sidebar.moduleOutlines;
           n: modelData;

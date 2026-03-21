@@ -1,6 +1,6 @@
 pragma Singleton
 
-import qs.widgets.sidebar as Sidebar;
+import qs.panels.sidebar as Sidebar;
 import Quickshell;
 import Quickshell.Io;
 import QtQuick;

@@ -1,4 +1,4 @@
-import qs.widgets.sidebar as Sidebar;
+import qs.panels.sidebar as Sidebar;
 import qs.components
 import Quickshell;
 import QtQuick;

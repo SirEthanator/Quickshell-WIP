@@ -2,7 +2,7 @@ pragma Singleton
 
 import qs.utils as Utils;
 import qs.singletons.modules.config
-import qs.widgets.settings as Settings;
+import qs.panels.settings as Settings;
 import Quickshell;
 import QtQuick;
 
@@ -241,7 +241,7 @@ Singleton {
         },
         "shader": {
           "title": "Shader",
-          "description": "Defines the name of the shader to show. This is displayed on top of the wallpaper. Set to an empty string to disable. Additional shaders may be placed in <shellRoot>/widgets/desktop/shaders.",
+          "description": "Defines the name of the shader to show. This is displayed on top of the wallpaper. Set to an empty string to disable. Additional shaders may be placed in <shellRoot>/panels.desktop/shaders.",
           "type": "string"
         },
         "bgColor": {

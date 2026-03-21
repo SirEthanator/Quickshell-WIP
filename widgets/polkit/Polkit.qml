@@ -1,4 +1,4 @@
-import qs.widgets.sidebar as Sidebar
+import qs.panels.sidebar as Sidebar
 import Quickshell.Services.Polkit
 import QtQuick;
 

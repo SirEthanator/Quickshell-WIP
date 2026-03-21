@@ -1,5 +1,5 @@
 import qs.singletons
-import qs.widgets.sidebar as Sidebar;
+import qs.panels.sidebar as Sidebar;
 import qs.components
 import Quickshell.Services.SystemTray;
 import QtQuick;

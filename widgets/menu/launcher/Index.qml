@@ -1,7 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import qs.singletons
-import qs.widgets.sidebar as Sidebar;
+import qs.panels.sidebar as Sidebar;
 import qs.components
 import qs.utils as Utils;
 import qs.animations as Anims;
