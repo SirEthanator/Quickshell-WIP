@@ -15,7 +15,7 @@ BarModule {
   readonly property list<MprisPlayer> players: Utils.Mpris.players;
   readonly property MprisPlayer activePlayer: Utils.Mpris.activePlayer;
 
-  show: !!activePlayer;
+  visible: !!activePlayer;
 
   Text {
     color: Colors.c.fg;

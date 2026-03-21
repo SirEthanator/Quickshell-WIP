@@ -9,7 +9,7 @@ import Quickshell;
 import Quickshell.Wayland;
 import QtQuick;
 
-// volumemixer is only imported from a file loaded by a loader,
+// volumemixer is only imported from a dynamically created component
 // so it must be imported somewhere else too for it to work.
 import qs.widgets.volumemixer as Unused; // WARN: ^ Do not remove
 
@@ -31,6 +31,10 @@ PanelWindow {
     top: true;
     left: true;
     right: true;
+  }
+
+  Component.onCompleted: {
+    Controller.screen = root.screen;
   }
 
   // If modules are floating this will remove the padding from the height.
@@ -110,15 +114,11 @@ PanelWindow {
 
         BarSection {
           id: leftModules;
-          screen: root.screen;
-          window: root;
           modules: Conf.bar.left;
           anchors.left: parent.left;
         }
 
         BarSection {
-          screen: root.screen;
-          window: root;
           modules: Conf.bar.centre;
           anchors.horizontalCenter: parent.horizontalCenter;
           anchors.horizontalCenterOffset: {
@@ -142,8 +142,6 @@ PanelWindow {
 
         BarSection {
           id: rightModules;
-          screen: root.screen;
-          window: root;
           modules: Conf.bar.right;
           anchors.right: parent.right;
         }

@@ -15,7 +15,7 @@ BarModule {
   readonly property real percentage: Math.round(battery.percentage*100) / 100;
   readonly property bool charging: battery.timeToEmpty === 0;
 
-  show: battery.ready && battery.isLaptopBattery;
+  visible: battery.ready && battery.isLaptopBattery;
 
   customIcon: BatteryIcon {
     percentage: root.percentage;

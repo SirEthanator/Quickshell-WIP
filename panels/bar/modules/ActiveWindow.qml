@@ -10,7 +10,7 @@ BarModule {
   id: root;
 
   readonly property string title: (!!ToplevelManager.activeToplevel && !!ToplevelManager.activeToplevel.title) ? ToplevelManager.activeToplevel.title : "";
-  show: title.length > 0;
+  visible: title.length > 0;
 
   Text {
     color: Colors.c.fg;

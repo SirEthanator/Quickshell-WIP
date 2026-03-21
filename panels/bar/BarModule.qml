@@ -28,9 +28,6 @@ OutlinedRectangle {
   property alias containsMouse: mouseArea.containsMouse;
   property alias isPressed: mouseArea.pressed;
 
-  // Used by the loader which the module is wrapped in to determine whether to show or not
-  property bool show: true;
-
   color: root.background;
 
   disableAllOutlines: !outline;
@@ -42,7 +39,6 @@ OutlinedRectangle {
   bottomLeftRadius: Consts.br;
   bottomRightRadius: Consts.br;
 
-  // Fills the height of the RowLayout which it's inside of. The RowLayout has a margin so this won't stretch to the bar's full height.
   Layout.fillHeight: true;
   // If there is an icon it will include paddingModule for the left, so we only need to add for the right.
   implicitWidth: (root.icon || root.customIcon ? content.implicitWidth + root.padding : content.implicitWidth + root.padding*2) + (root.outline ? outlineSize*2 : 0);
@@ -65,8 +61,8 @@ OutlinedRectangle {
   // When a module changes width or visibility, other modules will shift too.
   // The tooltip's position is not reactive, so to correct its position we must
   // manually recalculate it.
-  onImplicitWidthChanged: TooltipController.requestReposition();
-  onShowChanged: TooltipController.requestReposition();
+  onWidthChanged: TooltipController.requestReposition();
+  onVisibleChanged: TooltipController.requestReposition();
 
   Timer {
     id: tooltipShowTimer;

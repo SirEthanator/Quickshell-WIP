@@ -11,7 +11,7 @@ BarModule {
 
   clickable: true;
 
-  show: Notifs.NotifServer.notifList.values.length > 0;
+  visible: Notifs.NotifServer.notifList.values.length > 0;
 
   Text {
     text: Notifs.NotifServer.notifList.values.length;

@@ -14,7 +14,7 @@ BarModule {
   }
   iconbgColor: Colors.c.network;
 
-  show: NetworkInfo.connectedNetwork !== null;
+  visible: NetworkInfo.connectedNetwork !== null;
 
   Text {
     text: NetworkInfo.connectedNetwork.name;

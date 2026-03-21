@@ -9,7 +9,6 @@ import QtQuick.Layouts;
 
 BarModule {
   id: root;
-  required property var window;
 
   hoverEnabled: true;
   background: mouseArea.containsPress ? Colors.c.accent : mouseArea.containsMouse ? Colors.c.bgHover : Colors.c.bgLight;

@@ -6,9 +6,6 @@ import QtQuick.Layouts;
 
 RowLayout {
   id: root
-  required property var window;
-  required property var screen;
-  readonly property var allModules: Consts.barModules;
   required property var modules;
 
   anchors {
@@ -17,39 +14,33 @@ RowLayout {
   }
   spacing: Consts.marginModule;
 
+  function creationError(component, url) {
+    console.error(`Failed to load bar module from: ${url}: ${component.errorString()}`);
+  }
 
-  // TODO: Dynamic component creation like done for dashboard?
+  function finishCreation(component, url) {
+    if (component.status === Component.Ready) {
+      component.createObject(root, {});
+    } else {
+      creationError(component, url);
+    }
+  }
 
-  Repeater {
-    model: root.modules;
-    delegate: Loader {
-      id: loader
-      required property string modelData;
-      readonly property string url: `./modules/${root.allModules[modelData].moduleName}.qml`;
-      readonly property list<string> passedProps: root.allModules[modelData].props;
-      readonly property var props: {
-        let result = {};
-        if (passedProps.indexOf("screen") !== -1) {
-          result.screen = root.screen
-        }
-        if (passedProps.indexOf("window") !== -1) {
-          result.window = root.window
-        }
-        return result
-      };
+  Component.onCompleted: {
+    const modules = root.modules;
+    const allModules = Consts.barModules.toStripped();
 
-      Layout.fillHeight: true;
-      visible: item?.show ?? false;
+    for (let i=0; i < modules.length; i++) {
+      const m = allModules[modules[i]];
+      const url = `./modules/${m.moduleName}.qml`;
 
-      Component.onCompleted: {
-        setSource(url, props);
-      }
-
-      onStatusChanged: {
-        if (status === Loader.Error) {
-          active = false;
-          console.error(`Failed to load bar module from: "${url}"`)
-        }
+      const component = Qt.createComponent(url);
+      if (component.status === Component.Ready) {
+        finishCreation(component, url);
+      } else if (component.status === Component.Error || component.status === Component.Null) {
+        creationError(component, url);
+      } else {
+        component.statusChanged.connect(() => finishCreation(component, url));
       }
     }
   }

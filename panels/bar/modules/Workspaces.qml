@@ -28,9 +28,10 @@ BarModule {
     }
   }
 
-  required property var screen;
-  // readonly property HyprlandMonitor monitor: Hyprland.monitorFor(screen);
-  readonly property string monitor: screen.name;
+  readonly property var screen: Controller.screen;
+  readonly property string monitor: screen?.name;
+
+  visible: screen !== null;
 
   readonly property list<var> workspaces: Utils.Session.workspaces.filter((ws) =>
     ws.display === root.monitor
