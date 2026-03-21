@@ -18,7 +18,7 @@ RowLayout {
   visible: node.ready;
 
   Icon {
-    icon: root.iconOverride || root.node.properties["application.icon-name"];
+    icon: root.iconOverride || root.node.properties["application.icon-name"] || fallback;
     isMask: root.colorizeIcon;
     color: root.iconColor;
     visible: !!icon;
