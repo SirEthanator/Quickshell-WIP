@@ -147,11 +147,12 @@ Item {
             }
             spacing: Consts.paddingButton;
 
-            IconImage {
+            Icon {
               Layout.alignment: Qt.AlignVCenter;
-              asynchronous: true;
-              implicitSize: 42;
-              source: Quickshell.iconPath(entryMouseArea.modelData.icon);
+              size: 42;
+              icon: entryMouseArea.modelData.icon || fallback;
+              fallback: "application-x-executable";
+              isMask: false;
             }
 
             Text {
