@@ -1,11 +1,10 @@
 import qs.singletons
 import qs.components
-import qs.animations as Anims;
 import qs.panels.notifications as Notifs;
 import qs.widgets.notifications as NotifWidgets;
 import Quickshell.Services.Notifications;
 import QtQuick;
-import QtQuick.Controls;
+import QtQuick.Controls as Ctrls;
 import QtQuick.Layouts;
 
 DashItem {
@@ -26,21 +25,20 @@ DashItem {
       id: buttons;
 
       Button {
-        label: "Clear All";
+        label: "Clear all";
         allRadius: true;
 
         onClicked: {
           for (const notif of root.notifications) { notif.dismiss() }
-          emptyFadeInAnim.start();
         }
       }
     }
 
-    ScrollView {
+    Ctrls.ScrollView {
       id: scrollView;
       Layout.fillWidth: true;
       Layout.fillHeight: true;
-      ScrollBar.vertical: StyledScrollBar { scrollView: scrollView }
+      Ctrls.ScrollBar.vertical: StyledScrollBar { scrollView: scrollView }
       clip: true;
 
       ListView {
@@ -68,14 +66,6 @@ DashItem {
     Layout.fillWidth: true;
     spacing: Consts.paddingCard;
 
-    Anims.NumberAnim {
-      id: emptyFadeInAnim;
-      target: empty;
-      property: "opacity";
-      from: 0; to: 1;
-      duration: 1500;
-    }
-
     Icon {
       icon: "no-notifications-symbolic";
       color: Colors.c.grey;
@@ -84,7 +74,7 @@ DashItem {
     }
 
     Text {
-      text: "No Notifications";
+      text: "No notifications";
       font {
         family: Consts.fontFamily;
         pixelSize: Consts.smallHeadingFontSize;

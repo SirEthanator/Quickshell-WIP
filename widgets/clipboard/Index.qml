@@ -5,7 +5,7 @@ import qs.components
 import qs.widgets.clipboard
 import qs.animations as Anims
 import QtQuick;
-import QtQuick.Controls;
+import QtQuick.Controls as Ctrls;
 import QtQuick.Layouts;
 
 Item {
@@ -33,7 +33,7 @@ Item {
     anchors.centerIn: parent;
 
     spacing: Consts.paddingWindow;
-    visible: Controller.model.count < 1;
+    opacity: Controller.model.count < 1 ? 1 : 0;
 
     Icon {
       icon: "clipboard-outline-symbolic";
@@ -54,188 +54,53 @@ Item {
     }
   }
 
-  MouseArea {
-    id: listMouse;
-    hoverEnabled: true;
+  ColumnLayout {
     anchors.fill: parent;
+    spacing: Consts.marginCard;
 
-    ListView {
-      id: listView;
-      anchors.fill: parent;
+    visible: Controller.model.count > 0;
 
-      model: Controller.model;
-      currentIndex: Controller.currentIndex;
-      highlightMoveDuration: 300;
-      highlightMoveVelocity: 0.8;
+    Button {
+      label: "Clear all";
+      allRadius: true;
 
-      spacing: Consts.marginModule;
+      bg: Colors.c.bgLight;
 
-      visible: model.count > 0;
-
-      flickableDirection: Flickable.VerticalFlick;
-      ScrollBar.vertical: StyledScrollBar { scrollView: listView }
-
-      // For scrollbar
-      readonly property alias hovered: listMouse.containsMouse;
-
-      displaced: Transition {
-        Anims.NumberAnim { property: "y" }
+      onClicked: {
+        Controller.clear();
       }
-      move: displaced;
+    }
 
-      delegate: Item {
-        id: listItem;
-        required property string value;
-        required property int index;
+    MouseArea {
+      id: listMouse;
+      hoverEnabled: true;
+      Layout.fillHeight: true;
+      Layout.fillWidth: true;
 
-        readonly property bool isCurrent: index === Controller.currentIndex;
+      ListView {
+        id: listView;
+        anchors.fill: parent;
+        clip: true;
 
-        height: itemText.implicitHeight + Consts.paddingCard * 2;
-        width: parent.width;
+        model: Controller.model;
+        currentIndex: Controller.currentIndex;
+        highlightMoveDuration: 300;
+        highlightMoveVelocity: 0.8;
 
-        function del() {
-          deleteAnim.restart();
+        spacing: Consts.marginModule;
+
+        flickableDirection: Flickable.VerticalFlick;
+        Ctrls.ScrollBar.vertical: StyledScrollBar { scrollView: listView }
+
+        // For scrollbar
+        readonly property alias hovered: listMouse.containsMouse;
+
+        displaced: Transition {
+          Anims.NumberAnim { property: "y" }
         }
+        move: displaced;
 
-        Item {
-          id: container;
-          clip: true;
-
-          height: parent.height;
-          width: parent.width;
-        }
-
-        Item {
-          id: itemBackground;
-
-          // Just to avoid more nesting
-          parent: container;
-
-          height: parent.height;
-          width: parent.width;
-
-          x: 0;
-
-          Anims.NumberTransition on x {}
-
-          SequentialAnimation {
-            id: deleteAnim;
-
-            Anims.NumberAnim {
-              target: itemBackground;
-              property: "x";
-              to: itemBackground.width * (itemBackground.x > 0 ? 1 : -1);
-            }
-
-            PauseAnimation { duration: 100 }
-
-            ScriptAction {
-              script: Controller.del(listItem.index);
-            }
-          }
-
-          OutlinedRectangle {
-            id: itemMainBackground;
-            color: itemMouse.drag.active
-              ? Colors.c.bgLight
-              : itemMouse.containsPress
-                ? Colors.c.accent
-                : itemMouse.containsMouse || listItem.isCurrent
-                  ? Colors.c.bgHover
-                  : Colors.c.bgLight;
-
-            disableAllOutlines: !Conf.sidebar.moduleOutlines;
-            radius: Math.abs(parent.x) > 0 ? 0 : Consts.br;
-
-            width: parent.width;
-            height: parent.height;
-
-            x: 0;
-
-            Anims.ColorTransition on color {}
-            Anims.NumberTransition on radius {}
-
-            Text {
-              id: itemText;
-              text: listItem.value.replace(/^\d+\s+/, "");
-
-              anchors {
-                verticalCenter: parent.verticalCenter;
-                left: parent.left;
-                right: parent.right;
-                margins: Consts.paddingCard;
-              }
-
-              color: !itemMouse.drag.active && itemMouse.containsPress ? Colors.c.bgLight : Colors.c.fg;
-              font {
-                family: Consts.fontFamily;
-                pixelSize: Consts.mainFontSize;
-              }
-
-              maximumLineCount: 1;
-              clip: true;
-            }
-          }
-
-          OutlinedRectangle {
-            id: itemDeleteBackground;
-
-            color: itemMouse.atThreshold ? Colors.c.red : Colors.c.bgRed;
-            disableAllOutlines: itemMainBackground.disableAllOutlines;
-            radius: itemMainBackground.radius;
-
-            height: parent.height;
-            width: parent.width;
-
-            x: parent.x > 0 ? -width : width;
-
-            Anims.ColorTransition on color {}
-            Anims.NumberTransition on radius {}
-
-            Icon {
-              icon: "delete-symbolic";
-              color: itemMouse.atThreshold ? Colors.c.bgRed : Colors.c.red;
-              size: Consts.mainIconSize;
-
-              Anims.ColorTransition on color {}
-
-              x: parent.x < 0 ? parent.width - size - Consts.paddingCard : Consts.paddingCard;
-
-              anchors {
-                verticalCenter: parent.verticalCenter;
-              }
-            }
-          }
-        }
-
-        MouseArea {
-          id: itemMouse
-          anchors.fill: parent;
-          hoverEnabled: true;
-
-          onClicked: Controller.select(parent.index);
-
-          readonly property real deleteThreshold: 0.25;
-          readonly property bool atThreshold: Math.abs(drag.target.x) >= drag.target.width * deleteThreshold;
-
-          drag {
-            target: itemBackground;
-            axis: Drag.XAxis;
-            maximumX: drag.target.width;
-            minimumX: -drag.target.width;
-            threshold: 15;
-          }
-
-          onReleased: (e) => {
-            if (e.button !== Qt.LeftButton) return;
-            const target = drag.target;
-            if (atThreshold) {
-              listItem.del();
-            } else {
-              target.x = 0;
-            }
-          }
-        }
+        delegate: ClipboardItem {}
       }
     }
   }

@@ -65,4 +65,9 @@ Singleton {
     Quickshell.execDetached(["sh", "-c", `printf '%s' ${shellSafeStr(item)} | cliphist delete`]);
     listModel.remove(index);
   }
+
+  function clear(): void {
+    Quickshell.execDetached(["sh", "-c", "cliphist wipe"]);
+    listModel.clear();
+  }
 }
