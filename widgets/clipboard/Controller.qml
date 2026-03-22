@@ -10,7 +10,11 @@ Singleton {
 
   property int currentIndex: 0;
 
-  property list<string> model: [];
+  readonly property alias model: listModel;
+
+  ListModel {
+    id: listModel;
+  }
 
   Connections {
     target: Sidebar.Controller;
@@ -18,12 +22,12 @@ Singleton {
     function onDeactivated(id) {
       if (id === "clipboard") {
         root.currentIndex = 0;
-        root.model = [];
       }
     }
   }
 
   function updateModel() {
+    listModel.clear();
     cliphistList.running = true;
   }
 
@@ -32,13 +36,13 @@ Singleton {
     command: ["sh", "-c", "cliphist list"];
     stdout: SplitParser {
       onRead: (data) => {
-        root.model.push(data);
+        listModel.append({ value: data });
       }
     }
   }
 
   function down(amount=1) {
-    const len = model.length;
+    const len = listModel.count;
     currentIndex = (((currentIndex + amount) % len) + len) % len;
   }
 
@@ -46,8 +50,19 @@ Singleton {
     down(-amount);
   }
 
-  function select(item: string): void {
-    Quickshell.execDetached(["sh", "-c", `cliphist decode '${item}' | wl-copy`]);
+  function shellSafeStr(str: string): string {
+    return `'${str.replace(/\\/g, "\\\\").replace(/'/g, "'\\''")}'`;
+  }
+
+  function select(index: int): void {
+    const item = listModel.get(index).value;
+    Quickshell.execDetached(["sh", "-c", `printf '%s' ${shellSafeStr(item)} | cliphist decode | wl-copy --type text/plain`]);
     Sidebar.Controller.deactivate("clipboard");
+  }
+
+  function del(index: int): void {
+    const item = listModel.get(index).value;
+    Quickshell.execDetached(["sh", "-c", `printf '%s' ${shellSafeStr(item)} | cliphist delete`]);
+    listModel.remove(index);
   }
 }

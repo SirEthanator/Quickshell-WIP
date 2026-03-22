@@ -15,14 +15,14 @@ Item {
   anchors.fill: parent;
 
   Keys.onPressed: (e) => {
-    if (listView.model.length < 1) return;
+    if (listView.model.count < 1) return;
 
     if (e.key === Qt.Key_Up) {
       Controller.up();
     } else if (e.key === Qt.Key_Down) {
       Controller.down();
     } else if (e.key === Qt.Key_Enter || e.key === Qt.Key_Return) {
-      Controller.select(Controller.model[Controller.currentIndex]);
+      Controller.select(Controller.currentIndex);
     }
   }
 
@@ -33,7 +33,7 @@ Item {
     anchors.centerIn: parent;
 
     spacing: Consts.paddingWindow;
-    visible: Controller.model.length < 1;
+    visible: Controller.model.count < 1;
 
     Icon {
       icon: "clipboard-outline-symbolic";
@@ -70,7 +70,7 @@ Item {
 
       spacing: Consts.marginModule;
 
-      visible: model.length > 0;
+      visible: model.count > 0;
 
       flickableDirection: Flickable.VerticalFlick;
       ScrollBar.vertical: StyledScrollBar { scrollView: listView }
@@ -78,50 +78,163 @@ Item {
       // For scrollbar
       readonly property alias hovered: listMouse.containsMouse;
 
-      delegate: OutlinedRectangle {
-        required property string modelData;
+      displaced: Transition {
+        Anims.NumberAnim { property: "y" }
+      }
+      move: displaced;
+
+      delegate: Item {
+        id: listItem;
+        required property string value;
         required property int index;
 
         readonly property bool isCurrent: index === Controller.currentIndex;
 
-        color: itemMouse.containsPress ? Colors.c.accent : itemMouse.containsMouse || isCurrent ? Colors.c.bgHover : Colors.c.bgLight;
-
-        radius: Consts.br;
-
         height: itemText.implicitHeight + Consts.paddingCard * 2;
         width: parent.width;
 
-        disableAllOutlines: !Conf.sidebar.moduleOutlines;
+        function del() {
+          deleteAnim.restart();
+        }
 
-        Anims.ColorTransition on color {}
+        Item {
+          id: container;
+          clip: true;
+
+          height: parent.height;
+          width: parent.width;
+        }
+
+        Item {
+          id: itemBackground;
+
+          // Just to avoid more nesting
+          parent: container;
+
+          height: parent.height;
+          width: parent.width;
+
+          x: 0;
+
+          Anims.NumberTransition on x {}
+
+          SequentialAnimation {
+            id: deleteAnim;
+
+            Anims.NumberAnim {
+              target: itemBackground;
+              property: "x";
+              to: itemBackground.width * (itemBackground.x > 0 ? 1 : -1);
+            }
+
+            PauseAnimation { duration: 100 }
+
+            ScriptAction {
+              script: Controller.del(listItem.index);
+            }
+          }
+
+          OutlinedRectangle {
+            id: itemMainBackground;
+            color: itemMouse.drag.active
+              ? Colors.c.bgLight
+              : itemMouse.containsPress
+                ? Colors.c.accent
+                : itemMouse.containsMouse || listItem.isCurrent
+                  ? Colors.c.bgHover
+                  : Colors.c.bgLight;
+
+            disableAllOutlines: !Conf.sidebar.moduleOutlines;
+            radius: Math.abs(parent.x) > 0 ? 0 : Consts.br;
+
+            width: parent.width;
+            height: parent.height;
+
+            x: 0;
+
+            Anims.ColorTransition on color {}
+            Anims.NumberTransition on radius {}
+
+            Text {
+              id: itemText;
+              text: listItem.value.replace(/^\d+\s+/, "");
+
+              anchors {
+                verticalCenter: parent.verticalCenter;
+                left: parent.left;
+                right: parent.right;
+                margins: Consts.paddingCard;
+              }
+
+              color: !itemMouse.drag.active && itemMouse.containsPress ? Colors.c.bgLight : Colors.c.fg;
+              font {
+                family: Consts.fontFamily;
+                pixelSize: Consts.mainFontSize;
+              }
+
+              maximumLineCount: 1;
+              clip: true;
+            }
+          }
+
+          OutlinedRectangle {
+            id: itemDeleteBackground;
+
+            color: itemMouse.atThreshold ? Colors.c.red : Colors.c.bgRed;
+            disableAllOutlines: itemMainBackground.disableAllOutlines;
+            radius: itemMainBackground.radius;
+
+            height: parent.height;
+            width: parent.width;
+
+            x: parent.x > 0 ? -width : width;
+
+            Anims.ColorTransition on color {}
+            Anims.NumberTransition on radius {}
+
+            Icon {
+              icon: "delete-symbolic";
+              color: itemMouse.atThreshold ? Colors.c.bgRed : Colors.c.red;
+              size: Consts.mainIconSize;
+
+              Anims.ColorTransition on color {}
+
+              x: parent.x < 0 ? parent.width - size - Consts.paddingCard : Consts.paddingCard;
+
+              anchors {
+                verticalCenter: parent.verticalCenter;
+              }
+            }
+          }
+        }
 
         MouseArea {
           id: itemMouse
           anchors.fill: parent;
           hoverEnabled: true;
 
-          onClicked: Controller.select(parent.modelData);
-        }
+          onClicked: Controller.select(parent.index);
 
-        Text {
-          id: itemText;
-          text: parent.modelData.replace(/^\d+\s+/, "");
+          readonly property real deleteThreshold: 0.25;
+          readonly property bool atThreshold: Math.abs(drag.target.x) >= drag.target.width * deleteThreshold;
 
-          anchors {
-            verticalCenter: parent.verticalCenter;
-            left: parent.left;
-            right: parent.right;
-            margins: Consts.paddingCard;
+          drag {
+            target: itemBackground;
+            axis: Drag.XAxis;
+            maximumX: drag.target.width;
+            minimumX: -drag.target.width;
+            threshold: 15;
           }
 
-          color: itemMouse.containsPress ? Colors.c.bgLight : Colors.c.fg;
-          font {
-            family: Consts.fontFamily;
-            pixelSize: Consts.mainFontSize;
+          onReleased: (e) => {
+            if (e.button !== Qt.LeftButton) return;
+            const target = drag.target;
+            if (atThreshold) {
+              listItem.del();
+            } else {
+              target.x = 0;
+            }
           }
-
-          maximumLineCount: 1;
-          clip: true;
         }
       }
     }
