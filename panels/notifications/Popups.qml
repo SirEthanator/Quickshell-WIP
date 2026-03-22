@@ -48,7 +48,7 @@ PanelWindow {
       Component.onCompleted: () => {
         NotifServer.incoming.connect((n) => {
           if (!n.lastGeneration) {
-            data.insert(0, {n: n});
+            data.insert(0, { n });
             if (Conf.notifications.sounds) {
               const sound = n.urgency === NotificationUrgency.Critical
                 ? Conf.notifications.criticalSound
@@ -79,6 +79,8 @@ PanelWindow {
       }
     }
     remove: Transition {
+      // Should show on top while sliding out
+      PropertyAction { property: "z"; value: 2 }
       Anims.NumberAnim {
         property: "x";
         to: popups.width;

@@ -95,7 +95,7 @@ MouseArea {
       right: parent.right;
     }
 
-    height: content.height + outlineSize * 2;
+    height: content.implicitHeight + outlineSize * 2;
 
     color: Colors.c.bg;
     radius: Consts.br;
@@ -173,6 +173,25 @@ MouseArea {
                 elide: Text.ElideRight
                 maximumLineCount: 1;
                 Layout.fillWidth: true;
+              }
+
+              Icon {
+                icon: "warning-symbolic";
+                size: criticalText.height;
+                color: Colors.c.red;
+                visible: criticalText.visible;
+              }
+
+              Text {
+                id: criticalText;
+                text: "Critical";
+                color: Colors.c.red;
+                font {
+                  family: Consts.fontFamily;
+                  pixelSize: Consts.mainFontSize;
+                  bold: true;
+                }
+                visible: root.n.urgency === NotificationUrgency.Critical;
               }
 
               Button {
