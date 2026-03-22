@@ -32,7 +32,9 @@ Singleton {
       n.tracked = true;
 
       root.incoming(n);
-      root.unreadIds.push(n.id);
+      if (!n.transient) {
+        root.unreadIds.push(n.id);
+      }
 
       n.closed.connect(() => {
         root.dismissed(n.id);
