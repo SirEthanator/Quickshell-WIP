@@ -103,8 +103,8 @@ MouseArea {
         color: parent.changeLabelColor ? root.bg : root.labelColor;
         Anims.ColorTransition on color {}
         font {
-          family: Consts.fontFamily;
-          pixelSize: !!root.fontSize ? root.fontSize : Consts.mainFontSize;
+          family: Consts.fontFamMain;
+          pixelSize: !!root.fontSize ? root.fontSize : Consts.fontSizeMain;
           bold: root.boldFont;
         }
       }

@@ -12,7 +12,7 @@ RowLayout {
     bottom: parent.bottom
     top: parent.top
   }
-  spacing: Consts.marginModule;
+  spacing: Consts.paddingSmall;
 
   function creationError(component, url) {
     console.error(`Failed to load bar module from: ${url}: ${component.errorString()}`);

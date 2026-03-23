@@ -13,7 +13,7 @@ Rectangle {
 
   readonly property var metadata: Conf.metadata[page][section][propName];
 
-  implicitHeight: content.height + Consts.paddingCard*2;
+  implicitHeight: content.height + Consts.paddingLarge*2;
   Layout.fillWidth: true;
 
   color: Colors.c.bgLight;
@@ -31,21 +31,21 @@ Rectangle {
     anchors.top: parent.top;
     anchors.left: parent.left;
     anchors.right: parent.right;
-    anchors.margins: Consts.paddingCard;
+    anchors.margins: Consts.paddingLarge;
 
-    spacing: longValueLoader.active ? 0 : Consts.paddingCard;
+    spacing: longValueLoader.active ? 0 : Consts.paddingLarge;
 
     ColumnLayout {
       Layout.maximumWidth: content.width - valueLoader.width - content.spacing;
-      spacing: Consts.marginCard;
+      spacing: Consts.paddingMedium;
 
       ColumnLayout {
-        spacing: Consts.marginCardSmall;
+        spacing: Consts.paddingXSmall;
         Text {
           text: root.metadata.title;
           font {
-            family: Consts.fontFamily;
-            pixelSize: Consts.smallHeadingFontSize;
+            family: Consts.fontFamMain;
+            pixelSize: Consts.fontSizeSmallLarge;
           }
           color: Colors.c.fg;
 
@@ -56,8 +56,8 @@ Rectangle {
         Text {
           text: root.metadata.description;
           font {
-            family: Consts.fontFamily;
-            pixelSize: Consts.mainFontSize;
+            family: Consts.fontFamMain;
+            pixelSize: Consts.fontSizeMain;
           }
           color: Colors.c.grey;
 

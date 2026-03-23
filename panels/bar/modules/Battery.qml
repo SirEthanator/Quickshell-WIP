@@ -40,8 +40,8 @@ BarModule {
     text: `${root.percentage * 100}%`;
     color: Colors.c.fg;
     font {
-      family: Consts.fontFamily;
-      pixelSize: Consts.mainFontSize;
+      family: Consts.fontFamMain;
+      pixelSize: Consts.fontSizeMain;
     }
   }
 
@@ -50,18 +50,18 @@ BarModule {
       text: `Battery - ${root.percentage * 100}%`;
       color: Colors.c.fg;
       font {
-        family: Consts.fontFamily;
-        pixelSize: Consts.mainFontSize;
+        family: Consts.fontFamMain;
+        pixelSize: Consts.fontSizeMain;
       }
     }
   }
 
   menu: Tooltip {
     ColumnLayout {
-      spacing: Consts.paddingModule;
+      spacing: Consts.paddingSmall;
 
       RowLayout {
-        spacing: Consts.paddingModule;
+        spacing: Consts.paddingSmall;
 
         Item {
           Layout.fillHeight: true;
@@ -91,8 +91,8 @@ BarModule {
           text: `${root.percentage * 100}%`;
           color: Colors.c.fg;
           font {
-            family: Consts.fontFamily;
-            pixelSize: Consts.smallHeadingFontSize;
+            family: Consts.fontFamMain;
+            pixelSize: Consts.fontSizeSmallLarge;
           }
           Layout.alignment: Qt.AlignVCenter;
         }
@@ -108,8 +108,8 @@ BarModule {
             : `Discharging - ${timeString} remaining`;
           color: Colors.c.grey;
           font {
-            family: Consts.fontFamily;
-            pixelSize: Consts.mainFontSize;
+            family: Consts.fontFamMain;
+            pixelSize: Consts.fontSizeMain;
           }
         }
       }
@@ -118,8 +118,8 @@ BarModule {
         text: `Remaining capacity: ${Math.round(root.battery.energy)}Wh/${Math.round(root.battery.energyCapacity)}Wh`;
         color: Colors.c.fg;
         font {
-          family: Consts.fontFamily;
-          pixelSize: Consts.mainFontSize;
+          family: Consts.fontFamMain;
+          pixelSize: Consts.fontSizeMain;
         }
       }
 
@@ -131,8 +131,8 @@ BarModule {
         visible: Math.abs(changeRate) > 0;
 
         font {
-          family: Consts.fontFamily;
-          pixelSize: Consts.mainFontSize;
+          family: Consts.fontFamMain;
+          pixelSize: Consts.fontSizeMain;
         }
       }
 
@@ -141,8 +141,8 @@ BarModule {
         color: Colors.c.fg;
         visible: root.battery.healthSupported && root.battery.healthPercentage > 0;
         font {
-          family: Consts.fontFamily;
-          pixelSize: Consts.mainFontSize;
+          family: Consts.fontFamMain;
+          pixelSize: Consts.fontSizeMain;
         }
       }
     }

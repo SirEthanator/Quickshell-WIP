@@ -9,7 +9,7 @@ Item {
   id: root;
   required property string icon;
   property color color: Colors.c.fg;
-  property real size: Consts.moduleIconSize;
+  property real size: Consts.iconSizeSmall;
   property int rotation;
 
   property string fallback: "warning-outline-symbolic";

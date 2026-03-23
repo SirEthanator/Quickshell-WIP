@@ -8,7 +8,7 @@ ParallelAnimation {
   property int direction: Slide.Direction.Right;
   property int slideOffset: 100;
   property real scaleOffset: 0.9;
-  property int duration: Consts.animLen;
+  property int duration: Consts.animLenMain;
   property int originalPos: 0;
 
   property bool fade: true;

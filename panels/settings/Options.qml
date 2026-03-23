@@ -52,8 +52,8 @@ Item {
       Text {
         text: sectionColumn.modelData;
         font {
-          family: Consts.fontFamily;
-          pixelSize: Consts.mediumHeadingFontSize;
+          family: Consts.fontFamMain;
+          pixelSize: Consts.fontSizeMedLarge;
           variableAxes: {
             "wght": 550
           }
@@ -61,7 +61,7 @@ Item {
         color: Colors.c.fg;
       }
 
-      Item { implicitHeight: Consts.marginCardSmall - sectionColumn.spacing }
+      Item { implicitHeight: Consts.paddingXSmall - sectionColumn.spacing }
 
       Repeater {
         id: sectionItems;

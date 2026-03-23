@@ -10,7 +10,7 @@ DashItem {
   ColumnLayout {
     id: column;
 
-    spacing: Consts.paddingCard;
+    spacing: Consts.paddingLarge;
 
     SysStatMonitor {
       percentage: SysInfo.cpuUsage;

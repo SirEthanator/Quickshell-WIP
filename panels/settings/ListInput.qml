@@ -10,7 +10,7 @@ import QtQuick.Layouts;
 
 ColumnLayout {
   id: root;
-  spacing: Consts.marginCard;
+  spacing: Consts.paddingMedium;
 
   required property string page;
   required property string propName;
@@ -42,7 +42,7 @@ ColumnLayout {
 
   RowLayout {
     id: buttons;
-    spacing: Consts.marginCardSmall;
+    spacing: Consts.paddingXSmall;
 
     z: 1000;  // For the add popup to show on top of options
 
@@ -58,7 +58,7 @@ ColumnLayout {
         id: addPopup;
 
         anchors.top: parent.bottom;
-        anchors.margins: Consts.marginCard;
+        anchors.margins: Consts.paddingMedium;
 
         height: addPopupItems.contentHeight;
         width: 200;
@@ -113,7 +113,7 @@ ColumnLayout {
     interactive: false;
     clip: true;
 
-    spacing: Consts.marginCard;
+    spacing: Consts.paddingMedium;
 
     add: Transition {
       NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Consts.shortTransitionLen }
@@ -179,7 +179,7 @@ ColumnLayout {
 
       Rectangle {
         id: delegateBg;
-        height: delegateRow.height + Consts.paddingCard * 2;
+        height: delegateRow.height + Consts.paddingLarge * 2;
         width: parent.width;
 
         color: Colors.c.bg;
@@ -187,13 +187,13 @@ ColumnLayout {
 
         RowLayout {
           id: delegateRow;
-          spacing: Consts.paddingCard;
+          spacing: Consts.paddingLarge;
 
           anchors {
             left: parent.left;
             right: parent.right;
             top: parent.top;
-            margins: Consts.paddingCard;
+            margins: Consts.paddingLarge;
           }
 
           // Drag indicator
@@ -208,8 +208,8 @@ ColumnLayout {
             Layout.fillWidth: true;
             color: Colors.c.fg;
             font {
-              family: Consts.fontFamily;
-              pixelSize: Consts.smallHeadingFontSize;
+              family: Consts.fontFamMain;
+              pixelSize: Consts.fontSizeSmallLarge;
             }
             maximumLineCount: 1;
             elide: Text.ElideRight;
@@ -221,7 +221,7 @@ ColumnLayout {
             id: removeBtn;
 
             icon: "delete-symbolic";
-            iconSize: Consts.moduleIconSize;
+            iconSize: Consts.iconSizeSmall;
             labelColor: Colors.c.red;
             bgPress: Colors.c.red;
 

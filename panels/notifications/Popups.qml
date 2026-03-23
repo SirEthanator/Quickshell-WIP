@@ -39,7 +39,7 @@ PanelWindow {
   ListView {
     id: popups
     anchors.fill: parent;
-    spacing: Consts.notifPopupSpacing;
+    spacing: Consts.paddingMedium;
 
     interactive: false;
 
@@ -68,13 +68,13 @@ PanelWindow {
     }
 
     displaced: Transition {
-      Anims.NumberAnim { property: "y"; duration: Consts.animLen }
+      Anims.NumberAnim { property: "y"; duration: Consts.animLenMain }
     }
     add: Transition {
       Anims.NumberAnim {
         property: "x";
         from: popups.width;
-        duration: Consts.animLen;
+        duration: Consts.animLenMain;
         easing.type: Easing.OutExpo;
       }
     }
@@ -84,7 +84,7 @@ PanelWindow {
       Anims.NumberAnim {
         property: "x";
         to: popups.width;
-        duration: Consts.animLen;
+        duration: Consts.animLenMain;
         easing.type: Easing.InExpo;
       }
     }

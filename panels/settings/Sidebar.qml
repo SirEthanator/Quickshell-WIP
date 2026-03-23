@@ -27,8 +27,8 @@ Rectangle {
     }
 
     font {
-      family: Consts.fontFamily;
-      pixelSize: Consts.headingFontSize;
+      family: Consts.fontFamMain;
+      pixelSize: Consts.fontSizeLarge;
       variableAxes: {
         "wght": 650
       }

@@ -24,7 +24,7 @@ PanelWindow {
   color: bgIsDimmed ? Colors.c.backdrop : "transparent";
 
   Anims.ColorTransition on color {
-    duration: Consts.animLen;
+    duration: Consts.animLenMain;
   }
 
   anchors {
@@ -64,7 +64,7 @@ PanelWindow {
   Behavior on margins.top {
     NumberAnimation {
       property: "margins.top";
-      duration: Consts.animLen;
+      duration: Consts.animLenMain;
       easing.type: Easing.OutExpo;
     }
   }

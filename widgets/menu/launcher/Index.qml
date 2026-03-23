@@ -37,7 +37,7 @@ Item {
   }
 
   ColumnLayout {
-    spacing: Consts.paddingCard;
+    spacing: Consts.paddingLarge;
     opacity: root.model.values.length > 0 ? 0 : 1;
     anchors.centerIn: parent;
 
@@ -46,15 +46,15 @@ Item {
     Icon {
       icon: "search-symbolic";
       color: Colors.c.grey;
-      size: Consts.extraLargeIconSize;
+      size: Consts.iconSizeXLarge;
       Layout.alignment: Qt.AlignHCenter;
     }
 
     Text {
       text: "No results found";
       font {
-        family: Consts.fontFamily;
-        pixelSize: Consts.smallHeadingFontSize;
+        family: Consts.fontFamMain;
+        pixelSize: Consts.fontSizeSmallLarge;
       }
       color: Colors.c.grey;
       Layout.fillWidth: true;
@@ -71,7 +71,7 @@ Item {
       readonly property bool hovered: parent.containsMouse;
 
       anchors.fill: parent;
-      spacing: Consts.marginModule;
+      spacing: Consts.paddingSmall;
       clip: true;
       opacity: root.model.values.length > 0 ? 1 : 0;
 
@@ -90,11 +90,11 @@ Item {
         NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Consts.shortTransitionLen }
       }
       displaced: Transition {
-        NumberAnimation { property: "y"; duration: Consts.transitionLen; easing.type: Easing.OutCubic }
+        NumberAnimation { property: "y"; duration: Consts.transitionLenMain; easing.type: Easing.OutCubic }
         PropertyAction { property: "opacity"; value: 1 }
       }
       move: Transition {
-        NumberAnimation { property: "y"; duration: Consts.transitionLen; easing.type: Easing.OutCubic }
+        NumberAnimation { property: "y"; duration: Consts.transitionLenMain; easing.type: Easing.OutCubic }
         PropertyAction { property: "opacity"; value: 1 }
       }
       remove: Transition {
@@ -159,8 +159,8 @@ Item {
               text: entryMouseArea.modelData.name;
               color: entryMouseArea.containsPress ? Colors.c.bgLight : Colors.c.fg;
               font {
-                family: Consts.fontFamily;
-                pixelSize: Consts.smallHeadingFontSize;
+                family: Consts.fontFamMain;
+                pixelSize: Consts.fontSizeSmallLarge;
               }
             }
           }

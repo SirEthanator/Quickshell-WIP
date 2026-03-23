@@ -17,7 +17,7 @@ Item {
   ColumnLayout {
     id: column;
 
-    spacing: Consts.paddingModule;
+    spacing: Consts.paddingSmall;
 
     VolumeMixerItem {
       node: SysInfo.audioNode;

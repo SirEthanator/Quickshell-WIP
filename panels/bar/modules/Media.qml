@@ -20,8 +20,8 @@ BarModule {
   Text {
     color: Colors.c.fg;
     font {
-      family: Consts.fontFamily;
-      pixelSize: Consts.mainFontSize;
+      family: Consts.fontFamMain;
+      pixelSize: Consts.fontSizeMain;
     }
 
     readonly property alias player: root.activePlayer;
@@ -38,8 +38,8 @@ BarModule {
       text: `${root.activePlayer.isPlaying ? "" : "[Paused] - "}Now playing "${root.activePlayer.trackTitle}" by ${root.activePlayer.trackArtist || "unknown artist"}`;
       color: Colors.c.fg;
       font {
-        family: Consts.fontFamily;
-        pixelSize: Consts.mainFontSize;
+        family: Consts.fontFamMain;
+        pixelSize: Consts.fontSizeMain;
       }
     }
   }

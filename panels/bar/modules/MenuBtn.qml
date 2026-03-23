@@ -10,7 +10,7 @@ BarModule {
   background: root.mouseArea.containsMouse ? Colors.c.accentLight : Colors.c.accent;
   outline: false;
   onClicked: Sidebar.Controller.toggle("menu");
-  padding: Consts.paddingModule*2;
+  padding: Consts.paddingSmall*2;
 
   Icon {
     icon: "archlinux-logo";
@@ -22,8 +22,8 @@ BarModule {
       text: "Toggle menu";
       color: Colors.c.fg;
       font {
-        family: Consts.fontFamily;
-        pixelSize: Consts.mainFontSize;
+        family: Consts.fontFamMain;
+        pixelSize: Consts.fontSizeMain;
       }
     }
   }

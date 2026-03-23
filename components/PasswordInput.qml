@@ -38,7 +38,7 @@ Input {
   Button {
     id: confirmBtn;
     icon: "checkmark-symbolic";
-    iconSize: Consts.moduleIconSize;
+    iconSize: Consts.iconSizeSmall;
 
     Layout.fillHeight: true;
 

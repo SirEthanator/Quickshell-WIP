@@ -15,7 +15,7 @@ OutlinedRectangle {
   property color iconColor: background;
   property color iconbgColor: Colors.c.accent;
   property bool forceIconbgColor: false;
-  property int padding: Consts.paddingModule; // NOTE: L+R padding only. T+B is based on bar height.
+  property int padding: Consts.paddingSmall; // NOTE: L+R padding only. T+B is based on bar height.
   property bool outline: Conf.bar.moduleOutlines;
 
   property Tooltip tooltip: null;
@@ -40,7 +40,7 @@ OutlinedRectangle {
   bottomRightRadius: Consts.br;
 
   Layout.fillHeight: true;
-  // If there is an icon it will include paddingModule for the left, so we only need to add for the right.
+  // If there is an icon it will include paddingSmall for the left, so we only need to add for the right.
   implicitWidth: (root.icon || root.customIcon ? content.implicitWidth + root.padding : content.implicitWidth + root.padding*2) + (root.outline ? outlineSize*2 : 0);
   // WARN: Don't remove 'root.' from the above property, it causes issues
 
@@ -132,7 +132,7 @@ OutlinedRectangle {
         id: iconbg;
         visible: !!root.icon || !!root.customIcon;  // Visible if icon is a non-empty string.
         color: Conf.bar.multiColorModules || root.forceIconbgColor ? root.iconbgColor : Colors.c.accent;
-        implicitWidth: Consts.moduleIconSize + root.padding*2;  // This will add padding to both sides of the icon's background.
+        implicitWidth: Consts.iconSizeSmall + root.padding*2;  // This will add padding to both sides of the icon's background.
         Layout.fillHeight: true;
         topLeftRadius: root.content.topLeftRadius;
         bottomLeftRadius: root.content.bottomLeftRadius;
@@ -142,7 +142,7 @@ OutlinedRectangle {
           sourceComponent: root.customIcon;
           active: root.customIcon;
           anchors.centerIn: parent;
-          width: Consts.moduleIconSize;
+          width: Consts.iconSizeSmall;
           height: width;
         }
 
@@ -153,7 +153,7 @@ OutlinedRectangle {
 
           icon: root.icon;
           color: root.iconColor;
-          size: Consts.moduleIconSize;
+          size: Consts.iconSizeSmall;
         }
       }
     }

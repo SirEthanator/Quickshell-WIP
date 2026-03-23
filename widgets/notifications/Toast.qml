@@ -78,7 +78,7 @@ MouseArea {
       x = width * (x < 0 ? -1 : 1);
       // Dismiss if popup, discard if not
       const dimissAction = popup && ! n.transient ? () => NotifServer.dismissed(n.id) : () => n.dismiss();
-      Utils.Timeout.setTimeout(dimissAction, Consts.transitionLen);
+      Utils.Timeout.setTimeout(dimissAction, Consts.transitionLenMain);
     }
   }
   onClicked: event => {
@@ -117,10 +117,10 @@ MouseArea {
       Button {
         id: closeButton;
         icon: "close-symbolic";
-        iconSize: Consts.moduleIconSize;
+        iconSize: Consts.iconSizeSmall;
 
         Layout.fillHeight: true;
-        implicitWidth: root.containsMouse ? Consts.moduleIconSize + padding * 2 : 0;
+        implicitWidth: root.containsMouse ? Consts.iconSizeSmall + padding * 2 : 0;
         visible: implicitWidth > 0;
         Anims.NumberTransition on implicitWidth {}
 
@@ -140,20 +140,20 @@ MouseArea {
 
 
       ColumnLayout {
-        spacing: Consts.paddingNotif;
+        spacing: Consts.paddingLarge;
 
         Item {}  // Padding
 
         RowLayout {
-          spacing: Consts.paddingNotif;
+          spacing: Consts.paddingLarge;
 
           Item {}  // Padding
 
           ColumnLayout {
-            spacing: Consts.notifInnerSpacing;
+            spacing: Consts.paddingMedium;
 
             RowLayout {
-              spacing: Consts.notifInnerSpacing;
+              spacing: Consts.paddingMedium;
 
               IconImage {
                 visible: !!root.n.appIcon;
@@ -166,8 +166,8 @@ MouseArea {
                 text: root.n.appName;
                 color: Colors.c.fg;
                 font {
-                  family: Consts.fontFamily;
-                  pixelSize: Consts.mainFontSize;
+                  family: Consts.fontFamMain;
+                  pixelSize: Consts.fontSizeMain;
                   italic: true;
                 }
                 elide: Text.ElideRight
@@ -187,8 +187,8 @@ MouseArea {
                 text: "Critical";
                 color: Colors.c.red;
                 font {
-                  family: Consts.fontFamily;
-                  pixelSize: Consts.mainFontSize;
+                  family: Consts.fontFamMain;
+                  pixelSize: Consts.fontSizeMain;
                   bold: true;
                 }
                 visible: root.n.urgency === NotificationUrgency.Critical;
@@ -216,8 +216,8 @@ MouseArea {
               text: root.n.summary;
               color: Colors.c.fg;
               font {
-                family: Consts.fontFamily;
-                pixelSize: Consts.smallHeadingFontSize;
+                family: Consts.fontFamMain;
+                pixelSize: Consts.fontSizeSmallLarge;
               }
               wrapMode: Text.Wrap;
               maximumLineCount: root.expanded ? 5 : 1;
@@ -233,8 +233,8 @@ MouseArea {
               text: root.n.body
               color: Colors.c.fg;
               font {
-                family: Consts.fontFamily;
-                pixelSize: Consts.mainFontSize;
+                family: Consts.fontFamMain;
+                pixelSize: Consts.fontSizeMain;
               }
               wrapMode: Text.Wrap;
               maximumLineCount: root.expanded ? 8 : 1;

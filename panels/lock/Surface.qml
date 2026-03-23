@@ -17,7 +17,7 @@ WlSessionLockSurface {
 
   function beginUnlock() {
     outAnim.start();
-    Utils.Timeout.setTimeout(lock.unlock, Consts.animLen);
+    Utils.Timeout.setTimeout(lock.unlock, Consts.animLenMain);
   }
 
   Pam {
@@ -44,7 +44,7 @@ WlSessionLockSurface {
       property: "opacity";
       from: Conf.lock.noFade ? 1 : 0;
       to: 1;
-      duration: Consts.animLen;
+      duration: Consts.animLenMain;
     }
     Anims.Slide {
       target: contentWrapper;
@@ -73,7 +73,7 @@ WlSessionLockSurface {
       property: "opacity";
       from: 1;
       to: Conf.lock.noFade ? 1 : 0;
-      duration: Consts.animLen;
+      duration: Consts.animLenMain;
     }
     Anims.Slide {
       target: contentWrapper;

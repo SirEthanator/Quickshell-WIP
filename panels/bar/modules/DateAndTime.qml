@@ -14,8 +14,8 @@ BarModule {
   Text {
     color: Colors.c.fg;
     font {
-      family: Consts.fontFamily;
-      pixelSize: Consts.mainFontSize;
+      family: Consts.fontFamMain;
+      pixelSize: Consts.fontSizeMain;
     }
 
     text: SysInfo.dateTime("ddd dd/MM | hh:mm ap");
@@ -26,8 +26,8 @@ BarModule {
       text: `Date & time - ${SysInfo.dateTime("ddd dd/MM/yy | hh:mm:ss ap")}`;
       color: Colors.c.fg;
       font {
-        family: Consts.fontFamily;
-        pixelSize: Consts.mainFontSize;
+        family: Consts.fontFamMain;
+        pixelSize: Consts.fontSizeMain;
       }
     }
   }
@@ -40,7 +40,7 @@ BarModule {
 
         Button {
           icon: "previous-symbolic";
-          iconSize: Consts.smallIconSize;
+          iconSize: Consts.iconSizeSmall;
           padding: Consts.paddingButtonIcon;
           bg: Colors.c.bgLight;
           tlRadius: true;
@@ -63,13 +63,13 @@ BarModule {
           }
 
           label: `${monthGrid.monthString} ${monthGrid.year}`
-          fontSize: Consts.mediumFontSize;
+          fontSize: Consts.fontSizeMedium;
           boldFont: true;
         }
 
         Button {
           icon: "next-symbolic";
-          iconSize: Consts.smallIconSize;
+          iconSize: Consts.iconSizeSmall;
           padding: Consts.paddingButtonIcon;
           bg: Colors.c.bgLight;
           trRadius: true;
@@ -79,7 +79,7 @@ BarModule {
       }
 
       Item {
-        implicitHeight: Consts.paddingModule - parent.spacing;
+        implicitHeight: Consts.paddingSmall - parent.spacing;
       }
 
       RowLayout {
@@ -94,8 +94,8 @@ BarModule {
             color: Colors.c.fg;
 
             font {
-              family: Consts.fontFamily;
-              pixelSize: Consts.mainFontSize;
+              family: Consts.fontFamMain;
+              pixelSize: Consts.fontSizeMain;
               italic: true;
             }
           }
@@ -118,8 +118,8 @@ BarModule {
               : Colors.c.greyDim;
 
           font {
-            family: Consts.fontFamily;
-            pixelSize: Consts.mainFontSize;
+            family: Consts.fontFamMain;
+            pixelSize: Consts.fontSizeMain;
             bold: modelData.today;
           }
 

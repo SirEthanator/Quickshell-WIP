@@ -20,8 +20,8 @@ BarModule {
     text: NetworkInfo.connectedNetwork.name;
     color: Colors.c.fg;
     font {
-      family: Consts.fontFamily;
-      pixelSize: Consts.mainFontSize;
+      family: Consts.fontFamMain;
+      pixelSize: Consts.fontSizeMain;
     }
   }
 
@@ -30,8 +30,8 @@ BarModule {
       text: `Connected to "${NetworkInfo.connectedNetwork.name}" with strength ${Math.round(NetworkInfo.connectedNetwork.signalStrength * 100)}%`;
       color: Colors.c.fg;
       font {
-        family: Consts.fontFamily;
-        pixelSize: Consts.mainFontSize;
+        family: Consts.fontFamMain;
+        pixelSize: Consts.fontSizeMain;
       }
     }
   }

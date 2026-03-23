@@ -218,8 +218,8 @@ LazyLoader {
           anchors.centerIn: parent.content;
 
           font {
-            family: Consts.fontFamily;
-            pixelSize: Consts.mainFontSize
+            family: Consts.fontFamMain;
+            pixelSize: Consts.fontSizeMain
           }
         }
       }

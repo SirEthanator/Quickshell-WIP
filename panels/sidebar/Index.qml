@@ -32,7 +32,7 @@ Scope {
 
   Timer {
     id: unloadTimer;
-    interval: Consts.animLen;
+    interval: Consts.animLenMain;
     repeat: false;
 
     onTriggered: {
@@ -72,13 +72,13 @@ Scope {
       Anims.ColorAnim on color {
         running: Conf.sidebar.dimBackground && loader.open;
         from: "#00000000"; to: Colors.c.backdrop;
-        duration: Consts.animLen;
+        duration: Consts.animLenMain;
       }
 
       Anims.ColorAnim on color {
         running: !loader.open && Conf.sidebar.dimBackground;
         to: "#00000000";
-        duration: Consts.animLen;
+        duration: Consts.animLenMain;
       }
 
       Anims.Slide {

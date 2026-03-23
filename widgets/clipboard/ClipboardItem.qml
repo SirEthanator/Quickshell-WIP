@@ -11,7 +11,7 @@ Item {
 
   readonly property bool isCurrent: index === Controller.currentIndex;
 
-  height: itemText.implicitHeight + Consts.paddingCard * 2;
+  height: itemText.implicitHeight + Consts.paddingButton * 2;
   width: parent.width;
 
   function del() {
@@ -80,13 +80,13 @@ Item {
             verticalCenter: parent.verticalCenter;
             left: parent.left;
             right: parent.right;
-            margins: Consts.paddingCard;
+            margins: Consts.paddingLarge;
           }
 
           color: !mouse.drag.active && mouse.containsPress ? Colors.c.bgLight : Colors.c.fg;
           font {
-            family: Consts.fontFamily;
-            pixelSize: Consts.mainFontSize;
+            family: Consts.fontFamMain;
+            pixelSize: Consts.fontSizeMain;
           }
 
           maximumLineCount: 1;
@@ -112,11 +112,11 @@ Item {
         Icon {
           icon: "delete-symbolic";
           color: mouse.atThreshold ? Colors.c.bgRed : Colors.c.red;
-          size: Consts.mainIconSize;
+          size: Consts.iconSizeMain;
 
           Anims.ColorTransition on color {}
 
-          x: parent.x < 0 ? parent.width - size - Consts.paddingCard : Consts.paddingCard;
+          x: parent.x < 0 ? parent.width - size - Consts.paddingLarge : Consts.paddingLarge;
 
           anchors {
             verticalCenter: parent.verticalCenter;

@@ -12,7 +12,7 @@ OutlinedRectangle {
   radius: Consts.br;
   color: Colors.c.bg;
 
-  implicitHeight: content.implicitHeight + Consts.paddingCard * 2;
+  implicitHeight: content.implicitHeight + Consts.paddingLarge * 2;
   implicitWidth: 550;
 
   Image {
@@ -81,13 +81,13 @@ OutlinedRectangle {
 
   RowLayout {
     id: content;
-    spacing: Consts.paddingCard;
+    spacing: Consts.paddingLarge;
 
     anchors {
       top: root.content.top;
       left: root.content.left;
       right: root.content.right;
-      margins: Consts.paddingCard;
+      margins: Consts.paddingLarge;
     }
 
     ClippingRectangle {
@@ -111,14 +111,14 @@ OutlinedRectangle {
 
         Icon {
           icon: "music-note-symbolic";
-          size: parent.height - Consts.paddingCard * 2;
+          size: parent.height - Consts.paddingLarge * 2;
           anchors.centerIn: parent;
         }
       }
     }
 
     ColumnLayout {
-      spacing: Consts.paddingCard;
+      spacing: Consts.paddingLarge;
       Layout.fillWidth: true;
 
       ColumnLayout {
@@ -128,8 +128,8 @@ OutlinedRectangle {
         Text {
           text: Utils.Mpris.activePlayer.trackTitle || "Unknown Track";
           font {
-            family: Consts.fontFamily;
-            pixelSize: Consts.headingFontSize;
+            family: Consts.fontFamMain;
+            pixelSize: Consts.fontSizeLarge;
             bold: true;
           }
           color: Colors.c.fg;
@@ -142,8 +142,8 @@ OutlinedRectangle {
         Text {
           text: Utils.Mpris.activePlayer.trackArtist || "Unknown Artist";
           font {
-            family: Consts.fontFamily;
-            pixelSize: Consts.mainFontSize;
+            family: Consts.fontFamMain;
+            pixelSize: Consts.fontSizeMain;
           }
           color: Colors.c.fg;
 
@@ -160,7 +160,7 @@ OutlinedRectangle {
         Button {
           tlRadius: true; blRadius: true;
           icon: "media-seek-backward-symbolic";
-          iconSize: Consts.mainIconSize;
+          iconSize: Consts.iconSizeMain;
           bg: Colors.c.bgLight;
 
           disabled: !Utils.Mpris.activePlayer.canGoPrevious;
@@ -171,7 +171,7 @@ OutlinedRectangle {
         }
         Button {
           icon: Utils.Mpris.activePlayer.isPlaying ? "media-playback-pause-symbolic" : "media-playback-start-symbolic"
-          iconSize: Consts.mainIconSize;
+          iconSize: Consts.iconSizeMain;
           bg: Colors.c.bgLight;
 
           onClicked: Utils.Mpris.activePlayer.togglePlaying();
@@ -179,7 +179,7 @@ OutlinedRectangle {
         Button {
           trRadius: true; brRadius: true;
           icon: "media-seek-forward-symbolic"
-          iconSize: Consts.mainIconSize;
+          iconSize: Consts.iconSizeMain;
           bg: Colors.c.bgLight;
 
           disabled: !Utils.Mpris.activePlayer.canGoNext;
@@ -217,8 +217,8 @@ OutlinedRectangle {
 
             text: Utils.TimeString.colonSeparated(Utils.Mpris.posInfo.length * progress.clampedValue);
             font {
-              family: Consts.fontMono;
-              pixelSize: Consts.mainFontSize;
+              family: Consts.fontFamMono;
+              pixelSize: Consts.fontSizeMain;
             }
             color: Colors.c.fg;
             anchors.left: parent.left;
@@ -228,8 +228,8 @@ OutlinedRectangle {
             id: lenText;
             text: Utils.Mpris.posInfo.lengthString;
             font {
-              family: Consts.fontMono;
-              pixelSize: Consts.mainFontSize;
+              family: Consts.fontFamMono;
+              pixelSize: Consts.fontSizeMain;
             }
             color: Colors.c.fg;
             anchors.right: parent.right;

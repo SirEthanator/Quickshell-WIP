@@ -31,12 +31,12 @@ Rectangle {
       spacing: Consts.paddingWindow;
 
       ColumnLayout {
-        spacing: Consts.marginCardSmall;
+        spacing: Consts.paddingXSmall;
         Text {
           text: root.title;
           font {
-            family: Consts.fontFamily;
-            pixelSize: Consts.smallHeadingFontSize;
+            family: Consts.fontFamMain;
+            pixelSize: Consts.fontSizeSmallLarge;
           }
           color: Colors.c.fg;
           Layout.alignment: Qt.AlignHCenter;
@@ -45,8 +45,8 @@ Rectangle {
         Text {
           text: root.description;
           font {
-            family: Consts.fontFamily;
-            pixelSize: Consts.mainFontSize;
+            family: Consts.fontFamMain;
+            pixelSize: Consts.fontSizeMain;
           }
           color: Colors.c.grey;
           Layout.alignment: Qt.AlignHCenter;

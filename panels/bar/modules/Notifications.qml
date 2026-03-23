@@ -18,8 +18,8 @@ BarModule {
 
     color: Colors.c.fg;
     font {
-      family: Consts.fontFamily;
-      pixelSize: Consts.mainFontSize;
+      family: Consts.fontFamMain;
+      pixelSize: Consts.fontSizeMain;
     }
   }
 
@@ -32,8 +32,8 @@ BarModule {
       text: `${Notifs.NotifServer.notifList.values.length} notifications, ${Notifs.NotifServer.unreadCount} unread`;
       color: Colors.c.fg;
       font {
-        family: Consts.fontFamily;
-        pixelSize: Consts.mainFontSize;
+        family: Consts.fontFamMain;
+        pixelSize: Consts.fontSizeMain;
       }
     }
   }

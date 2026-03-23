@@ -8,7 +8,7 @@ RowLayout {
   required property real percentage;
   required property string title;
   property string extraInfo;
-  spacing: Consts.paddingCard;
+  spacing: Consts.paddingLarge;
 
   CircularProgress {
     implicitHeight: 80;
@@ -18,13 +18,13 @@ RowLayout {
   }
 
   ColumnLayout {
-    spacing: Consts.marginCardSmall;
+    spacing: Consts.paddingXSmall;
 
     Text {
       text: root.title;
       font {
-        family: Consts.fontFamily;
-        pixelSize: Consts.mediumHeadingFontSize;
+        family: Consts.fontFamMain;
+        pixelSize: Consts.fontSizeMedLarge;
         variableAxes: {
           "wght": 600
         }
@@ -36,8 +36,8 @@ RowLayout {
       text: root.extraInfo;
       visible: !!root.extraInfo;
       font {
-        family: Consts.fontFamily;
-        pixelSize: Consts.mainFontSize;
+        family: Consts.fontFamMain;
+        pixelSize: Consts.fontSizeMain;
       }
       color: Colors.c.grey;
     }

@@ -8,7 +8,7 @@ ColumnLayout {
   anchors.bottom: parent.bottom;
   anchors.horizontalCenter: parent.horizontalCenter;
 
-  spacing: Consts.marginCard;
+  spacing: Consts.paddingMedium;
 
   Text {
     Layout.alignment: Qt.AlignHCenter;
@@ -16,8 +16,8 @@ ColumnLayout {
     text: root.pam.message;
     visible: !!text && text !== "Password: ";
     font {
-      family: Consts.fontFamily;
-      pixelSize: Consts.mainFontSize;
+      family: Consts.fontFamMain;
+      pixelSize: Consts.fontSizeMain;
     }
     color: Colors.c.grey;
     maximumLineCount: 1;
@@ -37,8 +37,8 @@ ColumnLayout {
       }
     }
     font {
-      family: Consts.fontFamily;
-      pixelSize: Consts.mainFontSize;
+      family: Consts.fontFamMain;
+      pixelSize: Consts.fontSizeMain;
     }
     color: root.pam.state === "failed" || root.pam.state === "error"
       ? Colors.c.warning

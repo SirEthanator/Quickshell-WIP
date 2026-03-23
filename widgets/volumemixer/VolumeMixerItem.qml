@@ -13,7 +13,7 @@ RowLayout {
   property color iconColor: Colors.c.fg;
   property bool useNickname: false;
 
-  spacing: Consts.paddingModule;
+  spacing: Consts.paddingSmall;
 
   visible: node.ready;
 
@@ -34,7 +34,7 @@ RowLayout {
     spacing: 4;
 
     RowLayout {
-      spacing: Consts.paddingModule;
+      spacing: Consts.paddingSmall;
       Layout.fillWidth: true;
 
       Text {
@@ -42,8 +42,8 @@ RowLayout {
         text: root.useNickname ? root.node.nickname : root.node.name;
         color: Colors.c.fg;
         font {
-          family: Consts.fontFamily;
-          pixelSize: Consts.mediumFontSize;
+          family: Consts.fontFamMain;
+          pixelSize: Consts.fontSizeMedium;
         }
 
         Layout.fillWidth: true;
@@ -55,7 +55,7 @@ RowLayout {
       Button {
         icon: "audio-volume-muted";
         active: root.node.audio.muted;
-        iconSize: Consts.smallIconSize;
+        iconSize: Consts.iconSizeSmall;
         padding: 6;
         bg: Colors.c.bgLight;
         allRadius: true;
@@ -105,8 +105,8 @@ RowLayout {
         horizontalAlignment: Qt.AlignLeft;
 
         font {
-          family: Consts.fontMono;
-          pixelSize: Consts.mainFontSize;
+          family: Consts.fontFamMono;
+          pixelSize: Consts.fontSizeMain;
         }
       }
     }

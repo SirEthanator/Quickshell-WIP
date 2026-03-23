@@ -18,7 +18,7 @@ DashItem {
     id: column;
     Layout.fillWidth: true;
     Layout.fillHeight: true;
-    spacing: Consts.notifPopupSpacing;
+    spacing: Consts.paddingMedium;
     visible: root.notifications.length > 0;
 
     RowLayout {
@@ -44,7 +44,7 @@ DashItem {
       ListView {
         id: list;
         anchors.fill: parent;
-        spacing: Consts.notifPopupSpacing;
+        spacing: Consts.paddingMedium;
         boundsBehavior: Flickable.StopAtBounds;
         cacheBuffer: 0;
 
@@ -64,20 +64,20 @@ DashItem {
     visible: !column.visible;
     Layout.fillHeight: true;
     Layout.fillWidth: true;
-    spacing: Consts.paddingCard;
+    spacing: Consts.paddingLarge;
 
     Icon {
       icon: "no-notifications-symbolic";
       color: Colors.c.grey;
-      size: Consts.extraLargeIconSize;
+      size: Consts.iconSizeXLarge;
       Layout.alignment: Qt.AlignHCenter;
     }
 
     Text {
       text: "No notifications";
       font {
-        family: Consts.fontFamily;
-        pixelSize: Consts.smallHeadingFontSize;
+        family: Consts.fontFamMain;
+        pixelSize: Consts.fontSizeSmallLarge;
       }
       color: Colors.c.grey;
       Layout.fillWidth: true;

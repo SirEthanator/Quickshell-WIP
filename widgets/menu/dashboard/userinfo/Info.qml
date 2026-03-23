@@ -9,7 +9,7 @@ import QtQuick.Layouts;
 
 RowLayout {
   id: root;
-  spacing: Consts.paddingCard;
+  spacing: Consts.paddingLarge;
   signal clicked(event: MouseEvent);
 
   Rectangle {
@@ -65,14 +65,14 @@ RowLayout {
   }
 
   ColumnLayout {
-    spacing: Consts.marginCardSmall;
+    spacing: Consts.paddingXSmall;
 
     Text {
       text: SysInfo.username;
       color: Colors.c.fg;
       font {
-        family: Consts.fontFamily;
-        pixelSize: Consts.headingFontSize;
+        family: Consts.fontFamMain;
+        pixelSize: Consts.fontSizeLarge;
         variableAxes: {
           "wght": 700,
           "wdth": 130
@@ -84,8 +84,8 @@ RowLayout {
       text: SysInfo.hostname;
       color: Colors.c.fg;
       font {
-        family: Consts.fontFamily;
-        pixelSize: Consts.mainFontSize;
+        family: Consts.fontFamMain;
+        pixelSize: Consts.fontSizeMain;
       }
     }
   }
@@ -94,7 +94,7 @@ RowLayout {
 
   Button {
     icon: "settings-symbolic";
-    iconSize: Consts.largeIconSize;
+    iconSize: Consts.iconSizeLarge;
     allRadius: true;
 
     onClicked: {
@@ -105,7 +105,7 @@ RowLayout {
 
   Button {
     icon: "system-shutdown-symbolic";
-    iconSize: Consts.largeIconSize;
+    iconSize: Consts.iconSizeLarge;
     labelColor: Colors.c.red;
     allRadius: true;
     bgPress: Colors.c.red;

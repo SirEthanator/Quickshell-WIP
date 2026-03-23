@@ -18,7 +18,7 @@ Item {
   onFgChanged: canvas.requestPaint();
   onThicknessChanged: canvas.requestPaint();
 
-  property int fontSize: Consts.mainFontSize;
+  property int fontSize: Consts.fontSizeMain;
   property color fontColor: Colors.c.fg;
 
   Anims.NumberTransition on value {}
@@ -62,7 +62,7 @@ Item {
     anchors.centerIn: parent;
     text: `${Math.round(root.value * 100)}%`;
     font {
-      family: Consts.fontFamily;
+      family: Consts.fontFamMain;
       pixelSize: root.fontSize;
     }
     color: root.fontColor;

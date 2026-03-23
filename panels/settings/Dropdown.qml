@@ -51,8 +51,8 @@ Rectangle {
     id: text;
     text: root.displayText;
     font {
-      family: Consts.fontFamily;
-      pixelSize: Consts.mainFontSize;
+      family: Consts.fontFamMain;
+      pixelSize: Consts.fontSizeMain;
     }
     color: Colors.c.fg;
     anchors.verticalCenter: parent.verticalCenter;

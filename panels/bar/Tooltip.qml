@@ -9,7 +9,7 @@ Item {
   property bool isMenu: false;
 
   property bool disableOutline: false;
-  property int padding: Consts.paddingModule;
+  property int padding: Consts.paddingSmall;
 
   width: data.width;
   height: data.height;

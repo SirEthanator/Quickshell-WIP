@@ -2,6 +2,6 @@ import qs.singletons
 import QtQuick;
 
 Behavior {
-  NumberAnimation { duration: Consts.transitionLen; easing.type: Easing.OutCubic }
+  NumberAnimation { duration: Consts.transitionLenMain; easing.type: Easing.OutCubic }
 }
 

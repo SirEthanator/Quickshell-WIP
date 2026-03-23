@@ -32,7 +32,7 @@ Item {
 
   ColumnLayout {
     id: content;
-    spacing: Consts.marginCardSmall;
+    spacing: Consts.paddingXSmall;
     anchors.fill: parent;
 
     Text {
@@ -40,8 +40,8 @@ Item {
       text: `${root.title}?`;
       color: Colors.c.fg;
       font {
-        family: Consts.fontFamily;
-        pixelSize: Consts.smallHeadingFontSize;
+        family: Consts.fontFamMain;
+        pixelSize: Consts.fontSizeSmallLarge;
       }
     }
 
@@ -50,8 +50,8 @@ Item {
       text: `${root.titleFuture} in ${root.countdown} seconds...`;
       color: Colors.c.fg;
       font {
-        family: Consts.fontFamily;
-        pixelSize: Consts.mainFontSize;
+        family: Consts.fontFamMain;
+        pixelSize: Consts.fontSizeMain;
       }
     }
 

@@ -12,8 +12,8 @@ DashItem {
 
   GridLayout {
     id: trayButtons;
-    rowSpacing: Consts.marginCard;
-    columnSpacing: Consts.marginCard;
+    rowSpacing: Consts.paddingMedium;
+    columnSpacing: Consts.paddingMedium;
 
     TrayItems {
       onActivated: Sidebar.Controller.deactivate("menu");

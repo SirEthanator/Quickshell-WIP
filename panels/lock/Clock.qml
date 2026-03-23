@@ -11,8 +11,8 @@ ColumnLayout {
 
     color: Colors.c.fg;
     font {
-      family: Consts.fontFamily;
-      pixelSize: Consts.largeFontSize;
+      family: Consts.fontFamMain;
+      pixelSize: Consts.fontSizeXLarge;
       variableAxes: {
         "wdth": 200,
         "wght": 1000
@@ -26,8 +26,8 @@ ColumnLayout {
 
     color: Colors.c.fg;
     font {
-      family: Consts.fontFamily;
-      pixelSize: Consts.headingFontSize;
+      family: Consts.fontFamMain;
+      pixelSize: Consts.fontSizeLarge;
     }
   }
 }

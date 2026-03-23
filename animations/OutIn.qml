@@ -6,7 +6,7 @@ Behavior {
 
   property QtObject fadeTarget: targetProperty.object;
   property string fadeProperty: "opacity";
-  property int fadeDuration: Consts.transitionLen;
+  property int fadeDuration: Consts.transitionLenMain;
   property int fadeOutDuration: fadeDuration;
   property int fadeInDuration: fadeDuration;
   property var fadeValue: 0;

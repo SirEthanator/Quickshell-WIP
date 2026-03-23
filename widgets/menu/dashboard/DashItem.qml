@@ -7,7 +7,7 @@ Rectangle {
   default property alias data: content.data;
   property bool fullContentWidth: false;
   property bool padding: true;
-  property int spacing: Consts.paddingCard;
+  property int spacing: Consts.paddingLarge;
 
   color: Colors.c.bgLight;
   radius: Consts.br;
@@ -19,7 +19,7 @@ Rectangle {
   }
 
   Layout.fillWidth: true;
-  implicitHeight: content.implicitHeight + (padding ? Consts.paddingCard*2 : 0);
+  implicitHeight: content.implicitHeight + (padding ? Consts.paddingLarge*2 : 0);
 
   signal clicked(event: MouseEvent);
   property alias mouseArea: mouseArea;
@@ -41,7 +41,7 @@ Rectangle {
         bottom: parent.bottom;
         left: parent.left;
         right: root.fullContentWidth ? parent.right : undefined;
-        margins: root.padding ? Consts.paddingCard : 0;
+        margins: root.padding ? Consts.paddingLarge : 0;
       }
       spacing: root.spacing;
     }

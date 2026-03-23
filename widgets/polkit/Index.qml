@@ -83,15 +83,15 @@ Item {
         }
 
         ColumnLayout {
-          spacing: Consts.marginCard;
+          spacing: Consts.paddingMedium;
 
           Text {
             Layout.fillWidth: true;
             text: root.polkit.flow.message;
             color: Colors.c.fg;
             font {
-              family: Consts.fontFamily;
-              pixelSize: Consts.smallHeadingFontSize;
+              family: Consts.fontFamMain;
+              pixelSize: Consts.fontSizeSmallLarge;
             }
             wrapMode: Text.Wrap;
           }
@@ -101,8 +101,8 @@ Item {
             Layout.fillWidth: true;
             color: Colors.c.grey;
             font {
-              family: Consts.fontFamily;
-              pixelSize: Consts.mainFontSize;
+              family: Consts.fontFamMain;
+              pixelSize: Consts.fontSizeMain;
             }
             wrapMode: Text.Wrap;
           }
@@ -120,7 +120,7 @@ Item {
       anchors {
         right: parent.right;
         top: mainColumn.bottom;
-        topMargin: Consts.marginCard;
+        topMargin: Consts.paddingMedium;
       }
 
       label: "Cancel";

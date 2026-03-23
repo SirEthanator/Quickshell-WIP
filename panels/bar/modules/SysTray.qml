@@ -26,8 +26,8 @@ BarModule {
       text: "Show system tray";
       color: Colors.c.fg;
       font {
-        family: Consts.fontFamily;
-        pixelSize: Consts.mainFontSize;
+        family: Consts.fontFamMain;
+        pixelSize: Consts.fontSizeMain;
       }
     }
   }
@@ -36,8 +36,8 @@ BarModule {
     GridLayout {
       id: trayButtons;
       columns: 5;
-      rowSpacing: Consts.marginCard;
-      columnSpacing: Consts.marginCard;
+      rowSpacing: Consts.paddingMedium;
+      columnSpacing: Consts.paddingMedium;
 
       TrayItems {
         onActivated: TooltipController.clearTooltip();

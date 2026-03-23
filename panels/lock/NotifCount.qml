@@ -7,7 +7,7 @@ import QtQuick.Layouts
 Item {
   id: root;
 
-  readonly property real padding: Consts.paddingModule;
+  readonly property real padding: Consts.paddingSmall;
 
   width: row.implicitWidth + padding * 2;
   height: row.implicitHeight + padding * 2;
@@ -31,7 +31,7 @@ Item {
 
       Icon {
         icon: Notifs.NotifServer.icon;
-        size: Consts.mainIconSize;
+        size: Consts.iconSizeMain;
         color: Colors.c.fg;
       }
 
@@ -39,8 +39,8 @@ Item {
         text: `${Notifs.NotifServer.unreadCount} new notifications`;
         color: Colors.c.fg;
         font {
-          family: Consts.fontFamily;
-          pixelSize: Consts.mainFontSize;
+          family: Consts.fontFamMain;
+          pixelSize: Consts.fontSizeMain;
         }
       }
     }

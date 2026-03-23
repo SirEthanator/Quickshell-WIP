@@ -11,7 +11,7 @@ ColumnLayout {
   anchors.bottom: parent.bottom;
   anchors.horizontalCenter: parent.horizontalCenter;
 
-  spacing: Consts.marginCard;
+  spacing: Consts.paddingMedium;
 
   Text {
     Layout.alignment: Qt.AlignHCenter;
@@ -21,8 +21,8 @@ ColumnLayout {
     visible: !!text;
 
     font {
-      family: Consts.fontFamily;
-      pixelSize: Consts.mainFontSize;
+      family: Consts.fontFamMain;
+      pixelSize: Consts.fontSizeMain;
     }
 
     color: root.polkit.flow.supplementaryIsError ? Colors.c.red : Colors.c.grey;
@@ -47,8 +47,8 @@ ColumnLayout {
     }
 
     font {
-      family: Consts.fontFamily;
-      pixelSize: Consts.mainFontSize;
+      family: Consts.fontFamMain;
+      pixelSize: Consts.fontSizeMain;
     }
 
     color: root.polkit.flow.failed ? Colors.c.red : Colors.c.grey;

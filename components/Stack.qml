@@ -92,7 +92,7 @@ Item {
     id: exitAnim;
     property: "opacity";
     easing.type: Easing.OutCubic;
-    duration: Consts.transitionLen;
+    duration: Consts.transitionLenMain;
     from: 1;
     to: 0;
 

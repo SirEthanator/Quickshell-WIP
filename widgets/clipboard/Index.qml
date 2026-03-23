@@ -38,7 +38,7 @@ Item {
     Icon {
       icon: "clipboard-outline-symbolic";
       color: Colors.c.grey;
-      size: Consts.extraLargeIconSize;
+      size: Consts.iconSizeXLarge;
       Layout.alignment: Qt.AlignHCenter;
     }
 
@@ -46,8 +46,8 @@ Item {
       text: "Clipboard empty";
       color: Colors.c.grey;
       font {
-        family: Consts.fontFamily;
-        pixelSize: Consts.smallHeadingFontSize;
+        family: Consts.fontFamMain;
+        pixelSize: Consts.fontSizeSmallLarge;
       }
       Layout.fillWidth: true;
       horizontalAlignment: Text.AlignHCenter;
@@ -56,7 +56,7 @@ Item {
 
   ColumnLayout {
     anchors.fill: parent;
-    spacing: Consts.marginCard;
+    spacing: Consts.paddingMedium;
 
     visible: Controller.model.count > 0;
 
@@ -87,7 +87,7 @@ Item {
         highlightMoveDuration: 300;
         highlightMoveVelocity: 0.8;
 
-        spacing: Consts.marginModule;
+        spacing: Consts.paddingXSmall;
 
         flickableDirection: Flickable.VerticalFlick;
         Ctrls.ScrollBar.vertical: StyledScrollBar { scrollView: listView }
