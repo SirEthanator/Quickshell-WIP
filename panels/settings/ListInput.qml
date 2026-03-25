@@ -116,7 +116,7 @@ ColumnLayout {
     spacing: Consts.paddingMedium;
 
     add: Transition {
-      NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Consts.shortTransitionLen }
+      NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Consts.transitionLenShort }
     }
     displaced: Transition {
       NumberAnimation { property: "y"; duration: Consts.transitionLen; easing.type: Easing.OutCubic }
@@ -127,7 +127,7 @@ ColumnLayout {
       PropertyAction { property: "opacity"; value: 1 }
     }
     remove: Transition {
-      NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Consts.shortTransitionLen }
+      NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Consts.transitionLenShort }
     }
 
     delegate: MouseArea {

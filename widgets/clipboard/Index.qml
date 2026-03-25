@@ -99,6 +99,9 @@ Item {
           Anims.NumberAnim { property: "y" }
         }
         move: displaced;
+        remove: Transition {
+          Anims.NumberAnim { property: "height"; to: 0; duration: Consts.transitionLenShort }
+        }
 
         delegate: ClipboardItem {}
       }

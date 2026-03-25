@@ -58,7 +58,7 @@ Singleton {
 
   readonly property int animLenMain: 350;
   readonly property int transitionLenMain: 250;
-  readonly property int shortTransitionLen: 150;
+  readonly property int transitionLenShort: 150;
 
   readonly property int progressBarHeight: 5;
 
