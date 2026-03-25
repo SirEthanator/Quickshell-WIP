@@ -1,12 +1,14 @@
 import qs.singletons
 import qs.components
-import qs.widgets.media as Media;
-import qs.animations as Anims;
-import qs.utils as Utils;
-import qs.panels.desktop as Desktop;
-import Quickshell.Wayland;
-import QtQuick;
-import QtQuick.Layouts;
+import qs.widgets.screensaver as ScreensaverWidget
+import qs.panels.screensaver as Screensaver
+import qs.widgets.media as Media
+import qs.animations as Anims
+import qs.utils as Utils
+import qs.panels.desktop as Desktop
+import Quickshell.Wayland
+import QtQuick
+import QtQuick.Layouts
 
 WlSessionLockSurface {
   id: root;
@@ -127,7 +129,12 @@ WlSessionLockSurface {
         spacing: Consts.paddingWindow * 2;
 
         Clock {}
-        PassInput { id: input; pam: pam }
+        PassInput {
+          id: input;
+          pam: pam;
+          onChange: Screensaver.Controller.open = false;
+          Keys.onPressed: Screensaver.Controller.open = false;
+        }
       }
 
       Status { pam: pam }
@@ -158,5 +165,18 @@ WlSessionLockSurface {
 
     Shadow { target: media }
     Media.Index { id: media }
+  }
+
+  Loader {
+    anchors.fill: parent;
+    active: Screensaver.Controller.open;
+
+    sourceComponent: Item {
+      anchors.fill: parent;
+
+      ScreensaverWidget.Index {
+        anchors.fill: parent;
+      }
+    }
   }
 }
