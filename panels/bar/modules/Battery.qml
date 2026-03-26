@@ -13,6 +13,7 @@ BarModule {
 
   readonly property var battery: UPower.displayDevice;
   readonly property real percentage: Math.round(battery.percentage*100) / 100;
+  readonly property int percentageInt: Math.round(percentage * 100);
   readonly property bool charging: battery.timeToEmpty === 0;
 
   visible: battery.ready && battery.isLaptopBattery;
@@ -37,7 +38,7 @@ BarModule {
   }
 
   Text {
-    text: `${root.percentage * 100}%`;
+    text: `${root.percentageInt}%`;
     color: Colors.c.fg;
     font {
       family: Consts.fontFamMain;
@@ -47,7 +48,7 @@ BarModule {
 
   tooltip: Tooltip {
     Text {
-      text: `Battery - ${root.percentage * 100}%`;
+      text: `Battery - ${root.percentageInt}%`;
       color: Colors.c.fg;
       font {
         family: Consts.fontFamMain;
@@ -88,7 +89,7 @@ BarModule {
         }
 
         Text {
-          text: `${root.percentage * 100}%`;
+          text: `${root.percentageInt}%`;
           color: Colors.c.fg;
           font {
             family: Consts.fontFamMain;
