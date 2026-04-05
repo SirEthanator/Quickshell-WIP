@@ -326,7 +326,36 @@ Singleton {
           "type": "int",
           "max": 99,
           "min": 1
+        },
+        "showFlash": {
+          "title": "Show border flash",
+          "description": "Defines whether a border around the screen should flash on incoming notifications.",
+          "type": "bool"
         }
+      },
+      "Border flash": {
+        "_getIsVisible": () => {
+          return Settings.Controller.getVal("notifications", "showFlash");
+        },
+        "flashOnTransient": {
+          "title": "Flash border on transient",
+          "description": "Defines whether the border should flash on transient notifications.",
+          "type": "bool"
+        },
+        "flashPauseDuration": {
+          "title": "Flash duration",
+          "description": "Defines how long the border should stay solid for before fading away in milliseconds.",
+          "type": "int",
+          "max": 60_000,
+          "min": 0
+        },
+        "flashThickness": {
+          "title": "Flash thickness",
+          "description": "Defines how thick the flash border should be.",
+          "type": "int",
+          "max": 100,
+          "min": 1
+        },
       }
     },
 

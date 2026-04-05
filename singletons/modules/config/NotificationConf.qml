@@ -10,4 +10,8 @@ ConfigCategory {
   property string normalSound: "/usr/share/sounds/ocean/stereo/message-new-instant.oga";
   property string criticalSound: "/usr/share/sounds/ocean/stereo/dialog-error-critical.oga";
   property int dismissThreshold: 30;
+  property bool showFlash: false;
+  property bool flashOnTransient: true;
+  property int flashPauseDuration: 800;
+  property int flashThickness: 4;
 }

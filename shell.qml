@@ -64,6 +64,7 @@ ShellRoot {
 
   // These can be created in any order because they use
   // lazy loaders - they are created after other windows
+  Notifications.NotifFlash {}
   Settings.Index {}
   Sidebar.Index {}
   OSD.Index {}
