@@ -67,7 +67,7 @@ PopupWindow {
     }
 
     function onRequestReposition() {
-      tooltipMouse.setXPos();
+      tooltipMouse.setXPosDelayed();
     }
   }
 
@@ -130,6 +130,16 @@ PopupWindow {
 
     function setXPos() {
       x = getXPos()
+    }
+
+    function setXPosDelayed() {
+      setXPosTimer.restart();
+    }
+
+    Timer {
+      id: setXPosTimer;
+      interval: 40;
+      onTriggered: tooltipMouse.setXPos();
     }
 
     x: getXPos();
