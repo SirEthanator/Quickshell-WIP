@@ -106,6 +106,7 @@ ProgressBar {
       internal.smoothingOriginalVal = root.smoothing;
       root.smoothing = false;
     } else {
+      dragThrottleTimer.stop();
       root.value = Math.min(Math.max(root.value, 0), root.maxValue);
       root.userChange();
       root.smoothing = internal.smoothingOriginalVal;
