@@ -96,24 +96,25 @@ OutlinedRectangle {
       Layout.fillHeight: true;
       implicitWidth: height;
 
+      Rectangle {
+        color: Colors.c.bgLight;
+        anchors.fill: parent;
+      }
+
       Image {
         id: albumCover;
         source: Utils.Mpris.activePlayer.trackArtUrl;
         visible: source.toString() !== "";
         anchors.fill: parent;
         asynchronous: true;
+        fillMode: Image.PreserveAspectFit;
       }
 
-      Rectangle {
-        color: Colors.c.bgLight;
-        anchors.fill: parent;
+      Icon {
+        icon: "music-note-symbolic";
+        size: parent.height - Consts.paddingLarge * 2;
+        anchors.centerIn: parent;
         visible: !albumCover.visible;
-
-        Icon {
-          icon: "music-note-symbolic";
-          size: parent.height - Consts.paddingLarge * 2;
-          anchors.centerIn: parent;
-        }
       }
     }
 
